@@ -74,6 +74,8 @@ WSGI_APPLICATION = 'django_dublin_bus.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
+
+# This is the setting that should be pushed to the server (leave uncommented)
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -85,6 +87,21 @@ DATABASES = {
     }
 }
 
+# This database setting should only be used for local test and development
+# Ensure this is not used on the server
+# To set up an ssh tunnel to work with database locally do the following:
+# ssh -L 3333:127.0.0.1:3306 Witheld
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': ***REMOVED***,
+        'USER': ***REMOVED***,
+        'PASSWORD': ***REMOVED***,
+        'HOST': '127.0.0.1',
+        'PORT': '3333',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.2/ref/settings/#auth-password-validators
