@@ -1,7 +1,7 @@
 # Rules for Simple Coding as a Team - _Version 1.0_
 
 #### Authored by - Robert Young
-#### Note - Please see .md (Mardown) files on the repo for tips and info.
+#### Note - Please see .md (Markdown) files on the repo for tips and info.
 <br/>
 
 ## Code Release Process
