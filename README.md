@@ -12,6 +12,10 @@
 4. Upon completion of the code review, initiate a pull request for the group, and each team member can sign off on the changes to be merged back to the master.
 5. Follow the below design rules when working on code.
 
+![Branching](images/branching.001.png?raw=true)
+
+
+
 ## Keep it Simple
 
 Writing code that is simple to read and understand for all members of the team is key. If the choice is between one line of succinct code, or three lines of very readable code, the code should be three lines long for the purpose of readability.
