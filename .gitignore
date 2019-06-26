@@ -103,3 +103,11 @@ venv.bak/
 # mypy
 .mypy_cache/
 .DS_Store
+
+# User-specific stuff PyCharm
+.idea/**/workspace.xml
+.idea/**/tasks.xml
+.idea/**/usage.statistics.xml
+.idea/**/dictionaries
+.idea/**/shelf
+.idea/
