@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e34b2887-bdf4-42b1-a860-a18ed61dc1c6" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dublin-bus.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dublin-bus.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_dublin_bus/map/static/map/all_bus_stops.json" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/django_dublin_bus/map/templates/map/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/django_dublin_bus/map/templates/map/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/django_dublin_bus/map/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_dublin_bus/map/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,8 +45,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/templates/map/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="46" column="60" selection-start-line="46" selection-start-column="60" selection-end-line="46" selection-end-column="60" />
+            <state relative-caret-position="199">
+              <caret line="54" column="48" selection-start-line="54" selection-start-column="48" selection-end-line="54" selection-end-column="48" />
             </state>
           </provider>
         </entry>
@@ -192,7 +189,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13363000" />
+    <option name="totallyTimeSpent" value="15139000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="812" extended-state="6" />
@@ -213,7 +210,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.37083334" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.041666668" />
       <window_info anchor="bottom" id="Python Console" order="12" weight="0.32916668" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -373,8 +370,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/templates/map/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="46" column="60" selection-start-line="46" selection-start-column="60" selection-end-line="46" selection-end-column="60" />
+        <state relative-caret-position="199">
+          <caret line="54" column="48" selection-start-line="54" selection-start-column="48" selection-end-line="54" selection-end-column="48" />
         </state>
       </provider>
     </entry>
