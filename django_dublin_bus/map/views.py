@@ -4,7 +4,7 @@ from .models import StopsInfo
 # Create your views here.
 
 def home(request):
-    bus_stops = StopsInfo.objects.all()
-    context = {'bus_stops': bus_stops}
+    stops_info = StopsInfo.objects.all()
+    context = {'stops_info': stops_info}
     return render(request,'map/home.html', context)
 
