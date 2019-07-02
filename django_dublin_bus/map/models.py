@@ -28,3 +28,6 @@ class StopsInfo(models.Model):
     class Meta:
         managed = False
         db_table = 'stops_info'
+
+
+
