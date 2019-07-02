@@ -46,22 +46,21 @@
 
             {%  for bus_stop in stops_info %}
 
-                var contentString = '<div id="stop_name">{{bus_stop.stop_name}}</div>';
-
-                var infowindow = new google.maps.InfoWindow({
-                    content: contentString
-                });
-
                 var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lon }}};
+
                 var marker = new google.maps.Marker({
                     position: latLng,
                     map: map
                 });
 
+                marker.content = '<div id="stop_name">{{bus_stop.stop_name}}</div>';;
 
-                marker.addListener('click', function(){
-                infowindow.open(map, marker);
-            });
+                var infoWindow = new google.maps.InfoWindow();
+                google.maps.event.addListener(marker, 'click', function () {
+                    infoWindow.setContent(this.content);
+                    infoWindow.open(this.getMap(), this);
+                });
+
 
 
             {%  endfor %}
