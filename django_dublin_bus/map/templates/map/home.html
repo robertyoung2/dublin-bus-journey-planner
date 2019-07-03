@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
     <title>Title</title>
 </head>
 <body>
@@ -34,66 +35,113 @@
     <div id="map"></div>
     <script>
 
+        window.lat = 53.3498;
+        window.lng = -6.2603;
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(updatePosition);
+            }
+            return null;
+        };
+
+        function updatePosition(position) {
+            if (position) {
+                window.lat = position.coords.latitude;
+                window.lng = position.coords.longitude;
+            }
+        }
+
+        setInterval(function () {
+            updatePosition(getLocation());
+        }, 10000);
+
+        function currentLocation() {
+            return {lat: window.lat, lng: window.lng};
+        };
 
         var map;
+        var mark;
 
-        function initMap() {
+        function circlePoint(time) {
+            var radius = 0.01;
+            var x = Math.cos(time) * radius;
+            var y = Math.sin(time) * radius;
+            return {lat: window.lat + y, lng: window.lng + x};
+        }
+
+        var initialize = function () {
 
             map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: 53.3498, lng: -6.2603},
+                center: {lat: lat, lng: lng},
                 zoom: 12
             });
+            mark = new google.maps.Marker({position: {lat: lat, lng: lng}, map: map});
 
             {%  for bus_stop in stops_info %}
 
                 var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lon }}};
-
                 var marker = new google.maps.Marker({
                     position: latLng,
                     map: map
                 });
-
                 marker.content = '<div id="stop_name">{{bus_stop.stop_name}}</div>';;
-
                 var infoWindow = new google.maps.InfoWindow();
                 google.maps.event.addListener(marker, 'click', function () {
                     infoWindow.setContent(this.content);
                     infoWindow.open(this.getMap(), this);
                 });
-
-
-
+                
             {%  endfor %}
-            // Geolocation function (rudimentary pop up window for now
-            // need to add live user tracking, as well as an icon instead of a pop-up
+        };
 
-            // Try HTML5 geolocation.
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(function (position) {
-                    var pos = {
-                        lat: position.coords.latitude,
-                        lng: position.coords.longitude
-                    };
+        window.initialize = initialize;
 
-                    map.setCenter(pos);
-                }, function () {
-                    handleLocationError(true, infoWindow, map.getCenter());
-                });
-            }
-        }
+        var redraw = function (payload) {
+            lat = payload.message.lat;
+            lng = payload.message.lng;
 
-        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-            infoWindow.setPosition(pos);
-            infoWindow.setContent(browserHasGeolocation ?
-                'Error: The Geolocation service failed.' :
-                'Error: Your browser doesn\'t support geolocation.');
-            infoWindow.open(map);
-        }
+            map.setCenter({lat: lat, lng: lng, alt: 0});
+            mark.setPosition({lat: lat, lng: lng, alt: 0});
+        };
+
+            var pnChannel = "map2-channel";
+
+            var pubnub = new PubNub({
+                publishKey: 'pub-c-180f8ae2-5a29-43b3-88a3-c550c9d1352c',
+                subscribeKey: 'sub-c-165dd5b0-9d91-11e9-b7bc-46e9b2e3ba6e'
+            });
+
+            pubnub.subscribe({channels: [pnChannel]});
+            pubnub.addListener({message: redraw});
+
+            setInterval(function () {
+                pubnub.publish({channel: pnChannel, message: currentLocation()});
+            }, 5000);
+
+
+{#                           {%  for bus_stop in stops_info %}#}
+{##}
+{#                               var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lon }}};#}
+{#                               var marker = new google.maps.Marker({#}
+{#                                   position: latLng,#}
+{#                                   map: map#}
+{#                               });#}
+{#                               marker.content = '<div id="stop_name">{{bus_stop.stop_name}}</div>';;#}
+{#                               var infoWindow = new google.maps.InfoWindow();#}
+{#                               google.maps.event.addListener(marker, 'click', function () {#}
+{#                                   infoWindow.setContent(this.content);#}
+{#                                   infoWindow.open(this.getMap(), this);#}
+{#                               });#}
+{#                           {%  endfor %}#}
+
+
+
+
     </script>
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5V4zf8b_qLA-NnLKK0WzDizc0sFr62M&callback=initMap"
-            async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5V4zf8b_qLA-NnLKK0WzDizc0sFr62M&callback=initialize"></script>
     </body>
     </html>
 </p>
