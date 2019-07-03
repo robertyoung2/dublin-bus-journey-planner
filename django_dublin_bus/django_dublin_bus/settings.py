@@ -76,16 +76,16 @@ WSGI_APPLICATION = 'django_dublin_bus.wsgi.application'
 
 
 # This is the setting that should be pushed to the server (leave uncommented)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': ***REMOVED***,
-        'USER': ***REMOVED***,
-        'PASSWORD': ***REMOVED***,
-        'HOST': '137.43.49.51',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': ***REMOVED***,
+#         'USER': ***REMOVED***,
+#         'PASSWORD': ***REMOVED***,
+#         'HOST': '137.43.49.51',
+#         'PORT': '3306',
+#     }
+# }
 
 # This database setting should only be used for local test and development
 # Ensure this is not used on the server
