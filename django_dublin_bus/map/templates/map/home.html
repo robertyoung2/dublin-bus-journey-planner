@@ -106,14 +106,14 @@
                 lat = payload.message.lat;
                 lng = payload.message.lng;
 
-                map.setCenter({lat: lat, lng: lng, alt: 0});
+
                 mark.setPosition({lat: lat, lng: lng, alt: 0});
-                if (toggle){
-                map.setZoom(16);
-                toggle = false;
+                if (toggle) {
+                    map.setCenter({lat: lat, lng: lng, alt: 0});
+                    map.setZoom(16);
+                    toggle = false;
                 }
             };
-
 
             var pnChannel = "map2-channel";
 
