@@ -3,6 +3,38 @@
   <component name="ChangeListManager">
     <list default="true" id="e34b2887-bdf4-42b1-a860-a18ed61dc1c6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/django_dublin_bus/map/templates/map/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/django_dublin_bus/map/templates/map/home.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/getWeather.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/01d.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/01n.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/02d.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/02n.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/03d.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/03n.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/04d.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/04n.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/09d.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/09n.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/10d.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/10n.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/11d.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/11n.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/13d.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/13n.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/50d.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/50n.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/Haild.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/Hailn.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/temp0.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/temp100.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/temp25.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/temp50.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/temp75.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/windy.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/django_dublin_bus/map/static/map/navbar.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_dublin_bus/django_dublin_bus/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_dublin_bus/django_dublin_bus/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_dublin_bus/map/templates/map/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/django_dublin_bus/map/templates/map/home.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/django_dublin_bus/map/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/django_dublin_bus/map/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -15,11 +47,43 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="19" />
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.open.time.6" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.edit">
+        <counts>
+          <entry key="html" value="345" />
+          <entry key="js" value="179" />
+          <entry key="py" value="295" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="HTML" value="19" />
+          <entry key="HTML" value="345" />
+          <entry key="JavaScript" value="179" />
+          <entry key="Python" value="295" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="css" value="1" />
+          <entry key="html" value="2" />
+          <entry key="js" value="2" />
+          <entry key="py" value="3" />
+          <entry key="svg" value="10" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CSS" value="1" />
+          <entry key="HTML" value="2" />
+          <entry key="JavaScript" value="2" />
+          <entry key="Python" value="3" />
+          <entry key="SVG" value="10" />
         </counts>
       </usages-collector>
     </session>
@@ -52,6 +116,10 @@
               <folding>
                 <element signature="e#0#35#0" expanded="true" />
               </folding>
+        <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/getWeather.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="375">
+              <caret line="25" selection-start-line="25" selection-end-line="25" />
             </state>
           </provider>
         </entry>
@@ -73,6 +141,9 @@
               <folding>
                 <element signature="e#641#673#0" expanded="true" />
               </folding>
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="128">
+              <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -89,6 +160,8 @@
       <list>
         <option value="Python Script" />
         <option value="HTML File" />
+        <option value="JavaScript File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -101,12 +174,18 @@
         <option value="$PROJECT_DIR$/django_dublin_bus/map/urls.py" />
         <option value="$PROJECT_DIR$/django_dublin_bus/map/views.py" />
         <option value="$PROJECT_DIR$/django_dublin_bus/django_dublin_bus/urls.py" />
-        <option value="$PROJECT_DIR$/django_dublin_bus/map/models.py" />
-        <option value="$PROJECT_DIR$/django_dublin_bus/django_dublin_bus/settings.py" />
         <option value="$PROJECT_DIR$/Django.md" />
         <option value="$PROJECT_DIR$/requirements.txt" />
         <option value="$PROJECT_DIR$/test.py" />
         <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/django_dublin_bus/map/models.py" />
+        <option value="$PROJECT_DIR$/django_dublin_bus/map/static/navbar.css" />
+        <option value="$PROJECT_DIR$/django_dublin_bus/map/urls.py" />
+        <option value="$PROJECT_DIR$/django_dublin_bus/map/templates/map/weather_widget.html" />
+        <option value="$PROJECT_DIR$/django_dublin_bus/map/templates/map/getWeather.js" />
+        <option value="$PROJECT_DIR$/django_dublin_bus/django_dublin_bus/settings.py" />
+        <option value="$PROJECT_DIR$/django_dublin_bus/map/views.py" />
+        <option value="$PROJECT_DIR$/django_dublin_bus/map/static/map/getWeather.js" />
         <option value="$PROJECT_DIR$/django_dublin_bus/map/templates/map/home.html" />
       </list>
     </option>
@@ -119,9 +198,10 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="22" />
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="y" value="23" />
-    <option name="width" value="1397" />
-    <option name="height" value="812" />
+    <option name="width" value="802" />
+    <option name="height" value="877" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -146,11 +226,21 @@
               <item name="dublin-bus" type="462c0819:PsiDirectoryNode" />
               <item name="django_dublin_bus" type="462c0819:PsiDirectoryNode" />
               <item name="django_dublin_bus" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dublin-bus" type="b2602c69:ProjectViewProjectNode" />
               <item name="dublin-bus" type="462c0819:PsiDirectoryNode" />
               <item name="django_dublin_bus" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dublin-bus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dublin-bus" type="462c0819:PsiDirectoryNode" />
+              <item name="django_dublin_bus" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="map" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -159,6 +249,19 @@
               <item name="django_dublin_bus" type="462c0819:PsiDirectoryNode" />
               <item name="map" type="462c0819:PsiDirectoryNode" />
               <item name="migrations" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="dublin-bus" type="b2602c69:ProjectViewProjectNode" />
+              <item name="dublin-bus" type="462c0819:PsiDirectoryNode" />
+              <item name="django_dublin_bus" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+              <item name="weather_icons" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="dublin-bus" type="b2602c69:ProjectViewProjectNode" />
@@ -186,16 +289,24 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.django.DjangoModulesConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/django_dublin_bus/map/static/map/images" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons" />
+      <recent name="$PROJECT_DIR$/django_dublin_bus/map/static/map/images" />
+      <recent name="$PROJECT_DIR$/django_dublin_bus/map/static/map" />
+      <recent name="$PROJECT_DIR$/django_dublin_bus/map/static" />
+      <recent name="$PROJECT_DIR$/django_dublin_bus/map/static/js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -226,7 +337,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="6695000" />
+    <option name="totallyTimeSpent" value="17122000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="877" extended-state="6" />
@@ -244,10 +355,12 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" />
-      <window_info anchor="bottom" id="Database Changes" order="9" />
+      <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.25477707" />
       <window_info anchor="bottom" id="Python Console" order="12" />
+      <window_info anchor="bottom" id="Python Console" order="12" weight="0.32916668" />
+      <window_info anchor="bottom" id="Inspection Results" order="13" weight="0.09583333" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -282,58 +395,48 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/django_dublin_bus/manage.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/views.py">
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/apps.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
           <folding>
             <element signature="e#0#35#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/apps.py">
-      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" lean-forward="true" selection-start-line="5" selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="39" selection-start-line="4" selection-start-column="39" selection-end-line="4" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_dublin_bus/django_dublin_bus/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="35" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="35" />
-          <folding>
-            <element signature="e#641#673#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/django_dublin_bus/django_dublin_bus/settings.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="103" column="1" selection-start-line="103" selection-start-column="1" selection-end-line="103" selection-end-column="1" />
         </state>
       </provider>
     </entry>
@@ -347,6 +450,7 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/apps.py">
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -375,6 +479,110 @@
             <caret line="3" column="32" selection-start-line="3" selection-start-column="32" selection-end-line="3" selection-end-column="32" />
           </first_editor>
           <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/django_dublin_bus/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="35" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="35" />
+          <folding>
+            <element signature="e#641#673#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="103" column="1" selection-start-line="103" selection-start-column="1" selection-end-line="103" selection-end-column="1" />
+        <state relative-caret-position="180">
+          <caret line="12" column="34" selection-start-line="12" selection-start-column="25" selection-end-line="12" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/navbar.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="1" selection-start-line="18" selection-start-column="1" selection-end-line="18" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/templates/map/weather_widget.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/django_dublin_bus/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="648">
+          <caret line="142" selection-start-line="142" selection-end-line="142" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" selection-start-line="12" selection-end-line="19" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/01d.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/01n.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/02d.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/02n.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/03d.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/03n.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/04d.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/04n.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/09d.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/images/weather_icons/09n.svg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/static/map/getWeather.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/django_dublin_bus/map/templates/map/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
         </state>
       </provider>
     </entry>
