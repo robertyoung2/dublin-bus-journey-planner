@@ -9,25 +9,41 @@ from django.db import models
 
 
 class BusStops(models.Model):
-    stop_id = models.TextField(blank=True, null=False, primary_key=True)
-    bus_numbers = models.TextField(blank=True, null=True)
-    stop_headsign = models.TextField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'bus_stops'
+    stop_id = models.TextField()
+    bus_numbers = models.TextField()
+    stop_headsign = models.TextField()
 
 
 class StopsInfo(models.Model):
-    stop_lat = models.FloatField(blank=True, null=True)
-    stop_lon = models.FloatField(blank=True, null=True)
-    stop_id = models.TextField(blank=True, null=False, primary_key=True)
-    actual_stop_id = models.IntegerField(blank=True, null=True)
-    stop_name = models.TextField(blank=True, null=True)
+    stop_lat = models.FloatField()
+    stop_lon = models.FloatField()
+    stop_id = models.TextField()
+    actual_stop_id = models.IntegerField()
+    stop_name = models.TextField()
+    routes = models.ForeignKey('BusStops', on_delete=models.CASCADE)
 
-    class Meta:
-        managed = False
-        db_table = 'stops_info'
+
+# class BusStops(models.Model):
+#     stop_id = models.TextField(blank=True, null=False, primary_key=True)
+#     bus_numbers = models.TextField(blank=True, null=True)
+#     stop_headsign = models.TextField(blank=True, null=True)
+#
+#     class Meta:
+#         managed = False
+#         db_table = 'bus_stops'
+#
+#
+# class StopsInfo(models.Model):
+#     stop_lat = models.FloatField(blank=True, null=True)
+#     stop_lon = models.FloatField(blank=True, null=True)
+#     stop_id = models.TextField(blank=True, null=False, primary_key=True)
+#     actual_stop_id = models.IntegerField(blank=True, null=True)
+#     stop_name = models.TextField(blank=True, null=True)
+#
+#     class Meta:
+#         managed = False
+#         db_table = 'stops_info'
+#
 
 
 
