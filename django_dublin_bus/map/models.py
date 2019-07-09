@@ -20,30 +20,4 @@ class StopsInfo(models.Model):
     stop_id = models.TextField()
     actual_stop_id = models.IntegerField()
     stop_name = models.TextField()
-    routes = models.ForeignKey('BusStops', on_delete=models.CASCADE)
-
-
-# class BusStops(models.Model):
-#     stop_id = models.TextField(blank=True, null=False, primary_key=True)
-#     bus_numbers = models.TextField(blank=True, null=True)
-#     stop_headsign = models.TextField(blank=True, null=True)
-#
-#     class Meta:
-#         managed = False
-#         db_table = 'bus_stops'
-#
-#
-# class StopsInfo(models.Model):
-#     stop_lat = models.FloatField(blank=True, null=True)
-#     stop_lon = models.FloatField(blank=True, null=True)
-#     stop_id = models.TextField(blank=True, null=False, primary_key=True)
-#     actual_stop_id = models.IntegerField(blank=True, null=True)
-#     stop_name = models.TextField(blank=True, null=True)
-#
-#     class Meta:
-#         managed = False
-#         db_table = 'stops_info'
-#
-
-
-
+    routes = models.ManyToManyField('BusStops')
