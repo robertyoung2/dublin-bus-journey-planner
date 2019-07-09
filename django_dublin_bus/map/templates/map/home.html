@@ -145,6 +145,18 @@
                 }, 5000);
                 
                 geocoder = new google.maps.Geocoder();
+
+
+                var origin_searchbox = document.getElementById('origin');
+                var destination_searchbox = document.getElementById('destination');
+                var options = {
+                    types: ['geocode'],
+                    componentRestrictions: {country: 'ie'}
+                };
+
+                autocomplete = new google.maps.places.Autocomplete(origin_searchbox, options);
+                autocomplete = new google.maps.places.Autocomplete(destination_searchbox, options);
+
             };
             
             /* Initiating Geodecoder. */
@@ -153,10 +165,6 @@
             /* Action after pressing the submit button. */
             document.getElementById('submit').addEventListener('click', function () {
                 geocodeAddress();
-                for (marker in markers){
-                    marker.setVisible(false);
-                }
-
             });
 
             /* Function that performs geodecoding. */
@@ -213,6 +221,7 @@
                         origin: origin,
                         destination: destination,
                         travelMode: 'TRANSIT',
+                        provideRouteAlternatives: true,
                         transitOptions: {
                             modes: ['BUS'],
 
@@ -221,7 +230,17 @@
                     };
 
                     directionsService.route(request, function (result, status) {
-                        directionsDisplay.setDirections(result);
+
+                        for (var i = 0; i < result.routes.length; i++) {
+                            var dr = new google.maps.DirectionsRenderer();
+                            dr.setDirections(result);
+                            // Tell the DirectionsRenderer which route to display
+                            dr.setRouteIndex(i);
+                            dr.setMap(map);
+                        }
+                        {#dirRenderer.setMap(map);#}
+
+                        {#directionsDisplay.setDirections(result);#}
                         var text = "";
 
                         for (var i = 0; i < result.routes[0].legs[0].steps.length; i++) {
@@ -233,8 +252,9 @@
 
                         console.log(text);
 
+                        console.log(result);
                         var myRoute = result.routes[0].legs[0];
-                        console.log(myRoute);
+
 
                         for (var i = 0; i < myRoute.steps.length; i++) {
                             if(myRoute.steps[i].travel_mode == "TRANSIT"){
@@ -289,7 +309,6 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5V4zf8b_qLA-NnLKK0WzDizc0sFr62M&callback=initialize"></script>
-
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5V4zf8b_qLA-NnLKK0WzDizc0sFr62M&callback=initialize&libraries=places""></script>
     </body>
 </html>
