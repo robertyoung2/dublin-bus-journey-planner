@@ -13,12 +13,12 @@
             /* Always set the map height explicitly to define the size of the div
              * element that contains the map. */
             #map {
-                height: 90%;
+                height: 100%;
             }
 
             /* Optional: Makes the sample page fill the window. */
             html, body {
-                height: 90%;
+                height: 100%;
                 margin: 0;
                 padding: 0;
             }
@@ -49,102 +49,138 @@
 
         <script>
 
-        var image = "";
-        window.lat = 53.3498;
-        window.lng = -6.2603;
+            var image = "";
+            window.lat = 53.3498;
+            window.lng = -6.2603;
 
-        function getLocation() {
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(updatePosition);
-            }
-            return null;
-        };
-
-        function updatePosition(position) {
-            if (position) {
-                window.lat = position.coords.latitude;
-                window.lng = position.coords.longitude;
-            }
-        }
-
-        setInterval(function () {
-            updatePosition(getLocation());
-        }, 10000);
-
-        function currentLocation() {
-            return {lat: window.lat, lng: window.lng};
-        };
-
-        var map;
-        var mark;
-
-        function circlePoint(time) {
-            var radius = 0.01;
-            var x = Math.cos(time) * radius;
-            var y = Math.sin(time) * radius;
-            return {lat: window.lat + y, lng: window.lng + x};
-        }
-
-        var initialize = function () {
-
-            map = new google.maps.Map(document.getElementById('map'), {
-                center: {lat: lat, lng: lng},
-                zoom: 12,
-            });
-            mark = new google.maps.Marker({position: {lat: lat, lng: lng}, map: map});
-            var markers = [];
-            {%  for bus_stop in stops_info %}
-
-                var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lon }}};
-                var marker = new google.maps.Marker({
-                    position: latLng,
-                    map: map,
-                });
-                marker.content = '<div id="stop_name">{{bus_stop.stop_name}}</div>';;
-                var infoWindow = new google.maps.InfoWindow();
-                google.maps.event.addListener(marker, 'click', function () {
-                    infoWindow.setContent(this.content);
-                    infoWindow.open(this.getMap(), this);
-                });
-                markers.push(marker);
-
-            {%  endfor %}
-
-            var markerCluster = new MarkerClusterer(map, markers,
-                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-            window.initialize = initialize;
-            var toggle = true;
-            var redraw = function (payload) {
-                lat = payload.message.lat;
-                lng = payload.message.lng;
-
-                mark.setPosition({lat: lat, lng: lng, alt: 0});
-                if (toggle) {
-                    map.setCenter({lat: lat, lng: lng, alt: 0});
-                    map.setZoom(16);
-                    toggle = false;
+            function getLocation() {
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(updatePosition);
                 }
-            };
+                return null;
+            }
 
-            var pnChannel = "map2-channel";
-
-            var pubnub = new PubNub({
-                publishKey: 'pub-c-180f8ae2-5a29-43b3-88a3-c550c9d1352c',
-                subscribeKey: 'sub-c-165dd5b0-9d91-11e9-b7bc-46e9b2e3ba6e'
-            });
-
-            pubnub.subscribe({channels: [pnChannel]});
-            pubnub.addListener({message: redraw});
+            function updatePosition(position) {
+                if (position) {
+                    window.lat = position.coords.latitude;
+                    window.lng = position.coords.longitude;
+                }
+            }
 
             setInterval(function () {
-                pubnub.publish({channel: pnChannel, message: currentLocation()});
-            }, 5000);
-        }
-    </script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>
+                updatePosition(getLocation());
+            }, 10000);
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5V4zf8b_qLA-NnLKK0WzDizc0sFr62M&callback=initialize"></script>
+            function currentLocation() {
+                return {lat: window.lat, lng: window.lng};
+            }
+
+            var map;
+            var mark;
+
+            function circlePoint(time) {
+                var radius = 0.01;
+                var x = Math.cos(time) * radius;
+                var y = Math.sin(time) * radius;
+                return {lat: window.lat + y, lng: window.lng + x};
+            }
+
+            var initialize = function () {
+
+                map = new google.maps.Map(document.getElementById('map'), {
+                    center: {lat: lat, lng: lng},
+                    zoom: 12,
+                });
+                mark = new google.maps.Marker({position: {lat: lat, lng: lng}, map: map});
+                var markers = [];
+                {%  for bus_stop in stops_info %}
+
+                    var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lon }}};
+                    var marker = new google.maps.Marker({
+                        position: latLng,
+                        map: map,
+                    });
+
+                    var infoWindow = new google.maps.InfoWindow();
+                    google.maps.event.addListener(marker, 'click', function () {
+                        var stop_id = '{{bus_stop.stop_id}}';
+                        var stop_name = '{{ bus_stop.stop_name }}'
+                        AjaxGetRoutes(stop_id, infoWindow, stop_name);
+                        infoWindow.open(this.getMap(), this);
+                    });
+                    markers.push(marker);
+
+                {%  endfor %}
+
+                var markerCluster = new MarkerClusterer(map, markers,
+                    {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+
+                window.initialize = initialize;
+                var toggle = true;
+                var redraw = function (payload) {
+                    lat = payload.message.lat;
+                    lng = payload.message.lng;
+
+                    mark.setPosition({lat: lat, lng: lng, alt: 0});
+                    if (toggle) {
+                        map.setCenter({lat: lat, lng: lng, alt: 0});
+                        map.setZoom(16);
+                        toggle = false;
+                    }
+                };
+
+                var pnChannel = "map2-channel";
+
+                var pubnub = new PubNub({
+                    publishKey: 'pub-c-180f8ae2-5a29-43b3-88a3-c550c9d1352c',
+                    subscribeKey: 'sub-c-165dd5b0-9d91-11e9-b7bc-46e9b2e3ba6e'
+                });
+
+                pubnub.subscribe({channels: [pnChannel]});
+                pubnub.addListener({message: redraw});
+
+                setInterval(function () {
+                    pubnub.publish({channel: pnChannel, message: currentLocation()});
+                }, 5000);
+            }
+        </script>
+
+        <script>
+            function AjaxGetRoutes(stop_id, infowindow, stop_name){
+                console.log(stop_id);
+                $.ajax({
+                    type: "POST",
+                    data:{'stop_id': stop_id},
+                    url: '{% url "get_routes" %}',
+                    {#dataType: value,#}
+
+                    success: function(routes, status) {
+                        console.log(routes);
+                        console.log(status);
+
+                        var content_string = '<div id="stop_name">'+stop_name+'</div>';
+                        content_string += '<div><ul>';
+                        var route_list = []
+                        for (route in routes){
+                            var route_number = routes[route].fields.bus_numbers;
+                            if (!route_list.includes(route_number)){
+                                content_string += '<li>'+route_number+'</li>';
+                                route_list.push(route_number);
+                            }
+                        }
+                        content_string += '</ul></div>';
+
+                        infowindow.setContent(content_string);
+                    },
+
+                    error: function(jqXHR) {
+                        console.log(jqXHR);
+                    }
+                });
+            }
+        </script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5V4zf8b_qLA-NnLKK0WzDizc0sFr62M&callback=initialize"></script>
     </body>
 </html>
