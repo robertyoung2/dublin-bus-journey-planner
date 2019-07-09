@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+django_dublin_bus/bus_stops\.csv
+
+django_dublin_bus/stop_info\.csv
