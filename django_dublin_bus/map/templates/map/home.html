@@ -7,23 +7,9 @@
         <link rel="stylesheet" type="text/css" href="{% static "map/navbar.css" %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title>Simple Map</title>
+        <title>Dublin Bus - Map</title>
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta charset="utf-8">
-{#        <style>#}
-{#            /* Always set the map height explicitly to define the size of the div#}
-{#             * element that contains the map. */#}
-{#            #map {#}
-{#                height: 100%;#}
-{#            }#}
-{##}
-{#            /* Optional: Makes the sample page fill the window. */#}
-{#            html, body {#}
-{#                height: 100%;#}
-{#                margin: 0;#}
-{#                padding: 0;#}
-{#            }#}
-{#        </style>#}
     </head>
 
     <body>
@@ -62,11 +48,7 @@
 
         <script>
 
-            /* Decalring an array to store GPS co-ordinates. */
-            var array_for_gps = new Array();
-            var directionDisplay;
-
-            var image = "";
+            var marker_image = "";
             window.lat = 53.3498;
             window.lng = -6.2603;
 
@@ -93,7 +75,9 @@
             }
 
             var map;
-            var mark;
+            var geocoder;
+            var user_location_marker;
+            var markers = [];
 
             function circlePoint(time) {
                 var radius = 0.01;
@@ -108,8 +92,8 @@
                     center: {lat: lat, lng: lng},
                     zoom: 12,
                 });
-                mark = new google.maps.Marker({position: {lat: lat, lng: lng}, map: map});
-                var markers = [];
+                user_location_marker = new google.maps.Marker({position: {lat: lat, lng: lng}, map: map});
+
                 {%  for bus_stop in stops_info %}
 
                     var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lon }}};
@@ -138,7 +122,7 @@
                     lat = payload.message.lat;
                     lng = payload.message.lng;
 
-                    mark.setPosition({lat: lat, lng: lng, alt: 0});
+                    user_location_marker.setPosition({lat: lat, lng: lng, alt: 0});
                     if (toggle) {
                         map.setCenter({lat: lat, lng: lng, alt: 0});
                         map.setZoom(16);
@@ -159,77 +143,70 @@
                 setInterval(function () {
                     pubnub.publish({channel: pnChannel, message: currentLocation()});
                 }, 5000);
-
-                /* Initiating Geodecoder. */
-                var geocoder = new google.maps.Geocoder();
-
-                /* Action after pressing the submit button. */
-                document.getElementById('submit').addEventListener('click', function () {
-                    geocodeAddress(geocoder, map);
-                });
+                
+                geocoder = new google.maps.Geocoder();
             };
+            
+            /* Initiating Geodecoder. */
+            
+
+            /* Action after pressing the submit button. */
+            document.getElementById('submit').addEventListener('click', function () {
+                geocodeAddress();
+                for (marker in markers){
+                    marker.setVisible(false);
+                }
+
+            });
 
             /* Function that performs geodecoding. */
-            function geocodeAddress(geocoder, resultsMap) {
+            function geocodeAddress() {
 
                 var address_of_origin = document.getElementById('origin').value;
                 var address_of_destination = document.getElementById('destination').value;
 
                 geocoder.geocode({'address': address_of_origin},
-                    function (results, status) {
+                    function (res_origin, status) {
                         /* If place is legitimate and able to get GPS co-ordinates. */
                         if (status === 'OK') {
                             /* Set center based upon the lat and longitiude on final map */
-                            resultsMap.setCenter(results[0].geometry.location);
+                            map.setCenter(res_origin[0].geometry.location);
 
-                            /* res_orgin,res_desti-contains lat,longititude of origin and destination */
-                            geocoder.geocode({'address': address_of_origin},
-                                function (res_origin, status_of_response) {
-                                    /* Status of response is used for checking if
-                                    the respose from geocoding is valid or not (N.B. This is not a formal definition). */
-                                    geocoder.geocode({'address': address_of_destination}, function (res_dest, status_of_response) {
-                                        push_to_gpsarray(
-                                            res_origin[0].geometry.location.lat(),
-                                            res_origin[0].geometry.location.lng(),
-                                            res_dest[0].geometry.location.lat(),
-                                            res_dest[0].geometry.location.lng());
-                                    });
+                            /* Status of response is used for checking if
+                            the respose from geocoding is valid or not (N.B. This is not a formal definition). */
+                            geocoder.geocode({'address': address_of_destination}, function (res_dest, status) {
+
+                                if (status === 'OK') {
+                                    mapLocation(
+                                        res_origin[0].geometry.location.lat(),
+                                        res_origin[0].geometry.location.lng(),
+                                        res_dest[0].geometry.location.lat(),
+                                        res_dest[0].geometry.location.lng()
+                                    );
+                                }
+                                else {
+                                    alert('Geocode was not successful for the following reason: ' + status);
+                                }
+
                             });
-
                         }
                         else {
                             alert('Geocode was not successful for the following reason: ' + status);
                         }
-                });
-            }
-
-            /* Combinging Origin and destination gps co-ordinates to an array */
-            function push_to_gpsarray(orgin_lat, orgin_lng, dest_lat, dest_lng) {
-
-                array_for_gps.push(orgin_lat);
-                array_for_gps.push(orgin_lng);
-                array_for_gps.push(dest_lat);
-                array_for_gps.push(dest_lng);
-                console.log(array_for_gps);
-                mapLocation(array_for_gps);
-
+                    }
+                );
             }
 
             /* Displaying the actual route on map */
-            function mapLocation(a) {
+            function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
                 var directionsDisplay = new google.maps.DirectionsRenderer(); /* Intialising a rendering module from google maps api. */
                 var directionsService = new google.maps.DirectionsService();   /* Intialising a direction service from google maps api. */
-                var map;
 
-                var origin = new google.maps.LatLng(a[0], a[1]);
-                var destination = new google.maps.LatLng(a[2], a[3]);
-                var mapOptions = {
-                    zoom: 14,
-                    center: origin
-                };
+                var origin = new google.maps.LatLng(origin_lat, origin_lng);
+                var destination = new google.maps.LatLng(dest_lat, dest_lng);
 
-                map = new google.maps.Map(document.getElementById('map'), mapOptions);
                 directionsDisplay.setMap(map);  /* Display on resulting map */
+                calculateRoute();
 
                 function calculateRoute() {
                     var request = {
@@ -245,7 +222,6 @@
 
                     directionsService.route(request, function (result, status) {
                         directionsDisplay.setDirections(result);
-                        var final_result = [];
                         var text = "";
 
                         for (var i = 0; i < result.routes[0].legs[0].steps.length; i++) {
@@ -254,10 +230,24 @@
                                 " Instruction: "+result.routes[0].legs[0].steps[i]['instructions'];
                             text +="\n";
                         }
+
+                        console.log(text);
+
+                        var myRoute = result.routes[0].legs[0];
+                        console.log(myRoute);
+
+                        for (var i = 0; i < myRoute.steps.length; i++) {
+                            if(myRoute.steps[i].travel_mode == "TRANSIT"){
+                                console.log("Transit Step!");
+                                console.log(myRoute.steps[i].transit.departure_stop.name);
+                                console.log(myRoute.steps[i].transit.line.short_name);
+                            }
+                            console.log(myRoute.steps[i].TransitDetails);
+                        }
                     });
                 }
 
-                calculateRoute();
+
             }
         </script>
 
@@ -268,7 +258,6 @@
                     type: "POST",
                     data:{'stop_id': stop_id},
                     url: '{% url "get_routes" %}',
-                    {#dataType: value,#}
 
                     success: function(routes, status) {
                         console.log(routes);
@@ -288,7 +277,6 @@
 
                         infowindow.setContent(content_string);
                     },
-
                     error: function(jqXHR) {
                         console.log(jqXHR);
                     }
