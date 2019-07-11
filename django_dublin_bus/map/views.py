@@ -16,6 +16,7 @@ def home(request):
     description = weather_data['weather'][0]['description']
     icon = weather_data['weather'][0]['icon']
 
+    # Change stops_info to bus_stops
     context = {'stops_info': stops_info, 'temp': temp, 'description':description, 'icon':icon}
     return render(request,'map/home.html', context)
 
@@ -23,8 +24,9 @@ def home(request):
 def get_routes(request):
     if request.method == "POST":
         stop_id = request.POST['stop_id']
-        print("Stop ID:", stop_id)
+        # print("Stop ID:", stop_id)
 
+        # In our django query see is it more efficient to return only bus_numbers field
         routes = BusStops.objects.filter(stop_id=stop_id)
         routes_json = serializers.serialize('json', routes, fields=('bus_numbers',))
         return HttpResponse(routes_json, content_type='application/json')
