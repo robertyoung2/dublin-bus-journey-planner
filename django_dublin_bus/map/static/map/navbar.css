@@ -1,343 +1,448 @@
 /* CSS to be used for the nav bar */
 
-/*  Container structure for the grid elements */
-.grid-container {
-    display: grid;
-    grid-template-columns: 320px 200px 460px 80px auto 60px auto;
-    background-color: #27535F;
-    align-items: center;
-    margin-bottom: 1px;
-    margin-top: 1px;
-}
 
-/* Begin list CSS for grid elements 1 through 7 */
-.grid_item1 {
-    grid-column: 1;
-    font-size: 20px;
-    text-align: center;
-
-}
-
-.grid_item2 {
-    grid-column: 2;
-    font-size: 20px;
-    text-align: center;
-}
-
-.grid_item3 {
-    grid-column: 3;
-    font-size: 20px;
-    text-align: center;
-}
-
-.grid_item4 {
-    grid-column: 4;
-    font-size: 20px;
-    text-align: center;
-}
-
-.grid_item5 {
-    grid-column: 5;
-    font-size: 20px;
-    text-align: center;
-}
-
-.grid_item6 {
-    grid-column: 6;
-    font-size: 20px;
-    text-align: center;
-}
-
-.grid_item7 {
-    grid-column: 7;
-    font-size: 20px;
-    text-align: center;
-}
-
-/* End CSS for individual grid elements */
-
-/* START Page Title & Dropdown Section*/
-#pageTitle {
-    color: whitesmoke;
+html, body {
     margin: 0;
+    padding: 0;
+    background-color: #27535F;
     font-family: 'Roboto', sans-serif;
-    font-size: 26pt;
-
 }
 
-/* CSS for bike station dropdown */
-#dropdown {
-    margin-left: 16px;
-    font-family: 'Roboto', sans-serif;
-    font-weight: bold;
-    display: inline-flex;
+
+
+.page_container{
+  width: 100vw;
+    height: 100vh;
 }
 
-/* Text input area font CSS*/
-input {
-    font-size: 16px;
-    font-family: 'Roboto', sans-serif;
-    border-radius: 16px;
-    border: none;
-    height: 22px;
-    width: 260px;
+nav{
+    width: 100vw;
+    height: 8vh;
+    /*max-height: 20vh;*/
     text-align: center;
-    background-color: white;
-    padding-top: 5px;
-    padding-bottom: 5px;
+    background-color: #27535F;
 }
 
-/* START Dublin Bikes Logo*/
-#logo {
-    height: 60px;
-    float: right;
-    padding-bottom: 5px;
+#map{
+    /*height: 80vh;*/
+    overflow: hidden;
+    padding-bottom: 92vh;
+    /*min-height: 80vh;*/
+    /*padding-top: 30px;*/
+    position: relative;
 }
 
-/* END Dublin Bikes Logo*/
+/*@media only screen and (min-width : 730px) and (max-width: 900px) {*/
+    /*nav{*/
+        /*height: 20vh;*/
+    /*}*/
+    /*#map{*/
+        /*padding-bottom: 80vh;*/
+    /*}*/
+/*}*/
+/*@media only screen and (min-width : 176px) and (max-width: 730px) {*/
+    /*nav{*/
+        /*height: 12vh;*/
+    /*}*/
+    /*#map{*/
+        /*padding-bottom: 88vh;*/
+    /*}*/
+/*}*/
 
-/* CSS for svg weather icon */
-#weatherIcon {
-    height: 75px;
-    margin: 0 0 0 0;
-    padding-bottom: 7px;
-    float: right;
+/*@media only screen and (min-width : 901px) and (max-width: 1099px) {*/
+    /*nav{*/
+        /*height: 10vh;*/
+    /*}*/
+    /*#map{*/
+        /*padding-bottom: 90vh;*/
+    /*}*/
+/*}*/
 
-}
+/*@media only screen and (min-width : 1100px) and (max-width: 1150px) {*/
+    /*nav{*/
+        /*height: 9vh;*/
+    /*}*/
+    /*#map{*/
+        /*padding-bottom: 91vh;*/
+    /*}*/
+/*}*/
 
-/* CSS for text description of weather */
-#weatherDescription {
-    color: whitesmoke;
-    padding: 0;
-    font-size: 24px;
-    font-family: 'Roboto', sans-serif;
-    float: left;
-}
+/*@media only screen and (min-width : 1150px) and (max-width: 1340px) {*/
+    /*nav{*/
+        /*height: 8vh;*/
+    /*}*/
+    /*#map{*/
+        /*padding-bottom: 92vh;*/
+    /*}*/
+/*}*/
+/*.pageContainer{*/
+    /*width: 100vw;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+/*}*/
 
-/* CSS for dynamic thermometer svg */
-#weatherThermometer {
-    float: left;
-}
+/*section {*/
+    /*margin: 0;*/
+    /*width: 100%;*/
+    /*display: table;*/
+    /*max-width: none;*/
+    /*background-color: #EEEEEE;*/
+    /*height: 90vh;*/
+/*}*/
 
-/* CSS for text description of current temperature */
-#weatherTemp {
-    color: whitesmoke;
-    padding: 0;
-    font-size: 24px;
-    font-family: 'Roboto', sans-serif;
-    margin: 2px 0 2px 0;
-    float: left;
-    font-weight: bold;
-}
+/*.content {*/
+    /*display: table-cell;*/
+    /*vertical-align: middle;*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*border: 0;*/
+/*}*/
 
-/* Responsive design for defined screen width*/
-@media only screen and (min-width : 176px) and (max-width: 730px) {
-    .grid-container {
-        display: grid;
-        grid-template-columns: 100%;
-        background-color: #27535F;
-        align-items: center;
-        margin-bottom: 1px;
-        margin-top: 1px;
-    }
 
-    .grid_item1 {
-        display: inline-block;
-        grid-column-start: 1;
-        grid-row-start: 2;
-    }
+/*#map{*/
+    /*margin: 0;*/
+    /*padding: 0;*/
+    /*height: 100%;*/
+/*}*/
 
-    .grid_item2 {
-        display: none;
-    }
 
-    .grid_item3 {
-        display: inline-block;
-        grid-column-start: 1;
-        grid-row-start: 1;
-    }
 
-    .grid_item4 {
-        display: none;
-    }
+/*!*  Container structure for the grid elements *!*/
+/*.grid-container {*/
+    /*display: grid;*/
+    /*grid-template-columns: 320px 200px 460px 80px auto 60px auto;*/
+    /*background-color: #27535F;*/
+    /*align-items: center;*/
+    /*margin-bottom: 1px;*/
+    /*margin-top: 1px;*/
+/*}*/
 
-    .grid_item5 {
-        display: none;
-    }
+/*!* Begin list CSS for grid elements 1 through 7 *!*/
+/*.grid_item1 {*/
+    /*grid-column: 1;*/
+    /*font-size: 20px;*/
+    /*text-align: center;*/
 
-    .grid_item6 {
-        display: none;
-    }
+/*}*/
 
-    .grid_item7 {
-        display: none;
-    }
-}
+/*.grid_item2 {*/
+    /*grid-column: 2;*/
+    /*font-size: 20px;*/
+    /*text-align: center;*/
+/*}*/
 
-/* Responsive design for defined screen width*/
-@media only screen and (min-width : 730px) and (max-width: 900px) {
-    .grid-container {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        background-color: #27535F;
-        align-items: center;
-        margin-bottom: 1px;
-        margin-top: 1px;
-    }
+/*.grid_item3 {*/
+    /*grid-column: 3;*/
+    /*font-size: 20px;*/
+    /*text-align: center;*/
+/*}*/
 
-    .grid_item1 {
-        display: inline-block;
-        grid-column-start: 1;
-        grid-row-start: 1;
-    }
+/*.grid_item4 {*/
+    /*grid-column: 4;*/
+    /*font-size: 20px;*/
+    /*text-align: center;*/
+/*}*/
 
-    .grid_item2 {
-        display: none;
-    }
+/*.grid_item5 {*/
+    /*grid-column: 5;*/
+    /*font-size: 20px;*/
+    /*text-align: center;*/
+/*}*/
 
-    .grid_item3 {
-        display: inline-block;
-        grid-column-start: 2;
-        grid-row-start: 1;
-    }
+/*.grid_item6 {*/
+    /*grid-column: 6;*/
+    /*font-size: 20px;*/
+    /*text-align: center;*/
+/*}*/
 
-    .grid_item4 {
-        display: none;
-    }
+/*.grid_item7 {*/
+    /*grid-column: 7;*/
+    /*font-size: 20px;*/
+    /*text-align: center;*/
+/*}*/
 
-    .grid_item5 {
-        display: none;
-    }
+/*!* End CSS for individual grid elements *!*/
 
-    .grid_item6 {
-        display: none;
-    }
+/*!* START Page Title & Dropdown Section*!*/
+/*#pageTitle {*/
+    /*color: whitesmoke;*/
+    /*margin: 0;*/
+    /*font-family: 'Roboto', sans-serif;*/
+    /*font-size: 26pt;*/
 
-    .grid_item7 {
-        display: none;
-    }
-}
+/*}*/
 
-/* Responsive design for defined screen width*/
-@media only screen and (min-width : 901px) and (max-width: 1099px) {
+/*!* CSS for bike station dropdown *!*/
+/*#dropdown {*/
+    /*margin-left: 16px;*/
+    /*font-family: 'Roboto', sans-serif;*/
+    /*font-weight: bold;*/
+    /*display: inline-flex;*/
+/*}*/
 
-    .grid-container {
-        display: grid;
-        grid-template-columns: 1fr 120px 1fr;
-        background-color: #27535F;
-        align-items: center;
-        margin-bottom: 1px;
-        margin-top: 1px;
-    }
+/*!* Text input area font CSS*!*/
+/*input {*/
+    /*font-size: 16px;*/
+    /*font-family: 'Roboto', sans-serif;*/
+    /*border-radius: 16px;*/
+    /*border: none;*/
+    /*height: 22px;*/
+    /*width: 260px;*/
+    /*text-align: center;*/
+    /*background-color: white;*/
+    /*padding-top: 5px;*/
+    /*padding-bottom: 5px;*/
+/*}*/
 
-    .grid_item1 {
-        display: inline-block;
-    }
+/*!* START Dublin Bikes Logo*!*/
+/*#logo {*/
+    /*height: 60px;*/
+    /*float: right;*/
+    /*padding-bottom: 5px;*/
+/*}*/
 
-    .grid_item2 {
-        display: inline-block;
-    }
+/*!* END Dublin Bikes Logo*!*/
 
-    .grid_item3 {
-        display: inline-block;
-    }
+/*!* CSS for svg weather icon *!*/
+/*#weatherIcon {*/
+    /*height: 75px;*/
+    /*margin: 0 0 0 0;*/
+    /*padding-bottom: 7px;*/
+    /*float: right;*/
 
-    .grid_item4 {
-        display: none;
-    }
+/*}*/
 
-    .grid_item5 {
-        display: none;
-    }
+/*!* CSS for text description of weather *!*/
+/*#weatherDescription {*/
+    /*color: whitesmoke;*/
+    /*padding: 0;*/
+    /*font-size: 24px;*/
+    /*font-family: 'Roboto', sans-serif;*/
+    /*float: left;*/
+/*}*/
 
-    .grid_item6 {
-        display: none;
-    }
+/*!* CSS for dynamic thermometer svg *!*/
+/*#weatherThermometer {*/
+    /*float: left;*/
+/*}*/
 
-    .grid_item7 {
-        display: none;
+/*!* CSS for text description of current temperature *!*/
+/*#weatherTemp {*/
+    /*color: whitesmoke;*/
+    /*padding: 0;*/
+    /*font-size: 24px;*/
+    /*font-family: 'Roboto', sans-serif;*/
+    /*margin: 2px 0 2px 0;*/
+    /*float: left;*/
+    /*font-weight: bold;*/
+/*}*/
 
-    }
-}
+/*!* Responsive design for defined screen width*!*/
+/*.grid-container {*/
+/*display: grid;*/
+        /*grid-template-columns: 100%;*/
+        /*background-color: #27535F;*/
+        /*align-items: center;*/
+        /*margin-bottom: 1px;*/
+        /*margin-top: 1px;*/
+    /*}*/
 
-/* Responsive design for defined screen width*/
-@media only screen and (min-width : 1100px) and (max-width: 1150px) {
+    /*.grid_item1 {*/
+        /*display: inline-block;*/
+        /*grid-column-start: 1;*/
+        /*grid-row-start: 2;*/
+    /*}*/
 
-    .grid-container {
-        display: grid;
-        grid-template-columns: 300px 100px 450px auto auto;
-        background-color: #27535F;
-        align-items: center;
-        margin-bottom: 1px;
-        margin-top: 1px;
-    }
+    /*.grid_item2 {*/
+        /*display: none;*/
+    /*}*/
 
-    .grid_item1 {
-        display: inline-block;
-    }
+    /*.grid_item3 {*/
+        /*display: inline-block;*/
+        /*grid-column-start: 1;*/
+        /*grid-row-start: 1;*/
+    /*}*/
 
-    .grid_item2 {
-        display: inline-block;
-    }
+    /*.grid_item4 {*/
+        /*display: none;*/
+    /*}*/
 
-    .grid_item3 {
-        display: inline-block;
-    }
+    /*.grid_item5 {*/
+        /*display: none;*/
+    /*}*/
 
-    .grid_item4 {
-        display: inline-block;
-    }
+    /*.grid_item6 {*/
+        /*display: none;*/
+    /*}*/
 
-    .grid_item5 {
-        display: inline-block;
-    }
+    /*.grid_item7 {*/
+        /*display: none;*/
+    /*}*/
+/*}*/
 
-    .grid_item6 {
-        display: none;
-    }
+/*!* Responsive design for defined screen width*!*/
+    /*.grid-container {*/
+        /*display: grid;*/
+        /*grid-template-columns: 1fr 1fr;*/
+        /*background-color: #27535F;*/
+        /*align-items: center;*/
+        /*margin-bottom: 1px;*/
+        /*margin-top: 1px;*/
+    /*}*/
 
-    .grid_item7 {
-        display: none;
-    }
-}
+    /*.grid_item1 {*/
+        /*display: inline-block;*/
+        /*grid-column-start: 1;*/
+        /*grid-row-start: 1;*/
+    /*}*/
 
-/* Responsive design for defined screen width*/
-@media only screen and (min-width : 1150px) and (max-width: 1340px) {
+    /*.grid_item2 {*/
+        /*display: none;*/
+    /*}*/
 
-    .grid-container {
-        display: grid;
-        grid-template-columns: 300px 100px 450px auto auto auto;
-        background-color: #27535F;
-        align-items: center;
-        margin-bottom: 1px;
-        margin-top: 1px;
-    }
+    /*.grid_item3 {*/
+        /*display: inline-block;*/
+        /*grid-column-start: 2;*/
+        /*grid-row-start: 1;*/
+    /*}*/
 
-    .grid_item1 {
-        display: inline-block;
-    }
+    /*.grid_item4 {*/
+        /*display: none;*/
+    /*}*/
 
-    .grid_item2 {
-        display: inline-block;
-    }
+    /*.grid_item5 {*/
+        /*display: none;*/
+    /*}*/
 
-    .grid_item3 {
-        display: inline-block;
-    }
+    /*.grid_item6 {*/
+        /*display: none;*/
+    /*}*/
 
-    .grid_item4 {
-        display: inline-block;
-    }
+    /*.grid_item7 {*/
+        /*display: none;*/
+    /*}*/
+/*}*/
 
-    .grid_item5 {
-        display: inline-block;
-    }
+/*!* Responsive design for defined screen width*!*/
+/**/
 
-    .grid_item6 {
-        display: none;
-    }
+    /*.grid-container {*/
+        /*display: grid;*/
+        /*grid-template-columns: 1fr 120px 1fr;*/
+        /*background-color: #27535F;*/
+        /*align-items: center;*/
+        /*margin-bottom: 1px;*/
+        /*margin-top: 1px;*/
+    /*}*/
 
-    .grid_item7 {
-        display: inline-block;
-    }
-}
+    /*.grid_item1 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item2 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item3 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item4 {*/
+        /*display: none;*/
+    /*}*/
+
+    /*.grid_item5 {*/
+        /*display: none;*/
+    /*}*/
+
+    /*.grid_item6 {*/
+        /*display: none;*/
+    /*}*/
+
+    /*.grid_item7 {*/
+        /*display: none;*/
+
+    /*}*/
+/*}*/
+
+/*!* Responsive design for defined screen width*!*/
+/**/
+
+    /*.grid-container {*/
+        /*display: grid;*/
+        /*grid-template-columns: 300px 100px 450px auto auto;*/
+        /*background-color: #27535F;*/
+        /*align-items: center;*/
+        /*margin-bottom: 1px;*/
+        /*margin-top: 1px;*/
+    /*}*/
+
+    /*.grid_item1 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item2 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item3 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item4 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item5 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item6 {*/
+        /*display: none;*/
+    /*}*/
+
+    /*.grid_item7 {*/
+        /*display: none;*/
+    /*}*/
+/*}*/
+
+/*!* Responsive design for defined screen width*!*/
+/**/
+
+    /*.grid-container {*/
+        /*display: grid;*/
+        /*grid-template-columns: 300px 100px 450px auto auto auto;*/
+        /*background-color: #27535F;*/
+        /*align-items: center;*/
+        /*margin-bottom: 1px;*/
+        /*margin-top: 1px;*/
+    /*}*/
+
+    /*.grid_item1 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item2 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item3 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item4 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item5 {*/
+        /*display: inline-block;*/
+    /*}*/
+
+    /*.grid_item6 {*/
+        /*display: none;*/
+    /*}*/
+
+    /*.grid_item7 {*/
+        /*display: inline-block;*/
+    /*}*/
+/*}*/

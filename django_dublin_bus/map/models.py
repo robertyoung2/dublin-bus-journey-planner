@@ -16,7 +16,7 @@ class BusStops(models.Model):
 
 class StopsInfo(models.Model):
     stop_lat = models.FloatField()
-    stop_lon = models.FloatField()
+    stop_lon = models.FloatField() #Should be renamed to stop_lng
     stop_id = models.TextField()
     actual_stop_id = models.IntegerField()
     stop_name = models.TextField()
