@@ -17,7 +17,7 @@ def home(request):
     icon = weather_data['weather'][0]['icon']
 
     # Change stops_info to bus_stops
-    context = {'stops_info': stops_info, 'temp': temp, 'description':description, 'icon':icon}
+    context = {'bus_stops': stops_info, 'temp': temp, 'description':description, 'icon':icon}
     return render(request,'map/home.html', context)
 
 
