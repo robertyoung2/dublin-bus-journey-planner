@@ -1,335 +1,362 @@
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
-    <head>
-{#        Live Geolocation API Connection#}
-        <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
+<head>
+    {#        Live Geolocation API Connection#}
+    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
 
 
-        {% load staticfiles %}
-        <link rel="stylesheet" type="text/css" href="{% static "map/navbar.css" %}">
+    {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "map/navbar.css" %}">
 
-{#        To be replaced with foundation#}
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    {#        To be replaced with foundation#}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-        <title>Dublin Bus - Map</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta charset="utf-8">
-    </head>
+    <title>Dublin Bus - Map</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta charset="utf-8">
+</head>
 
-    <body>
+<body>
 {#    Page container for CSS purposes, can be removed later if needed#}
-    <div class="page_container">
+<div class="page_container">
 
-        {# Remove commented code with single solution for weather #}
-{#        {% load staticfiles %}#}
-{#        <script src="{% static "map/getWeather.js" %}" type="text/javascript"></script>#}
-{##}
-{#        <script>#}
-{#            var weather_icons = "{% static 'map/images/weather_icons/'%}";#}
-{#        </script>#}
+    {# Remove commented code with single solution for weather #}
+    {#        {% load staticfiles %}#}
+    {#        <script src="{% static "map/getWeather.js" %}" type="text/javascript"></script>#}
+    {##}
+    {#        <script>#}
+    {#            var weather_icons = "{% static 'map/images/weather_icons/'%}";#}
+    {#        </script>#}
 
-{#      Replace bootstrap code with foundation #}
-        <nav class="navbar navbar-expand-lg navbar-light">
-            <a class="navbar-brand" href="#">Dublin Bus</a>
-            <form class="form-inline my-2 my-lg-0" action="Getinput" method="get">
-{#                Refactor ids etc for origin destination to make more explicit#}
-                Origin: <input class="form-control mr-sm-2" type="text" name="input_route_origin" id="input_route_origin">
-                Destination: <input class="form-control mr-sm-2" type="text" name="input_route_destination" id="input_route_destination">
+    {#      Replace bootstrap code with foundation #}
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" href="#">Dublin Bus</a>
+        <form class="form-inline my-2 my-lg-0" action="Getinput" method="get">
+            {#                Refactor ids etc for origin destination to make more explicit#}
+            Origin: <input class="form-control mr-sm-2" type="text" name="input_route_origin" id="input_route_origin">
+            Destination: <input class="form-control mr-sm-2" type="text" name="input_route_destination"
+                                id="input_route_destination">
 
-                {#                Submit button needs to be changed to the right type #}
-                <input class="btn btn-outline-success my-2 my-sm-0" type="button" id="route_submit" value="Search"></input>
-            </form>
-            {#         Weather Container#}
-{#            <div class="grid-container">#}
-{#                <div class="grid_item4"><img id="weatherIcon" class="svg"></div>#}
-{#                <div class="grid_item5"><p id="weatherDescription"><p/></div>#}
-{#                <div class="grid_item6"><img id="weatherThermometer" class="svg"></div>#}
-{#                <div class="grid_item7"><p id="weatherTemp"><p/></div>#}
-{#            </div>#}
+            {#                Submit button needs to be changed to the right type #}
+            <input class="btn btn-outline-success my-2 my-sm-0" type="button" id="route_submit" value="Search"></input>
+        </form>
+        {#         Weather Container#}
+        {#            <div class="grid-container">#}
+        {#                <div class="grid_item4"><img id="weatherIcon" class="svg"></div>#}
+        {#                <div class="grid_item5"><p id="weatherDescription"><p/></div>#}
+        {#                <div class="grid_item6"><img id="weatherThermometer" class="svg"></div>#}
+        {#                <div class="grid_item7"><p id="weatherTemp"><p/></div>#}
+        {#            </div>#}
 
-        </nav>
-
-
-
-{#        <script type="text/javascript">#}
-{#            getWeather({{ temp }}, "{{ description }}", "{{ icon }}");#}
-{#        </script>#}
-
-        {# This is the container for the google map #}
-        <div id="map"></div>
-
-
-        <script>
-            var user_marker_image = ""; // Not doing anything yet but to be used for customer user location marker
-            var bus_marker_image = ""; // Not doing anything yet but to be used for busstop location marker
-
-            {# centering the the initial map position on dublin#}
-            window.lat = 53.3498;
-            window.lng = -6.2603;
-
-            {#Test to see if the browser has HTML5 geolocation#}
-            function getLocation() {
-                if (navigator.geolocation) {
-                    navigator.geolocation.getCurrentPosition(updatePosition);
-                }
-                return null;
+    </nav>
+    <a class="weatherwidget-io" href="https://forecast7.com/en/53d35n6d26/dublin/" data-label_1="DUBLIN"
+       data-label_2="WEATHER" data-font="Trebuchet MS" data-icons="Climacons Animated" data-theme="weather_one">DUBLIN
+        WEATHER</a>
+    <script>
+        !function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (!d.getElementById(id)) {
+                js = d.createElement(s);
+                js.id = id;
+                js.src = 'https://weatherwidget.io/js/widget.min.js';
+                fjs.parentNode.insertBefore(js, fjs);
             }
+        }(document, 'script', 'weatherwidget-io-js');
+    </script>
 
-            {#Updates the map position values to users location#}
-            function updatePosition(position) {
-                if (position) {
-                    window.lat = position.coords.latitude;
-                    window.lng = position.coords.longitude;
-                }
+    {#        <script type="text/javascript">#}
+    {#            getWeather({{ temp }}, "{{ description }}", "{{ icon }}");#}
+    {#        </script>#}
+
+    {# This is the container for the google map #}
+    <div id="map"></div>
+
+
+    <script>
+        var user_marker_image = ""; // Not doing anything yet but to be used for customer user location marker
+        var bus_marker_image = ""; // Not doing anything yet but to be used for busstop location marker
+
+        {# centering the the initial map position on dublin#}
+        window.lat = 53.3498;
+        window.lng = -6.2603;
+
+        {#Test to see if the browser has HTML5 geolocation#}
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(updatePosition);
             }
+            return null;
+        }
 
-            {#interval in ms#}
-            setInterval(function () {
-                updatePosition(getLocation());
-            }, 10000);
+        {#Updates the map position values to users location#}
 
-            function currentLocation() {
-                return {lat: window.lat, lng: window.lng};
+        function updatePosition(position) {
+            if (position) {
+                window.lat = position.coords.latitude;
+                window.lng = position.coords.longitude;
             }
+        }
 
-            var map; // for initialising the maps map object
-            var geocoder; // for initialising the maps geocoder object
-            var user_location_marker;
-            var markers = []; // storing the markers as we create them
-            var origin_searchbox;
-            var destination_searchbox;
+        {#interval in ms#}
+        setInterval(function () {
+            updatePosition(getLocation());
+        }, 10000);
 
-            var initialize = function () {
+        function currentLocation() {
+            return {lat: window.lat, lng: window.lng};
+        }
 
-                map = new google.maps.Map(document.getElementById('map'), {
-                    center: {lat: lat, lng: lng}, //investigate where lat nd lng variables are coming from
-                    zoom: 12,
-                });
+        var map; // for initialising the maps map object
+        var geocoder; // for initialising the maps geocoder object
+        var user_location_marker;
+        var markers = []; // storing the markers as we create them
+        var origin_searchbox;
+        var destination_searchbox;
 
-                // look at changing where this is positioned in script to resolve marker jumping from O'connell street
-                user_location_marker = new google.maps.Marker({position: {lat: lat, lng: lng}, map: map});
+        var initialize = function () {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: {lat: lat, lng: lng}, //investigate where lat nd lng variables are coming from
+                zoom: 12,
 
-                {%  for bus_stop in bus_stops %}
-
-                    var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lng }}};
-                    var marker = new google.maps.Marker({
-                        position: latLng,
-                        map: map,
-                    });
-
-                    var infoWindow = new google.maps.InfoWindow();
-                    google.maps.event.addListener(marker, 'click', function () {
-                        var stop_id = '{{bus_stop.stop_id}}';
-                        var stop_name = '{{ bus_stop.stop_name }}'
-                        AjaxGetRoutes(stop_id, infoWindow, stop_name);
-                        infoWindow.open(this.getMap(), this);
-                    });
-                    markers.push(marker);
-
-                {%  endfor %}
-
-                var markerCluster = new MarkerClusterer(map, markers,
-                    {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
-
-                window.initialize = initialize;
-                var toggle = true;
-                var redraw = function (payload) {
-                    lat = payload.message.lat;
-                    lng = payload.message.lng;
-
-                    user_location_marker.setPosition({lat: lat, lng: lng, alt: 0});
-                    if (toggle) {
-                        map.setCenter({lat: lat, lng: lng, alt: 0});
-                        map.setZoom(16);
-                        toggle = false;
-                    }
-                };
-
-                var pnChannel = "map2-channel";
-
-                var pubnub = new PubNub({
-                    publishKey: 'pub-c-180f8ae2-5a29-43b3-88a3-c550c9d1352c',
-                    subscribeKey: 'sub-c-165dd5b0-9d91-11e9-b7bc-46e9b2e3ba6e'
-                });
-
-                pubnub.subscribe({channels: [pnChannel]});
-                pubnub.addListener({message: redraw});
-
-                setInterval(function () {
-                    pubnub.publish({channel: pnChannel, message: currentLocation()});
-                }, 5000);
-
-                geocoder = new google.maps.Geocoder();
-
-
-                origin_searchbox = document.getElementById('input_route_origin');
-                destination_searchbox = document.getElementById('input_route_destination');
-                var options = {
-                    types: ['geocode'],
-                    componentRestrictions: {country: 'ie'}
-                };
-
-                autocomplete = new google.maps.places.Autocomplete(origin_searchbox, options);
-                autocomplete = new google.maps.places.Autocomplete(destination_searchbox, options);
-
-            };
-
-            /* Initiating Geodecoder. */
-
-
-            /* Action after pressing the submit button. */
-            document.getElementById('route_submit').addEventListener('click', function () {
-                geocodeAddress();
             });
 
-            /* Function that performs geodecoding. */
-            function geocodeAddress() {
+            // look at changing where this is positioned in script to resolve marker jumping from O'connell street
+            user_location_marker = new google.maps.Marker({position: {lat: lat, lng: lng}, map: map});
 
-                geocoder.geocode({'address': origin_searchbox.value},
-                    function (res_origin, status) {
-                        /* If place is legitimate and able to get GPS co-ordinates. */
-                        if (status === 'OK') {
-                            /* Set center based upon the lat and longitiude on final map */
-                            map.setCenter(res_origin[0].geometry.location);
+            {%  for bus_stop in bus_stops %}
 
-                            /* Status of response is used for checking if
-                            the respose from geocoding is valid or not (N.B. This is not a formal definition). */
-                            geocoder.geocode({'address': destination_searchbox.value}, function (res_dest, status) {
+                var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lng }}};
+                var marker = new google.maps.Marker({
+                    position: latLng,
+                    map: map,
+                });
 
-                                if (status === 'OK') {
-                                    mapLocation(
-                                        res_origin[0].geometry.location.lat(),
-                                        res_origin[0].geometry.location.lng(),
-                                        res_dest[0].geometry.location.lat(),
-                                        res_dest[0].geometry.location.lng()
-                                    );
-                                }
-                                else {
-                                    alert('Geocode was not successful for the following reason: ' + status);
-                                }
+                var infoWindow = new google.maps.InfoWindow();
+                google.maps.event.addListener(marker, 'click', function () {
+                    var stop_id = '{{bus_stop.stop_id}}';
+                    var stop_name = '{{ bus_stop.stop_name }}'
+                    AjaxGetRoutes(stop_id, infoWindow, stop_name);
+                    infoWindow.open(this.getMap(), this);
+                });
+                markers.push(marker);
 
-                            });
-                        }
-                        else {
-                            alert('Geocode was not successful for the following reason: ' + status);
-                        }
-                    }
-                );
-            }
+            {%  endfor %}
 
-            /* Displaying the actual route on map */
-            function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
-                var directionsDisplay = new google.maps.DirectionsRenderer(); /* Intialising a rendering module from google maps api. */
-                var directionsService = new google.maps.DirectionsService();   /* Intialising a direction service from google maps api. */
+            var markerCluster = new MarkerClusterer(map, markers,
+                {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
 
-                var origin = new google.maps.LatLng(origin_lat, origin_lng);
-                var destination = new google.maps.LatLng(dest_lat, dest_lng);
+            window.initialize = initialize;
+            var toggle = true;
+            var redraw = function (payload) {
+                lat = payload.message.lat;
+                lng = payload.message.lng;
 
-                directionsDisplay.setMap(map);  /* Display on resulting map */
-                calculateRoute();
-
-                function calculateRoute() {
-                    var request = {
-                        origin: origin,
-                        destination: destination,
-                        travelMode: 'TRANSIT',
-                        provideRouteAlternatives: true,
-                        transitOptions: {
-                            modes: ['BUS'],
-
-                        },
-                        unitSystem: google.maps.UnitSystem.IMPERIAL
-                    };
-
-                    directionsService.route(request, function (result, status) {
-
-                        for (var i = 0; i < result.routes.length; i++) {
-                            var dr = new google.maps.DirectionsRenderer();
-                            dr.setDirections(result);
-                            // Tell the DirectionsRenderer which route to display
-                            dr.setRouteIndex(i);
-                            dr.setMap(map);
-                        }
-                        {#dirRenderer.setMap(map);#}
-
-                        {#directionsDisplay.setDirections(result);#}
-                        var text = "";
-
-                        for (var i = 0; i < result.routes[0].legs[0].steps.length; i++) {
-                            text +="Distance(in miles): "+result.routes[0].legs[0].steps[i]['distance'].text+
-                                " Duration: "+result.routes[0].legs[0].steps[i]['duration'].text+
-                                " Instruction: "+result.routes[0].legs[0].steps[i]['instructions'];
-                            text +="\n";
-                        }
-
-                        console.log(text);
-
-                        console.log(result);
-                        var myRoute = result.routes[0].legs[0];
-
-
-                        for (var i = 0; i < myRoute.steps.length; i++) {
-                            if(myRoute.steps[i].travel_mode == "TRANSIT"){
-                                console.log("Transit Step!");
-                                console.log(myRoute.steps[i].transit.departure_stop.name);
-                                console.log(myRoute.steps[i].transit.line.short_name);
-                            }
-
-                        }
-                    });
+                user_location_marker.setPosition({lat: lat, lng: lng, alt: 0});
+                if (toggle) {
+                    map.setCenter({lat: lat, lng: lng, alt: 0});
+                    map.setZoom(16);
+                    toggle = false;
                 }
+            };
+
+            var pnChannel = "map2-channel";
+
+            var pubnub = new PubNub({
+                publishKey: 'pub-c-180f8ae2-5a29-43b3-88a3-c550c9d1352c',
+                subscribeKey: 'sub-c-165dd5b0-9d91-11e9-b7bc-46e9b2e3ba6e'
+            });
+
+            pubnub.subscribe({channels: [pnChannel]});
+            pubnub.addListener({message: redraw});
+
+            setInterval(function () {
+                pubnub.publish({channel: pnChannel, message: currentLocation()});
+            }, 5000);
+
+            geocoder = new google.maps.Geocoder();
 
 
-            }
-        </script>
+            origin_searchbox = document.getElementById('input_route_origin');
+            destination_searchbox = document.getElementById('input_route_destination');
+            var options = {
+                types: ['geocode'],
+                componentRestrictions: {country: 'ie'}
+            };
 
-        <script>
-            function AjaxGetRoutes(stop_id, infowindow, stop_name){
-                console.log(stop_id);
-                $.ajax({
-                    type: "POST",
-                    data:{'stop_id': stop_id},
-                    url: '{% url "get_routes" %}',
+            autocomplete = new google.maps.places.Autocomplete(origin_searchbox, options);
+            autocomplete = new google.maps.places.Autocomplete(destination_searchbox, options);
 
-                    success: function(routes, status) {
-                        {#Do unit test to make sure the right format is being returned and the data is correct#}
-                        console.log(routes);
-                        console.log(status);
+        };
 
-                        {#Refactor content string to stop_info_content or something like this#}
-                        var content_string = '<div id="stop_name">'+stop_name+'</div>';
-                        content_string += '<div><ul>';
-                        var route_list = []
+        /* Initiating Geodecoder. */
 
-                        {#Record performance for this loop execution, see is there a better way to do it#}
-                        for (route in routes){
-                            var route_number = routes[route].fields.bus_numbers; //remember route is a string, not a number "0", "1", etc.
-                            if (!route_list.includes(route_number)){
-                                content_string += '<li>'+route_number+'</li>';
-                                route_list.push(route_number);
+
+        /* Action after pressing the submit button. */
+        document.getElementById('route_submit').addEventListener('click', function () {
+            geocodeAddress();
+        });
+
+        /* Function that performs geodecoding. */
+        function geocodeAddress() {
+
+            geocoder.geocode({'address': origin_searchbox.value},
+                function (res_origin, status) {
+                    /* If place is legitimate and able to get GPS co-ordinates. */
+                    if (status === 'OK') {
+                        /* Set center based upon the lat and longitiude on final map */
+                        map.setCenter(res_origin[0].geometry.location);
+
+                        /* Status of response is used for checking if
+                        the respose from geocoding is valid or not (N.B. This is not a formal definition). */
+                        geocoder.geocode({'address': destination_searchbox.value}, function (res_dest, status) {
+
+                            if (status === 'OK') {
+                                mapLocation(
+                                    res_origin[0].geometry.location.lat(),
+                                    res_origin[0].geometry.location.lng(),
+                                    res_dest[0].geometry.location.lat(),
+                                    res_dest[0].geometry.location.lng()
+                                );
+                            } else {
+                                alert('Geocode was not successful for the following reason: ' + status);
                             }
-                        }
-                        content_string += '</ul></div>';
 
-                        infowindow.setContent(content_string);
+                        });
+                    } else {
+                        alert('Geocode was not successful for the following reason: ' + status);
+                    }
+                }
+            );
+        }
+
+        /* Displaying the actual route on map */
+        function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
+            var directionsDisplay = new google.maps.DirectionsRenderer(); /* Intialising a rendering module from google maps api. */
+            var directionsService = new google.maps.DirectionsService();   /* Intialising a direction service from google maps api. */
+
+            var origin = new google.maps.LatLng(origin_lat, origin_lng);
+            var destination = new google.maps.LatLng(dest_lat, dest_lng);
+
+            directionsDisplay.setMap(map);  /* Display on resulting map */
+            calculateRoute();
+
+            function calculateRoute() {
+                var request = {
+                    origin: origin,
+                    destination: destination,
+                    travelMode: 'TRANSIT',
+                    provideRouteAlternatives: true,
+                    transitOptions: {
+                        modes: ['BUS'],
+
                     },
-                    error: function(jqXHR) {
-                        console.log(jqXHR);
-                    {#    Might be worth displaying this to the user in meaningful way #}
+                    unitSystem: google.maps.UnitSystem.IMPERIAL
+                };
+
+                directionsService.route(request, function (result, status) {
+
+                    for (var i = 0; i < result.routes.length; i++) {
+                        var dr = new google.maps.DirectionsRenderer();
+                        dr.setDirections(result);
+                        // Tell the DirectionsRenderer which route to display
+                        dr.setRouteIndex(i);
+                        dr.setMap(map);
+                    }
+                    {#dirRenderer.setMap(map);#}
+
+                    {#directionsDisplay.setDirections(result);#}
+                    var text = "";
+
+                    for (var i = 0; i < result.routes[0].legs[0].steps.length; i++) {
+                        text += "Distance(in miles): " + result.routes[0].legs[0].steps[i]['distance'].text +
+                            " Duration: " + result.routes[0].legs[0].steps[i]['duration'].text +
+                            " Instruction: " + result.routes[0].legs[0].steps[i]['instructions'];
+                        text += "\n";
+                    }
+
+                    console.log(text);
+
+                    console.log(result);
+                    var myRoute = result.routes[0].legs[0];
+
+
+                    for (var i = 0; i < myRoute.steps.length; i++) {
+                        if (myRoute.steps[i].travel_mode == "TRANSIT") {
+                            console.log("Transit Step!");
+                            console.log(myRoute.steps[i].transit.departure_stop.name);
+                            console.log(myRoute.steps[i].transit.line.short_name);
+                        }
+
                     }
                 });
             }
-        </script>
-    </div>
+
+
+        }
+    </script>
+
+    <script>
+        function AjaxGetRoutes(stop_id, infowindow, stop_name) {
+            console.log(stop_id);
+            $.ajax({
+                type: "POST",
+                data: {'stop_id': stop_id},
+                url: '{% url "get_routes" %}',
+
+                success: function (routes, status) {
+                    {#Do unit test to make sure the right format is being returned and the data is correct#}
+                    console.log(routes);
+                    console.log(status);
+
+                    {#Refactor content string to stop_info_content or something like this#}
+                    var stop_info_content = '<div id="stop_name">' + stop_name + '</div>';
+                    stop_info_content += '<div><ul>';
+                    var route_list = []
+
+                    {#Record performance for this loop execution, see is there a better way to do it#}
+                    console.time('Time');
+                    //var start = new Date().getTime();
+                    for (route in routes) {
+                        var route_number = routes[route].fields.bus_numbers; //remember route is a string, not a number "0", "1", etc.
+                        if (!route_list.includes(route_number)) {
+                            stop_info_content += '<li>' + route_number + '</li>';
+                            route_list.push(route_number);
+                        }
+                    }
+                    console.timeEnd('Time');
+                    //var end = new Date().getTime();
+                    //var time = end - start;
+                    //console.log('Execution time: ' + time);
+
+                    stop_info_content += '</ul></div>';
+
+                    infowindow.setContent(stop_info_content);
+                },
+                error: function (jqXHR) {
+                    console.log(jqXHR);
+                    {#    Might be worth displaying this to the user in meaningful way #}
+                }
+            });
+        }
+    </script>
+</div>
 {#        Bootstrap #}
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5V4zf8b_qLA-NnLKK0WzDizc0sFr62M&callback=initialize&libraries=places"></script>
-    </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBE5V4zf8b_qLA-NnLKK0WzDizc0sFr62M&callback=initialize&libraries=places"></script>
+</body>
 </html>
