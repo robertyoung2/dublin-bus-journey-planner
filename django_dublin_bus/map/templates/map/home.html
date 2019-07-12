@@ -120,27 +120,7 @@
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: lat, lng: lng}, //investigate where lat nd lng variables are coming from
                 zoom: 12,
-                gestureHandling: 'cooperative',
-                /**
-       * This sample sets the gesture handling mode to 'cooperative',
-       * which means that on a mobile device, the user must swipe with one
-       * finger to scroll the page and two fingers to pan the map.
-       */
-                mapTypeControl: true,
-                mapTypeControlOptions: {
-                    style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
-                    position: google.maps.ControlPosition.TOP_CENTER
-                },
-                zoomControl: true,
-                zoomControlOptions: {
-                    position: google.maps.ControlPosition.LEFT_CENTER
-                },
-                scaleControl: true,
-                streetViewControl: true,
-                streetViewControlOptions: {
-                    position: google.maps.ControlPosition.LEFT_TOP
-                },
-                fullscreenControl: true
+
             });
 
             // look at changing where this is positioned in script to resolve marker jumping from O'connell street
