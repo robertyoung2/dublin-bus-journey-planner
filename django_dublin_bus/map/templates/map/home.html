@@ -5,13 +5,9 @@
     {#        Live Geolocation API Connection#}
     <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
 
-
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static "map/navbar.css" %}">
-
-    {#        To be replaced with foundation#}
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="script" type="" href="{% static "map/navbar.css" %}">
 
     <title>Dublin Bus - Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -22,55 +18,31 @@
 {#    Page container for CSS purposes, can be removed later if needed#}
 <div class="page_container">
 
-    {# Remove commented code with single solution for weather #}
-    {#        {% load staticfiles %}#}
-    {#        <script src="{% static "map/getWeather.js" %}" type="text/javascript"></script>#}
-    {##}
-    {#        <script>#}
-    {#            var weather_icons = "{% static 'map/images/weather_icons/'%}";#}
-    {#        </script>#}
-
-    {#      Replace bootstrap code with foundation #}
-    <nav class="navbar navbar-expand-lg navbar-light">
-        <a class="navbar-brand" href="#">Dublin Bus</a>
-        <form class="form-inline my-2 my-lg-0" action="Getinput" method="get">
-            {#                Refactor ids etc for origin destination to make more explicit#}
-            Origin: <input class="form-control mr-sm-2" type="text" name="input_route_origin" id="input_route_origin">
-            Destination: <input class="form-control mr-sm-2" type="text" name="input_route_destination"
-                                id="input_route_destination">
-
-            {#                Submit button needs to be changed to the right type #}
-            <input class="btn btn-outline-success my-2 my-sm-0" type="button" id="route_submit" value="Search"></input>
+    <nav >
+        <a href="#">Dublin Bus</a>
+        <form action="Getinput" method="get">
+            Origin: <input  type="text" name="input_route_origin" id="input_route_origin">
+            Destination: <input type="text" name="input_route_destination" id="input_route_destination">
+            <input type="button" id="route_submit" value="Search"></input>
         </form>
-        {#         Weather Container#}
-        {#            <div class="grid-container">#}
-        {#                <div class="grid_item4"><img id="weatherIcon" class="svg"></div>#}
-        {#                <div class="grid_item5"><p id="weatherDescription"><p/></div>#}
-        {#                <div class="grid_item6"><img id="weatherThermometer" class="svg"></div>#}
-        {#                <div class="grid_item7"><p id="weatherTemp"><p/></div>#}
-        {#            </div>#}
+
 
     </nav>
     <a class="weatherwidget-io" href="https://forecast7.com/en/53d35n6d26/dublin/" data-label_1="DUBLIN"
        data-label_2="WEATHER" data-font="Trebuchet MS" data-icons="Climacons Animated" data-theme="weather_one">DUBLIN
         WEATHER</a>
     <script>
-        !function (d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (!d.getElementById(id)) {
-                js = d.createElement(s);
-                js.id = id;
-                js.src = 'https://weatherwidget.io/js/widget.min.js';
-                fjs.parentNode.insertBefore(js, fjs);
+        !function (document, script_tag, weather_widget_script_id) {
+            var weather_widget_JS_elemenet, following_JS__element = document.getElementsByTagName(script_tag)[0];
+            if (!document.getElementById(weather_widget_script_id)) {
+                weather_widget_JS_elemenet = document.createElement(script_tag);
+                weather_widget_JS_elemenet.id = weather_widget_script_id;
+                weather_widget_JS_elemenet.src = 'https://weatherwidget.io/js/widget.min.js';
+                following_JS__element.parentNode.insertBefore(weather_widget_JS_elemenet, following_JS__element);
             }
         }(document, 'script', 'weatherwidget-io-js');
     </script>
 
-    {#        <script type="text/javascript">#}
-    {#            getWeather({{ temp }}, "{{ description }}", "{{ icon }}");#}
-    {#        </script>#}
-
-    {# This is the container for the google map #}
     <div id="map"></div>
 
 
@@ -83,7 +55,6 @@
         window.lng = -6.2603;
 
         {#Test to see if the browser has HTML5 geolocation#}
-
         function getLocation() {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(updatePosition);
@@ -92,7 +63,6 @@
         }
 
         {#Updates the map position values to users location#}
-
         function updatePosition(position) {
             if (position) {
                 window.lat = position.coords.latitude;
@@ -190,9 +160,6 @@
             autocomplete = new google.maps.places.Autocomplete(destination_searchbox, options);
 
         };
-
-        /* Initiating Geodecoder. */
-
 
         /* Action after pressing the submit button. */
         document.getElementById('route_submit').addEventListener('click', function () {
@@ -343,17 +310,6 @@
         }
     </script>
 </div>
-{#        Bootstrap #}
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
