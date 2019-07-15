@@ -3,6 +3,20 @@
 The dataset for our project is stored and maintained on the UCD server. The data cannot be removed from the server due to legal requirements. To view this data via Jupyter Notebook on the UCD VM requires to steps to achieve:
 
 ### Step 1
+
+First, before starting Jupyter notebook using the below command, check that there is not an instance of Jupyter Notebook
+running already. To do this, in the terminal on the server type the following:
+
+`` jupyter notebook list``
+
+If this returns a message such as this:
+
+``Currently running servers:
+http://localhost:8888/?token=***REMOVED*** :: /home/student``
+
+Copy and paste this token into your browser when requesting and connecting via the local host as seen in **Step 2**. If it is __not__ running,
+please continue to the below step:
+
 Login to the server using ssh. To start Jupyter notebook on the server use this command: 
 
 `` jupyter notebook --no-browser ``
