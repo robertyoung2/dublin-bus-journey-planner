@@ -16,9 +16,15 @@ class BusStops(models.Model):
 
 class StopsInfo(models.Model):
     stop_lat = models.FloatField()
-    stop_lng = models.FloatField() #Should be renamed to stop_lng
+    stop_lng = models.FloatField()
     stop_id = models.TextField()
     actual_stop_id = models.IntegerField()
     stop_name = models.TextField()
     routes = models.ManyToManyField('BusStops')
 
+
+class Holidays(models.Model):
+    date = models.DateField()
+    public_holiday = models.BooleanField(default=False)
+    primary_holiday = models.BooleanField(default=False)
+    secondary_holiday = models.BooleanField(default=False)
