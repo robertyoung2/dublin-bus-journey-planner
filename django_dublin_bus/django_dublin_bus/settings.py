@@ -44,7 +44,7 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -76,16 +76,16 @@ WSGI_APPLICATION = 'django_dublin_bus.wsgi.application'
 
 
 # This is the setting that should be pushed to the server (leave uncommented)
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': ***REMOVED***,
-        'USER': ***REMOVED***,
-        'PASSWORD': ***REMOVED***,
-        'HOST': '137.43.49.51',
-        'PORT': '3306',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': ***REMOVED***,
+#         'USER': ***REMOVED***,
+#         'PASSWORD': ***REMOVED***,
+#         'HOST': '137.43.49.51',
+#         'PORT': '3306',
+#     }
+# }
 
 # This database setting should only be used for local test and development
 # Ensure this is not used on the server
@@ -95,7 +95,7 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': ***REMOVED***,
+        'NAME': '***REMOVED***',
         'USER': ***REMOVED***,
         'PASSWORD': ***REMOVED***,
         'HOST': '127.0.0.1',
@@ -125,9 +125,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-gb'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Dublin'
 
 USE_I18N = True
 
@@ -140,3 +140,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
