@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 
-# Script that takes each route dataset and breaks them down into segmentation datasets
-
-# Import required libraries 
+# Import required libraries
 import pandas as pd
 import numpy as np
 import os
@@ -45,13 +43,13 @@ def dataframe_transformation(current_file, path):
 	df["FIRSTSTOPARRIVAL"] = 0
 	df["JOURNEYTIME"] = 0
 	df.loc[df.PROGRNUMBER < 2, 'SEGMENT'] = "start"
-	result = df.loc[(df.TRIPID == seg_prev.TRIPID) & (df.PROGRNUMBER > 1)]
+	result = df.loc[(df.TRIPID == seg_prev.TRIPID) & (df.PROGRNUMBER - seg_prev.PROGRNUMBER == 1)]
 	result['SEGMENT'] = seg_prev['STOPPOINTID'] + "_" + df['STOPPOINTID']
 	result['FIRSTSTOPARRIVAL'] = seg_prev["ACTUALTIME_ARR"]
 	result['JOURNEYTIME'] = df['ACTUALTIME_ARR'] - seg_prev["ACTUALTIME_ARR"]
 	result['FIRSTSTOPARRIVAL'] = result['FIRSTSTOPARRIVAL'].astype('int32')
 	result['JOURNEYTIME'] = result['JOURNEYTIME'].astype('int32')
-	df.loc[(df.TRIPID == seg_prev.TRIPID) & (df.PROGRNUMBER > 1), ['SEGMENT', 'FIRSTSTOPARRIVAL','JOURNEYTIME']] = result
+	df.loc[(df.TRIPID == seg_prev.TRIPID) & (df.PROGRNUMBER - seg_prev.PROGRNUMBER == 1), ['SEGMENT', 'FIRSTSTOPARRIVAL','JOURNEYTIME']] = result
 	df = df.drop(["ARR_DATETIME"], axis=1)
 	del seg_prev
 	# Return dataframe
