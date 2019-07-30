@@ -11,14 +11,13 @@ html, body {
 
 
 .page_container{
-  width: 100vw;
+    width: 100vw;
     height: 100vh;
 }
 
 nav{
     width: 100vw;
-    height: 8vh;
-    /*max-height: 20vh;*/
+    height: 10vh;
     text-align: center;
     background-color: #27535F;
 }
@@ -26,7 +25,7 @@ nav{
 #map{
     /*height: 80vh;*/
     overflow: hidden;
-    padding-bottom: 92vh;
+    padding-bottom: 90vh;
     /*min-height: 80vh;*/
     /*padding-top: 30px;*/
     position: relative;

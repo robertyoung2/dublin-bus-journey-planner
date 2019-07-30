@@ -7,239 +7,45 @@
 
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static "map/navbar.css" %}">
-    <link rel="script" type="" href="{% static "map/navbar.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "map/page.css" %}">
 
     <title>Dublin Bus - Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="utf-8">
-    <style>
-        .page_container{
-            height: auto;
-        }
-         #map {
-        height: 100%;
-      }
-         html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-               html, body {
-        height: 100%;
-        margin: 0;
-        padding: 0;
-      }
-        #right-panel {
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
 
-      #right-panel select, #right-panel input {
-        font-size: 15px;
-      }
-
-      #right-panel select {
-        width: 100%;
-      }
-
-      #right-panel i {
-        font-size: 12px;
-      }
-      #right-panel {
-          height: 100%;
-          float: right;
-          width: 390px;
-          overflow: auto;
-          display:inline;
-      }
-    @media print {
-        #map {
-          height: 500px;
-          margin: 0;
-        }
-        #right-panel {
-          float: none;
-          width: auto;
-        }
-      }
-         #right-panel {
-        font-family: 'Roboto','sans-serif';
-        line-height: 30px;
-        padding-left: 10px;
-      }
-
-      #right-panel select, #right-panel input {
-        font-size: 15px;
-      }
-
-      #right-panel select {
-        width: 100%;
-      }
-
-      #right-panel i {
-        font-size: 12px;
-      }
-      #right-panel {
-          height: 100%;
-          float: right;
-          width: 390px;
-          overflow: auto;
-          display:inline;
-      }
-    @media print {
-        #map {
-          height: 500px;
-          margin: 0;
-        }
-        #right-panel {
-          float: none;
-          width: auto;
-        }
-      }
-        .sidebar {
-            height: 100%;
-            width: 0;
-            position: fixed;
-            z-index: 1;
-            top: 0;
-            right: 0;
-            background-color: rgba(2, 4, 2, 0.8);
-            overflow-x: hidden;
-            transition: 0.5s;
-            padding-top: 60px;
-        }
-
-
-        .sidebar a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 15px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-            width:400px;
-
-        }
-
-        .sidebar a:hover {
-            color: #f1f1f1;
-        }
-
-        .sidebar .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        .openbtn {
-            font-size: 20px;
-            cursor: pointer;
-            background-color: rgba(2, 4, 2, 0.8);
-            color: white;
-            padding: 10px 15px;
-            border: none;
-        }
-
-        .openbtn:hover {
-            background-color: rgba(2, 4, 2, 0.8);
-        }
-
-        #main {
-            transition: margin-left .5s;
-            padding: 16px;
-        }
-
-        .topnav input[type=text] {
-            padding: 6px;
-            margin-top: 8px;
-            font-size: 17px;
-            border: none;
-            width: 140px;
-            height: 20px;
-        }
-
-        .topnav .login-container button {
-            float: right;
-            padding: 6px 10px;
-            margin-top: 8px;
-            margin-right: 16px;
-            background-color: #555;
-            color: white;
-            font-size: 17px;
-            border: none;
-            cursor: pointer;
-
-        }
-
-        .openbtn {
-            background-color: #61D3E8;
-            border: none;
-            color: white;
-            padding: 3px 32px;
-            text-align: left;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 16px;
-            margin: 12px 20px;
-            cursor: pointer;
-        }
-
-
-    </style>
 </head>
 
 <body>
-{#    Page container for CSS purposes, can be removed later if needed#}
 
 <script>
     function openNav() {
         document.getElementById("mySidebar").style.width = "450px";
-        document.getElementById("main").style.marginRight = "450px";
     }
 
     function closeNav() {
         document.getElementById("mySidebar").style.width = "0";
-        document.getElementById("main").style.marginRight = "0";
     }
 
 </script>
     <nav >
-        <a href="#">Dublin Bus</a>
-         <button class="openbtn" onclick="openNav()">Website Guidance</button>
         <form action="Getinput" method="get">
             Origin: <input  type="text" name="input_route_origin" id="input_route_origin">
             Destination: <input type="text" name="input_route_destination" id="input_route_destination">
             <input type="button" id="route_submit" value="Search"></input>
         </form>
-
-
     </nav>
-    <a class="weatherwidget-io" href="https://forecast7.com/en/53d35n6d26/dublin/" data-label_1="DUBLIN"
-       data-label_2="WEATHER" data-font="Trebuchet MS" data-icons="Climacons Animated" data-theme="weather_one">DUBLIN
-        WEATHER</a>
-<div class="page_container">
-    <div id="mySidebar" class="sidebar">
-    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
-    <a href="#"><div id="right-panel"></div></a>
-</div>
-        <div id="right-panel"></div>
+
+    <div class="page_container">
+        <div id="mySidebar" class="sidebar">
+        <a href="#">
+            <div id="right-panel">
+                <div id="route_options_container"></div>
+                <input type='button' onclick='alert(arrayToModify);' value='Show the buttons I have clicked' />
+            </div>
+        </a>
+    </div>
+
     <div id="map"></div>
-
-
-    <script>
-        !function (document, script_tag, weather_widget_script_id) {
-            var weather_widget_JS_elemenet, following_JS__element = document.getElementsByTagName(script_tag)[0];
-            if (!document.getElementById(weather_widget_script_id)) {
-                weather_widget_JS_elemenet = document.createElement(script_tag);
-                weather_widget_JS_elemenet.id = weather_widget_script_id;
-                weather_widget_JS_elemenet.src = 'https://weatherwidget.io/js/widget.min.js';
-                following_JS__element.parentNode.insertBefore(weather_widget_JS_elemenet, following_JS__element);
-            }
-        }(document, 'script', 'weatherwidget-io-js');
-    </script>
 
 
     <script>
@@ -360,7 +166,7 @@
         /* Action after pressing the submit button. */
         document.getElementById('route_submit').addEventListener('click', function () {
             geocodeAddress();
-
+            openNav()
         });
 
         /* Function that performs geodecoding. */
@@ -403,31 +209,48 @@
 
             var origin = new google.maps.LatLng(origin_lat, origin_lng);
             var destination = new google.maps.LatLng(dest_lat, dest_lng);
-            map = new google.maps.Map(document.getElementById('map'));
+
             directionsDisplay.setMap(map);
-            directionsDisplay.setPanel(document.getElementById('right-panel'));
+            // directionsDisplay.setPanel(document.getElementById('right-panel'));
 
             calculateAndDisplayRoute(directionsService, directionsDisplay);
+
             function calculateAndDisplayRoute(directionsService, directionsDisplay) {
                 directionsService.route({
                     origin: origin,
                     destination: destination,
                     travelMode: 'TRANSIT',
                     provideRouteAlternatives: true,
-                        transitOptions: {
-                            modes: ['BUS'],
-
-                        }
+                    transitOptions: {
+                        modes: ['BUS'],
+                    },
+                    unitSystem: google.maps.UnitSystem.IMPERIAL
                 }, function (response, status) {
                     if (status === 'OK') {
+                        console.log(response);
                         directionsDisplay.setDirections(response);
+
+                        console.log(response.routes.length);
+                        var buttonContainer = document.getElementById('route_options_container');
+                        for (i = 0; i < response.routes.length; i++) {
+                          newButton = document.createElement('input');
+                          newButton.type = 'button';
+                          newButton.value = i;
+                          newButton.id = "route_option_"+i;
+                          newButton.onclick = function () {
+                            console.log(this.value);
+                            directionsDisplay.setRouteIndex(parseInt(this.value));
+                          };
+                          buttonContainer.appendChild(newButton);
+                        }
+
                     } else {
                         window.alert('Directions request failed due to ' + status);
                     }
                 });
+
             }
         }
-
 
 
     </script>
