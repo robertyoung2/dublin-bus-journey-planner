@@ -9,6 +9,8 @@
     <link rel="stylesheet" type="text/css" href="{% static "map/navbar.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "map/page.css" %}">
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <title>Dublin Bus - Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta charset="utf-8">
@@ -39,8 +41,7 @@
         <div id="mySidebar" class="sidebar">
         <a href="#">
             <div id="right-panel">
-                <div id="route_options_container"></div>
-                <input type='button' onclick='alert(arrayToModify);' value='Show the buttons I have clicked' />
+                <table id="route_options_container"></table>
             </div>
         </a>
     </div>
@@ -87,6 +88,7 @@
         var markers = []; // storing the markers as we create them
         var origin_searchbox;
         var destination_searchbox;
+        var directionsRenderer;
 
         var initialize = function () {
             map = new google.maps.Map(document.getElementById('map'), {
@@ -202,20 +204,24 @@
             );
         }
 
+
         /* Displaying the actual route on map */
         function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
-            var directionsDisplay = new google.maps.DirectionsRenderer; /* Intialising a rendering module from google maps api. */
-            var directionsService = new google.maps.DirectionsService;   /* Intialising a direction service from google maps api. */
-
             var origin = new google.maps.LatLng(origin_lat, origin_lng);
             var destination = new google.maps.LatLng(dest_lat, dest_lng);
 
-            directionsDisplay.setMap(map);
-            // directionsDisplay.setPanel(document.getElementById('right-panel'));
 
-            calculateAndDisplayRoute(directionsService, directionsDisplay);
+            if(directionsRenderer){
+                directionsRenderer.setMap(null);
+            }
+            var directionsService = new google.maps.DirectionsService();
 
-            function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+            directionsRenderer = new google.maps.DirectionsRenderer();
+
+            directionsRenderer.setMap(map);
+            calculateAndDisplayRoute(directionsService, directionsRenderer);
+
+            function calculateAndDisplayRoute(directionsService, directionsRenderer) {
                 directionsService.route({
                     origin: origin,
                     destination: destination,
@@ -228,22 +234,38 @@
                 }, function (response, status) {
                     if (status === 'OK') {
                         console.log(response);
-                        directionsDisplay.setDirections(response);
+                        directionsRenderer.setDirections(response);
 
                         console.log(response.routes.length);
-                        var buttonContainer = document.getElementById('route_options_container');
+                        let route_options_table = document.getElementById('route_options_container');
+                        route_options_table.innerHTML = "";
                         for (i = 0; i < response.routes.length; i++) {
-                          newButton = document.createElement('input');
-                          newButton.type = 'button';
-                          newButton.value = i;
-                          newButton.id = "route_option_"+i;
-                          newButton.onclick = function () {
-                            console.log(this.value);
-                            directionsDisplay.setRouteIndex(parseInt(this.value));
-                          };
-                          buttonContainer.appendChild(newButton);
+                            let new_route_row = route_options_table.insertRow(-1);
+                            new_route_row.id = i;
+                            new_route_row.onclick = function () {
+                                console.log(this.id);
+                                directionsRenderer.setRouteIndex(parseInt(this.id));
+                            };
+                            let steps_counter = 0;
+                            let steps_len = response.routes[i].legs[0].steps.length;
+                            for (let step of response.routes[i].legs[0].steps) {
+                                let newCell = new_route_row.insertCell(-1);
+                                if(step.travel_mode == "WALKING"){
+                                    newCell.innerHTML = '<i class="material-icons" style="font-size:30px;color:white">directions_walk</i>';
+                                }
+                                else if(step.travel_mode == "TRANSIT"){
+                                    newCell.innerHTML = '<i class="material-icons" style="font-size:30px;color:white">directions_bus</i>';
+                                    let newCell2 = new_route_row.insertCell(-1);
+                                    let current_route = step.transit.line.short_name;
+                                    newCell2.innerHTML = '<p>'+current_route+'</p>';
+                                }
+                                if (steps_counter < steps_len - 1){
+                                    let nextStepCell = new_route_row.insertCell(-1);
+                                    nextStepCell.innerHTML = '<i class="material-icons" style="font-size:30px;color:white">navigate_next</i>';
+                                }
+                                steps_counter += 1;
+                            }
                         }
-
                     } else {
                         window.alert('Directions request failed due to ' + status);
                     }
