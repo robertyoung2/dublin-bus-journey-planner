@@ -3,6 +3,7 @@ from .models import StopsInfo, BusStops
 import requests
 from django.core import serializers
 from django.http import HttpResponse
+import json
 
 # Create your views here.
 
@@ -30,3 +31,14 @@ def get_routes(request):
         routes = BusStops.objects.filter(stop_id=stop_id)
         routes_json = serializers.serialize('json', routes, fields=('bus_numbers','stop_headsign'))
         return HttpResponse(routes_json, content_type='application/json')
+
+
+def run_model(request):
+    if request.method == "POST":
+        data = request.POST.get('data[]', False)
+        print("Data in Backend:", data)
+
+
+        predictions = [{'47':[2, 3, 4, 2, 3, 4], '11':[7, 5, 3, 5, 6, 7]}, {'3':[9, 6, 4, 2, 66, 7, 4], '75':[9, 2, 5, 6, 4, 3, 4, 6, 8, 6]}]
+        predictions = json.dumps(predictions)
+        return HttpResponse(predictions, content_type='application/json')

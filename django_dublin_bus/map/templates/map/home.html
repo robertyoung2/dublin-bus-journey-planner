@@ -50,6 +50,8 @@
 
 
     <script>
+        var model_url = '{% url "run_model" %}';
+
         var user_marker_image = ""; // Not doing anything yet but to be used for customer user location marker
         var bus_marker_image = ""; // Not doing anything yet but to be used for busstop location marker
 
@@ -229,6 +231,7 @@
                     provideRouteAlternatives: true,
                     transitOptions: {
                         modes: ['BUS'],
+                        routingPreference: 'FEWER_TRANSFERS'
                     },
                     unitSystem: google.maps.UnitSystem.IMPERIAL
                 }, function (response, status) {
@@ -239,7 +242,10 @@
                         console.log(response.routes.length);
                         let route_options_table = document.getElementById('route_options_container');
                         route_options_table.innerHTML = "";
+                        var model_journeys = [];
                         for (i = 0; i < response.routes.length; i++) {
+                            console.log("Journey Number: " + i);
+                            let journey = {};
                             let new_route_row = route_options_table.insertRow(-1);
                             new_route_row.id = i;
                             new_route_row.onclick = function () {
@@ -254,6 +260,26 @@
                                     newCell.innerHTML = '<i class="material-icons" style="font-size:30px;color:white">directions_walk</i>';
                                 }
                                 else if(step.travel_mode == "TRANSIT"){
+                                    let route_dict = {
+                                        "Origin_Lat": step.transit.departure_stop.location.lat(),
+                                        "Origin_Lon": step.transit.departure_stop.location.lng(),
+                                        "Dest_Lat": step.transit.arrival_stop.location.lat(),
+                                        "Dest_Lon": step.transit.arrival_stop.location.lng(),
+                                        "Origin": step.transit.arrival_stop.name,
+                                        "Destination": step.transit.headsign,
+                                        "Departure_Datetime": new Date(step.transit.departure_time.value)
+                                    };
+                                    journey[step.transit.line.short_name] = route_dict;
+
+                                    console.log("Origin_Lat: " + step.transit.departure_stop.location.lat());
+                                    console.log("Origin_Lon: " + step.transit.departure_stop.location.lng());
+                                    console.log("Dest_Lat: " + step.transit.arrival_stop.location.lat());
+                                    console.log("Dest_Lon: " + step.transit.arrival_stop.location.lng());
+                                    console.log("Bus_Headsign: " + step.transit.headsign);
+                                    console.log("Arrival Location: " + step.transit.arrival_stop.name);
+                                    console.log("Bus_Route: " + step.transit.line.short_name);
+                                    console.log("Departure_Datetime: " + new Date(step.transit.departure_time.value));
+                                    console.log();
                                     newCell.innerHTML = '<i class="material-icons" style="font-size:30px;color:white">directions_bus</i>';
                                     let newCell2 = new_route_row.insertCell(-1);
                                     let current_route = step.transit.line.short_name;
@@ -265,7 +291,11 @@
                                 }
                                 steps_counter += 1;
                             }
+                            model_journeys.push(journey);
+                            console.log("****************");
                         }
+                        console.log(model_journeys);
+                        Ajax_Model(model_journeys);
                     } else {
                         window.alert('Directions request failed due to ' + status);
                     }
@@ -322,6 +352,9 @@
         }
     </script>
 </div>
+
+{% load staticfiles %}
+<script src="{% static "map/js/ajax_model.js" %}"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
