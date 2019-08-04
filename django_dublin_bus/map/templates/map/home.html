@@ -17,7 +17,8 @@
 
 </head>
 
-<body>
+<>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script>
     function openNav() {
@@ -29,12 +30,18 @@
     }
 
 </script>
-    <nav >
+    <nav>
         <form action="Getinput" method="get">
             Origin: <input  type="text" name="input_route_origin" id="input_route_origin">
             Destination: <input type="text" name="input_route_destination" id="input_route_destination">
-            <input type="button" id="route_submit" value="Search"></input>
+            <input type="button" id="route_submit" value="Search">
         </form>
+        <select id="option">
+            <option value="now">now</option>
+            <option value="other">other time</option>
+        </select>
+        <input type="date" id="depDate" hidden="hidden" value = "date">
+        <input type="time" id="depTime" hidden="hidden" value = "time">
     </nav>
 
     <div class="page_container">
@@ -50,6 +57,21 @@
 
 
     <script>
+        $(function() {
+            $("#depDate").hide();
+            $("#depTime").hide();
+            $("#option").change(function () {
+                if ($(this).val() == 'other'){
+                    $("#depDate").show();
+                    $("#depTime").show();
+                }
+                if ($(this).val() == 'now'){
+                    $("#depDate").hide();
+                    $("#depTime").hide();
+                }
+            })
+        })
+
         var model_url = '{% url "run_model" %}';
 
         var user_marker_image = ""; // Not doing anything yet but to be used for customer user location marker
@@ -169,8 +191,15 @@
 
         /* Action after pressing the submit button. */
         document.getElementById('route_submit').addEventListener('click', function () {
-            geocodeAddress();
-            openNav()
+            $(function(){
+                if(($("#option").val() == 'other') && ($("#depTime").val() || $("#depDate").val() )==""){
+                    alert('Date and Time is required!')
+                }
+                else{
+                    geocodeAddress();
+                    openNav()
+                }
+            })
         });
 
         /* Function that performs geodecoding. */
@@ -213,6 +242,16 @@
             var destination = new google.maps.LatLng(dest_lat, dest_lng);
 
 
+            if (option.value == 'now'){
+                var time = new Date();
+            }
+            else{
+                var time = document.getElementById("depDate").value +" " + document.getElementById("depTime").value;
+                time = new Date(Date.parse(time));
+                console.log(time);
+            }
+
+
             if(directionsRenderer){
                 directionsRenderer.setMap(null);
             }
@@ -230,6 +269,7 @@
                     travelMode: 'TRANSIT',
                     provideRouteAlternatives: true,
                     transitOptions: {
+                        departureTime: time,
                         modes: ['BUS'],
                         routingPreference: 'FEWER_TRANSFERS'
                     },
@@ -356,7 +396,6 @@
 {% load staticfiles %}
 <script src="{% static "map/js/ajax_model.js" %}"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCdOS87zrKfHICHXYGsrcQA8WX9gG3o1I&callback=initialize&libraries=places"></script>
 </body>
