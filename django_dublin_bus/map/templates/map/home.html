@@ -17,7 +17,7 @@
 
 </head>
 
-<>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
 <script>
@@ -38,10 +38,11 @@
         </form>
         <select id="option">
             <option value="now">now</option>
-            <option value="other">other time</option>
+            <option value="departureTime">departureTime</option>
+            <option value="arrivalTime">arrivalTime</option>
         </select>
-        <input type="date" id="depDate" hidden="hidden" value = "date">
-        <input type="time" id="depTime" hidden="hidden" value = "time">
+        <input type="date" id="date" hidden="hidden" value = "date">
+        <input type="time" id="time" hidden="hidden" value = "time">
     </nav>
 
     <div class="page_container">
@@ -57,20 +58,38 @@
 
 
     <script>
+        //Function displays the date and time
         $(function() {
-            $("#depDate").hide();
-            $("#depTime").hide();
+            $("#date").hide();
+            $("#time").hide();
             $("#option").change(function () {
-                if ($(this).val() == 'other'){
-                    $("#depDate").show();
-                    $("#depTime").show();
+                if ($(this).val() == 'departureTime' || $(this).val() == 'arrivalTime'){
+                    $("#date").show();
+                    $("#time").show();
                 }
                 if ($(this).val() == 'now'){
-                    $("#depDate").hide();
-                    $("#depTime").hide();
+                    $("#date").hide();
+                    $("#time").hide();
                 }
             })
         })
+
+        //Function sets date condition with 7 days
+        $(function(){
+            var today = new Date();
+            var date_now = today.getTime();
+            var maxDate  = new Date(date_now + 7*24*60*60*1000);
+            var maxDateYear = maxDate.getFullYear();
+            var maxDateMonth = maxDate.getMonth()+1 < 10 ? "0"+(maxDate.getMonth()+1) : (maxDate.getMonth()+1);
+            var maxDateDate = maxDate.getDate() < 10 ? "0"+maxDate.getDate() : maxDate.getDate();
+            $("#date").attr("max",maxDateYear+"-"+maxDateMonth+"-"+maxDateDate);
+            var minDateYear = today.getFullYear();
+	        var minDateMonth = today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : (today.getMonth()+1);
+	        var minDateDate = today.getDate() < 10 ? "0"+today.getDate() : today.getDate();
+	        $("#date").attr("min",minDateYear+"-"+minDateMonth+"-"+minDateDate);
+        })
+
+
 
         var model_url = '{% url "run_model" %}';
 
@@ -192,7 +211,7 @@
         /* Action after pressing the submit button. */
         document.getElementById('route_submit').addEventListener('click', function () {
             $(function(){
-                if(($("#option").val() == 'other') && ($("#depTime").val() || $("#depDate").val() )==""){
+                if(($("#option").val() == 'departureTime' || $("#option").val() == 'arrivalTime') && ($("#time").val() == "" || $("#date").val() ) == ""){
                     alert('Date and Time is required!')
                 }
                 else{
@@ -245,12 +264,15 @@
             if (option.value == 'now'){
                 var time = new Date();
             }
-            else{
-                var time = document.getElementById("depDate").value +" " + document.getElementById("depTime").value;
-                time = new Date(Date.parse(time));
-                console.log(time);
+            else if (option.value == 'departureTime') {
+                var departureTime = document.getElementById("date").value +" " + document.getElementById("time").value;
+                departureTime = new Date(Date.parse(departureTime));
             }
-
+             else if (option.value == 'arrivalTime') {
+                var arrivalTime = document.getElementById("date").value + " " + document.getElementById("time").value;
+                arrivalTime = new Date(Date.parse(arrivalTime));
+                console.log(arrivalTime);
+            }
 
             if(directionsRenderer){
                 directionsRenderer.setMap(null);
@@ -269,7 +291,8 @@
                     travelMode: 'TRANSIT',
                     provideRouteAlternatives: true,
                     transitOptions: {
-                        departureTime: time,
+                        arrivalTime: arrivalTime,
+                        departureTime: departureTime,
                         modes: ['BUS'],
                         routingPreference: 'FEWER_TRANSFERS'
                     },
