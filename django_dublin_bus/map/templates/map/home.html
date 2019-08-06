@@ -41,8 +41,8 @@
             <option value="departureTime">departureTime</option>
             <option value="arrivalTime">arrivalTime</option>
         </select>
-        <input type="date" id="date" hidden="hidden" value = "date">
-        <input type="time" id="time" hidden="hidden" value = "time">
+        <select id="date"></select>
+        <input type="time" id="time" hidden="hidden">
     </nav>
 
     <div class="page_container">
@@ -58,6 +58,21 @@
 
 
     <script>
+        //Function makes the day
+        $(function(){
+            var today = new Date().getTime();
+        for(var i =0 ;i < 7; i++){
+            var day = "day" + i;
+            day = today + 1000*i*24*60*60;
+            day = new Date(day);
+            var maxDateYear = day.getFullYear();
+            var maxDateMonth = day.getMonth()+1 < 10 ? "0"+(day.getMonth()+1) : (day.getMonth()+1);
+            var maxDateDate = day.getDate() < 10 ? "0"+day.getDate() : day.getDate();
+            day = maxDateYear+"-"+maxDateMonth+"-"+maxDateDate;
+            $("#date").append("<option value="+day+">"+day+"</option>")
+        }
+        })
+
         //Function displays the date and time
         $(function() {
             $("#date").hide();
@@ -73,23 +88,6 @@
                 }
             })
         })
-
-        //Function sets date condition with 7 days
-        $(function(){
-            var today = new Date();
-            var date_now = today.getTime();
-            var maxDate  = new Date(date_now + 7*24*60*60*1000);
-            var maxDateYear = maxDate.getFullYear();
-            var maxDateMonth = maxDate.getMonth()+1 < 10 ? "0"+(maxDate.getMonth()+1) : (maxDate.getMonth()+1);
-            var maxDateDate = maxDate.getDate() < 10 ? "0"+maxDate.getDate() : maxDate.getDate();
-            $("#date").attr("max",maxDateYear+"-"+maxDateMonth+"-"+maxDateDate);
-            var minDateYear = today.getFullYear();
-	        var minDateMonth = today.getMonth()+1 < 10 ? "0"+(today.getMonth()+1) : (today.getMonth()+1);
-	        var minDateDate = today.getDate() < 10 ? "0"+today.getDate() : today.getDate();
-	        $("#date").attr("min",minDateYear+"-"+minDateMonth+"-"+minDateDate);
-        })
-
-
 
         var model_url = '{% url "run_model" %}';
 
@@ -211,12 +209,12 @@
         /* Action after pressing the submit button. */
         document.getElementById('route_submit').addEventListener('click', function () {
             $(function(){
-                if(($("#option").val() == 'departureTime' || $("#option").val() == 'arrivalTime') && ($("#time").val() == "" || $("#date").val() ) == ""){
-                    alert('Date and Time is required!')
+                if(($("#option").val() == 'departureTime' || $("#option").val() == 'arrivalTime') && ($("#time").val() == "" || $("#date").val()  == "")){
+                    alert('Date and Time is required!');
                 }
                 else{
                     geocodeAddress();
-                    openNav()
+                    openNav();
                 }
             })
         });
@@ -262,16 +260,15 @@
 
 
             if (option.value == 'now'){
-                var time = new Date();
+                var departureTime = new Date();
             }
             else if (option.value == 'departureTime') {
-                var departureTime = document.getElementById("date").value +" " + document.getElementById("time").value;
+                var departureTime = document.getElementById("date").value + " " + document.getElementById("time").value;
                 departureTime = new Date(Date.parse(departureTime));
             }
              else if (option.value == 'arrivalTime') {
                 var arrivalTime = document.getElementById("date").value + " " + document.getElementById("time").value;
                 arrivalTime = new Date(Date.parse(arrivalTime));
-                console.log(arrivalTime);
             }
 
             if(directionsRenderer){
