@@ -130,19 +130,26 @@
         var origin_searchbox;
         var destination_searchbox;
         var directionsRenderer;
+        var sunrise;
+        var sunset;
 
-        //need real domain
-        // $.get('https://api.darksky.net/forecast/95ab53fceccb16cedea7ed90b54c167d/53.3498,-6.2603',
-        //   function(data){
-        //         console.log(data);
-        //   });
+        $.ajax({
+            url: 'http://api.openweathermap.org/data/2.5/weather?q=Dublin&APPID=0a4fb876c0f4024eff4c1beb5c4d7761',
+            type: 'GET',
+            async: false,
+            success:function (data){
+                loadData(data);
+            }
+        });
+
+        function loadData(data) {
+                sunrise = data.sys.sunrise;
+                sunset = data.sys.sunset;
+        }
 
         var initialize = function () {
-            var datetoday = new Date();
-            var timenow=datetoday.getTime();
-            datetoday.setTime(timenow);
-            var thehour = datetoday.getHours();
-            if(thehour >= 20 || thehour <= 6){
+            var timetoday = new Date().getTime();
+            if(timetoday >= parseInt(sunset+'000') || timetoday <= (parseInt(sunrise+'000'))){
                 map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: lat, lng: lng}, //investigate where lat nd lng variables are coming from
                 zoom: 12,
