@@ -169,16 +169,8 @@
         });
 
         document.getElementById('sethomeandwork').addEventListener('click', function () {
-            localStorage.setItem('Home', sethome.value);
-            localStorage.setItem('Work',destination.value);
             window.localStorage.setItem('Home', sethome.value);
             window.localStorage.setItem('Work',destination.value);
-            window.sessionStorage.setItem('Home', sethome.value)
-            window.sessionStorage.setItem('Work',destination.value)
-            sessionStorage.setItem('Home', sethome.value)
-            sessionStorage.setItem('Work',destination.value)
-            document.cookie=sethome.value;
-
 
         });
 
