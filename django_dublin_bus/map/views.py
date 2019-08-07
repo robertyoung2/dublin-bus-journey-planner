@@ -34,7 +34,6 @@ def home(request):
 def get_routes(request):
     if request.method == "POST":
         stop_id = request.POST['stop_id']
-        # print("Stop ID:", stop_id)
 
         # In our django query see is it more efficient to return only bus_numbers field
         routes = BusStops.objects.filter(stop_id=stop_id)
@@ -48,7 +47,7 @@ def run_model(request):
         data = json.loads(data)
 
         Start_Model_Time = time.time()
-        df = pd.read_csv('/Users/conor/Desktop/Fantastic4_Local/dublin-bus/django_dublin_bus/map/static/map/csv/ordered_stops_with_segments_GoAhead.csv')
+        df = pd.read_csv('/Users/conor/Desktop/Fantastic4_Local/dublin-bus/django_dublin_bus/map/static/map/csv/ordered_stops_segment_goahead_fixed.csv')
         weather_df = pd.read_csv('/Users/conor/Desktop/Fantastic4_Local/dublin-bus/django_dublin_bus/map/static/map/csv/168_hours_weather.csv', parse_dates=['ts_weather'])
         path_xgbr_models = "/Users/conor/Desktop/Fantastic4_Local/dublin-bus/django_dublin_bus/map/static/map/xgbr_models/"
         headsign_options = list(df['destination'].unique())
@@ -73,8 +72,10 @@ def run_model(request):
                 hour = arr_time.hour
                 print("Hour of Departure:", hour)
 
-                # django model query
-                holidays = {"public_holiday": 0, "primary_holiday": 1, "secondary_holiday": 1}
+                try:
+                    holiday = Holidays.objects.get(date=arr_time.date())
+                except Holidays.DoesNotExist:
+                    holiday = {"public_holiday": False, "primary_holiday": False, "secondary_holiday": False}
 
                 headsign = journey[route]['Destination']
                 headsign = difflib.get_close_matches(headsign, headsign_options, n=1)
@@ -114,9 +115,9 @@ def run_model(request):
                             if os.path.isfile(path_xgbr_models + segment + "_pickle.sav"):
                                 loaded_model = pickle.load(open(path_xgbr_models + segment + "_pickle.sav", 'rb'))
 
-                                model_data = [[firststoparrival, hour, rain, temp, holidays['primary_holiday'],
-                                               holidays['secondary_holiday'],
-                                               holidays['public_holiday'], weekdays[0], weekdays[1], weekdays[2],
+                                model_data = [[firststoparrival, hour, rain, temp, int(holiday.primary_holiday),
+                                               int(holiday.secondary_holiday),
+                                               int(holiday.public_holiday), weekdays[0], weekdays[1], weekdays[2],
                                                weekdays[3], weekdays[4], weekdays[5], weekdays[6]]]
                                 model_df = pd.DataFrame(model_data, columns=['FIRSTSTOPARRIVAL', 'HOUR', 'rain', 'temp',
                                                                              'PRIMARYHOLIDAY',
@@ -149,22 +150,6 @@ def run_model(request):
         print("Total Prediction Time:", round(End_Model_Time - Start_Model_Time, 2), "seconds")
 
 
-
-        # test_date = date(2019, 12, 25) #Replace date from data
-        # # if result is 0 django will raise DoesNotExist exception, put in logic to handle this properly
-        # try:
-        #     holiday = Holidays.objects.get(date=test_date)
-        # except Holidays.DoesNotExist:
-        #     holiday = {"public_holiday": 0, "primary_holiday": 0, "secondary_holiday": 0}
-        #
-        # print()
-        # print("Result of Holiday:", holiday)
-        # print("Public Holiday:", holiday.public_holiday)
-        # print("Primary Holiday:", holiday.primary_holiday)
-        # print("Secondary Holiday:", holiday.secondary_holiday)
-        # print()
-
-        # predictions = [{'47':[2, 3, 4, 2, 3, 4], '11':[7, 5, 3, 5, 6, 7]}, {'3':[9, 6, 4, 2, 66, 7, 4], '75':[9, 2, 5, 6, 4, 3, 4, 6, 8, 6]}]
         predictions = json.dumps(predictions)
         return HttpResponse(predictions, content_type='application/json')
 
