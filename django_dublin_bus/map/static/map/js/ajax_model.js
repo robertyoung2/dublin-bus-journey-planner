@@ -1,12 +1,13 @@
 function Ajax_Model(data) {
-    console.log("Model Data:" + data);
+    console.log("Model Data Ajax:" + data);
     $.ajax({
         type: "POST",
         data: {'data': data},
+        dataType: 'json',
         url: model_url,
 
         success: function (predictions, status) {
-            // console.log(predictions);
+            console.log("Returned Model Data:"+ predictions);
             console.log(status);
             for(prediction of predictions){
                 let keys = Object.keys(prediction);
