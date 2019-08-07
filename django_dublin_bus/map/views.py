@@ -10,6 +10,7 @@ import datetime
 import pandas as pd
 import pickle
 import os
+from django_dublin_bus.settings import BASE_DIR
 import time
 from xgboost import XGBRegressor
 from datetime import date, timedelta
@@ -46,10 +47,13 @@ def run_model(request):
         data = request.POST.get('data')
         data = json.loads(data)
 
+        path_csv = os.path.join(BASE_DIR, 'map/ml_models/csv/')
+        path_xgbr_models = os.path.join(BASE_DIR, 'map/ml_models/xgbr_models/')
+
         Start_Model_Time = time.time()
-        df = pd.read_csv('/Users/conor/Desktop/Fantastic4_Local/dublin-bus/django_dublin_bus/map/static/map/csv/ordered_stops_segment_goahead_fixed.csv')
-        weather_df = pd.read_csv('/Users/conor/Desktop/Fantastic4_Local/dublin-bus/django_dublin_bus/map/static/map/csv/168_hours_weather.csv', parse_dates=['ts_weather'])
-        path_xgbr_models = "/Users/conor/Desktop/Fantastic4_Local/dublin-bus/django_dublin_bus/map/static/map/xgbr_models/"
+        df = pd.read_csv(path_csv+'ordered_stops_segment_goahead_fixed.csv')
+        weather_df = pd.read_csv(path_csv+'168_hours_weather.csv', parse_dates=['ts_weather'])
+x
         headsign_options = list(df['destination'].unique())
         predictions = []
         for journey in data:
