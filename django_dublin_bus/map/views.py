@@ -47,12 +47,16 @@ def run_model(request):
 
 def get_sun(request):
     if request.method == "POST":
+        print("Inside get_sun function")
         with open('sunrise_sunset.csv', 'r') as csvfile:
             reader = csv.reader(csvfile)
             sunrise = [row[2] for row in reader]
+
         with open('sunrise_sunset.csv', 'r') as csvfile:
             reader = csv.reader(csvfile)
             sunset = [row[3] for row in reader]
+
         sun = [sunrise.sunset]
         sun = json.dumps(sun)
-        return render(request, 'map/home.html', locals())
+
+        return render(sun, content_type='application/json')

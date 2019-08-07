@@ -54,10 +54,10 @@
     </div>
 
     <div id="map"></div>
-    <script>
-               var sun = {{ sun|safe }};
-               console.log(sun);
-    </script>
+    <!--<script>-->
+               <!--var sun = {{ sun|safe }};-->
+               <!--console.log(sun);-->
+    <!--</script>-->
 
     <script>
 
@@ -133,14 +133,15 @@
         var origin_searchbox;
         var destination_searchbox;
         var directionsRenderer;
+
         var sunrise;
         var sunset;
 
         $.ajax({
-            url: 'http://api.openweathermap.org/data/2.5/weather?q=Dublin&APPID=0a4fb876c0f4024eff4c1beb5c4d7761',
-            type: 'GET',
-            async: false,
+            url: '{% url "get_sun" %}',
+            type: 'POST',
             success:function (data){
+                console.log("I GOT SUNSHINE!");
                 loadData(data);
             }
         });
@@ -149,6 +150,8 @@
         function loadData(data) {
                 sunrise = data.sys.sunrise;
                 sunset = data.sys.sunset;
+                console.log("Sunrise: "+ sunrise);
+                console.log("Sunset: "+ sunset);
         }
 
         var initialize = function () {
