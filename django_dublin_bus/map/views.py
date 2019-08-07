@@ -3,8 +3,9 @@ from .models import StopsInfo, BusStops
 import requests
 from django.core import serializers
 from django.http import HttpResponse
+import csv
 import json
-
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -42,3 +43,16 @@ def run_model(request):
         predictions = [{'47':[2, 3, 4, 2, 3, 4], '11':[7, 5, 3, 5, 6, 7]}, {'3':[9, 6, 4, 2, 66, 7, 4], '75':[9, 2, 5, 6, 4, 3, 4, 6, 8, 6]}]
         predictions = json.dumps(predictions)
         return HttpResponse(predictions, content_type='application/json')
+
+
+def get_sun(request):
+    if request.method == "POST":
+        with open('sunrise_sunset.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            sunrise = [row[2] for row in reader]
+        with open('sunrise_sunset.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+            sunset = [row[3] for row in reader]
+        sun = [sunrise.sunset]
+        sun = json.dumps(sun)
+        return render(request, 'map/home.html', locals())

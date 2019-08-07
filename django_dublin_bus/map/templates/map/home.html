@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     {#        Live Geolocation API Connection#}
     <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
@@ -55,9 +54,13 @@
     </div>
 
     <div id="map"></div>
-
+    <script>
+               var sun = {{ sun|safe }};
+               console.log(sun);
+    </script>
 
     <script>
+
         //Function makes the day
         $(function(){
             var today = new Date().getTime();
@@ -68,8 +71,8 @@
             var maxDateYear = day.getFullYear();
             var maxDateMonth = day.getMonth()+1 < 10 ? "0"+(day.getMonth()+1) : (day.getMonth()+1);
             var maxDateDate = day.getDate() < 10 ? "0"+day.getDate() : day.getDate();
-            day = maxDateYear+"-"+maxDateMonth+"-"+maxDateDate;
-            $("#date").append("<option value="+day+">"+day+"</option>")
+            var showday = maxDateYear+"-"+maxDateMonth+"-"+maxDateDate;
+            $("#date").append("<option value="+showday+">"+day+"</option>")
         }
         })
 
@@ -141,6 +144,7 @@
                 loadData(data);
             }
         });
+
 
         function loadData(data) {
                 sunrise = data.sys.sunrise;
