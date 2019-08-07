@@ -5,6 +5,8 @@ from django.core import serializers
 from django.http import HttpResponse
 import csv
 import json
+import os
+from django_dublin_bus.settings import BASE_DIR
 from django.http import JsonResponse
 # Create your views here.
 
@@ -48,15 +50,23 @@ def run_model(request):
 def get_sun(request):
     if request.method == "POST":
         print("Inside get_sun function")
-        with open('sunrise_sunset.csv', 'r') as csvfile:
+        path_csv = os.path.join(BASE_DIR, 'map/ml_models/csv/')
+        with open(path_csv+'sunrise_sunset.csv', 'r') as csvfile:
             reader = csv.reader(csvfile)
-            sunrise = [row[2] for row in reader]
 
-        with open('sunrise_sunset.csv', 'r') as csvfile:
-            reader = csv.reader(csvfile)
-            sunset = [row[3] for row in reader]
+            first_row = True
+            for row in reader:
+                if first_row:
+                    first_row = False
+                else:
+                    sunrise = row[2]
+                    sunset = row[3]
+                    break
 
-        sun = [sunrise.sunset]
+            print("Sunrise:", sunrise)
+            print("Sunset:", sunset)
+
+        sun = {"sunrise":sunrise, "sunset":sunset}
         sun = json.dumps(sun)
 
-        return render(sun, content_type='application/json')
+        return HttpResponse(sun, content_type='application/json')
