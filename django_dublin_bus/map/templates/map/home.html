@@ -168,37 +168,12 @@
 
         /* Action after pressing the submit button. */
         document.getElementById('route_submit').addEventListener('click', function () {
-            var oh = origin_searchbox.value.includes("home") || origin_searchbox.value.includes("Home") || origin_searchbox.value.includes("HOME") || origin_searchbox.value.includes("HOme") || origin_searchbox.value.includes("HOMe") || origin_searchbox.value.includes("hOME") || origin_searchbox.value.includes("hoME");
-            if (oh== true)
-            {
-                origin=true;
-                console.log("1st");
-            }
-            var ow = origin_searchbox.value.includes("work") || origin_searchbox.value.includes("Work") || origin_searchbox.value.includes("WORK") || origin_searchbox.value.includes("WOrk") || origin_searchbox.value.includes("WORk") || origin_searchbox.value.includes("wORK") || origin_searchbox.value.includes("WoRk");
-            if (ow== true)
-            {
-                origin_work=true;
-                console.log("2nd");
-            }
-            var dw = destination_searchbox.value.includes("work") || destination_searchbox.value.includes("Work") || destination_searchbox.value.includes("WORK") || destination_searchbox.value.includes("WOrk") || destination_searchbox.value.includes("WORk") || destination_searchbox.value.includes("wORK") || destination_searchbox.value.includes("WoRk");
-            if (dw== true)
-            {
-                dest_work=true;
-                console.log("3rd");
-            }
-            var dh = destination_searchbox.value.includes("home") || destination_searchbox.value.includes("Home") || destination_searchbox.value.includes("HOME") || destination_searchbox.value.includes("HOme") || destination_searchbox.value.includes("HOMe") || destination_searchbox.value.includes("hOME") || destination_searchbox.value.includes("hoME");
-            if (dh== true)
-            {
-                dest=true;
-                console.log("4th");
-            }
             geocodeAddress();
-
         });
 
         document.getElementById('sethomeandwork').addEventListener('click', function () {
-            window.localStorage.setItem('Home', sethome.value);
-            window.localStorage.setItem('Work',destination.value);
+            window.localStorage.setItem('home', sethome.value);
+            window.localStorage.setItem('work',destination.value);
 
         });
 
@@ -206,41 +181,22 @@
         function geocodeAddress() {
             var origin_new="";
             var dest_new="";
-            if (origin == true)
-            {
-                origin_new=window.localStorage.getItem('Home');
-                origin=false;
-                console.log("11st");
+
+
+            if(origin_searchbox.value.toLowerCase() == "home" || origin_searchbox.value.toLowerCase() == "work"){
+                origin_new=window.localStorage.getItem(origin_searchbox.value.toLowerCase());
             }
-            else if(origin_work == true)
-            {
-                origin_new=window.localStorage.getItem('Work');
-                origin_work=false;
-                console.log("22nd");
-            }
-            else
-            {
-                origin_new=origin_searchbox.value;
-                console.log("33rd");
+            else{
+                origin_new=origin_searchbox.value
             }
 
-            if (dest == true)
-            {
-                dest_new=window.localStorage.getItem('Home');
-                dest=false;
-                console.log("44th");
+            if(destination_searchbox.value.toLowerCase() == "home" || destination_searchbox.value.toLowerCase() == "work"){
+                dest_new=window.localStorage.getItem(destination_searchbox.value.toLowerCase());
             }
-            else if(dest_work == true)
-            {
-                dest_new=window.localStorage.getItem('Work');
-                dest_work=false;
-                console.log("55rd");
-            }
-            else
-            {
+            else{
                 dest_new=destination_searchbox.value
-                console.log("66th");
             }
+
             console.log(origin_new);
             console.log(dest_new);
                 geocoder.geocode({'address': origin_new},
