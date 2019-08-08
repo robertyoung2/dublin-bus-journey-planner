@@ -43,6 +43,7 @@
     <script src="{% static "map/js/map_initialiser.js" %}"></script>
 
     <script>
+        var model_url = '{% url "run_model" %}';
         
         function loopBusStops(){
             console.log("Calling loopBusStops function!");
