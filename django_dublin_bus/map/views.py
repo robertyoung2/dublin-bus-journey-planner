@@ -34,12 +34,12 @@ def home(request):
 
 def get_routes(request):
     if request.method == "POST":
-        stop_id = request.POST['stop_id']
+        stop_id = request.POST["stop_id"]
 
         # In our django query see is it more efficient to return only bus_numbers field
         routes = BusStops.objects.filter(stop_id=stop_id)
-        routes_json = serializers.serialize('json', routes, fields=('bus_numbers','stop_headsign'))
-        return HttpResponse(routes_json, content_type='application/json')
+        routes_json = serializers.serialize("json", routes, fields=("bus_numbers","stop_headsign"))
+        return HttpResponse(routes_json, content_type="application/json")
 
 
 def run_model(request):
