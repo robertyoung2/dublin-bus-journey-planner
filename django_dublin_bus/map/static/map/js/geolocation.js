@@ -3,10 +3,6 @@ console.log("geolocation.js Loaded!");
 window.lat = 53.3498;
 window.lng = -6.2603;
 
-var select = document.getElementById('cmbitems');
-select.onchange = function () {
-    x=select.value;
-}
 function getnearby(pos) {
     if (typeof x === 'undefined')
     {
@@ -57,7 +53,7 @@ function getUserLocation(){
             pos={
                 lat:position.coords.latitude,
                 lng:position.coords.longitude
-            }
+            };
             window.lat = position.coords.latitude;
             window.lng = position.coords.longitude;
             geo_for_emptystring.length = 0
@@ -108,4 +104,34 @@ function initialiseUserLocation(){
     setInterval(function () {
         pubnub.publish({channel: pnChannel, message: currentLocation()});
     }, 5000);
+}
+
+function create_radius_selector(){
+    var centerControlDiv = document.createElement('select');
+    centerControlDiv.id = "cmbitems";
+    centerControlDiv.name = "cmbitems";
+    centerControlDiv.innerHTML =
+        '<option value=500>500</option>' +
+        '<option value=800>800</option>' +
+        '<option value=900>900</option>' +
+        '<option value=1000>1000</option>' +
+        '<option value=1200>1200</option>' +
+        '<option value=1500>1500</option>' +
+        '<option value=1700>1700</option>' +
+        '<option value=1800>1800</option>' +
+        '<option value=2000>2000</option>';
+
+    var centerControl = new CenterControl(centerControlDiv, map);
+    centerControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
+}
+
+function CenterControl(controlDiv, map) {
+    controlDiv.style.width = '80px';
+    // Setup the click event listeners: simply set the map to Chicago.
+    controlDiv.addEventListener('click', function() {
+        controlDiv.onchange = function () {
+            x=controlDiv.value;
+        }
+    });
 }

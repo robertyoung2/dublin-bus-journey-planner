@@ -12,9 +12,11 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
     {% load staticfiles %}
+    <link rel="stylesheet" type="text/css" href="{% static "map/css/home.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "map/css/mobile_bottom_nav_bar.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "map/css/map.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "map/css/info_section.css" %}">
+    <link rel="stylesheet" type="text/css" href="{% static "map/css/route_options.css" %}">
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -26,24 +28,7 @@
 
 <body>
     <div class="grid-y grid-frame">
-        <div class="cell responsive-embed">
-            <table>
-                <tr>
-                    <td>
-                        <select name="cmbitems" id="cmbitems">
-                            <option value=800>800</option>
-                            <option value=500>500</option>
-                            <option value=900>900</option>
-                            <option value=1000>1000</option>
-                            <option value=1500>1500</option>
-                            <option value=1200>1200</option>
-                            <option value=1700>1700</option>
-                            <option value=1800>1800</option>
-                            <option value=2000>2000</option>
-                        </select>
-                    </td>
-                </tr>
-            </table>
+        <div id="map_container" class="cell">
             <div id="map"></div>
         </div>
 

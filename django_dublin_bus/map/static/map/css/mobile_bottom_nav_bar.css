@@ -9,14 +9,6 @@
       -ms-flex-pack: distribute;
           justify-content: space-around;
     background: #fefefe;
-
-    position:absolute;
-    bottom:0;
-    width:100%;
-    height:10vh;   /* Height of the footer */
-    margin: 0px;
-    border: 0px;
-    padding: 0px;
 }
 
 .mobile-app-icon-bar button {

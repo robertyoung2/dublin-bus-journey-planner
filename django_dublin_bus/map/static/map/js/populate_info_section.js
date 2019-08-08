@@ -29,15 +29,13 @@ function populate_info(info){
         capture_favourites();
     }
     else if(info == "journey"){
-        info_section.innerHTML = '<div class="page_container">' +
-                                    '<div id="mySidebar" class="sidebar">' +
-                                        '<a href="#">' +
-                                            '<div id="right-panel">' +
-                                                '<table id="route_options_container"></table>' +
-                                            '</div>' +
-                                        '</a>' +
-                                    ' </div>' +
-                                '</div>';
+        info_section.innerHTML = '<div id="mySidebar" class="sidebar">' +
+                                    '<a href="#">' +
+                                        '<div id="right-panel">' +
+                                            '<table id="route_options_container"></table>' +
+                                        '</div>' +
+                                    '</a>' +
+                                ' </div>';
     }
 }
 

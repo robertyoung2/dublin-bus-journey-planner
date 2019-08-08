@@ -23,14 +23,17 @@ var initialize = function () {
     getUserLocation();
 
     set_night_mode();
-
+    create_radius_selector();
     // look at changing where this is positioned in script to resolve marker jumping from O'connell street
     user_location_marker = new google.maps.Marker({position: {lat: lat, lng: lng}, map: map});
 
     loopBusStops();
 
     var markerCluster = new MarkerClusterer(map, markers,
-        {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
+        {
+            imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
+        }
+    );
 
 
     initialiseUserLocation();

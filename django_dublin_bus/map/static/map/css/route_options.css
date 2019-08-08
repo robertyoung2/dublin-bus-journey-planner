@@ -1,0 +1,7 @@
+#route_options_container tr{
+    background-color: black;
+}
+
+#route_options_container{
+    width: 100vw;
+}
