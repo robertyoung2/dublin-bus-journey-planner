@@ -43,6 +43,7 @@
     <script src="{% static "map/js/map_initialiser.js" %}"></script>
 
     <script>
+        
         function loopBusStops(){
             console.log("Calling loopBusStops function!");
             {%  for bus_stop in bus_stops %}
@@ -64,15 +65,25 @@
 
             {%  endfor %}
         }
+
+    </script>
+    <script>
+
     </script>
 
     <script src="{% static "map/js/generateRoute.js" %}"></script>
     <script src="{% static "map/js/map_routing.js" %}"></script>
     <script src="{% static "map/js/populate_info_section.js" %}"></script>
+    <script src="{% static "map/js/ajax_model.js" %}"></script>
+    <script src="{% static "map/js/ajax_get_routes.js" %}"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCdOS87zrKfHICHXYGsrcQA8WX9gG3o1I&callback=initialize&libraries=places"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCdOS87zrKfHICHXYGsrcQA8WX9gG3o1I&callback=initialize&libraries=places"></script>
 
 </body>
 </html>

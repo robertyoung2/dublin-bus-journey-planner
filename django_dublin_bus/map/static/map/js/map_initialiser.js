@@ -11,6 +11,8 @@ var origin_searchbox;
 var destination_searchbox;
 var directionsRenderer;
 
+var rendered_route_list = []
+
 var initialize = function () {
     console.log("Called initialise map function!");
     getUserLocation();
