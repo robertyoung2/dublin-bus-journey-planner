@@ -7,7 +7,6 @@ import csv
 import json
 import os
 from django_dublin_bus.settings import BASE_DIR
-from django.http import JsonResponse
 # Create your views here.
 
 
@@ -49,7 +48,7 @@ def run_model(request):
 
 def get_sun(request):
     if request.method == "POST":
-        print("Inside get_sun function")
+
         path_csv = os.path.join(BASE_DIR, 'map/ml_models/csv/')
         with open(path_csv+'sunrise_sunset.csv', 'r') as csvfile:
             reader = csv.reader(csvfile)
@@ -63,10 +62,7 @@ def get_sun(request):
                     sunset = row[3]
                     break
 
-            print("Sunrise:", sunrise)
-            print("Sunset:", sunset)
-
-        sun = {"sunrise":sunrise, "sunset":sunset}
+        sun = {"sunrise": sunrise, "sunset": sunset}
         sun = json.dumps(sun)
 
         return HttpResponse(sun, content_type='application/json')

@@ -54,10 +54,6 @@
     </div>
 
     <div id="map"></div>
-    <!--<script>-->
-               <!--var sun = {{ sun|safe }};-->
-               <!--console.log(sun);-->
-    <!--</script>-->
 
     <script>
 
@@ -141,19 +137,17 @@
             url: '{% url "get_sun" %}',
             type: 'POST',
             success:function (data){
-                console.log("I GOT SUNSHINE!");
-                console.log("Sunrise: " + data.sunrise);
-                console.log("Sunset: " + data.sunset);
+                loadData(data);
             }
         });
 
 
-        // function loadData(data) {
-        //         sunrise = data.sys.sunrise;
-        //         sunset = data.sys.sunset;
-        //         console.log("Sunrise: "+ sunrise);
-        //         console.log("Sunset: "+ sunset);
-        // }
+        function loadData(data) {
+                sunrise = data.sunrise;
+                sunset = data.sunset;
+                console.log("Sunrise: "+ sunrise);
+                console.log("Sunset: "+ sunset);
+        }
 
         var initialize = function () {
             var timetoday = new Date().getTime();
