@@ -39,7 +39,24 @@
             Location: <input type="text" name="set destination" id="set destination">
             <input type="button" id="sethomeandwork" value="Set home and work"></input>
         </form>
+        <table>
+            <tr>
+                <td>
+                    <select name="cmbitems" id="cmbitems">
+                        <option value=500>500</option>
+                        <option value=800>800</option>
+                        <option value=900>900</option>
+                        <option value=1000>1000</option>
+                        <option value=1200>1200</option>
+                        <option value=1500>1500</option>
+                        <option value=1700>1700</option>
+                        <option value=1800>1800</option>
+                        <option value=2000>2000</option>
+                    </select>
 
+                </td>
+            </tr>
+        </table>
     </nav>
 
     <div class="page_container">
@@ -53,24 +70,32 @@
 
     <div id="map"></div>
 
-
     <script>
         var model_url = '{% url "run_model" %}';
 
         var user_marker_image = ""; // Not doing anything yet but to be used for customer user location marker
         var bus_marker_image = ""; // Not doing anything yet but to be used for busstop location marker
         var geo_for_emptystring=new Array;
-
+        var x;
         {# centering the the initial map position on dublin#}
         window.lat = 53.3498;
         window.lng = -6.2603;
 
+        var select = document.getElementById('cmbitems');
+        select.onchange = function () {
+            x=select.value;
+        }
+
         function getnearby(pos) {
-            console.log(pos);
+            if (typeof x === 'undefined')
+            {
+                x=500;
+            }
+            console.log(x);
             var service = new google.maps.places.PlacesService(map);
             service.nearbySearch({
                 location: pos,
-                radius: 500,
+                radius: x,
                 types: ['bus_station']
 
             }, callback);
@@ -115,7 +140,7 @@
                 geo_for_emptystring.length = 0
                 geo_for_emptystring.push(position.coords.longitude);
                 geo_for_emptystring.push(position.coords.latitude);
-                getnearby(pos);
+                getnearby(pos,x);
             }
         }
 
