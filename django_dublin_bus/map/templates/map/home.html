@@ -19,7 +19,8 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg==" crossorigin="anonymous">
     <!-- Compressed JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw==" crossorigin="anonymous"></script>
-
+    
+    
 </head>
 <body>
     <div class="grid-y grid-frame">
@@ -27,9 +28,11 @@
             <div id="map"></div>
         </div>
 
+
         <div class="cell" id="info_section">
         </div>
 
+        </div>>
         <div class="mobile-app-icon-bar">
         {% load staticfiles %}
             <button class="footer-link" onclick="populate_info('directions')"><img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}"></i></button>
@@ -38,10 +41,22 @@
         </div>
     </div>
 
+<!-- Put This code into the Info Window Population Module-->
+        <!--<select id="option">-->
+        <!--    <option value="now">now</option>-->
+        <!--    <option value="departureTime">departureTime</option>-->
+        <!--    <option value="arrivalTime">arrivalTime</option>-->
+        <!--</select>-->
+        <!--<select id="date"></select>-->
+        <!--<input type="time" id="time" hidden="hidden"-->
+
+
     {% load staticfiles %}
     <script src="{% static "map/js/geolocation.js" %}"></script>
     <script src="{% static "map/js/map_initialiser.js" %}"></script>
 
+
+        
     <script>
         var model_url = '{% url "run_model" %}';
         
@@ -68,9 +83,6 @@
         }
 
     </script>
-    <script>
-
-    </script>
 
     <script src="{% static "map/js/generateRoute.js" %}"></script>
     <script src="{% static "map/js/map_routing.js" %}"></script>
@@ -83,8 +95,3 @@
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCdOS87zrKfHICHXYGsrcQA8WX9gG3o1I&callback=initialize&libraries=places"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCdOS87zrKfHICHXYGsrcQA8WX9gG3o1I&callback=initialize&libraries=places"></script>
-
-</body>
-</html>

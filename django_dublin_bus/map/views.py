@@ -3,6 +3,7 @@ from .models import StopsInfo, BusStops, Holidays
 import requests
 from django.core import serializers
 from django.http import HttpResponse
+import csv
 import json
 from math import cos, asin, sqrt
 import difflib
@@ -194,3 +195,26 @@ def round_to_hour(dt):
         dt = dt_start_of_hour
 
     return dt
+
+
+
+def get_sun(request):
+    if request.method == "POST":
+
+        path_csv = os.path.join(BASE_DIR, 'map/ml_models/csv/')
+        with open(path_csv+'sunrise_sunset.csv', 'r') as csvfile:
+            reader = csv.reader(csvfile)
+
+            first_row = True
+            for row in reader:
+                if first_row:
+                    first_row = False
+                else:
+                    sunrise = row[2]
+                    sunset = row[3]
+                    break
+
+        sun = {"sunrise": sunrise, "sunset": sunset}
+        sun = json.dumps(sun)
+
+        return HttpResponse(sun, content_type='application/json')
