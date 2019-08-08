@@ -1,20 +1,5 @@
 console.log("map_initialiser.js Loaded!");
-var user_marker_image = ""; // Not doing anything yet but to be used for customer user location marker
-var bus_marker_image = ""; // Not doing anything yet but to be used for busstop location marker
 
-
-var map; // for initialising the maps map object
-var geocoder; // for initialising the maps geocoder object
-var user_location_marker;
-var markers = []; // storing the markers as we create them
-var origin_searchbox;
-var destination_searchbox;
-var directionsRenderer;
-
-var rendered_route_list = [];
-
-var sunrise;
-var sunset;
 
 $.ajax({
     url: get_sun_url,

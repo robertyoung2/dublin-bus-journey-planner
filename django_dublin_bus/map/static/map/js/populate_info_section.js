@@ -18,9 +18,15 @@ function populate_info(info){
                                 '<input type="time" id="time" hidden="hidden">';
         generateRouteSearch();
         setRouteClick();
+        set_date_options();
     }
     else if(info == "map"){
-        info_section.innerHTML = "<h1>Map</h1>"
+        info_section.innerHTML = '<form action="Getinput" method="get">' +
+                                    'Key <input type="text" name="set_home" id="set_home">' +
+                                    'Location: <input type="text" name="set destination" id="set destination">' +
+                                    '<input type="button" id="set_favourites" value="Save Favourite"></input>' +
+                                '</form>';
+        capture_favourites();
     }
     else if(info == "journey"){
         info_section.innerHTML = '<div class="page_container">' +

@@ -3,6 +3,43 @@ console.log("geolocation.js Loaded!");
 window.lat = 53.3498;
 window.lng = -6.2603;
 
+var select = document.getElementById('cmbitems');
+select.onchange = function () {
+    x=select.value;
+}
+function getnearby(pos) {
+    if (typeof x === 'undefined')
+    {
+        x=500;
+    }
+    console.log(x);
+    var service = new google.maps.places.PlacesService(map);
+    service.nearbySearch({
+        location: pos,
+        radius: x,
+        types: ['bus_station']
+
+    }, callback);
+}
+
+function callback(results, status) {
+    if (status === google.maps.places.PlacesServiceStatus.OK) {
+        for (var i = 0; i < results.length; i++) {
+            var placeId = results[i].place_id;
+            var geocoder = new google.maps.Geocoder;
+            geocoder.geocode({'placeId': placeId}, function (results, status) {
+                if (status === 'OK') {
+                    if (results[0]) {
+                        console.log("Lat: "+results[0].geometry.location.lat() + " " + " Lon: "+results[0].geometry.location.lng());
+                    }
+                }
+
+            });
+        }
+    }
+}
+
+
 function getUserLocation(){
     // console.log("Called getUserLocation function!");
     // Test to see if the browser has HTML5 geolocation
@@ -16,10 +53,17 @@ function getUserLocation(){
 
     // Updates the map position values to users location
     function updatePosition(position) {
-        // console.log("Called updatePosition function!");
         if (position) {
+            pos={
+                lat:position.coords.latitude,
+                lng:position.coords.longitude
+            }
             window.lat = position.coords.latitude;
             window.lng = position.coords.longitude;
+            geo_for_emptystring.length = 0
+            geo_for_emptystring.push(position.coords.longitude);
+            geo_for_emptystring.push(position.coords.latitude);
+            getnearby(pos,x);
         }
     }
 

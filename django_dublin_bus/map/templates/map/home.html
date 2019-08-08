@@ -8,6 +8,9 @@
     {#        Live Geolocation API Connection#}
     <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
 
+    <!--Jquery-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
     {% load staticfiles %}
     <link rel="stylesheet" type="text/css" href="{% static "map/css/mobile_bottom_nav_bar.css" %}">
     <link rel="stylesheet" type="text/css" href="{% static "map/css/map.css" %}">
@@ -19,21 +22,34 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg==" crossorigin="anonymous">
     <!-- Compressed JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw==" crossorigin="anonymous"></script>
-    
-    
 </head>
+
 <body>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <div class="grid-y grid-frame">
         <div class="cell responsive-embed">
+            <table>
+                <tr>
+                    <td>
+                        <select name="cmbitems" id="cmbitems">
+                            <option value=800>800</option>
+                            <option value=500>500</option>
+                            <option value=900>900</option>
+                            <option value=1000>1000</option>
+                            <option value=1500>1500</option>
+                            <option value=1200>1200</option>
+                            <option value=1700>1700</option>
+                            <option value=1800>1800</option>
+                            <option value=2000>2000</option>
+                        </select>
+                    </td>
+                </tr>
+            </table>
             <div id="map"></div>
         </div>
-
 
         <div class="cell" id="info_section">
         </div>
 
-        </div>>
         <div class="mobile-app-icon-bar">
         {% load staticfiles %}
             <button class="footer-link" onclick="populate_info('directions')"><img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}"></i></button>
@@ -46,20 +62,40 @@
         <!--Global Variables-->
         var model_url = '{% url "run_model" %}';
         var get_sun_url = '{% url "get_sun" %}';
-    </script>
-    {% load staticfiles %}
-    <script src="{% static "map/js/journey_date_selector.js" %}"></script>
-    <script src="{% static "map/js/geolocation.js" %}"></script>
-    <script src="{% static "map/js/map_initialiser.js" %}"></script>
-    <script src="{% static "map/js/set_map_night_mode.js" %}"></script>
+        var geo_for_emptystring = [];
+        var x;
+        var user_marker_image = ""; // Not doing anything yet but to be used for customer user location marker
+        var bus_marker_image = ""; // Not doing anything yet but to be used for busstop location marker
 
 
+        var map; // for initialising the maps map object
+        var geocoder; // for initialising the maps geocoder object
+        var user_location_marker;
+        var markers = []; // storing the markers as we create them
+        var autocomplete_options;
+        var origin_searchbox;
+        var destination_searchbox;
+        var directionsRenderer;
+
+        var rendered_route_list = [];
+
+        var sunrise;
+        var sunset;
         
+    </script>
+
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static 'map/js/journey_date_selector.js' %}"></script>
+    <script type="text/javascript" src="{% static 'map/js/geolocation.js' %}"></script>
+    <script type="text/javascript" src="{% static 'map/js/cache_user_favourites.js' %}"></script>
+    <script type="text/javascript" src="{% static 'map/js/map_initialiser.js' %}"></script>
+    <script type="text/javascript" src="{% static 'map/js/set_map_night_mode.js' %}"></script>
+
     <script>
         function loopBusStops(){
             console.log("Calling loopBusStops function!");
             {%  for bus_stop in bus_stops %}
-
+                
                 var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lng }}};
                 var marker = new google.maps.Marker({
                     position: latLng,
@@ -77,16 +113,16 @@
 
             {%  endfor %}
         }
-
     </script>
 
-    <script src="{% static "map/js/generateRoute.js" %}"></script>
-    <script src="{% static "map/js/map_routing.js" %}"></script>
-    <script src="{% static "map/js/populate_info_section.js" %}"></script>
-    <script src="{% static "map/js/ajax_model.js" %}"></script>
-    <script src="{% static "map/js/ajax_get_routes.js" %}"></script>
+    <script type="text/javascript" src="{% static 'map/js/generateRoute.js' %}"></script>
+    <script type="text/javascript" src="{% static 'map/js/map_routing.js' %}"></script>
+    <script type="text/javascript" src="{% static 'map/js/populate_info_section.js' %}"></script>
+    <script type="text/javascript" src="{% static 'map/js/ajax_model.js' %}"></script>
+    <script type="text/javascript" src="{% static 'map/js/ajax_get_routes.js' %}"></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCdOS87zrKfHICHXYGsrcQA8WX9gG3o1I&callback=initialize&libraries=places"></script>
-
+</body>
+</html>

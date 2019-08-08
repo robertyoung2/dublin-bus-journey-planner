@@ -3,13 +3,13 @@ function generateRouteSearch(){
     console.log("Called generateRoute function!");
     origin_searchbox = document.getElementById('input_route_origin');
     destination_searchbox = document.getElementById('input_route_destination');
-    var options = {
+    autocomplete_options = {
         types: ['geocode'],
         componentRestrictions: {country: 'ie'}
     };
 
-    autocomplete = new google.maps.places.Autocomplete(origin_searchbox, options);
-    autocomplete = new google.maps.places.Autocomplete(destination_searchbox, options);
+    autocomplete = new google.maps.places.Autocomplete(origin_searchbox, autocomplete_options);
+    autocomplete = new google.maps.places.Autocomplete(destination_searchbox, autocomplete_options);
 }
 
 function setRouteClick(){
