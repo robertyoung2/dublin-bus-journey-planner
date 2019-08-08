@@ -41,6 +41,19 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
     var origin = new google.maps.LatLng(origin_lat, origin_lng);
     var destination = new google.maps.LatLng(dest_lat, dest_lng);
 
+    if (option.value == 'now'){
+        var departureTime = new Date();
+    }
+    else if (option.value == 'departureTime') {
+        var departureTime = document.getElementById("date").value + " " + document.getElementById("time").value;
+        departureTime = new Date(Date.parse(departureTime));
+    }
+     else if (option.value == 'arrivalTime') {
+        var arrivalTime = document.getElementById("date").value + " " + document.getElementById("time").value;
+        arrivalTime = new Date(Date.parse(arrivalTime));
+    }
+
+
 
     if(directionsRenderer){
         directionsRenderer.setMap(null);
@@ -62,6 +75,8 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
             travelMode: 'TRANSIT',
             provideRouteAlternatives: true,
             transitOptions: {
+                arrivalTime: arrivalTime,
+                departureTime: departureTime,
                 modes: ['BUS'],
                 routingPreference: 'FEWER_TRANSFERS'
             },

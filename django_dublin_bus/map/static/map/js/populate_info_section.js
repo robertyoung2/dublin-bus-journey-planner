@@ -8,7 +8,14 @@ function populate_info(info){
                                     'Origin: <input  type="text" name="input_route_origin" id="input_route_origin">' +
                                     'Destination: <input type="text" name="input_route_destination" id="input_route_destination">' +
                                     '<input type="button" id="route_submit" value="Search"></input>' +
-                                '</form>';
+                                '</form>' +
+                                '<select id="option">'+
+                                    '<option value="now">now</option>' +
+                                    '<option value="departureTime">departureTime</option>' +
+                                    '<option value="arrivalTime">arrivalTime</option>' +
+                                '</select>' +
+                                '<select id="date"></select>'+
+                                '<input type="time" id="time" hidden="hidden">';
         generateRouteSearch();
         setRouteClick();
     }

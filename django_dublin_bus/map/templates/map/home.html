@@ -23,6 +23,7 @@
     
 </head>
 <body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <div class="grid-y grid-frame">
         <div class="cell responsive-embed">
             <div id="map"></div>
@@ -41,25 +42,20 @@
         </div>
     </div>
 
-<!-- Put This code into the Info Window Population Module-->
-        <!--<select id="option">-->
-        <!--    <option value="now">now</option>-->
-        <!--    <option value="departureTime">departureTime</option>-->
-        <!--    <option value="arrivalTime">arrivalTime</option>-->
-        <!--</select>-->
-        <!--<select id="date"></select>-->
-        <!--<input type="time" id="time" hidden="hidden"-->
-
-
+    <script>
+        <!--Global Variables-->
+        var model_url = '{% url "run_model" %}';
+        var get_sun_url = '{% url "get_sun" %}';
+    </script>
     {% load staticfiles %}
+    <script src="{% static "map/js/journey_date_selector.js" %}"></script>
     <script src="{% static "map/js/geolocation.js" %}"></script>
     <script src="{% static "map/js/map_initialiser.js" %}"></script>
+    <script src="{% static "map/js/set_map_night_mode.js" %}"></script>
 
 
         
     <script>
-        var model_url = '{% url "run_model" %}';
-        
         function loopBusStops(){
             console.log("Calling loopBusStops function!");
             {%  for bus_stop in bus_stops %}
@@ -94,4 +90,3 @@
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCdOS87zrKfHICHXYGsrcQA8WX9gG3o1I&callback=initialize&libraries=places"></script>
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
