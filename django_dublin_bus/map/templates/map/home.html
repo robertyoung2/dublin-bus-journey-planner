@@ -92,6 +92,8 @@
         var destination_searchbox;
         var directionsRenderer;
 
+        var rendered_route_list = [];
+
         var initialize = function () {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: {lat: lat, lng: lng}, //investigate where lat nd lng variables are coming from
@@ -243,6 +245,7 @@
                         let route_options_table = document.getElementById('route_options_container');
                         route_options_table.innerHTML = "";
                         var model_journeys = [];
+                        rendered_route_list = [];
                         for (i = 0; i < response.routes.length; i++) {
                             console.log("Journey Number: " + i);
                             let journey = {};
@@ -303,10 +306,13 @@
                                     newCell.innerHTML = cell;
                                 }
                                 model_journeys.push(journey);
+                                rendered_route_list.push(response.routes[i]);
                                 console.log("****************");
                             }
                         }
                         console.log("Data for Backend:" + model_journeys);
+                        console.log("****************");
+                        console.log("Accessable GMaps Data: " + rendered_route_list);
                         Ajax_Model(JSON.stringify(model_journeys));
                     } else {
                         window.alert('Directions request failed due to ' + status);
