@@ -35,8 +35,8 @@
             <input type="button" id="route_submit" value="Search"></input>
         </form>
         <form action="Getinput" method="get">
-            Home <input type="text" name="set_home" id="set_home">
-            Work: <input type="text" name="set destination" id="set destination">
+            Key <input type="text" name="set_home" id="set_home">
+            Location: <input type="text" name="set destination" id="set destination">
             <input type="button" id="sethomeandwork" value="Set home and work"></input>
         </form>
 
@@ -65,6 +65,36 @@
         window.lat = 53.3498;
         window.lng = -6.2603;
 
+        function getnearby(pos) {
+            console.log(pos);
+            var service = new google.maps.places.PlacesService(map);
+            service.nearbySearch({
+                location: pos,
+                radius: 500,
+                types: ['bus_station']
+
+            }, callback);
+        }
+
+
+
+        function callback(results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                for (var i = 0; i < results.length; i++) {
+                    var placeId = results[i].place_id;
+                    var geocoder = new google.maps.Geocoder;
+                    geocoder.geocode({'placeId': placeId}, function (results, status) {
+                        if (status === 'OK') {
+                            if (results[0]) {
+                                console.log("Lat: "+results[0].geometry.location.lat() + " " + " Lon: "+results[0].geometry.location.lng());
+                            }
+                        }
+
+                    });
+                }
+            }
+        }
+
         {#Test to see if the browser has HTML5 geolocation#}
         function getLocation() {
             if (navigator.geolocation) {
@@ -76,11 +106,16 @@
         {#Updates the map position values to users location#}
         function updatePosition(position) {
             if (position) {
+                pos={
+                    lat:position.coords.latitude,
+                    lng:position.coords.longitude
+                }
                 window.lat = position.coords.latitude;
                 window.lng = position.coords.longitude;
                 geo_for_emptystring.length = 0
                 geo_for_emptystring.push(position.coords.longitude);
                 geo_for_emptystring.push(position.coords.latitude);
+                getnearby(pos);
             }
         }
 
@@ -160,7 +195,6 @@
 
             autocomplete = new google.maps.places.Autocomplete(origin_searchbox, options);
             autocomplete = new google.maps.places.Autocomplete(destination_searchbox, options);
-            autocomplete = new google.maps.places.Autocomplete(sethome, options);
             autocomplete = new google.maps.places.Autocomplete(destination, options);
 
 
@@ -168,81 +202,55 @@
 
         /* Action after pressing the submit button. */
         document.getElementById('route_submit').addEventListener('click', function () {
-            var oh = origin_searchbox.value.includes("home") || origin_searchbox.value.includes("Home") || origin_searchbox.value.includes("HOME") || origin_searchbox.value.includes("HOme") || origin_searchbox.value.includes("HOMe") || origin_searchbox.value.includes("hOME") || origin_searchbox.value.includes("hoME");
-            if (oh== true)
-            {
-                origin=true;
-                console.log("1st");
-            }
-            var ow = origin_searchbox.value.includes("work") || origin_searchbox.value.includes("Work") || origin_searchbox.value.includes("WORK") || origin_searchbox.value.includes("WOrk") || origin_searchbox.value.includes("WORk") || origin_searchbox.value.includes("wORK") || origin_searchbox.value.includes("WoRk");
-            if (ow== true)
-            {
-                origin_work=true;
-                console.log("2nd");
-            }
-            var dw = destination_searchbox.value.includes("work") || destination_searchbox.value.includes("Work") || destination_searchbox.value.includes("WORK") || destination_searchbox.value.includes("WOrk") || destination_searchbox.value.includes("WORk") || destination_searchbox.value.includes("wORK") || destination_searchbox.value.includes("WoRk");
-            if (dw== true)
-            {
-                dest_work=true;
-                console.log("3rd");
-            }
-            var dh = destination_searchbox.value.includes("home") || destination_searchbox.value.includes("Home") || destination_searchbox.value.includes("HOME") || destination_searchbox.value.includes("HOme") || destination_searchbox.value.includes("HOMe") || destination_searchbox.value.includes("hOME") || destination_searchbox.value.includes("hoME");
-            if (dh== true)
-            {
-                dest=true;
-                console.log("4th");
-            }
             geocodeAddress();
-
         });
 
         document.getElementById('sethomeandwork').addEventListener('click', function () {
-            window.localStorage.setItem('Home', sethome.value);
-            window.localStorage.setItem('Work',destination.value);
+            window.localStorage.setItem(sethome.value,destination.value);
 
         });
 
         /* Function that performs geodecoding. */
         function geocodeAddress() {
-            var origin_new="";
-            var dest_new="";
-            if (origin == true)
-            {
-                origin_new=window.localStorage.getItem('Home');
-                origin=false;
-                console.log("11st");
-            }
-            else if(origin_work == true)
-            {
-                origin_new=window.localStorage.getItem('Work');
-                origin_work=false;
-                console.log("22nd");
-            }
-            else
-            {
-                origin_new=origin_searchbox.value;
-                console.log("33rd");
-            }
+            var origin_new = "";
+            var dest_new = "";
+            if (origin_searchbox.value == "") {
+                if (Object.keys(window.localStorage).includes(destination_searchbox.value)) {
+                    console.log("here also");
+                    dest_new = window.localStorage.getItem(destination_searchbox.value);
+                } else {
+                    dest_new = destination_searchbox.value
+                }
+                geocoder.geocode({'address': dest_new}, function (res_dest, status) {
+                    if (status === 'OK') {
+                        console.log(status);
+                        mapLocation(
+                            geo_for_emptystring[1],
+                            geo_for_emptystring[0],
+                            res_dest[0].geometry.location.lat(),
 
-            if (dest == true)
-            {
-                dest_new=window.localStorage.getItem('Home');
-                dest=false;
-                console.log("44th");
-            }
-            else if(dest_work == true)
-            {
-                dest_new=window.localStorage.getItem('Work');
-                dest_work=false;
-                console.log("55rd");
-            }
-            else
-            {
-                dest_new=destination_searchbox.value
-                console.log("66th");
-            }
-            console.log(origin_new);
-            console.log(dest_new);
+                            res_dest[0].geometry.location.lng()
+                        );
+                        console.log("success")
+                        console.log(geo_for_emptystring);
+                    }
+                });
+            } else {
+                if (Object.keys(window.localStorage).includes(origin_searchbox.value)) {
+                    origin_new = window.localStorage.getItem(origin_searchbox.value);
+                } else {
+                    origin_new = origin_searchbox.value
+                }
+
+                if (Object.keys(window.localStorage).includes(destination_searchbox.value)) {
+                    console.log("here also");
+                    dest_new = window.localStorage.getItem(destination_searchbox.value);
+                } else {
+                    dest_new = destination_searchbox.value
+                }
+
+                console.log(origin_new);
+                console.log(dest_new);
                 geocoder.geocode({'address': origin_new},
                     function (res_origin, status) {
                         /* If place is legitimate and able to get GPS co-ordinates. */
@@ -275,7 +283,7 @@
                     }
                 );
             }
-
+        }
 
 
             /* Displaying the actual route on map */
