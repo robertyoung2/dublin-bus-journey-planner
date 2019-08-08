@@ -231,7 +231,7 @@
         });
 
         document.getElementById('sethomeandwork').addEventListener('click', function () {
-            window.localStorage.setItem(sethome.value,destination.value);
+            window.localStorage.setItem(sethome.value.toLowerCase(),destination.value);
 
         });
 
@@ -261,15 +261,15 @@
                     }
                 });
             } else {
-                if (Object.keys(window.localStorage).includes(origin_searchbox.value)) {
-                    origin_new = window.localStorage.getItem(origin_searchbox.value);
+                if (Object.keys(window.localStorage).includes(origin_searchbox.value.toLowerCase())) {
+                    origin_new = window.localStorage.getItem(origin_searchbox.value.toLowerCase());
                 } else {
                     origin_new = origin_searchbox.value
                 }
 
-                if (Object.keys(window.localStorage).includes(destination_searchbox.value)) {
+                if (Object.keys(window.localStorage).includes(destination_searchbox.value.toLowerCase())) {
                     console.log("here also");
-                    dest_new = window.localStorage.getItem(destination_searchbox.value);
+                    dest_new = window.localStorage.getItem(destination_searchbox.value.toLowerCase());
                 } else {
                     dest_new = destination_searchbox.value
                 }
