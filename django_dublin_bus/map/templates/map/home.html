@@ -206,12 +206,18 @@
         });
 
         document.getElementById('sethomeandwork').addEventListener('click', function () {
+<<<<<<< HEAD
             window.localStorage.setItem(sethome.value,destination.value);
+=======
+            window.localStorage.setItem('home', sethome.value);
+            window.localStorage.setItem('work',destination.value);
+>>>>>>> Feature_implementation
 
         });
 
         /* Function that performs geodecoding. */
         function geocodeAddress() {
+<<<<<<< HEAD
             var origin_new = "";
             var dest_new = "";
             if (origin_searchbox.value == "") {
@@ -251,6 +257,28 @@
 
                 console.log(origin_new);
                 console.log(dest_new);
+=======
+            var origin_new="";
+            var dest_new="";
+
+
+            if(origin_searchbox.value.toLowerCase() == "home" || origin_searchbox.value.toLowerCase() == "work"){
+                origin_new=window.localStorage.getItem(origin_searchbox.value.toLowerCase());
+            }
+            else{
+                origin_new=origin_searchbox.value
+            }
+
+            if(destination_searchbox.value.toLowerCase() == "home" || destination_searchbox.value.toLowerCase() == "work"){
+                dest_new=window.localStorage.getItem(destination_searchbox.value.toLowerCase());
+            }
+            else{
+                dest_new=destination_searchbox.value
+            }
+
+            console.log(origin_new);
+            console.log(dest_new);
+>>>>>>> Feature_implementation
                 geocoder.geocode({'address': origin_new},
                     function (res_origin, status) {
                         /* If place is legitimate and able to get GPS co-ordinates. */
