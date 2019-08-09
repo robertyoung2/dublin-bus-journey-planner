@@ -1,0 +1,34 @@
+html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+    background-color: #666666;
+}
+
+#map_container{
+    position: relative;
+    height: 40vh;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background-color: #ddffdd;
+    font-family: 'Roboto', sans-serif;
+}
+
+#info_section{
+    position: relative;
+    height: 50vh;
+    background-color: #ddffdd;
+    overflow-y: scroll;
+}
+
+.mobile-app-icon-bar {
+    position:absolute;
+    bottom:0;
+    width:100%;
+    height:10vh;   /* Height of the footer */
+    margin: 0;
+    border: 0;
+    padding: 0;
+    background-color: #ddffdd;
+}

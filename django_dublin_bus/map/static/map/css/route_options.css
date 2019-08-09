@@ -1,0 +1,11 @@
+#route_options_container tbody{
+    background-color: rgba(0, 0, 0, 0);
+}
+
+#route_options_container{
+    width: 100vw;
+}
+
+.card{
+    background-color: black;
+}
