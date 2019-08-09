@@ -11,18 +11,35 @@ function populate_info(info){
         directions_button.classList.add("active_view");
         favourites_button.classList.remove("active_view");
         journey_button.classList.remove("active_view");
-        info_section.innerHTML = '<form action="Getinput" method="get">' +
-                                    'Origin: <input  type="text" name="input_route_origin" id="input_route_origin">' +
-                                    'Destination: <input type="text" name="input_route_destination" id="input_route_destination">' +
-                                    '<input type="button" id="route_submit" value="Search">' +
-                                '</form>' +
-                                '<select id="option">'+
-                                    '<option value="now">now</option>' +
-                                    '<option value="departureTime">departureTime</option>' +
-                                    '<option value="arrivalTime">arrivalTime</option>' +
-                                '</select>' +
-                                '<select id="date"></select>'+
-                                '<input type="time" id="time" hidden="hidden" min="05:00" max="4:00" required>';
+        info_section.innerHTML =
+            '<form action="Getinput" method="get">' +
+            '   <div class="grid-container">' +
+            '       <div class="grid-y grid-padding-y">' +
+            '           <div class="medium-6 cell">' +
+            '               <input  type="text" name="input_route_origin" id="input_route_origin" placeholder="Enter Origin (Default Current Location)">' +
+            '           </div>' +
+            '          <div class="medium-6 cell">' +
+            '               <input type="text" name="input_route_destination" id="input_route_destination" placeholder="Enter Destination">' +
+            '           </div>' +
+            '           <div class="medium-6 cell">' +
+            '               <select id="option">'+
+            '                   <option value="now">now</option>' +
+            '                   <option value="departureTime">departureTime</option>' +
+            '                   <option value="arrivalTime">arrivalTime</option>' +
+            '               </select>' +
+            '           </div>' +
+            '           <div class="medium-6 cell datetime_selector_container" hidden="hidden">' +
+            '               <select id="date"></select>' +
+            '           </div>' +
+            '           <div class="medium-6 cell datetime_selector_container" hidden="hidden">' +
+            '               <input type="time" id="time" min="05:00" max="4:00" required>' +
+            '           </div>' +
+            '           <div class="medium-6 cell">' +
+            '               <input type="button" id="route_submit" value="Search">' +
+            '           </div>' +
+            '       </div>' +
+            '   </div>' +
+            '</form>';
         generateRouteSearch();
         setRouteClick();
         set_date_options();
@@ -47,7 +64,7 @@ function populate_info(info){
         info_section.innerHTML = '<div id="mySidebar" class="sidebar">' +
                                     '<a href="#">' +
                                         '<div id="right-panel">' +
-                                            '<table id="route_options_container"></table>' +
+                                            '<table id="route_options_container" class="table-scroll"></table>' +
                                         '</div>' +
                                     '</a>' +
                                 ' </div>';

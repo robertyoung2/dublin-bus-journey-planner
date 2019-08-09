@@ -123,7 +123,7 @@ function create_radius_selector(){
 
     var centerControl = new CenterControl(centerControlDiv, map);
     centerControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
+    map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
 }
 
 function CenterControl(controlDiv, map) {

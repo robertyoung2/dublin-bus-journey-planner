@@ -19,6 +19,7 @@ html, body {
     position: relative;
     height: 50vh;
     background-color: #ddffdd;
+    overflow-y: scroll;
 }
 
 .mobile-app-icon-bar {

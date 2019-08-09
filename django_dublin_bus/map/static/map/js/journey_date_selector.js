@@ -18,16 +18,13 @@ function set_date_options(){
     //Function displays the date and time
     $(function() {
         console.log("Inside Show/Hide date function!");
-        $("#date").hide();
-        $("#time").hide();
+
         $("#option").change(function () {
             if ($(this).val() == 'departureTime' || $(this).val() == 'arrivalTime'){
-                $("#date").show();
-                $("#time").show();
+                $(".datetime_selector_container").show();
             }
             if ($(this).val() == 'now'){
-                $("#date").hide();
-                $("#time").hide();
+                $(".datetime_selector_container").hide();
             }
         });
     });
