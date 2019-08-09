@@ -17,7 +17,6 @@ function geocodeAddress() {
                     geo_for_emptystring[1],
                     geo_for_emptystring[0],
                     res_dest[0].geometry.location.lat(),
-
                     res_dest[0].geometry.location.lng()
                 );
                 console.log("success")
@@ -105,7 +104,7 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
     directionsRenderer.setMap(map);
 
     calculateAndDisplayRoute(directionsService, directionsRenderer);
-    openNav();
+    populate_info("journey_view");
 
     function calculateAndDisplayRoute(directionsService, directionsRenderer) {
         console.log("Called calculateAndDisplayRoute function!");
@@ -150,6 +149,14 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
                                 include = false;
                                 break;
                             }
+                            let current_route;
+                            if(step.transit.line.short_name){
+                                 current_route = step.transit.line.short_name;
+                            }
+                            else{
+                                current_route = step.transit.line.name;
+                            }
+
                             let route_dict = {
                                 "Origin_Lat": step.transit.departure_stop.location.lat(),
                                 "Origin_Lon": step.transit.departure_stop.location.lng(),
@@ -159,7 +166,7 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
                                 "Destination": step.transit.headsign,
                                 "Departure_Datetime": new Date(step.transit.departure_time.value)
                             };
-                            journey[step.transit.line.short_name] = route_dict;
+                            journey[current_route] = route_dict;
 
                             console.log("Origin_Lat: " + step.transit.departure_stop.location.lat());
                             console.log("Origin_Lon: " + step.transit.departure_stop.location.lng());
@@ -167,12 +174,12 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
                             console.log("Dest_Lon: " + step.transit.arrival_stop.location.lng());
                             console.log("Bus_Headsign: " + step.transit.headsign);
                             console.log("Arrival Location: " + step.transit.arrival_stop.name);
-                            console.log("Bus_Route: " + step.transit.line.short_name);
+                            console.log("Bus_Route: " + current_route);
                             console.log("Departure_Datetime: " + new Date(step.transit.departure_time.value));
                             console.log();
                             cell_array_data.push('<i class="material-icons" style="font-size:30px;color:white">directions_bus</i>');
                             // let newCell2 = new_route_row.insertCell(-1);
-                            let current_route = step.transit.line.short_name;
+
                             cell_array_data.push('<p>'+current_route+'</p>');
                         }
                         if (steps_counter < steps_len - 1){

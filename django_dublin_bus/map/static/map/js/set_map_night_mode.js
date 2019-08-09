@@ -1,10 +1,7 @@
 function set_night_mode(){
     var timetoday = new Date().getTime();
     if(timetoday >= parseInt(sunset+'000') || timetoday <= (parseInt(sunrise+'000'))){
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: lat, lng: lng}, //investigate where lat nd lng variables are coming from
-            zoom: 12,
-            styles: [
+        let styles = [
                 {
                     elementType: 'geometry',
                     stylers: [{color: '#242f3e'}]
@@ -92,13 +89,7 @@ function set_night_mode(){
                     elementType: 'labels.text.stroke',
                     stylers: [{color: '#17263c'}]
                 }
-            ]
-        });
-    }
-    else{
-        map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: lat, lng: lng}, //investigate where lat nd lng variables are coming from
-            zoom: 12,
-        });
+            ];
+        map.set('styles', styles);
     }
 }

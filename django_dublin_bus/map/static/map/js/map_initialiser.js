@@ -22,6 +22,13 @@ var initialize = function () {
     console.log("Called initialise map function!");
     getUserLocation();
 
+    map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: lat, lng: lng}, //investigate where lat nd lng variables are coming from
+            zoom: 12,
+            mapTypeControl: false,
+            fullscreenControl: false
+    });
+
     set_night_mode();
     create_radius_selector();
     // look at changing where this is positioned in script to resolve marker jumping from O'connell street
