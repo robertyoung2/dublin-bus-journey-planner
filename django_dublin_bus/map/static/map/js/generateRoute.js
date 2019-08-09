@@ -24,12 +24,3 @@ function setRouteClick(){
         }
     });
 }
-
-function openNav() {
-    populate_info("journey");
-    document.getElementById("mySidebar").style.width = "450px";
-}
-
-function closeNav() {
-    document.getElementById("mySidebar").style.width = "0";
-}

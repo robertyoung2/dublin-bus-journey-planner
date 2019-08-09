@@ -37,9 +37,9 @@
 
         <div class="mobile-app-icon-bar">
         {% load staticfiles %}
-            <button class="footer-link" onclick="populate_info('directions')"><img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}"></i></button>
-            <button class="footer-link" onclick="populate_info('map')"><img class="fa" aria-hidden="true" src="{% static "map/images/map.png" %}"></i></button>
-            <button class="footer-link" onclick="populate_info('journey')"><img class="fa" aria-hidden="true" src="{% static "map/images/journey.png" %}"></i></button>
+            <a id='directions_view' class="footer-link" onclick="populate_info('directions_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}"></a>
+            <a id="favourites_view" class="footer-link" onclick="populate_info('favourites_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/favourites.png" %}"></a>
+            <a id='journey_view' class="footer-link" onclick="populate_info('journey_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/journey.png" %}"></a>
         </div>
     </div>
 
@@ -106,8 +106,12 @@
     <script type="text/javascript" src="{% static 'map/js/ajax_model.js' %}"></script>
     <script type="text/javascript" src="{% static 'map/js/ajax_get_routes.js' %}"></script>
 
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCdOS87zrKfHICHXYGsrcQA8WX9gG3o1I&callback=initialize&libraries=places"></script>
+    <script>
+        populate_info("directions_view");
+    </script>
 </body>
 </html>

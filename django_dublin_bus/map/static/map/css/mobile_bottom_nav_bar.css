@@ -11,22 +11,26 @@
     background: #fefefe;
 }
 
-.mobile-app-icon-bar button {
+.mobile-app-icon-bar a {
   padding: 1.25rem;
   cursor: pointer;
 }
 
-.mobile-app-icon-bar button svg,
-.mobile-app-icon-bar button i,
-.mobile-app-icon-bar button img {
-    opacity: 0.6;
+
+.mobile-app-icon-bar img {
+    opacity: 0.3;
     font-size: 5rem;
     min-height: 5vh;
     max-height: 8vh;
 }
 
-.footer-link:hover img{
-  opacity: 1;
+a:hover img{
+    opacity: 1;
+    /*filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg) brightness(95%) contrast(80%);*/
 }
 
 
+.active_view img{
+    opacity: 1;
+    /*filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg) brightness(95%) contrast(80%);*/
+}
