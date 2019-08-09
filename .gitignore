@@ -111,3 +111,4 @@ venv.bak/
 .idea/**/dictionaries
 .idea/**/shelf
 .idea/
+django_dublin_bus/map/static/ordered_routes_scraper\.py
