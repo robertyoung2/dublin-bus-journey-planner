@@ -15,6 +15,7 @@ from django_dublin_bus.settings import BASE_DIR
 import time
 from xgboost import XGBRegressor
 from datetime import date, timedelta
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 # Create your views here.
 
@@ -41,7 +42,6 @@ def get_routes(request):
         routes = BusStops.objects.filter(stop_id=stop_id)
         routes_json = serializers.serialize("json", routes, fields=("bus_numbers","stop_headsign"))
         return HttpResponse(routes_json, content_type="application/json")
-
 
 def run_model(request):
     if request.method == "POST":
@@ -197,7 +197,7 @@ def round_to_hour(dt):
     return dt
 
 
-
+@ensure_csrf_cookie
 def get_sun(request):
     if request.method == "POST":
 

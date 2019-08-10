@@ -1,6 +1,6 @@
 console.log("generateRoute.js Loaded!");
 function generateRouteSearch(){
-    console.log("Called generateRoute function!");
+    console.log("Called generateRouteSearch function!");
     origin_searchbox = document.getElementById('input_route_origin');
     destination_searchbox = document.getElementById('input_route_destination');
     autocomplete_options = {

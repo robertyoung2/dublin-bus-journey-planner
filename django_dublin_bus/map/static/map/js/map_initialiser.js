@@ -1,6 +1,6 @@
 console.log("map_initialiser.js Loaded!");
 
-
+setup_ajax();
 $.ajax({
     url: get_sun_url,
     type: 'POST',
@@ -46,7 +46,5 @@ var initialize = function () {
     initialiseUserLocation();
 
     geocoder = new google.maps.Geocoder();
-
-    generateRouteSearch();
 
 };
