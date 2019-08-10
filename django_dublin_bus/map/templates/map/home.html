@@ -57,7 +57,6 @@
         var model_url = '{% url "run_model" %}';
         var get_sun_url = '{% url "get_sun" %}';
         var get_routes_url = '{% url "get_routes" %}';
-        var static_dir = '{% static map%}';
         var geo_for_emptystring = [];
         var x;
         var user_marker_image = ""; // Not doing anything yet but to be used for customer user location marker
@@ -105,6 +104,7 @@
                     var stop_name = '{{ bus_stop.stop_name }}'
                     AjaxGetRoutes(stop_id, infoWindow, stop_name);
                     infoWindow.open(this.getMap(), this);
+                    populate_info('journey_view');
                 });
                 markers.push(marker);
                 marker_bounds.extend(marker.getPosition());

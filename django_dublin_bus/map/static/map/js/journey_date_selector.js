@@ -2,16 +2,12 @@
 console.log("Loaded jounrey_date_selector.js");
 function set_date_options(){
     $(function(){
-        var today = new Date().getTime();
+        var today = new Date()
         console.log("Today: "+today);
-        for(var i =0 ;i < 7; i++){
-            var day = today + i * 86400000;
-            day = new Date(day);
-            var maxDateYear = day.getFullYear();
-            var maxDateMonth = day.getMonth()+1 < 10 ? "0"+(day.getMonth()+1) : (day.getMonth()+1);
-            var maxDateDate = day.getDate() < 10 ? "0"+day.getDate() : day.getDate();
-            var showday = maxDateYear+"-"+maxDateMonth+"-"+maxDateDate;
-            $("#date").append("<option value="+showday+">"+day+"</option>");
+        for(var day =0 ;day < 7; day++){
+            date_value = today.getFullYear() + "-" + (today.getMonth()+1) + "-" + (today.getDate()+day);
+            date_name = new Date(date_value);
+            $("#date").append("<option value="+date_value+">"+date_name.toDateString()+"</option>");
         }
     });
 
