@@ -1,4 +1,5 @@
 function Ajax_Model(data) {
+    setup_ajax();
     console.log("Model Data Ajax:" + data);
     $.ajax({
         type: "POST",

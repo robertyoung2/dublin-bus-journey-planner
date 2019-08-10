@@ -7,7 +7,7 @@ html, body {
 
 #map_container{
     position: relative;
-    height: 40vh;
+    height: 50vh;
     margin: 0;
     border: 0;
     padding: 0;
@@ -17,7 +17,7 @@ html, body {
 
 #info_section{
     position: relative;
-    height: 50vh;
+    height: 40vh;
     background-color: #ddffdd;
     overflow-y: scroll;
 }

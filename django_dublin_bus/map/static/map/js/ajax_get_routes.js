@@ -1,9 +1,10 @@
 function AjaxGetRoutes(stop_id, infowindow, stop_name) {
     console.log(stop_id);
+    setup_ajax();
     $.ajax({
         type: "POST",
         data: {'stop_id': stop_id},
-        url: '{% url "get_routes" %}',
+        url: get_routes_url,
 
         success: function (routes, status) {
             // Do unit test to make sure the right format is being returned and the data is correct

@@ -1,6 +1,6 @@
 console.log("map_initialiser.js Loaded!");
 
-
+setup_ajax();
 $.ajax({
     url: get_sun_url,
     type: 'POST',
@@ -34,7 +34,9 @@ var initialize = function () {
     // look at changing where this is positioned in script to resolve marker jumping from O'connell street
     user_location_marker = new google.maps.Marker({position: {lat: lat, lng: lng}, map: map});
 
+    marker_bounds = new google.maps.LatLngBounds();
     loopBusStops();
+
 
     var markerCluster = new MarkerClusterer(map, markers,
         {
@@ -46,7 +48,5 @@ var initialize = function () {
     initialiseUserLocation();
 
     geocoder = new google.maps.Geocoder();
-
-    generateRouteSearch();
 
 };

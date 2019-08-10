@@ -1,11 +1,11 @@
 console.log("generateRoute.js Loaded!");
 function generateRouteSearch(){
-    console.log("Called generateRoute function!");
+    console.log("Called generateRouteSearch function!");
     origin_searchbox = document.getElementById('input_route_origin');
     destination_searchbox = document.getElementById('input_route_destination');
     autocomplete_options = {
-        types: ['geocode'],
-        componentRestrictions: {country: 'ie'}
+        bounds:marker_bounds,
+        strictBounds: true
     };
 
     autocomplete = new google.maps.places.Autocomplete(origin_searchbox, autocomplete_options);
