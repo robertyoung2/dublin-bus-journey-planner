@@ -34,7 +34,9 @@ var initialize = function () {
     // look at changing where this is positioned in script to resolve marker jumping from O'connell street
     user_location_marker = new google.maps.Marker({position: {lat: lat, lng: lng}, map: map});
 
+    marker_bounds = new google.maps.LatLngBounds();
     loopBusStops();
+
 
     var markerCluster = new MarkerClusterer(map, markers,
         {

@@ -65,6 +65,7 @@
         var geocoder; // for initialising the maps geocoder object
         var user_location_marker;
         var markers = []; // storing the markers as we create them
+        var marker_bounds;
         var autocomplete_options;
         var origin_searchbox;
         var destination_searchbox;
@@ -104,6 +105,7 @@
                     infoWindow.open(this.getMap(), this);
                 });
                 markers.push(marker);
+                marker_bounds.extend(marker.getPosition());
 
             {%  endfor %}
         }
