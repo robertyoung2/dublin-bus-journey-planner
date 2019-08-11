@@ -18,13 +18,13 @@ function generate_directions_views(){
                             <input  type="text" name="input_route_origin" id="input_route_origin" placeholder="Enter Origin (Default Current Location)">
                         </div>
                         <div class="cell small-2 medium-2">
-                            <button tabindex="-1" onclick="clearSearch('input_route_origin')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/clear_search.png"></button>
+                            <a tabindex="-1" onclick="clearSearch('input_route_origin')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/clear_search.png"></a>
                         </div>
                         <div class="cell small-8 medium-8">
                             <input type="text" name="input_route_destination" id="input_route_destination" placeholder="Enter Destination">
                         </div>
                         <div class="cell small-2 medium-2">
-                            <button tabindex="-1" onclick="clearSearch('input_route_destination')"><img id="clear_search_icon" title="Clear destination search" src="/static/map/images/clear_search.png"></button>
+                            <a tabindex="-1" onclick="clearSearch('input_route_destination')"><img id="clear_search_icon" title="Clear destination search" src="/static/map/images/clear_search.png"></a>
                         </div>
                     </div>
                     <div class="grid-x align-center">
@@ -58,5 +58,4 @@ function generate_directions_views(){
         setRouteClick();
         set_date_options();
     }
-
 }
