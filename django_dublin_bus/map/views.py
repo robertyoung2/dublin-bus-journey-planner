@@ -11,13 +11,12 @@ import datetime
 import pandas as pd
 import pickle
 import os
-from django_dublin_bus.settings import BASE_DIR
+from django_dublin_bus.settings import BASE_DIR, GOOGLE_KEY
 import time
 from xgboost import XGBRegressor
 from datetime import date, timedelta
 
 # Create your views here.
-
 
 def home(request):
     stops_info = StopsInfo.objects.all()
@@ -27,9 +26,10 @@ def home(request):
     temp = weather_data['main']['temp_max']
     description = weather_data['weather'][0]['description']
     icon = weather_data['weather'][0]['icon']
+    hidden_key = GOOGLE_KEY
 
     # Change stops_info to bus_stops
-    context = {'bus_stops': stops_info, 'temp': temp, 'description':description, 'icon':icon}
+    context = {'bus_stops': stops_info, 'temp': temp, 'description':description, 'icon':icon, 'google_key': hidden_key}
     return render(request,'map/home.html', context)
 
 
@@ -195,7 +195,6 @@ def round_to_hour(dt):
         dt = dt_start_of_hour
 
     return dt
-
 
 
 def get_sun(request):
