@@ -4,8 +4,6 @@ console.log("geolocation.js Loaded!");
 window.lat = 53.3498;
 window.lng = -6.2603;
 
-
-
 function getUserLocation(){
     // console.log("Called getUserLocation function!");
     // Test to see if the browser has HTML5 geolocation

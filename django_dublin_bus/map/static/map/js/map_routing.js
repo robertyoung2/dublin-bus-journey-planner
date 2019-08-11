@@ -5,19 +5,19 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
     console.log("Called mapLocation function!");
     var origin = new google.maps.LatLng(origin_lat, origin_lng);
     var destination = new google.maps.LatLng(dest_lat, dest_lng);
+    var departureTime;
 
-    if (option.value == 'now'){
-        var departureTime = new Date();
+    if (option.value === 'now'){
+        departureTime = new Date();
     }
-    else if (option.value == 'departureTime') {
-        var departureTime = document.getElementById("date").value + " " + document.getElementById("time").value;
+    else if (option.value === 'departureTime') {
+        departureTime = document.getElementById("date").value + " " + document.getElementById("time").value;
         departureTime = new Date(Date.parse(departureTime));
     }
-     else if (option.value == 'arrivalTime') {
+     else if (option.value === 'arrivalTime') {
         var arrivalTime = document.getElementById("date").value + " " + document.getElementById("time").value;
         arrivalTime = new Date(Date.parse(arrivalTime));
     }
-
 
 
     if(directionsRenderer){
@@ -67,11 +67,11 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
 
                     let cell_array_data = [];
                     for (let step of response.routes[i].legs[0].steps) {
-                        if(step.travel_mode == "WALKING"){
+                        if(step.travel_mode === "WALKING"){
                             cell_array_data.push('<i class="material-icons" style="font-size:30px;color:white">directions_walk</i>');
                         }
-                        else if(step.travel_mode == "TRANSIT"){
-                            if(step.transit.line.vehicle.type != "BUS"){
+                        else if(step.travel_mode === "TRANSIT"){
+                            if(step.transit.line.vehicle.type !== "BUS"){
                                 include = false;
                                 break;
                             }
@@ -114,7 +114,7 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
                         }
                         steps_counter += 1;
                     }
-                    if(include == true){
+                    if(include === true){
                         let new_route_row = route_options_table.insertRow(-1);
                         new_route_row.id = i;
                         new_route_row.onclick = function () {
