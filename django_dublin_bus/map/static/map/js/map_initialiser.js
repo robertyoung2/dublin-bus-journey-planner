@@ -12,7 +12,7 @@ $.ajax({
     }
 });
 
-// The following geolocation code was taken and adapted from the tutorial at the following address:
+// The following geolocation live tracking code was taken and adapted from the tutorial at the following address:
 // https://medium.com/risan/track-users-location-and-display-it-on-google-maps-41d1f850786e
 
 // Function to track follow user location
@@ -24,8 +24,6 @@ const trackLocation = ({ onSuccess, onError = () => { } }) => {
 // Else use watch position
 return navigator.geolocation.watchPosition(onSuccess, onError, {
     enableHighAccuracy: true,
-    timeout: 5000,
-    maximumAge: 0
   });
 };
 
@@ -82,11 +80,8 @@ var initialize = function () {
     set_night_mode();
     // create_radius_selector();
 
-
-
-
     marker_bounds = new google.maps.LatLngBounds();
-    // loopBusStops();
+    loopBusStops();
     //
     //
     geocoder = new google.maps.Geocoder();
