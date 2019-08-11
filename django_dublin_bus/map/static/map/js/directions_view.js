@@ -42,7 +42,7 @@ function generate_directions_views(){
                             <select id="date"></select>
                         </div>
                         <div class="small-3 medium-3 cell datetime_selector_container" hidden="hidden">
-                            <input type="time" id="time" min="05:00" max="4:00" required>
+                            <input type="time" id="journey_time" value="now" required>
                         </div>
                         <div class="small-1 medium-1 cell"></div>
                     </div>

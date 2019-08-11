@@ -7,15 +7,17 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
     var destination = new google.maps.LatLng(dest_lat, dest_lng);
     var departureTime;
     var arrivalTime;
+    var journey_date_element = document.getElementById("date");
+    var journey_time_element = document.getElementById("journey_time");
 
     if (option.value === 'now'){
         departureTime = new Date();
     }
     else if (option.value === 'departureTime') {
-        departureTime = new Date(Date.parse(document.getElementById("date").value + " " + document.getElementById("time").value));
+        departureTime = new Date(Date.parse(journey_date_element.value + " " + journey_time_element.value));
     }
      else if (option.value === 'arrivalTime') {
-        arrivalTime = new Date(Date.parse(document.getElementById("date").value + " " + document.getElementById("time").value));
+        arrivalTime = new Date(Date.parse(journey_date_element.value + " " + journey_time_element.value));
     }
 
     if(directionsRenderer){
