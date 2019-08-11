@@ -59,6 +59,11 @@ var initialize = function () {
 
     const marker = new google.maps.Marker({map, position: initialPosition, icon:user_marker_icon});
 
+    //Hardcoding autocomplete bounds from results from google map markers
+    marker_bounds = new google.maps.LatLngBounds();
+    marker_bounds.extend(new google.maps.LatLng(53.07067778, -6.614865495999993));
+    marker_bounds.extend(new google.maps.LatLng(53.60619628, -6.053310958999987));
+
     // Call the track location function
     trackLocation({
         onSuccess: ({coords: {latitude: lat, longitude: lng}}) => {
@@ -80,8 +85,8 @@ var initialize = function () {
     set_night_mode();
     // create_radius_selector();
 
-    marker_bounds = new google.maps.LatLngBounds();
-    loopBusStops();
+    // marker_bounds = new google.maps.LatLngBounds();
+    // loopBusStops();
     //
     //
     geocoder = new google.maps.Geocoder();
