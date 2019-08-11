@@ -4,15 +4,15 @@ window.lat = 53.3498;
 window.lng = -6.2603;
 
 function getnearby(pos) {
-    if (typeof x === 'undefined')
+    if (typeof nearby_radius === 'undefined')
     {
-        x=500;
+        nearby_radius=500;
     }
-    console.log(x);
+    console.log("Nearby Radius: " + nearby_radius);
     var service = new google.maps.places.PlacesService(map);
     service.nearbySearch({
         location: pos,
-        radius: x,
+        radius: nearby_radius,
         types: ['bus_station']
 
     }, callback);
@@ -26,6 +26,7 @@ function callback(results, status) {
             geocoder.geocode({'placeId': placeId}, function (results, status) {
                 if (status === 'OK') {
                     if (results[0]) {
+                        console.log("Nearby Station Results: " + results);
                         console.log("Lat: "+results[0].geometry.location.lat() + " " + " Lon: "+results[0].geometry.location.lng());
                     }
                 }
@@ -56,10 +57,10 @@ function getUserLocation(){
             };
             window.lat = position.coords.latitude;
             window.lng = position.coords.longitude;
-            geo_for_emptystring.length = 0
+            geo_for_emptystring.length = 0;
             geo_for_emptystring.push(position.coords.longitude);
             geo_for_emptystring.push(position.coords.latitude);
-            getnearby(pos,x);
+            // getnearby(pos,x);
         }
     }
 
@@ -78,16 +79,16 @@ function currentLocation() {
 function initialiseUserLocation(){
     console.log("Called initialiseUserLocation function!");
     window.initialize = initialize;
-    var toggle = true;
+    var first_load = true;
     var redraw = function (payload) {
         lat = payload.message.lat;
         lng = payload.message.lng;
 
         user_location_marker.setPosition({lat: lat, lng: lng, alt: 0});
-        if (toggle) {
+        if (first_load) {
             map.setCenter({lat: lat, lng: lng, alt: 0});
             map.setZoom(16);
-            toggle = false;
+            first_load = false;
         }
     };
 
@@ -131,7 +132,7 @@ function CenterControl(controlDiv, map) {
     // Setup the click event listeners: simply set the map to Chicago.
     controlDiv.addEventListener('click', function() {
         controlDiv.onchange = function () {
-            x=controlDiv.value;
+            nearby_radius = controlDiv.value;
         }
     });
 }

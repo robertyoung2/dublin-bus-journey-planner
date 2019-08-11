@@ -29,10 +29,30 @@ var initialize = function () {
             fullscreenControl: false
     });
 
-    set_night_mode();
+    var styles = [
+    {
+        "featureType": "transit.station.bus",
+        "stylers": [{ "visibility": "off" }]
+    }
+    ];
+    map.setOptions({ styles: styles });
+
+    // set_night_mode();
     create_radius_selector();
-    // look at changing where this is positioned in script to resolve marker jumping from O'connell street
-    user_location_marker = new google.maps.Marker({position: {lat: lat, lng: lng}, map: map});
+
+
+    var bus_marker_icon = {
+        url: user_marker_image_url, //the image itself
+        scaledSize: new google.maps.Size(75, 75) // resizing image to 50% smaller
+    };
+    user_location_marker = new google.maps.Marker({
+        position: {
+            lat: lat,
+            lng: lng
+        },
+        map: map,
+        icon: bus_marker_icon
+    });
 
     marker_bounds = new google.maps.LatLngBounds();
     loopBusStops();

@@ -88,6 +88,10 @@ function set_night_mode(){
                     featureType: 'water',
                     elementType: 'labels.text.stroke',
                     stylers: [{color: '#17263c'}]
+                },
+                {
+                    featureType: "transit.station.bus",
+                    stylers: [{ visibility: "off" }]
                 }
             ];
         map.set('styles', styles);

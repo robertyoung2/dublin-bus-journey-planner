@@ -1,25 +1,17 @@
 from django.shortcuts import render
-from .models import StopsInfo, BusStops, Holidays
-import requests
+from django_dublin_bus.settings import BASE_DIR
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.core import serializers
 from django.http import HttpResponse
-import csv
-import json
-from math import cos, asin, sqrt
-import difflib
-import datetime
+
+from .models import StopsInfo, BusStops, Holidays
+
+import difflib, datetime, os, time, pickle, json, csv, requests
 import pandas as pd
-import pickle
-import os
-from django_dublin_bus.settings import BASE_DIR
-import time
-from xgboost import XGBRegressor
-from datetime import date, timedelta
-from django.views.decorators.csrf import ensure_csrf_cookie
-
-# Create your views here.
+from math import cos, asin, sqrt
 
 
+# Create your views here
 def home(request):
     stops_info = StopsInfo.objects.all()
 
