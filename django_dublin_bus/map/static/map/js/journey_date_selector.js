@@ -1,6 +1,6 @@
-//Function makes the day
-console.log("Loaded jounrey_date_selector.js");
+console.log("Loaded journey_date_selector.js");
 function set_date_options(){
+    //
     $(function(){
         var today = new Date()
         console.log("Today: "+today);

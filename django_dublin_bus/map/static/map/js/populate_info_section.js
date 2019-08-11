@@ -1,105 +1,21 @@
 console.log("populate_info_section.js Loaded!");
-var directions_button = document.getElementById("directions_view");
-var favourites_button = document.getElementById("favourites_view");
-var journey_button = document.getElementById("journey_view");
+var directions_button = document.getElementById("directions_view_button");
+var favourites_button = document.getElementById("favourites_view_button");
+var journey_button = document.getElementById("stop_info_view_button");
+var info_section = document.getElementById("info_section");
 
 function populate_info(info){
     console.log("Called populate_info function!");
-    var info_section = document.getElementById("info_section");
+
     info_section.innerHTML = "";
     if (info == "directions_view"){
-        directions_button.classList.add("active_view");
-        favourites_button.classList.remove("active_view");
-        journey_button.classList.remove("active_view");
-        info_section.innerHTML =`
-            <form action="Getinput" method="get">
-                <div class="grid-container">
-                    <div class="grid-x align-center">
-                        <div class="cell small-8 medium-8">
-                            <input  type="text" name="input_route_origin" id="input_route_origin" placeholder="Enter Origin (Default Current Location)">
-                        </div>
-                        <div class="cell small-2 medium-2">
-                            <button tabindex="-1" onclick="clearSearch('input_route_origin')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/clear_search.png"></button>
-                        </div>
-                        <div class="cell small-8 medium-8">
-                            <input type="text" name="input_route_destination" id="input_route_destination" placeholder="Enter Destination">
-                        </div>
-                        <div class="cell small-2 medium-2">
-                            <button tabindex="-1" onclick="clearSearch('input_route_destination')"><img id="clear_search_icon" title="Clear destination search" src="/static/map/images/clear_search.png"></button>
-                        </div>
-                    </div>
-                    <div class="grid-x align-center">
-                        <div class="cell small-6 medium-6 large-4">
-                            <select id="option">
-                                <option value="now">Now</option>
-                                <option value="departureTime">Departure Time</option>
-                                <option value="arrivalTime">Arrival Time</option>
-                            </select>
-                        </div>
-                        <div class="cell small-4 medium-4 large-6"></div>
-                    </div>
-                    <div class="grid-x align-center">
-                        <div class="small-6 medium-6 cell datetime_selector_container" hidden="hidden">
-                            <select id="date"></select>
-                        </div>
-                        <div class="small-3 medium-3 cell datetime_selector_container" hidden="hidden">
-                            <input type="time" id="time" min="05:00" max="4:00" required>
-                        </div>
-                        <div class="small-1 medium-1 cell"></div>
-                    </div>
-                    <div class="grid-x align-center">
-                        <div class="small-3 medium-3 cell">
-                            <input type="button" id="route_submit" value="Search">
-                        </div>
-                        <div class="small-7 medium-7 cell"></div>
-                    </div>
-               </div>
-            </form>`;
-        generateRouteSearch();
-        setRouteClick();
-        set_date_options();
+        generate_directions_views();
     }
     else if(info == "favourites_view"){
-        directions_button.classList.remove("active_view");
-        favourites_button.classList.add("active_view");
-        journey_button.classList.remove("active_view");
-
-        info_section.innerHTML = `
-            <form action="Getinput" method="get">
-                <div class="grid-x">
-                    <div class="cell small-9 medium-9">
-                        <input type="text" name="set_home" id="set_home" placeholder="Enter Key">
-                    </div>
-                    <div class="cell small-3 medium-3">
-                        <button tabindex="-1" onclick="clearSearch('set_home')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/clear_search.png"></button>
-                    </div>
-                    <div class="cell small-9 medium-9">
-                        <input type="text" name="set destination" id="set_destination" placeholder="Enter Location">
-                    </div>
-                    <div class="cell small-3 medium-3">
-                        <button tabindex="-1" onclick="clearSearch('set_destination')"><img id="clear_search_icon" title="Clear destination search" src="/static/map/images/clear_search.png"></button>
-                    </div>
-                    <div class="cell small-3 medium-3">
-                        <input type="button" id="set_favourites" value="Save Favourite">
-                    </div>
-                </div>
-            </form>`;
-        capture_favourites();
-
-
+        generate_favourites_view();
     }
-    else if(info == "journey_view"){
-        directions_button.classList.remove("active_view");
-        favourites_button.classList.remove("active_view");
-        journey_button.classList.add("active_view");
-
-        info_section.innerHTML = '<div id="mySidebar" class="sidebar">' +
-                                    '<a href="#">' +
-                                        '<div id="right-panel">' +
-                                            '<table id="route_options_container" class="table-scroll"></table>' +
-                                        '</div>' +
-                                    '</a>' +
-                                ' </div>';
+    else if(info == "stop_info_view"){
+        generate_stop_info_view();
     }
 }
 
