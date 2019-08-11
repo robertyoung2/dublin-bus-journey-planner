@@ -5,17 +5,13 @@ $.ajax({
     url: get_sun_url,
     type: 'POST',
     success:function (data){
-        loadData(data);
-    }
-});
-
-
-function loadData(data) {
         sunrise = data.sunrise;
         sunset = data.sunset;
         console.log("Sunrise: "+ sunrise);
         console.log("Sunset: "+ sunset);
-}
+    }
+});
+
 
 
 var initialize = function () {
@@ -29,6 +25,8 @@ var initialize = function () {
             fullscreenControl: false
     });
 
+    initialiseUserLocation();
+
     var styles = [
     {
         "featureType": "transit.station.bus",
@@ -37,7 +35,7 @@ var initialize = function () {
     ];
     map.setOptions({ styles: styles });
 
-    // set_night_mode();
+    set_night_mode();
     create_radius_selector();
 
 
@@ -64,8 +62,6 @@ var initialize = function () {
         }
     );
 
-
-    initialiseUserLocation();
 
     geocoder = new google.maps.Geocoder();
 
