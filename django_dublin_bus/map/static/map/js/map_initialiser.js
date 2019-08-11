@@ -25,7 +25,7 @@ var initialize = function () {
             fullscreenControl: false
     });
 
-    initialiseUserLocation();
+    // initialiseUserLocation();
 
     var styles = [
     {

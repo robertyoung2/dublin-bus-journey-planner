@@ -8,25 +8,25 @@ function getnearby(pos){
             nearby_markers.push(marker);
         }
     }
-
-    function addMarker(nearby_markers) {
-        var bus_marker_icon = {
-            url: bus_marker_image_url, //the image itself
-            scaledSize: new google.maps.Size(50, 50) // resizing image to 50% smaller
-        };
-
-        for(let i = 0; i < nearby_markers.length; i++){
-
-            nearMarker = new google.maps.Marker({
-                position: {
-                    lat: nearby_markers[i].position.lat(),
-                    lng: nearby_markers[i].position.lng(),
-                },
-                icon: bus_marker_icon,
-                map: map
-            });
-        }
-    }
+    //
+    // function addMarker(nearby_markers) {
+    //     var bus_marker_icon = {
+    //         url: bus_marker_image_url, //the image itself
+    //         scaledSize: new google.maps.Size(50, 50) // resizing image to 50% smaller
+    //     };
+    //
+    //     for(let i = 0; i < nearby_markers.length; i++){
+    //
+    //         nearMarker = new google.maps.Marker({
+    //             position: {
+    //                 lat: nearby_markers[i].position.lat(),
+    //                 lng: nearby_markers[i].position.lng(),
+    //             },
+    //             icon: bus_marker_icon,
+    //             map: map
+    //         });
+    //     }
+    // }
     // addMarker(nearby_markers);
 
 }

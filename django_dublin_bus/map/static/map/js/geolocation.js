@@ -33,7 +33,7 @@ function getUserLocation(){
             geo_for_emptystring.length = 0;
             geo_for_emptystring.push(position.coords.longitude);
             geo_for_emptystring.push(position.coords.latitude);
-            // getnearby(pos);
+            getnearby(pos);
         }
     }
 
@@ -41,27 +41,27 @@ function getUserLocation(){
     setInterval(function () {
         // console.log("Called setInterval function!");
         updatePosition(getLocation());
+
     }, 10000);
 }
 
 function currentLocation() {
-    // console.log("Called currentLocation function!");
     return {lat: window.lat, lng: window.lng};
 }
 
-function initialiseUserLocation(){
-    console.log("Called initialiseUserLocation function!");
-    window.initialize = initialize;
-    var first_load = true;
-    var redraw = function (payload) {
-        lat = payload.message.lat;
-        lng = payload.message.lng;
-
-        user_location_marker.setPosition({lat: lat, lng: lng, alt: 0});
-        if (first_load) {
-            map.setCenter({lat: lat, lng: lng, alt: 0});
-            map.setZoom(16);
-            first_load = false;
-        }
-    };
-}
+// function initialiseUserLocation(){
+//     console.log("Called initialiseUserLocation function!");
+//     window.initialize = initialize;
+//     var first_load = true;
+//     var redraw = function (payload) {
+//         lat = payload.message.lat;
+//         lng = payload.message.lng;
+//
+//         user_location_marker.setPosition({lat: lat, lng: lng, alt: 0});
+//         if (first_load) {
+//             map.setCenter({lat: lat, lng: lng, alt: 0});
+//             map.setZoom(16);
+//             first_load = false;
+//         }
+//     };
+// }
