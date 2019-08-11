@@ -12,20 +12,64 @@ $.ajax({
     }
 });
 
+// The following geolocation code was taken and adapted from the tutorial at the following address:
+// https://medium.com/risan/track-users-location-and-display-it-on-google-maps-41d1f850786e
 
+// Function to track follow user location
+const trackLocation = ({ onSuccess, onError = () => { } }) => {
+  if ('geolocation' in navigator === false) {
+    return onError(new Error('Geolocation is not supported by your browser.'));
+  }
 
+// Else use watch position
+return navigator.geolocation.watchPosition(onSuccess, onError, {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+  });
+};
+
+const getPositionErrorMessage = code => {
+  switch (code) {
+    case 1:
+      return 'Permission denied.';
+    case 2:
+      return 'Position unavailable.';
+    case 3:
+      return 'Timeout reached.';
+  }
+};
+
+// Function to initialise map
 var initialize = function () {
     console.log("Called initialise map function!");
-    getUserLocation();
+
+    // Centre on Dublin at the statt
+    const initialPosition = {lat: 53.3498, lng: -6.2603};
 
     map = new google.maps.Map(document.getElementById('map'), {
-            center: {lat: lat, lng: lng}, //investigate where lat nd lng variables are coming from
-            zoom: 12,
-            mapTypeControl: false,
-            fullscreenControl: false
+        center: {lat: initialPosition.lat, lng: initialPosition.lng}, //investigate where lat nd lng variables are coming from
+        zoom: 12,
+        mapTypeControl: false,
+        fullscreenControl: false
     });
 
-    // initialiseUserLocation();
+    var user_marker_icon = {
+        url: user_marker_image_url, //the image itself
+        scaledSize: new google.maps.Size(75, 75) // resizing image to 50% smaller
+    };
+
+    const marker = new google.maps.Marker({map, position: initialPosition, icon:user_marker_icon});
+
+    // Call the track location function
+    trackLocation({
+        onSuccess: ({coords: {latitude: lat, longitude: lng}}) => {
+            marker.setPosition({lat, lng});
+            map.panTo({lat, lng});
+        },
+        onError: err =>
+            alert(`Error: ${getPositionErrorMessage(err.code) || err.message}`)
+    });
 
     var styles = [
     {
@@ -36,26 +80,15 @@ var initialize = function () {
     map.setOptions({ styles: styles });
 
     set_night_mode();
-    create_radius_selector();
+    // create_radius_selector();
 
 
-    var bus_marker_icon = {
-        url: user_marker_image_url, //the image itself
-        scaledSize: new google.maps.Size(75, 75) // resizing image to 50% smaller
-    };
-    user_location_marker = new google.maps.Marker({
-        position: {
-            lat: lat,
-            lng: lng
-        },
-        map: map,
-        icon: bus_marker_icon
-    });
+
 
     marker_bounds = new google.maps.LatLngBounds();
-    loopBusStops();
-
-
+    // loopBusStops();
+    //
+    //
     geocoder = new google.maps.Geocoder();
-
 };
+

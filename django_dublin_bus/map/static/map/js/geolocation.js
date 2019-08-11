@@ -49,19 +49,19 @@ function currentLocation() {
     return {lat: window.lat, lng: window.lng};
 }
 
-// function initialiseUserLocation(){
-//     console.log("Called initialiseUserLocation function!");
-//     window.initialize = initialize;
-//     var first_load = true;
-//     var redraw = function (payload) {
-//         lat = payload.message.lat;
-//         lng = payload.message.lng;
-//
-//         user_location_marker.setPosition({lat: lat, lng: lng, alt: 0});
-//         if (first_load) {
-//             map.setCenter({lat: lat, lng: lng, alt: 0});
-//             map.setZoom(16);
-//             first_load = false;
-//         }
-//     };
-// }
+function initialiseUserLocation(){
+    console.log("Called initialiseUserLocation function!");
+    window.initialize = initialize;
+    var first_load = true;
+    var redraw = function (payload) {
+        lat = payload.message.lat;
+        lng = payload.message.lng;
+
+        user_location_marker.setPosition({lat: lat, lng: lng, alt: 0});
+        if (first_load) {
+            map.setCenter({lat: lat, lng: lng, alt: 0});
+            map.setZoom(16);
+            first_load = false;
+        }
+    };
+}
