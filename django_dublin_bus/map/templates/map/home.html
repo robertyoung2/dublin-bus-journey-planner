@@ -84,6 +84,8 @@
 
         var sunrise;
         var sunset;
+
+
         
     </script>
 
@@ -98,6 +100,7 @@
 
 
     <script>
+
         function loopBusStops(){
             console.log("Calling loopBusStops function!");
 
@@ -107,22 +110,20 @@
             };
             {%  for bus_stop in bus_stops %}
 
-
                 var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lng }}};
                 var marker = new google.maps.Marker({
                     position: latLng,
-                    map: map,
                     icon: bus_marker_icon
                 });
 
-                var infoWindow = new google.maps.InfoWindow();
-                google.maps.event.addListener(marker, 'click', function () {
-                    var stop_id = '{{bus_stop.stop_id}}';
-                    var stop_name = '{{ bus_stop.stop_name }}'
-                    AjaxGetRoutes(stop_id, infoWindow, stop_name);
-                    infoWindow.open(this.getMap(), this);
-                    populate_info('stop_info_view');
-                });
+                // var infoWindow = new google.maps.InfoWindow();
+                // google.maps.event.addListener(marker, 'click', function () {
+                //     var stop_id = '{{bus_stop.stop_id}}';
+                //     var stop_name = '{{ bus_stop.stop_name }}'
+                //     AjaxGetRoutes(stop_id, infoWindow, stop_name);
+                //     infoWindow.open(this.getMap(), this);
+                //     populate_info('stop_info_view');
+                // });
                 markers.push(marker);
                 marker_bounds.extend(marker.getPosition());
 

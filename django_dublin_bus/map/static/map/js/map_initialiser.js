@@ -56,13 +56,6 @@ var initialize = function () {
     loopBusStops();
 
 
-    var markerCluster = new MarkerClusterer(map, markers,
-        {
-            imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
-        }
-    );
-
-
     geocoder = new google.maps.Geocoder();
 
 };

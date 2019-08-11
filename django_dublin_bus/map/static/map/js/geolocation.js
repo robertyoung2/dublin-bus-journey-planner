@@ -16,7 +16,7 @@ function getUserLocation(){
     function getLocation() {
         // console.log("Called getLocation function!");
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(updatePosition, error, options);
+            navigator.geolocation.getCurrentPosition(updatePosition);
         }
         return null;
     }
@@ -33,7 +33,7 @@ function getUserLocation(){
             geo_for_emptystring.length = 0;
             geo_for_emptystring.push(position.coords.longitude);
             geo_for_emptystring.push(position.coords.latitude);
-            getnearby(pos);
+            // getnearby(pos);
         }
     }
 
