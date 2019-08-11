@@ -4,6 +4,7 @@ var favourites_button = document.getElementById("favourites_view_button");
 var stop_info_button = document.getElementById("stop_info_view_button");
 
 var directions_section = document.getElementById("directions_view_section");
+var journey_results_section = document.getElementById("journey_results_view_section");
 var favourites_section = document.getElementById("favourites_view_section");
 var stop_info_section = document.getElementById("stop_info_view_section");
 

@@ -9,3 +9,8 @@
 .card{
     background-color: black;
 }
+
+#back_button img{
+    min-height: 5vh;
+    max-height: 8vh;
+}

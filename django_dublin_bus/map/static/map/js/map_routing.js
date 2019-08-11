@@ -30,7 +30,7 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
     directionsRenderer.setMap(map);
 
     calculateAndDisplayRoute(directionsService, directionsRenderer,origin, destination, arrivalTime, departureTime);
-    populate_info("stop_info_view");
+
 }
 
 
@@ -50,6 +50,10 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
         unitSystem: google.maps.UnitSystem.IMPERIAL
     }, function (response, status) {
         if (status === 'OK') {
+
+            showing_journey_results = true;
+            generate_directions_views();
+
             console.log(response);
             directionsRenderer.setDirections(response);
 
@@ -67,10 +71,11 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                 let steps_counter = 0;
                 let steps_len = response.routes[i].legs[0].steps.length;
 
-                let cell_array_data = [];
+                let journey_icons_string = "";
+
                 for (let step of response.routes[i].legs[0].steps) {
                     if(step.travel_mode === "WALKING"){
-                        cell_array_data.push('<i class="material-icons" style="font-size:30px;color:white">directions_walk</i>');
+                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:white">directions_walk</i>';
                     }
                     else if(step.travel_mode === "TRANSIT"){
                         if(step.transit.line.vehicle.type !== "BUS"){
@@ -105,28 +110,25 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                         console.log("Bus_Route: " + current_route);
                         console.log("Departure_Datetime: " + new Date(step.transit.departure_time.value));
                         console.log();
-                        cell_array_data.push('<i class="material-icons" style="font-size:30px;color:white">directions_bus</i>');
+                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:white">directions_bus</i>';
                         // let newCell2 = new_route_row.insertCell(-1);
 
-                        cell_array_data.push('<p>'+current_route+'</p>');
+                        journey_icons_string += '<span class="">'+current_route+'</span>';
                     }
                     if (steps_counter < steps_len - 1){
                         // let nextStepCell = new_route_row.insertCell(-1);
-                        cell_array_data.push('<i class="material-icons" style="font-size:30px;color:white">navigate_next</i>');
+                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:white">navigate_next</i>';
                     }
                     steps_counter += 1;
                 }
                 if(include === true){
-                    let new_route_row = route_options_table.insertRow(-1);
-                    new_route_row.id = i;
-                    new_route_row.onclick = function () {
-                        console.log(this.id);
-                        directionsRenderer.setRouteIndex(parseInt(this.id));
-                    };
-                    for(cell of cell_array_data){
-                        let newCell = new_route_row.insertCell(-1);
-                        newCell.innerHTML = cell;
-                    }
+                    route_options_table.innerHTML += `<div id="`+i+`" onclick="render_route_at_index(`+i+`)" class="grid-x grid-padding"></div>`;
+                    let new_route_row = document.getElementById(i);
+                    console.log(new_route_row.id);
+
+                    new_route_row.innerHTML = '<p id="journey_time_'+i+'" class="cell small-1 medium-1"></p>';
+                    new_route_row.innerHTML += '<div class="cell small-11 medium-11">'+journey_icons_string+'</div>';
+
                     model_journeys.push(journey);
                     rendered_route_list.push(response.routes[i]);
                     console.log("****************");
@@ -136,9 +138,15 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
             console.log("****************");
             console.log("Accessable GMaps Data: " + rendered_route_list);
             Ajax_Model(JSON.stringify(model_journeys));
+            return true;
         }
         else {
             window.alert('Directions request failed due to ' + status);
+            return false;
         }
     });
+}
+
+function render_route_at_index(index){
+    directionsRenderer.setRouteIndex(parseInt(index));
 }

@@ -32,22 +32,25 @@
 </head>
 
 <body>
-    <div class="grid-y grid-frame">
+    <div id="page_layout" class="grid-y grid-frame">
         <div id="map_container" class="cell">
             <div id="map"></div>
         </div>
 
-        <div class="cell" id="info_section">
-            <div id="directions_view_section" style="display:none"></div>
-            <div id="favourites_view_section" style="display:none"></div>
-            <div id="stop_info_view_section" style="display:none"></div>
+        <div id="info_section" class="cell grid-x">
+            <div id="directions_view_section" class="cell align-self-middle" style="display:none"></div>
+            <div id="journey_results_view_section" style="display:none"></div>
+            <div id="favourites_view_section" class="cell grid-x align-self-middle" style="display:none"></div>
+            <div id="stop_info_view_section" class="cell align-self-middle" style="display:none"></div>
         </div>
 
-        <div class="mobile-app-icon-bar">
-        {% load staticfiles %}
-            <a id='directions_view_button' class="footer-link" onclick="populate_info('directions_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}"></a>
-            <a id="favourites_view_button" class="footer-link" onclick="populate_info('favourites_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/favourites.png" %}"></a>
-            <a id='stop_info_view_button' class="footer-link" onclick="populate_info('stop_info_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/journey.png" %}"></a>
+        <div id="bottom_navbar" class="cell">
+            <div class="mobile-app-icon-bar">
+            {% load staticfiles %}
+                <a id='directions_view_button' class="footer-link" onclick="populate_info('directions_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}"></a>
+                <a id="favourites_view_button" class="footer-link" onclick="populate_info('favourites_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/favourites.png" %}"></a>
+                <a id='stop_info_view_button' class="footer-link" onclick="populate_info('stop_info_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/journey.png" %}"></a>
+            </div>
         </div>
     </div>
 
@@ -68,7 +71,7 @@
         // ( This duplicating variables already created so should be refactored and removed)
         var geo_for_emptystring = [];
 
-
+        var back_button_image_url = "{% static 'map/images/back_button.png' %}";
         var user_marker_image_url = "{% static 'map/images/user_location_marker.png' %}"; // Not doing anything yet but to be used for customer user location marker
         var bus_marker_image_url = "{% static 'map/images/bus_stop_marker.png' %}"; // Not doing anything yet but to be used for busstop location marker
 
@@ -100,7 +103,6 @@
     <script type="text/javascript" src="{% static 'map/js/get_nearby_markers.js' %}"></script>
     <script type="text/javascript" src="{% static 'map/js/map_initialiser.js' %}"></script>
 
-
     <script>
         function loopBusStops(){
             console.log("Calling loopBusStops function!");
@@ -109,7 +111,7 @@
                 url: bus_marker_image_url, //the image itself
                 scaledSize: new google.maps.Size(50, 50) // resizing image to 50% smaller
             };
-            {%  for bus_stop in bus_stops %}
+            {% for bus_stop in bus_stops %}
 
 
                 var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lng }}};
@@ -119,17 +121,17 @@
                     icon: bus_marker_icon
                 });
 
-                var infoWindow = new google.maps.InfoWindow();
+                // var infoWindow = new google.maps.InfoWindow();
                 google.maps.event.addListener(marker, 'click', function () {
-                    var stop_id = '{{bus_stop.stop_id}}';
-                    var stop_name = '{{ bus_stop.stop_name }}'
-                    AjaxGetRoutes(stop_id, infoWindow, stop_name);
-                    infoWindow.open(this.getMap(), this);
+                    // var stop_id = '{{bus_stop.stop_id}}';
+                    // var stop_name = '{{ bus_stop.stop_name }}'
+                    // AjaxGetRoutes(stop_id, infoWindow, stop_name);
+                    // infoWindow.open(this.getMap(), this);
                     populate_info('stop_info_view');
                 });
                 markers.push(marker);
 
-            {%  endfor %}
+            {% endfor %}
         }
     </script>
 
@@ -139,6 +141,7 @@
     <script type="text/javascript" src="{% static 'map/js/populate_info_section.js' %}"></script>
     <script type="text/javascript" src="{% static 'map/js/geocode_address.js' %}"></script>
     <script type="text/javascript" src="{% static 'map/js/directions_view.js' %}"></script>
+    <script type="text/javascript" src="{% static 'map/js/journey_results_view.js' %}"></script>
     <script type="text/javascript" src="{% static 'map/js/favourites_view.js' %}"></script>
     <script type="text/javascript" src="{% static 'map/js/stop_info_view.js' %}"></script>
     <script type="text/javascript" src="{% static 'map/js/ajax_model.js' %}"></script>

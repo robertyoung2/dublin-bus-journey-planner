@@ -57,7 +57,7 @@ var initialize = function () {
     marker_bounds.extend(new google.maps.LatLng(53.07067778, -6.614865495999993));
     marker_bounds.extend(new google.maps.LatLng(53.60619628, -6.053310958999987));
 
-    // loopBusStops();
+    loopBusStops();
 
     var markerCluster = new MarkerClusterer(map, markers,
         {
@@ -65,6 +65,10 @@ var initialize = function () {
         }
     );
 
+    for(marker of markers){
+        marker.setMap(null);
+        marker=null;
+    }
 
     geocoder = new google.maps.Geocoder();
 
