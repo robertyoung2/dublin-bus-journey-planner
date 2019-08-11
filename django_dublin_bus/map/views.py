@@ -11,9 +11,7 @@ import pandas as pd
 from math import cos, asin, sqrt
 
 
-# Create your views here.
-
-
+# Create your views here
 def home(request):
     stops_info = StopsInfo.objects.all()
 

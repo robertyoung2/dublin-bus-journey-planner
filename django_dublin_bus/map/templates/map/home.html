@@ -58,7 +58,7 @@
         var get_sun_url = '{% url "get_sun" %}';
         var get_routes_url = '{% url "get_routes" %}';
         var geo_for_emptystring = [];
-        var x;
+        var nearby_radius;
         var user_marker_image_url = "{% static 'map/images/user_location_marker.png' %}"; // Not doing anything yet but to be used for customer user location marker
         var bus_marker_image_url = "{% static 'map/images/bus_stop_marker.png' %}"; // Not doing anything yet but to be used for busstop location marker
 
