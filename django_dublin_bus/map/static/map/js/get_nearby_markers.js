@@ -1,14 +1,16 @@
 previous_markers = [];
 
-function getnearby(pos){
-    var location = new google.maps.LatLng(pos.lat, pos.lng);
+function getnearby(){
+    var location = map.getCenter();
+    // var location = new google.maps.LatLng(pos.lat, pos.lng);
     var nearby_markers = [];
-    nearby_radius = 500;
+    nearby_radius = 300;
 
 
     function removeMarkers(previous_markers){
         if(previous_markers.length>0){
             for(var i=0; i<previous_markers.length; i++){
+
                 previous_markers[i].setMap(null);
         }}
     }
@@ -40,41 +42,41 @@ function getnearby(pos){
             previous_markers.push(nearMarker);
         }
     }
-    
+
     removeMarkers(previous_markers);
     previous_markers = [];
     update_marker_lists();
     addMarker(nearby_markers);
 }
+//
+// function create_radius_selector(){
+//     var centerControlDiv = document.createElement('select');
+//     centerControlDiv.id = "cmbitems";
+//     centerControlDiv.name = "cmbitems";
+//     centerControlDiv.innerHTML =
+//         '<option value=500>500</option>' +
+//         '<option value=800>800</option>' +
+//         '<option value=900>900</option>' +
+//         '<option value=1000>1000</option>' +
+//         '<option value=1200>1200</option>' +
+//         '<option value=1500>1500</option>' +
+//         '<option value=1700>1700</option>' +
+//         '<option value=1800>1800</option>' +
+//         '<option value=2000>2000</option>';
+//
+//     nearby_radius = centerControlDiv.value;
+//     var centerControl = new CenterControl(centerControlDiv, map);
+//     centerControlDiv.index = 1;
+//     map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+// }
 
-function create_radius_selector(){
-    var centerControlDiv = document.createElement('select');
-    centerControlDiv.id = "cmbitems";
-    centerControlDiv.name = "cmbitems";
-    centerControlDiv.innerHTML =
-        '<option value=500>500</option>' +
-        '<option value=800>800</option>' +
-        '<option value=900>900</option>' +
-        '<option value=1000>1000</option>' +
-        '<option value=1200>1200</option>' +
-        '<option value=1500>1500</option>' +
-        '<option value=1700>1700</option>' +
-        '<option value=1800>1800</option>' +
-        '<option value=2000>2000</option>';
-
-    nearby_radius = centerControlDiv.value;
-    var centerControl = new CenterControl(centerControlDiv, map);
-    centerControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
-}
-
-function CenterControl(controlDiv, map) {
-    controlDiv.style.width = '80px';
-    // Setup the click event listeners: simply set the map to Chicago.
-    controlDiv.addEventListener('click', function() {
-        controlDiv.onchange = function () {
-            console.log("Changed Value Yo!");
-            nearby_radius = controlDiv.value;
-        }
-    });
-}
+// function CenterControl(controlDiv, map) {
+//     controlDiv.style.width = '80px';
+//     // Setup the click event listeners: simply set the map to Chicago.
+//     controlDiv.addEventListener('click', function() {
+//         controlDiv.onchange = function () {
+//             console.log("Changed Value Yo!");
+//             nearby_radius = controlDiv.value;
+//         }
+//     });
+// }

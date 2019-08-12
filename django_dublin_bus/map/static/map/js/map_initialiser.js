@@ -65,16 +65,26 @@ var initialize = function () {
     marker_bounds.extend(new google.maps.LatLng(53.60619628, -6.053310958999987));
 
     // Call the track location function
-    trackLocation({
-        onSuccess: ({coords: {latitude: lat, longitude: lng}}) => {
-            marker.setPosition({lat, lng});
-            map.panTo({lat, lng});
-            pos = {lat:lat, lng:lng};
-            getnearby(pos);
-        },
-        onError: err =>
-            alert(`Error: ${getPositionErrorMessage(err.code) || err.message}`)
-    });
+    // trackLocation({
+    //     onSuccess: ({coords: {latitude: lat, longitude: lng}}) => {
+    //         marker.setPosition({lat, lng});
+    //         map.panTo({lat, lng});
+    //         pos = {lat:lat, lng:lng};
+    //         getnearby(pos);
+    //     },
+    //     onError: err =>
+    //         alert(`Error: ${getPositionErrorMessage(err.code) || err.message}`)
+    // });
+
+      map.addListener('dragend', function() {
+
+          getnearby();
+    // 3 seconds after the center of the map has changed, pan back to the
+    // marker.
+    // window.setTimeout(function() {
+    //   map.panTo(marker.getPosition());
+    // }, 3000);
+  });
 
     var styles = [
     {
