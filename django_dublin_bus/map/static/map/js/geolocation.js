@@ -4,6 +4,8 @@ console.log("geolocation.js Loaded!");
 window.lat = 53.3498;
 window.lng = -6.2603;
 
+
+
 function getUserLocation(){
     // console.log("Called getUserLocation function!");
     // Test to see if the browser has HTML5 geolocation
@@ -35,11 +37,11 @@ function getUserLocation(){
     setInterval(function () {
         // console.log("Called setInterval function!");
         updatePosition(getLocation());
+
     }, 10000);
 }
 
 function currentLocation() {
-    // console.log("Called currentLocation function!");
     return {lat: window.lat, lng: window.lng};
 }
 
@@ -58,18 +60,4 @@ function initialiseUserLocation(){
             first_load = false;
         }
     };
-
-    var pnChannel = "map2-channel";
-
-    var pubnub = new PubNub({
-        publishKey: 'pub-c-180f8ae2-5a29-43b3-88a3-c550c9d1352c',
-        subscribeKey: 'sub-c-165dd5b0-9d91-11e9-b7bc-46e9b2e3ba6e'
-    });
-
-    pubnub.subscribe({channels: [pnChannel]});
-    pubnub.addListener({message: redraw});
-
-    setInterval(function () {
-        pubnub.publish({channel: pnChannel, message: currentLocation()});
-    }, 5000);
 }

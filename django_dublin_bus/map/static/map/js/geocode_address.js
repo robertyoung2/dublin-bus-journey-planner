@@ -1,5 +1,6 @@
 /* Function that performs geodecoding. */
 function geocodeAddress() {
+    console.log('called geocode_Address')
     var origin_new = "";
     var dest_new = "";
     var origin_lat;

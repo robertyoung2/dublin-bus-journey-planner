@@ -6,7 +6,6 @@
     <meta charset="utf-8">
 
     {#        Live Geolocation API Connection#}
-    <script src="https://cdn.pubnub.com/sdk/javascript/pubnub.4.19.0.min.js"></script>
 
     <!--Jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -99,7 +98,7 @@
     {% load staticfiles %}
     <script type="text/javascript" src="{% static 'map/js/csrf_ajax_token_setting.js' %}"></script>
     <script type="text/javascript" src="{% static 'map/js/journey_date_selector.js' %}"></script>
-    <script type="text/javascript" src="{% static 'map/js/geolocation.js' %}"></script>
+<!--    <script type="text/javascript" src="{% static 'map/js/geolocation.js' %}"></script>-->
     <script type="text/javascript" src="{% static 'map/js/cache_user_favourites.js' %}"></script>
     <script type="text/javascript" src="{% static 'map/js/set_map_night_mode.js' %}"></script>
     <script type="text/javascript" src="{% static 'map/js/get_nearby_markers.js' %}"></script>
@@ -121,7 +120,6 @@
 
                 var marker = new google.maps.Marker({
                     position: latLng,
-                    map: map,
                     icon: bus_marker_icon,
                     stop_info: stop_info
                 });
@@ -130,6 +128,7 @@
                     console.log(this.stop_info.actual_stop_id);
                     populate_info('stop_info_view');
                 });
+                
                 markers.push(marker);
                 stop_data_list_string += `<option value=`+'{{bus_stop.actual_stop_id}}'+`></option>`
             {% endfor %}

@@ -20,7 +20,7 @@ try:
                           index = range(0,169))
 
     df_sunset_sunrise = pd.DataFrame(columns=['ts_recorded_data', 'date', 'ts_sunrise', 'ts_sunset'],
-                                     index=range(0, 8))
+                                     index=range(0, 1))
 
     current_time = calendar.timegm(time.gmtime())
 
@@ -35,17 +35,13 @@ try:
     df['ts_recorded_data'] = datetime.datetime.utcfromtimestamp(current_time).strftime('%Y-%m-%d %H:%M:%S')
     df.to_csv('168_hours_weather.csv', header=True, index=False)
 
-    for item_num in range(8):
-        ts_sunrise = (weather_data['daily']['data'][item_num]['sunriseTime'])
-        ts_sunset = (weather_data['daily']['data'][item_num]['sunsetTime'])
-        df_sunset_sunrise.iloc[item_num]['ts_sunrise'] = datetime.datetime.utcfromtimestamp(ts_sunrise).strftime(
-            '%Y-%m-%d %H:%M:%S')
-        df_sunset_sunrise.iloc[item_num]['ts_sunset'] = datetime.datetime.utcfromtimestamp(ts_sunset).strftime(
-            '%Y-%m-%d %H:%M:%S')
-        df_sunset_sunrise.iloc[item_num]['date'] = datetime.datetime.utcfromtimestamp(ts_sunrise).strftime('%Y-%m-%d')
-        df_sunset_sunrise['ts_recorded_data'] = datetime.datetime.utcfromtimestamp(current_time).strftime(
-            '%Y-%m-%d %H:%M:%S')
-        df_sunset_sunrise.to_csv('sunrise_sunset.csv', header=True, index=False)
+    ts_sunrise = (weather_data['daily']['data'][0]['sunriseTime'])
+    ts_sunset = (weather_data['daily']['data'][0]['sunsetTime'])
+    df_sunset_sunrise.iloc[0]['ts_sunrise'] = datetime.datetime.utcfromtimestamp(ts_sunrise).strftime(
+        '%Y-%m-%d %H:%M:%S')
+    df_sunset_sunrise.iloc[0]['ts_sunset'] = datetime.datetime.utcfromtimestamp(ts_sunset).strftime('%Y-%m-%d %H:%M:%S')
+    df_sunset_sunrise.iloc[0]['date'] = datetime.datetime.utcfromtimestamp(ts_sunrise).strftime('%Y-%m-%d')
+    df_sunset_sunrise.to_csv('sunrise_sunset.csv', header=True, index=False)
 
 except:
     f = open("logTracebackError.log", "a+")
