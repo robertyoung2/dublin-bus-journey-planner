@@ -65,26 +65,21 @@ var initialize = function () {
     marker_bounds.extend(new google.maps.LatLng(53.60619628, -6.053310958999987));
 
     // Call the track location function
-    // trackLocation({
-    //     onSuccess: ({coords: {latitude: lat, longitude: lng}}) => {
-    //         marker.setPosition({lat, lng});
-    //         map.panTo({lat, lng});
-    //         pos = {lat:lat, lng:lng};
-    //         getnearby(pos);
-    //     },
-    //     onError: err =>
-    //         alert(`Error: ${getPositionErrorMessage(err.code) || err.message}`)
-    // });
+    trackLocation({
+        onSuccess: ({coords: {latitude: lat, longitude: lng}}) => {
+            marker.setPosition({lat, lng});
+            map.panTo({lat, lng});
+            pos = {lat:lat, lng:lng};
+            getnearby(pos);
+        },
+        onError: err =>
+            alert(`Error: ${getPositionErrorMessage(err.code) || err.message}`)
+    });
 
-      map.addListener('dragend', function() {
-
+      map.addListener('center_changed', function() {
           getnearby();
-    // 3 seconds after the center of the map has changed, pan back to the
-    // marker.
-    // window.setTimeout(function() {
-    //   map.panTo(marker.getPosition());
-    // }, 3000);
   });
+
 
     var styles = [
     {
@@ -97,7 +92,7 @@ var initialize = function () {
     set_night_mode();
     // create_radius_selector();
 
-    // marker_bounds = new google.maps.LatLngBounds();
+    marker_bounds = new google.maps.LatLngBounds();
     loopBusStops();
     //
     //

@@ -1,8 +1,8 @@
-previous_markers = [];
-
 // Function to populate nearby markers on pan and user location
 // Currently works in isolation for user location and panning
 // Next version will have both working in harmony
+
+previous_markers = [];
 
 function getnearby() {
 
@@ -11,12 +11,13 @@ function getnearby() {
     var nearby_markers = [];
     var nearby_check = [];
     var previous_check = [];
-    nearby_radius = 300;
+    nearby_radius = 500;
 
     // List of current nearby markers as marker objects
     function update_marker_lists() {
         for (marker of markers) {
-            var marker_dist_from_location = google.maps.geometry.spherical.computeDistanceBetween(location, marker.position);
+            var marker_dist_from_location = google.maps.geometry.spherical.computeDistanceBetween(location,
+                marker.position);
             if (marker_dist_from_location <= nearby_radius) {
                 nearby_markers.push(marker);
             }
