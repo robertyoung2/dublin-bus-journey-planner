@@ -91,7 +91,9 @@
 
         var sunrise;
         var sunset;
-        
+
+        var stop_data_list_string = "";
+
     </script>
 
     {% load staticfiles %}
@@ -111,26 +113,25 @@
                 url: bus_marker_image_url, //the image itself
                 scaledSize: new google.maps.Size(50, 50) // resizing image to 50% smaller
             };
+
             {% for bus_stop in bus_stops %}
 
-
                 var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lng }}};
+                var stop_info = {"stop_id":'{{bus_stop.stop_id}}', "actual_stop_id":'{{bus_stop.actual_stop_id}}', "stop_name":'{{bus_stop.stop_name}}'};
+
                 var marker = new google.maps.Marker({
                     position: latLng,
                     map: map,
-                    icon: bus_marker_icon
+                    icon: bus_marker_icon,
+                    stop_info: stop_info
                 });
 
-                // var infoWindow = new google.maps.InfoWindow();
                 google.maps.event.addListener(marker, 'click', function () {
-                    // var stop_id = '{{bus_stop.stop_id}}';
-                    // var stop_name = '{{ bus_stop.stop_name }}'
-                    // AjaxGetRoutes(stop_id, infoWindow, stop_name);
-                    // infoWindow.open(this.getMap(), this);
+                    console.log(this.stop_info.actual_stop_id);
                     populate_info('stop_info_view');
                 });
                 markers.push(marker);
-
+                stop_data_list_string += `<option value=`+'{{bus_stop.actual_stop_id}}'+`></option>`
             {% endfor %}
         }
     </script>

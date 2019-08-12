@@ -14,15 +14,7 @@ from math import cos, asin, sqrt
 # Create your views here
 def home(request):
     stops_info = StopsInfo.objects.all()
-
-    response = requests.get(url='http://api.openweathermap.org/data/2.5/weather?q=Dublin&APPID=0a4fb876c0f4024eff4c1beb5c4d7761')
-    weather_data = response.json()
-    temp = weather_data['main']['temp_max']
-    description = weather_data['weather'][0]['description']
-    icon = weather_data['weather'][0]['icon']
-
-    # Change stops_info to bus_stops
-    context = {'bus_stops': stops_info, 'temp': temp, 'description':description, 'icon':icon}
+    context = {'bus_stops': stops_info}
     return render(request,'map/home.html', context)
 
 
@@ -31,8 +23,10 @@ def get_routes(request):
         stop_id = request.POST["stop_id"]
 
         # In our django query see is it more efficient to return only bus_numbers field
-        routes = BusStops.objects.filter(stop_id=stop_id)
-        routes_json = serializers.serialize("json", routes, fields=("bus_numbers","stop_headsign"))
+        routes = list(BusStops.objects.filter(stop_id=stop_id).values())
+        print(routes)
+        # routes_json = serializers.serialize("json", routes, fields=("bus_numbers","stop_headsign"))
+        routes_json = json.dumps(routes)
         return HttpResponse(routes_json, content_type="application/json")
 
 def run_model(request):

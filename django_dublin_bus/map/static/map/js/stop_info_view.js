@@ -9,6 +9,27 @@ function generate_stop_info_view(){
     stop_info_section.style.display = "initial";
 
     if(stop_info_section.innerHTML === ""){
-        stop_info_section.innerHTML = `YOU WILL DIE A PEASANT'S DEATH!!!!`;
+        stop_info_section.innerHTML = `
+                <input list="stationsList" placeholder="Search Stations" id="stationSelector" onchange="get_stop_info(this.value)">
+                <datalist id="stationsList">`+stop_data_list_string+`</datalist>`;
+    }
+}
+
+function get_stop_info(stop){
+    console.log("You have clicked: " + stop);
+    for(marker of markers){
+        if(marker.stop_info.actual_stop_id === stop){
+            map.setCenter(marker.getPosition());
+            let stop_routes = AjaxGetRoutes(marker.stop_info.stop_id);
+            console.log("Stop Routes Below!");
+            console.log(stop_routes);
+            // for(route of stop_routes){
+            //     stop_info_section.innerHTML += `
+            //     <div>Route: `+route.bus_number+`</div>
+            //     <div>Headsign: `+route.stop_headsign+`</div>
+            // `;
+            // }
+
+        }
     }
 }
