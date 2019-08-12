@@ -1,5 +1,9 @@
 previous_markers = [];
 
+// Function to populate nearby markers on pan and user location
+// Currently works in isolation for user location and panning
+// Next version will have both working in harmony
+
 function getnearby() {
 
     var location = map.getCenter();
@@ -9,6 +13,7 @@ function getnearby() {
     var previous_check = [];
     nearby_radius = 300;
 
+    // List of current nearby markers as marker objects
     function update_marker_lists() {
         for (marker of markers) {
             var marker_dist_from_location = google.maps.geometry.spherical.computeDistanceBetween(location, marker.position);
@@ -18,6 +23,7 @@ function getnearby() {
         }
     }
 
+    // Makes lists of unique marker stop_ids for previous and nearby markers
     function uniqueTags() {
         for (nearby of nearby_markers) {
             nearby_check.push(nearby.stop_info.stop_id)
@@ -29,6 +35,7 @@ function getnearby() {
         }
     }
 
+    // If the marker is not on the map, adds it to the map
     function addMarkerMap(nearby_markers, previous_check) {
         console.log("starting addMarkerMap ")
         const previous_markers_set = new Set(previous_check);
@@ -39,6 +46,7 @@ function getnearby() {
         }
     }
 
+    // If the marker shouldn't be displayed, removes it
     function removeMarkers(nearby_check, previous_markers) {
         if (previous_markers.length > 0) {
             const nearby_markers_set = new Set(nearby_check);
@@ -51,8 +59,8 @@ function getnearby() {
     }
 
     update_marker_lists();
-        uniqueTags();
-        removeMarkers(nearby_check, previous_markers);
-        addMarkerMap(nearby_markers, previous_check);
-        previous_markers = Object.assign([], nearby_markers);
+    uniqueTags();
+    removeMarkers(nearby_check, previous_markers);
+    addMarkerMap(nearby_markers, previous_check);
+    previous_markers = Object.assign([], nearby_markers);
 }
