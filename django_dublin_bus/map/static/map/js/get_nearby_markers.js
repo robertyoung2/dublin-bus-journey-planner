@@ -1,34 +1,50 @@
+previous_markers = [];
+
 function getnearby(pos){
     var location = new google.maps.LatLng(pos.lat, pos.lng);
-    var nearby_markers = []
-    console.log("Nearby Radius: " + nearby_radius);
-    for(marker of markers){
-        var marker_dist_from_location = google.maps.geometry.spherical.computeDistanceBetween(location, marker.position);
-        if(marker_dist_from_location <= nearby_radius){
-            nearby_markers.push(marker);
+    var nearby_markers = [];
+    nearby_radius = 500;
+
+
+    function removeMarkers(previous_markers){
+        if(previous_markers.length>0){
+            for(var i=0; i<previous_markers.length; i++){
+                previous_markers[i].setMap(null);
+        }}
+    }
+
+    function update_marker_lists() {
+        for (marker of markers) {
+            var marker_dist_from_location = google.maps.geometry.spherical.computeDistanceBetween(location, marker.position);
+            if (marker_dist_from_location <= nearby_radius) {
+                nearby_markers.push(marker);
+            }
         }
     }
-    //
-    // function addMarker(nearby_markers) {
-    //     var bus_marker_icon = {
-    //         url: bus_marker_image_url, //the image itself
-    //         scaledSize: new google.maps.Size(50, 50) // resizing image to 50% smaller
-    //     };
-    //
-    //     for(let i = 0; i < nearby_markers.length; i++){
-    //
-    //         nearMarker = new google.maps.Marker({
-    //             position: {
-    //                 lat: nearby_markers[i].position.lat(),
-    //                 lng: nearby_markers[i].position.lng(),
-    //             },
-    //             icon: bus_marker_icon,
-    //             map: map
-    //         });
-    //     }
-    // }
-    // addMarker(nearby_markers);
 
+    function addMarker(nearby_markers) {
+        var bus_marker_icon = {
+            url: bus_marker_image_url, //the image itself
+            scaledSize: new google.maps.Size(50, 50) // resizing image to 50% smaller
+        };
+
+        for(let i = 0; i < nearby_markers.length; i++){
+            nearMarker = new google.maps.Marker({
+                position: {
+                    lat: nearby_markers[i].position.lat(),
+                    lng: nearby_markers[i].position.lng(),
+                },
+                icon: bus_marker_icon,
+                map: map
+            });
+            previous_markers.push(nearMarker);
+        }
+    }
+    
+    removeMarkers(previous_markers);
+    previous_markers = [];
+    update_marker_lists();
+    addMarker(nearby_markers);
 }
 
 function create_radius_selector(){

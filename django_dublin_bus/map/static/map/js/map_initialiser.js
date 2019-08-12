@@ -69,6 +69,8 @@ var initialize = function () {
         onSuccess: ({coords: {latitude: lat, longitude: lng}}) => {
             marker.setPosition({lat, lng});
             map.panTo({lat, lng});
+            pos = {lat:lat, lng:lng};
+            getnearby(pos);
         },
         onError: err =>
             alert(`Error: ${getPositionErrorMessage(err.code) || err.message}`)
@@ -86,7 +88,7 @@ var initialize = function () {
     // create_radius_selector();
 
     // marker_bounds = new google.maps.LatLngBounds();
-    // loopBusStops();
+    loopBusStops();
     //
     //
     geocoder = new google.maps.Geocoder();
