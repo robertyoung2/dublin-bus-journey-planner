@@ -46,6 +46,26 @@ function Ajax_Model(data) {
                 }
                 console.log("Total Transit Time for journey "+journey_counter+": " + route_total_transit_time + " seconds");
                 console.log("**********");
+                let journey_mins = Math.ceil(route_total_transit_time / 60);
+                let journey_hours = 0;
+                let journey_time_string = "";
+                if(journey_mins >= 60){
+                    journey_hours = Math.floor(journey_mins / 60);
+                    journey_time_string += journey_hours + " h"
+                }
+                journey_mins = journey_mins - (journey_hours * 60);
+                if(journey_mins != 0){
+                    journey_time_string += " " + journey_mins;
+
+                    if(journey_mins > 1){
+                        journey_time_string += " mins";
+                    }
+                    else if(journey_mins === 1){
+                        journey_time_string += " min";
+                    }
+                }
+
+                document.getElementById("journey_time_"+journey_counter).innerHTML = journey_time_string;
                 journey_counter++;
             }
         },

@@ -3,6 +3,7 @@ html, body {
     margin: 0;
     padding: 0;
     background-color: #666666;
+    font-size: .75em;
 }
 
 #map_container{

@@ -52,9 +52,12 @@ var initialize = function () {
         icon: bus_marker_icon
     });
 
+    //Hardcoding autocomplete bounds from results from google map markers
     marker_bounds = new google.maps.LatLngBounds();
-    loopBusStops();
+    marker_bounds.extend(new google.maps.LatLng(53.07067778, -6.614865495999993));
+    marker_bounds.extend(new google.maps.LatLng(53.60619628, -6.053310958999987));
 
+    loopBusStops();
 
     var markerCluster = new MarkerClusterer(map, markers,
         {
@@ -62,6 +65,10 @@ var initialize = function () {
         }
     );
 
+    for(marker of markers){
+        marker.setMap(null);
+        marker=null;
+    }
 
     geocoder = new google.maps.Geocoder();
 

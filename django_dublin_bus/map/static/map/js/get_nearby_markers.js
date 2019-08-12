@@ -1,14 +1,14 @@
 function getnearby(pos){
     var location = new google.maps.LatLng(pos.lat, pos.lng);
     var nearby_markers = []
-    console.log("Nearby Radius: " + nearby_radius);
+    // console.log("Nearby Radius: " + nearby_radius);
     for(marker of markers){
         var marker_dist_from_location = google.maps.geometry.spherical.computeDistanceBetween(location, marker.position);
         if(marker_dist_from_location <= nearby_radius){
             nearby_markers.push(marker);
         }
     }
-    console.log("Nearby Markers: " + nearby_markers.length);
+    // console.log("Nearby Markers: " + nearby_markers.length);
 }
 
 function create_radius_selector(){
