@@ -68,16 +68,33 @@ var initialize = function () {
     trackLocation({
         onSuccess: ({coords: {latitude: lat, longitude: lng}}) => {
             marker.setPosition({lat, lng});
-            map.panTo({lat, lng});
-            pos = {lat:lat, lng:lng};
-            getnearby(pos);
+            if(geolocationFlag === true){
+                map.panTo({lat, lng});
+                map.setZoom(17);
+            }
+            userPosition= {lat:lat, lng:lng};
+            console.log("user lat is" +userPosition.lat)
+            console.log("user lng" +userPosition.lng)
+            getnearby(userPosition);
         },
         onError: err =>
             alert(`Error: ${getPositionErrorMessage(err.code) || err.message}`)
     });
 
-      map.addListener('center_changed', function() {
-          getnearby();
+            var centerControlDiv = document.createElement('div');
+        var centerControl = new CenterControl(centerControlDiv, map);
+
+        centerControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
+
+    // Listener to update markers as viewpoint centre changes
+    map.addListener('center_changed', function() {
+        getnearby();
+    });
+
+    // Listener to deactivate view tracking of user location on drag of map
+    map.addListener('drag', function() {
+        geolocationFlag = false;
   });
 
 
@@ -96,3 +113,35 @@ var initialize = function () {
     geocoder = new google.maps.Geocoder();
 };
 
+      function CenterControl(controlDiv, map) {
+
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginTop = '22px';
+        controlUI.style.marginRight = '8px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'User Geolocation';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'Geo';
+        controlUI.appendChild(controlText);
+
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlUI.addEventListener('click', function() {
+            geolocationFlag = true;
+            map.panTo({lat: userPosition.lat, lng: userPosition.lng});
+        });
+      }

@@ -11,7 +11,7 @@ function getnearby() {
     var nearby_markers = [];
     var nearby_check = [];
     var previous_check = [];
-    nearby_radius = 500;
+    nearby_radius = 1500;
 
     // List of current nearby markers as marker objects
     function update_marker_lists() {
