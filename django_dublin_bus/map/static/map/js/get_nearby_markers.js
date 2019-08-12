@@ -38,7 +38,7 @@ function getnearby() {
 
     // If the marker is not on the map, adds it to the map
     function addMarkerMap(nearby_markers, previous_check) {
-        console.log("starting addMarkerMap ")
+        // console.log("starting addMarkerMap ")
         const previous_markers_set = new Set(previous_check);
         for (near_marker of nearby_markers) {
             if (previous_markers_set.has(near_marker.stop_info.stop_id) === false) {

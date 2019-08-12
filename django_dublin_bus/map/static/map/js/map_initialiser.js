@@ -67,18 +67,22 @@ var initialize = function () {
     // Call the track location function
     trackLocation({
         onSuccess: ({coords: {latitude: lat, longitude: lng}}) => {
-            marker.setPosition({lat, lng});
+            // marker.setPosition({lat, lng});
             map.panTo({lat, lng});
             pos = {lat:lat, lng:lng};
-            getnearby(pos);
+            getnearby();
         },
         onError: err =>
             alert(`Error: ${getPositionErrorMessage(err.code) || err.message}`)
     });
 
-      map.addListener('center_changed', function() {
-          getnearby();
-  });
+    map.addListener('center_changed', function() {
+        getnearby();
+    });
+
+    map.addListener('dragend', function() {
+        generate_nearby_stop_info();
+    });
 
 
     var styles = [
