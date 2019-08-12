@@ -105,12 +105,14 @@
                 url: bus_marker_image_url, //the image itself
                 scaledSize: new google.maps.Size(50, 50) // resizing image to 50% smaller
             };
+            let stop_info;
             {%  for bus_stop in bus_stops %}
-
+                stop_info = {"stop_id":'{{bus_stop.stop_id}}', "stop_name":'{{ bus_stop.stop_name }}'};
                 var latLng = {lat:{{ bus_stop.stop_lat}}, lng:{{bus_stop.stop_lng }}};
                 var marker = new google.maps.Marker({
                     position: latLng,
-                    icon: bus_marker_icon
+                    icon: bus_marker_icon,
+                    stop_info: stop_info
                 });
 
                 // var infoWindow = new google.maps.InfoWindow();
@@ -123,6 +125,7 @@
                 // });
                 markers.push(marker);
             {%  endfor %}
+
         }
     </script>
 
