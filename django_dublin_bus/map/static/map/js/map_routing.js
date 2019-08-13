@@ -63,6 +63,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
 
             var model_journeys = [];
             rendered_route_list = [];
+            let rendered_route_index_list = [];
 
             for (i = 0; i < response.routes.length; i++) {
                 console.log("Journey Number: " + i);
@@ -75,7 +76,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
 
                 for (let step of response.routes[i].legs[0].steps) {
                     if(step.travel_mode === "WALKING"){
-                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:white">directions_walk</i>';
+                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:black">directions_walk</i>';
                     }
                     else if(step.travel_mode === "TRANSIT"){
                         if(step.transit.line.vehicle.type !== "BUS"){
@@ -110,34 +111,37 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                         console.log("Bus_Route: " + current_route);
                         console.log("Departure_Datetime: " + new Date(step.transit.departure_time.value));
                         console.log();
-                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:white">directions_bus</i>';
-                        // let newCell2 = new_route_row.insertCell(-1);
 
-                        journey_icons_string += '<span class="">'+current_route+'</span>';
+                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:black">directions_bus</i>';
+
+                        journey_icons_string += `<span class="">${current_route}</span>`;
                     }
                     if (steps_counter < steps_len - 1){
-                        // let nextStepCell = new_route_row.insertCell(-1);
-                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:white">navigate_next</i>';
+                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:black">navigate_next</i>';
                     }
                     steps_counter += 1;
                 }
                 if(include === true){
-                    route_options_table.innerHTML += `<div id="`+i+`" onclick="render_route_at_index(`+i+`)" class="grid-x grid-padding"></div>`;
+                    route_options_table.innerHTML +=
+                        `<div id="${i}" onclick="render_route_at_index(${i})" class="grid-x grid-padding"></div>`;
+
                     let new_route_row = document.getElementById(i);
                     console.log(new_route_row.id);
 
-                    new_route_row.innerHTML = '<p id="journey_time_'+i+'" class="cell small-1 medium-1"></p>';
-                    new_route_row.innerHTML += '<div class="cell small-11 medium-11">'+journey_icons_string+'</div>';
+                    new_route_row.innerHTML = `
+                        <div id="journey_time_${i}" class="cell small-1 medium-1"></div>
+                        <div class="cell small-8 medium-8">${journey_icons_string}</div>`;
 
                     model_journeys.push(journey);
                     rendered_route_list.push(response.routes[i]);
+                    rendered_route_index_list.push(i);
                     console.log("****************");
                 }
             }
             console.log("Data for Backend:" + model_journeys);
             console.log("****************");
             console.log("Accessable GMaps Data: " + rendered_route_list);
-            Ajax_Model(JSON.stringify(model_journeys));
+            Ajax_Model(JSON.stringify(model_journeys), rendered_route_index_list);
             return true;
         }
         else {

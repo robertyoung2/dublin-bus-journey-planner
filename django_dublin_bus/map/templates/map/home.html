@@ -132,12 +132,12 @@
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {
-                    console.log(this.stop_info.actual_stop_id);
+                    populate_info('stop_info_view')
                     search_stop_number(this.stop_info.actual_stop_id);
                 });
 
                 markers.push(marker);
-                stop_data_list_string += `<option value="${'{{bus_stop.stop_name}}'} (${'{{bus_stop.actual_stop_id}}'})"></option>`;
+                stop_data_list_string += `<option value="${'{{bus_stop.actual_stop_id}}'}">${'{{bus_stop.stop_name}}'} (${'{{bus_stop.actual_stop_id}}'})</option>`;
             {% endfor %}
         }
     </script>

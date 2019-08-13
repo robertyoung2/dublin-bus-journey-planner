@@ -3,6 +3,8 @@ function set_night_mode(){
     // Check to see if the date and time is between sunrise and sunset
     // If not, add night mode styles to map
     var timetoday = new Date().getTime();
+    console.log(timetoday);
+    console.log();
     if(timetoday >= parseInt(sunset+'000') || timetoday <= (parseInt(sunrise+'000'))){
         let styles = [
                 {

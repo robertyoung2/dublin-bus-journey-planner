@@ -1,4 +1,4 @@
-function Ajax_Model(data) {
+function Ajax_Model(data, rendered_route_index_list) {
     setup_ajax();
     console.log("Model Data Ajax:" + data);
     $.ajax({
@@ -31,8 +31,6 @@ function Ajax_Model(data) {
                     }
                     console.log(route + ": " + prediction[route]);
 
-
-
                     for (segment of prediction[route]){
                         route_total_transit_time += segment;
                     }
@@ -64,8 +62,7 @@ function Ajax_Model(data) {
                         journey_time_string += " min";
                     }
                 }
-
-                document.getElementById("journey_time_"+journey_counter).innerHTML = journey_time_string;
+                document.getElementById("journey_time_"+rendered_route_index_list[journey_counter]).innerHTML = journey_time_string;
                 journey_counter++;
             }
         },
