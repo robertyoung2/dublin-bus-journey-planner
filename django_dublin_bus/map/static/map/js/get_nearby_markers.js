@@ -6,12 +6,14 @@ previous_markers = [];
 
 function getnearby() {
 
+    var currentZoom = map.getZoom();
     var location = map.getCenter();
-    // var location = new google.maps.LatLng(pos.lat, pos.lng);
     var nearby_markers = [];
     var nearby_check = [];
     var previous_check = [];
-    nearby_radius = 1500;
+    // nearby_radius = haversine(location.lat(), location.lat(), boundsView.na.j, boundsView.ga.j);
+    nearby_radius = 2000;
+
 
     // List of current nearby markers as marker objects
     function update_marker_lists() {
@@ -59,9 +61,20 @@ function getnearby() {
         }
     }
 
-    update_marker_lists();
-    uniqueTags();
-    removeMarkers(nearby_check, previous_markers);
-    addMarkerMap(nearby_markers, previous_check);
-    previous_markers = Object.assign([], nearby_markers);
+    // Checks to make sure at desired zoom level before add & removing markers
+    if(currentZoom >= 16) {
+        update_marker_lists();
+        uniqueTags();
+        removeMarkers(nearby_check, previous_markers);
+        addMarkerMap(nearby_markers, previous_check);
+        previous_markers = Object.assign([], nearby_markers);
+    }
+
+    // If the zoom level is too far out, make sure no markers are displayed
+    else if(currentZoom < 16 && previous_markers.length > 0){
+        for(pre_marker of previous_markers){
+            pre_marker.setMap(null);
+            previous_markers = [];
+        }
+    }
 }

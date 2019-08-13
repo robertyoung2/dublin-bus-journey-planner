@@ -79,6 +79,11 @@ var initialize = function () {
         geolocationFlag = false;
     });
 
+    // Checks zoom level and if markers should be displayed
+    map.addListener('zoom_changed', function () {
+        getnearby();
+    });
+
     var styles = [
         {"featureType": "transit.station.bus","stylers": [{"visibility": "off"}]}
     ];
@@ -91,6 +96,7 @@ var initialize = function () {
     geocoder = new google.maps.Geocoder();
 };
 
+// Initialise controls for the maps
 function GeoControl(controlDiv, map) {
 
     // Set CSS for the control border.
