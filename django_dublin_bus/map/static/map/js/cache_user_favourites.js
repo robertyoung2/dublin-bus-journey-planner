@@ -11,6 +11,7 @@ function capture_favourites(){
     document.getElementById('set_favourites').addEventListener('click', function () {
         window.localStorage.setItem(sethome.value.toLowerCase(),destination.value);
         alert("Favourite Stop Saved!");
+
         clearSearch('set_home');
         clearSearch('set_destination');
     });

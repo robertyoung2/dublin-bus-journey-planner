@@ -1,6 +1,4 @@
 function AjaxGetRoutes(stop_id, actual_stop_id, element_id) {
-    console.log(stop_id);
-    console.log(typeof stop_id);
     setup_ajax();
     $.ajax({
         type: "POST",

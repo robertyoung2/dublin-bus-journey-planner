@@ -12,7 +12,7 @@ function generate_stop_info_view(){
     stop_info_section.style.display = "initial";
 
     if(stop_info_section.innerHTML === ""){
-        console.log("About to generate the shit!");
+
         stop_info_section.innerHTML = `
             <ul class="tabs " data-tabs id="example-tabs">
               <li class="tabs-title is-active"><a href="#search_stop_view" aria-selected="true">Search Stop</a></li>
@@ -21,7 +21,7 @@ function generate_stop_info_view(){
             
             <div class="tabs-content" data-tabs-content="example-tabs">
               <div class="tabs-panel is-active" id="search_stop_view">
-                <input list="stationsList" placeholder="Search Stations" id="stationSelector" onchange="search_stop_number(this.value)">
+                <input list="stationsList" placeholder="Search Stations" id="stationSelector" oninput="search_stop_number(this.value)" onblur="clearSearch('stationSelector')">
                 <datalist id="stationsList">${stop_data_list_string}</datalist>
                 <div id="search_stop_view_content"></div>
               </div>
@@ -34,14 +34,13 @@ function generate_stop_info_view(){
 }
 
 function search_stop_number(stop){
-    console.log("You have clicked: " + stop);
     let search_stop_view = document.getElementById("search_stop_view_content");
+
     search_stop_view.innerHTML = "";
 
     for(marker of markers){
         if(marker.stop_info.actual_stop_id === stop){
-            console.log(marker.stop_info.actual_stop_id);
-            console.log(marker.stop_info.stop_id);
+
             search_stop_view.innerHTML += `
                 <ul id="searched_stop_list" class="accordion" data-accordion>
                     <li id="stop_${marker.stop_info.actual_stop_id}" class="accordion-item is-active" data-accordion-item>

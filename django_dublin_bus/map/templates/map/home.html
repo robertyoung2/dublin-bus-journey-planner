@@ -71,7 +71,6 @@
 
         //This will contain the lat lng of the users current position to be passed if they don't enter an origin
         // ( This duplicating variables already created so should be refactored and removed)
-        var geo_for_emptystring = [];
 
         var back_button_image_url = "{% static 'map/images/back_button.png' %}";
         var user_marker_image_url = "{% static 'map/images/user_location_marker.png' %}"; // Not doing anything yet but to be used for customer user location marker
@@ -133,12 +132,12 @@
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {
-                    console.log(this.stop_info.actual_stop_id);
+                    populate_info('stop_info_view')
                     search_stop_number(this.stop_info.actual_stop_id);
                 });
 
                 markers.push(marker);
-                stop_data_list_string += `<option value="${'{{bus_stop.stop_name}}'} (${'{{bus_stop.actual_stop_id}}'})"></option>`;
+                stop_data_list_string += `<option value="${'{{bus_stop.actual_stop_id}}'}">${'{{bus_stop.stop_name}}'} (${'{{bus_stop.actual_stop_id}}'})</option>`;
             {% endfor %}
         }
     </script>
