@@ -11,6 +11,7 @@ import time
 
 
 try:
+    path_save = '/home/student/django_code/dublin-bus/django_dublin_bus/map/ml_models/csv/'
     response = requests.get('https://api.darksky.net/forecast/95ab53fceccb16cedea7ed90b54c167d/53.3498,-6.2603?'
                             'extend=hourly&exclude=minutely,alerts,flags&units=auto')
     weather_data = response.json()
@@ -33,7 +34,7 @@ try:
 
     df['ts_unix_recorded_data'] = current_time
     df['ts_recorded_data'] = datetime.datetime.utcfromtimestamp(current_time).strftime('%Y-%m-%d %H:%M:%S')
-    df.to_csv('168_hours_weather.csv', header=True, index=False)
+    df.to_csv(path_save + '168_hours_weather.csv', header=True, index=False)
 
     ts_sunrise = (weather_data['daily']['data'][0]['sunriseTime'])
     ts_sunset = (weather_data['daily']['data'][0]['sunsetTime'])
@@ -42,7 +43,7 @@ try:
     df_sunset_sunrise.iloc[0]['date'] = datetime.datetime.utcfromtimestamp(ts_sunrise).strftime('%Y-%m-%d')
     df_sunset_sunrise.iloc[0]['ts_recorded_data'] = datetime.datetime.utcfromtimestamp(current_time).\
         strftime('%Y-%m-%d %H:%M:%S')
-    df_sunset_sunrise.to_csv('sunrise_sunset.csv', header=True, index=False)
+    df_sunset_sunrise.to_csv(path_save + 'sunrise_sunset.csv', header=True, index=False)
 
 except:
     f = open("logTracebackError.log", "a+")
