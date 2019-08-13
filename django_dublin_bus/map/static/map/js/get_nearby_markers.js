@@ -19,8 +19,6 @@ function getnearby() {
         nearby_radius = haversine(location.lat(), location.lng(), northeastBound.lat(), northeastBound.lng());
     }
 
-    console.log(nearby_radius);
-
     // List of current nearby markers as marker objects
     function update_marker_lists() {
         for (marker of markers) {
