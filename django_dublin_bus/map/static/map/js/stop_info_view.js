@@ -1,5 +1,7 @@
 console.log("Loaded stop_info_view script");
 function generate_stop_info_view(){
+    console.log("Called Generate_stop_info_view");
+
     directions_button.classList.remove("active_view");
     favourites_button.classList.remove("active_view");
     stop_info_button.classList.add("active_view");
@@ -8,8 +10,9 @@ function generate_stop_info_view(){
     journey_results_section.style.display = "none";
     directions_section.style.display = "none";
     stop_info_section.style.display = "initial";
+
     if(stop_info_section.innerHTML === ""){
-        console.log("Poop!");
+        console.log("About to generate the shit!");
         stop_info_section.innerHTML = `
             <ul class="tabs " data-tabs id="example-tabs">
               <li class="tabs-title is-active"><a href="#search_stop_view" aria-selected="true">Search Stop</a></li>
@@ -19,11 +22,11 @@ function generate_stop_info_view(){
             <div class="tabs-content" data-tabs-content="example-tabs">
               <div class="tabs-panel is-active" id="search_stop_view">
                 <input list="stationsList" placeholder="Search Stations" id="stationSelector" onchange="search_stop_number(this.value)">
-                <datalist id="stationsList">`+stop_data_list_string+`</datalist>
+                <datalist id="stationsList">${stop_data_list_string}</datalist>
                 <div id="search_stop_view_content"></div>
               </div>
               <div class="tabs-panel" id="nearby_stops_view">
-                
+                    
               </div>
             </div>`;
         $(document).foundation();

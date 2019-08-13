@@ -48,7 +48,7 @@
 
         <div id="bottom_navbar" class="cell">
             <div class="mobile-app-icon-bar">
-            {% load staticfiles %}
+                {% load staticfiles %}
                 <a id='directions_view_button' class="footer-link" onclick="populate_info('directions_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}"></a>
                 <a id="favourites_view_button" class="footer-link" onclick="populate_info('favourites_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/favourites.png" %}"></a>
                 <a id='stop_info_view_button' class="footer-link" onclick="populate_info('stop_info_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/journey.png" %}"></a>
@@ -131,9 +131,9 @@
                     console.log(this.stop_info.actual_stop_id);
                     search_stop_number(this.stop_info.actual_stop_id);
                 });
-                
+
                 markers.push(marker);
-                stop_data_list_string += `<option value=`+'{{bus_stop.actual_stop_id}}'+`></option>`
+                stop_data_list_string += `<option value="${'{{bus_stop.stop_name}}'} (${'{{bus_stop.actual_stop_id}}'})"></option>`;
             {% endfor %}
         }
     </script>

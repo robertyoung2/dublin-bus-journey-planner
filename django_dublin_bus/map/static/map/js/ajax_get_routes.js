@@ -17,6 +17,7 @@ function AjaxGetRoutes(stop_id, actual_stop_id, element_id) {
             }
 
             element.innerHTML += `<span>Routes Served:</span>`;
+
             for(route of stop_routes){
                 element.innerHTML += `
                     <span class="badge primary" style="font-size: 1rem">`+route+`</span>
@@ -27,7 +28,7 @@ function AjaxGetRoutes(stop_id, actual_stop_id, element_id) {
                 for(route of route_data[1]){
                     element.innerHTML += `
                         <div style="padding: 1vh;">
-                            <span class="badge secondary" style="font-size: 2rem;">${route.duetime}</span>
+                            <span class="badge secondary" style="font-size: 1.25rem;">${route.duetime}</span>
                             <span>Route ${route.route} towards ${route.destination}</span>
                         </div>`;
                 }

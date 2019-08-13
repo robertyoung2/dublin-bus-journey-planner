@@ -22,3 +22,15 @@
     height: 100%;
     overflow-y: scroll;
 }
+
+
+#search_stop_view{
+    padding: 0;
+}
+
+#stationSelector{
+    width: 95vw;
+    margin: 1vh;
+    padding: 1vh;
+    border-radius: 10px;
+}
