@@ -21,13 +21,15 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ***REMOVED***
+SECRET_KEY = config('DJANGO_SECRET_KEY')
 GOOGLE_KEY = config('GOOGLE_KEY')
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
-ALLOWED_HOSTS = ['137.43.49.51', '.dublinbus.city', '127.0.0.1']
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = config('DEBUG')
+
+ALLOWED_HOSTS = ['137.43.49.51', '.dublinbus.city']
 
 
 # Application definition
@@ -78,30 +80,14 @@ WSGI_APPLICATION = 'django_dublin_bus.wsgi.application'
 
 
 # This is the setting that should be pushed to the server (leave uncommented)
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': '***REMOVED***',
-#         'USER': ***REMOVED***,
-#         'PASSWORD': ***REMOVED***,
-#         'HOST': '137.43.49.51',
-#         'PORT': '3306',
-#     }
-# }
-
-# This database setting should only be used for local test and development
-# Ensure this is not used on the server
-# To set up an ssh tunnel to work with database locally do the following:
-# ssh -L 3333:127.0.0.1:3306 Witheld
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': '***REMOVED***',
         'USER': ***REMOVED***,
-        'PASSWORD': ***REMOVED***,
-        'HOST': '127.0.0.1',
-        'PORT': '3333',
+        'PASSWORD': config('DB_PASSWORD'),
+        'HOST': '137.43.49.51',
+        'PORT': '3306',
     }
 }
 
