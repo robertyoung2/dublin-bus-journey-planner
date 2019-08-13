@@ -6,12 +6,18 @@ previous_markers = [];
 
 function getnearby() {
 
+    var currentZoom = map.getZoom();
     var location = map.getCenter();
-    // var location = new google.maps.LatLng(pos.lat, pos.lng);
     var nearby_markers = [];
     var nearby_check = [];
     var previous_check = [];
-    nearby_radius = 500;
+
+    if (bounds === undefined || bounds === null){
+        nearby_radius = 2500;
+    } else {
+        var northeastBound = bounds.getNorthEast();
+        nearby_radius = haversine(location.lat(), location.lng(), northeastBound.lat(), northeastBound.lng());
+    }
 
     // List of current nearby markers as marker objects
     function update_marker_lists() {
@@ -38,7 +44,6 @@ function getnearby() {
 
     // If the marker is not on the map, adds it to the map
     function addMarkerMap(nearby_markers, previous_check) {
-        // console.log("starting addMarkerMap ")
         const previous_markers_set = new Set(previous_check);
         for (near_marker of nearby_markers) {
             if (previous_markers_set.has(near_marker.stop_info.stop_id) === false) {
@@ -59,9 +64,20 @@ function getnearby() {
         }
     }
 
-    update_marker_lists();
-    uniqueTags();
-    removeMarkers(nearby_check, previous_markers);
-    addMarkerMap(nearby_markers, previous_check);
-    previous_markers = Object.assign([], nearby_markers);
+    // Checks to make sure at desired zoom level before add & removing markers
+    if(currentZoom >= 16) {
+        update_marker_lists();
+        uniqueTags();
+        removeMarkers(nearby_check, previous_markers);
+        addMarkerMap(nearby_markers, previous_check);
+        previous_markers = Object.assign([], nearby_markers);
+    }
+
+    // If the zoom level is too far out, make sure no markers are displayed
+    else if(currentZoom < 16 && previous_markers.length > 0){
+        for(pre_marker of previous_markers){
+            pre_marker.setMap(null);
+            previous_markers = [];
+        }
+    }
 }
