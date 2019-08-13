@@ -67,7 +67,7 @@ var initialize = function () {
     // Call the track location function
     trackLocation({
         onSuccess: ({coords: {latitude: lat, longitude: lng}}) => {
-            // marker.setPosition({lat, lng});
+            marker.setPosition({lat, lng});
             map.panTo({lat, lng});
             pos = {lat:lat, lng:lng};
             getnearby();
@@ -81,7 +81,9 @@ var initialize = function () {
     });
 
     map.addListener('dragend', function() {
-        generate_nearby_stop_info();
+        if(document.getElementById("stop_info_view_section").style.display == "initial"){
+            generate_nearby_stop_info();
+        }
     });
 
 

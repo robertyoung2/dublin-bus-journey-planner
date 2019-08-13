@@ -20,14 +20,29 @@ def home(request):
 
 def get_routes(request):
     if request.method == "POST":
-        stop_id = request.POST["stop_id"]
-
+        data_dict = json.loads(request.POST["json_data"])
+        print(data_dict['stop_id'])
+        print(data_dict['actual_stop_id'])
         # In our django query see is it more efficient to return only bus_numbers field
-        routes = list(BusStops.objects.filter(stop_id=stop_id).values())
+        routes = list(BusStops.objects.filter(stop_id=data_dict['stop_id']).values())
         print(routes)
+
+        rts_info = requests.get('http://data.smartdublin.ie/cgi-bin/rtpi//realtimebusinformation?stopid='+data_dict['actual_stop_id']+'&format=json')
+        rts_info_results = rts_info.json()['results']
+        rts_info_list = []
+
+        for result in rts_info_results:
+            bus_due_info = {"route": result['route'], "duetime": result['duetime'],
+                            "destination": result['destination']}
+            rts_info_list.append(bus_due_info)
+
+        # rts_info_list = json.dumps(rts_info_list)
         # routes_json = serializers.serialize("json", routes, fields=("bus_numbers","stop_headsign"))
-        routes_json = json.dumps(routes)
-        return HttpResponse(routes_json, content_type="application/json")
+        # routes_json = json.dumps(routes)
+
+        routes_served_RTS = json.dumps([routes, rts_info_list])
+
+        return HttpResponse(routes_served_RTS, content_type="application/json")
 
 def run_model(request):
     if request.method == "POST":

@@ -1,0 +1,24 @@
+#stop_info_view_section{
+    width: 100vw;
+}
+
+.tabs-title {
+	float:none !important;
+	display:inline-block;
+    width: 49.2vw;
+    padding: 0;
+}
+
+.tabs-title > a{
+    padding: 0;
+}
+
+.tabs{
+    text-align:center;
+    align-content: center;
+}
+
+.tabs-content{
+    height: 100%;
+    overflow-y: scroll;
+}

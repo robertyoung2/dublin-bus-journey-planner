@@ -1,8 +1,8 @@
 html, body {
     height: 100vh;
+    width: 100vw;
     margin: 0;
     padding: 0;
-    background-color: #666666;
     font-size: .75em;
 }
 
@@ -12,14 +12,13 @@ html, body {
     margin: 0;
     border: 0;
     padding: 0;
-    background-color: #ddffdd;
     font-family: 'Roboto', sans-serif;
 }
 
 #info_section{
     position: relative;
     height: 40vh;
-    background-color: #ddffdd;
+    width: 100vw;
     overflow-y: scroll;
 }
 
@@ -31,5 +30,4 @@ html, body {
     margin: 0;
     border: 0;
     padding: 0;
-    background-color: #ddffdd;
 }
