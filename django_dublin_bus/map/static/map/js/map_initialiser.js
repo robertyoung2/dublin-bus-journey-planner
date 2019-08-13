@@ -12,40 +12,11 @@ $.ajax({
     }
 });
 
-// The following geolocation live tracking code was taken and adapted from the tutorial at the following address:
-// https://medium.com/risan/track-users-location-and-display-it-on-google-maps-41d1f850786e
-
-// Function to track follow user location
-const trackLocation = ({
-    onSuccess,
-    onError = () => {}
-}) => {
-    if ('geolocation' in navigator === false) {
-        return onError(new Error('Geolocation is not supported by your browser.'));
-    }
-
-    // Else use watch position
-    return navigator.geolocation.watchPosition(onSuccess, onError, {
-        enableHighAccuracy: true,
-    });
-};
-
-const getPositionErrorMessage = code => {
-    switch (code) {
-        case 1:
-            return 'Permission denied.';
-        case 2:
-            return 'Position unavailable.';
-        case 3:
-            return 'Timeout reached.';
-    }
-};
-
 // Function to initialise map
 var initialize = function () {
     console.log("Called initialise map function!");
 
-    // Centre on Dublin at the statt
+    // Centre on Dublin at the start
     const initialPosition = {
         lat: 53.3498,
         lng: -6.2603
@@ -55,7 +26,7 @@ var initialize = function () {
         center: {
             lat: initialPosition.lat,
             lng: initialPosition.lng
-        }, //investigate where lat nd lng variables are coming from
+        },
         zoom: 12,
         mapTypeControl: false,
         fullscreenControl: false
@@ -87,18 +58,16 @@ var initialize = function () {
                 map.setZoom(17);
             }
             userPosition = {lat: lat, lng: lng};
-            console.log("user lat is" + userPosition.lat)
-            console.log("user lng" + userPosition.lng)
             getnearby(userPosition);
         },
         onError: err =>
             alert(`Error: ${getPositionErrorMessage(err.code) || err.message}`)
     });
 
-    var centerControlDiv = document.createElement('div');
-    var centerControl = new CenterControl(centerControlDiv, map);
-    centerControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(centerControlDiv);
+    var geoControlDiv = document.createElement('div');
+    var geoControl = new GeoControl(geoControlDiv, map);
+    geoControlDiv.index = 1;
+    map.controls[google.maps.ControlPosition.TOP_RIGHT].push(geoControlDiv);
 
     // Listener to update markers as viewpoint centre changes
     map.addListener('center_changed', function () {
@@ -120,10 +89,9 @@ var initialize = function () {
     set_night_mode();
     loopBusStops();
     geocoder = new google.maps.Geocoder();
-
 };
 
-function CenterControl(controlDiv, map) {
+function GeoControl(controlDiv, map) {
 
     // Set CSS for the control border.
     var controlUI = document.createElement('div');
@@ -150,7 +118,6 @@ function CenterControl(controlDiv, map) {
     controlText.style.height = '35px';
     controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149049.svg)";
 
-
     controlUI.appendChild(controlText);
 
     // Setup the click event listeners:  set the map to user location.
@@ -164,6 +131,7 @@ function CenterControl(controlDiv, map) {
         controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149049.svg)";
     });
 
+    // Setup the drag event listeners: change CSS of geolocation button
     map.addListener('drag', function(){
         controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149430.svg)";
     });
