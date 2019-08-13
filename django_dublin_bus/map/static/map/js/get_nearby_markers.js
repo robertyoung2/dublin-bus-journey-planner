@@ -11,9 +11,15 @@ function getnearby() {
     var nearby_markers = [];
     var nearby_check = [];
     var previous_check = [];
-    // nearby_radius = haversine(location.lat(), location.lat(), boundsView.na.j, boundsView.ga.j);
-    nearby_radius = 2000;
 
+    if (bounds === undefined || bounds === null){
+        nearby_radius = 2500;
+    } else {
+        var northeastBound = bounds.getNorthEast();
+        nearby_radius = haversine(location.lat(), location.lng(), northeastBound.lat(), northeastBound.lng());
+    }
+
+    console.log(nearby_radius);
 
     // List of current nearby markers as marker objects
     function update_marker_lists() {
@@ -40,7 +46,6 @@ function getnearby() {
 
     // If the marker is not on the map, adds it to the map
     function addMarkerMap(nearby_markers, previous_check) {
-        console.log("starting addMarkerMap ")
         const previous_markers_set = new Set(previous_check);
         for (near_marker of nearby_markers) {
             if (previous_markers_set.has(near_marker.stop_info.stop_id) === false) {

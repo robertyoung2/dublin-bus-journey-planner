@@ -71,6 +71,7 @@ var initialize = function () {
 
     // Listener to update markers as viewpoint centre changes
     map.addListener('center_changed', function () {
+        bounds = map.getBounds();
         getnearby();
     });
 
@@ -81,6 +82,7 @@ var initialize = function () {
 
     // Checks zoom level and if markers should be displayed
     map.addListener('zoom_changed', function () {
+        bounds = map.getBounds();
         getnearby();
     });
 
