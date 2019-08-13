@@ -148,11 +148,12 @@ function CenterControl(controlDiv, map) {
     controlText.style.paddingRight = '5px';
     controlText.style.width = '35px';
     controlText.style.height = '35px';
-    // controlText.innerHTML = 'Geo';
     controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149049.svg)";
+
+
     controlUI.appendChild(controlText);
 
-    // Setup the click event listeners: simply set the map to Chicago.
+    // Setup the click event listeners:  set the map to user location.
     controlUI.addEventListener('click', function () {
         geolocationFlag = true;
         map.panTo({
@@ -160,5 +161,10 @@ function CenterControl(controlDiv, map) {
             lng: userPosition.lng
         });
         map.setZoom(17);
+        controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149049.svg)";
+    });
+
+    map.addListener('drag', function(){
+        controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149430.svg)";
     });
 }
