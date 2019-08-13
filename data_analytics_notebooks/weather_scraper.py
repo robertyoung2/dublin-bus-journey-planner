@@ -37,10 +37,11 @@ try:
 
     ts_sunrise = (weather_data['daily']['data'][0]['sunriseTime'])
     ts_sunset = (weather_data['daily']['data'][0]['sunsetTime'])
-    df_sunset_sunrise.iloc[0]['ts_sunrise'] = datetime.datetime.utcfromtimestamp(ts_sunrise).strftime(
-        '%Y-%m-%d %H:%M:%S')
-    df_sunset_sunrise.iloc[0]['ts_sunset'] = datetime.datetime.utcfromtimestamp(ts_sunset).strftime('%Y-%m-%d %H:%M:%S')
+    df_sunset_sunrise.iloc[0]['ts_sunrise'] = ts_sunrise
+    df_sunset_sunrise.iloc[0]['ts_sunset'] = ts_sunset
     df_sunset_sunrise.iloc[0]['date'] = datetime.datetime.utcfromtimestamp(ts_sunrise).strftime('%Y-%m-%d')
+    df_sunset_sunrise.iloc[0]['ts_recorded_data'] = datetime.datetime.utcfromtimestamp(current_time).\
+        strftime('%Y-%m-%d %H:%M:%S')
     df_sunset_sunrise.to_csv('sunrise_sunset.csv', header=True, index=False)
 
 except:
