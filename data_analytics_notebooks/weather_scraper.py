@@ -11,7 +11,8 @@ import time
 
 
 try:
-    path_save = '/home/student/django_code/dublin-bus/django_dublin_bus/map/ml_models/csv/'
+    # path_save = '/home/student/django_code/dublin-bus/django_dublin_bus/map/ml_models/csv/'
+    path_save =''
     response = requests.get('https://api.darksky.net/forecast/95ab53fceccb16cedea7ed90b54c167d/53.3498,-6.2603?'
                             'extend=hourly&exclude=minutely,alerts,flags&units=auto')
     weather_data = response.json()

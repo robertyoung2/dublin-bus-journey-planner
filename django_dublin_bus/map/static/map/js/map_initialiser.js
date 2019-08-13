@@ -1,16 +1,16 @@
 console.log("map_initialiser.js Loaded!");
 
-setup_ajax();
-$.ajax({
-    url: get_sun_url,
-    type: 'POST',
-    success: function (data) {
-        sunrise = data.sunrise;
-        sunset = data.sunset;
-        console.log("Sunrise: " + sunrise);
-        console.log("Sunset: " + sunset);
-    }
-});
+// setup_ajax();
+// $.ajax({
+//     url: get_sun_url,
+//     type: 'POST',
+//     success: function (data) {
+//         sunrise = data.sunrise;
+//         sunset = data.sunset;
+//         console.log("Sunrise: " + sunrise);
+//         console.log("Sunset: " + sunset);
+//     }
+// });
 
 // Function to initialise map
 var initialize = function () {

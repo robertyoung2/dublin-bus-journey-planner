@@ -29,6 +29,7 @@ function generate_favourites_view(){
                     </div>
                     <div class="small-7 medium-7"></div>
                 </div>
+                <div id="snackbar">Favourite saved</div>
             </form>`;
         capture_favourites();
     }

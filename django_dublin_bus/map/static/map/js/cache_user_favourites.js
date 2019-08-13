@@ -10,7 +10,15 @@ function capture_favourites(){
 
     document.getElementById('set_favourites').addEventListener('click', function () {
         window.localStorage.setItem(sethome.value.toLowerCase(),destination.value);
-        alert("Favourite Stop Saved!");
+        // alert("Favourite Stop Saved!");
+
+          var x = document.getElementById("snackbar");
+
+  // Add the "show" class to DIV
+  x.className = "show";
+
+  // After 3 seconds, remove the show class from DIV
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 
         clearSearch('set_home');
         clearSearch('set_destination');
