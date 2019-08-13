@@ -200,22 +200,14 @@ def round_to_hour(dt):
 
 @ensure_csrf_cookie
 def get_sun(request):
+
+    path_csv = os.path.join(BASE_DIR, 'map/ml_models/csv/')
+
     if request.method == "POST":
+        df = pd.read_csv(path_csv + 'sunrise_sunset.csv')
+        sunrise = int(df.iloc[0]['ts_sunrise'])
+        sunset = int(df.iloc[0]['ts_sunset'])
+        sunrise_sunset_times = {"sunrise": sunrise, "sunset": sunset}
+        sunrise_sunset_times = json.dumps(sunrise_sunset_times)
 
-        path_csv = os.path.join(BASE_DIR, 'map/ml_models/csv/')
-        with open(path_csv+'sunrise_sunset.csv', 'r') as csvfile:
-            reader = csv.reader(csvfile)
-
-            first_row = True
-            for row in reader:
-                if first_row:
-                    first_row = False
-                else:
-                    sunrise = row[2]
-                    sunset = row[3]
-                    break
-
-        sun = {"sunrise": sunrise, "sunset": sunset}
-        sun = json.dumps(sun)
-
-        return HttpResponse(sun, content_type='application/json')
+        return HttpResponse(sunrise_sunset_times, content_type='application/json')
