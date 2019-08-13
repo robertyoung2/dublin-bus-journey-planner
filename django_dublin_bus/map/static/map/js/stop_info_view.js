@@ -20,6 +20,7 @@ function generate_stop_info_view(){
               <div class="tabs-panel is-active" id="search_stop_view">
                 <input list="stationsList" placeholder="Search Stations" id="stationSelector" onchange="search_stop_number(this.value)">
                 <datalist id="stationsList">`+stop_data_list_string+`</datalist>
+                <div id="search_stop_view_content"></div>
               </div>
               <div class="tabs-panel" id="nearby_stops_view">
                 
@@ -31,7 +32,7 @@ function generate_stop_info_view(){
 
 function search_stop_number(stop){
     console.log("You have clicked: " + stop);
-    let search_stop_view = document.getElementById("search_stop_view");
+    let search_stop_view = document.getElementById("search_stop_view_content");
     search_stop_view.innerHTML = "";
 
     for(marker of markers){
