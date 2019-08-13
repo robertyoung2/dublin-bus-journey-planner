@@ -13,8 +13,8 @@ function geocodeAddress() {
     }
 
     if (origin_searchbox.value === "") {
-        origin_lat = geo_for_emptystring[1];
-        origin_lng = geo_for_emptystring[0];
+        origin_lat = userPosition.lat;
+        origin_lng = userPosition.lng;
         origin_found = true;
     }
 
