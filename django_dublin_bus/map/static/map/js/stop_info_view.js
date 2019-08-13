@@ -81,7 +81,7 @@ function generate_nearby_stop_info(button_clicked){
                     `<li class="accordion-item" data-accordion-item>
                         <a href="#" class="accordion-title">${marker.stop_info.stop_name} (${marker.stop_info.actual_stop_id})</a>
                         <div id="nearby_stop_content_${nearby_stop_counter}" class="accordion-content" data-tab-content >
-                            <p>Routes Served:</p>
+                        
                         </div>
                     </li>`;
                 AjaxGetRoutes(marker.stop_info.stop_id, marker.stop_info.actual_stop_id, "nearby_stop_content_"+nearby_stop_counter);

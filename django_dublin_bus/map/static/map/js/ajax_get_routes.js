@@ -16,21 +16,19 @@ function AjaxGetRoutes(stop_id, actual_stop_id, element_id) {
                 stop_routes.add(route.bus_numbers);
             }
 
+            element.innerHTML += `<span>Routes Served:</span>`;
             for(route of stop_routes){
                 element.innerHTML += `
-                    <span class="badge primary">`+route+`</span>
+                    <span class="badge primary" style="font-size: 1rem">`+route+`</span>
                 `;
             }
-            element.innerHTML += `
-                <p>Realtime info</p>
-            `;
 
             if(route_data[1].length > 0){
                 for(route of route_data[1]){
                     element.innerHTML += `
-                        <div>
-                            <span class="badge secondary">${route.duetime}</span>
-                            <span>${route.route} towards ${route.destination}</span>
+                        <div style="padding: 1vh;">
+                            <span class="badge secondary" style="font-size: 2rem;">${route.duetime}</span>
+                            <span>Route ${route.route} towards ${route.destination}</span>
                         </div>`;
                 }
             }
