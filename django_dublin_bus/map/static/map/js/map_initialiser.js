@@ -70,15 +70,21 @@ var initialize = function () {
             marker.setPosition({lat, lng});
             map.panTo({lat, lng});
             pos = {lat:lat, lng:lng};
-            getnearby(pos);
+            getnearby();
         },
         onError: err =>
             alert(`Error: ${getPositionErrorMessage(err.code) || err.message}`)
     });
 
-      map.addListener('center_changed', function() {
-          getnearby();
-  });
+    map.addListener('center_changed', function() {
+        getnearby();
+    });
+
+    map.addListener('dragend', function() {
+        if(document.getElementById("stop_info_view_section").style.display == "initial"){
+            generate_nearby_stop_info();
+        }
+    });
 
 
     var styles = [
