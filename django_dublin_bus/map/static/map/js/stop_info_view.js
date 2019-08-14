@@ -15,30 +15,45 @@ function generate_stop_info_view(){
 
         stop_info_section.innerHTML = `
 
+<div class="mdl-tabs mdl-js-tabs">
+    <div class="mdl-tabs__tab-bar">
+        <a href="#search_stop_view" class="mdl-tabs__tab">Search Stop</a>
+        <a href="#nearby_stops_view" class="mdl-tabs__tab" onclick="generate_nearby_stop_info(true)">Nearby Stops</a>
+    </div>  
 
 
-
-
-
-
-
-
-            <ul class="tabs " data-tabs id="example-tabs">
-              <li class="tabs-title is-active"><a href="#search_stop_view" aria-selected="true">Search Stop</a></li>
-              <li class="tabs-title"><a href="#nearby_stops_view" onclick="generate_nearby_stop_info(true)">Nearby Stops</a></li>
-            </ul>
-            
-            <div class="tabs-content" data-tabs-content="example-tabs">
-              <div class="tabs-panel is-active" id="search_stop_view">
-                <input list="stationsList" placeholder="Search Stations" id="stationSelector" oninput="search_stop_number(this.value)" onblur="clearSearch('stationSelector')">
+<div class="mdl-tabs__panel is-active" id="search_stop_view">
+                <input list="stationsList" placeholder="Search Stations" id="stationSelector" oninput="
+                search_stop_number(this.value)" onblur="clearSearch('stationSelector')">
                 <datalist id="stationsList">${stop_data_list_string}</datalist>
                 <div id="search_stop_view_content"></div>
-              </div>
-              <div class="tabs-panel" id="nearby_stops_view">
-                    
-              </div>
-            </div>`;
+</div>
+
+<div class="mdl-tabs__panel" id="nearby_stops_view">
+help
+</div>
+</div>
+
+
+<!--            <ul class="tabs " data-tabs id="example-tabs">-->
+<!--              <li class="tabs-title is-active"><a href="#search_stop_view" aria-selected="true">Search Stop</a></li>-->
+<!--              <li class="tabs-title"><a href="#nearby_stops_view" onclick="generate_nearby_stop_info(true)">Nearby Stops</a></li>-->
+<!--            </ul>-->
+<!---->
+<!--            <div class="tabs-content" data-tabs-content="example-tabs">-->
+<!--              <div class="tabs-panel is-active" id="search_stop_view">-->
+<!--                <input list="stationsList" placeholder="Search Stations" id="stationSelector" oninput="-->
+<!--                search_stop_number(this.value)" onblur="clearSearch('stationSelector')">-->
+<!--                <datalist id="stationsList">${stop_data_list_string}</datalist>-->
+<!--                <div id="search_stop_view_content"></div>-->
+<!--              </div>-->
+<!--              <div class="tabs-panel" id="nearby_stops_view">-->
+
+<!--              </div>-->
+            `;
         // $(document).foundation();
+        componentHandler.upgradeAllRegistered();
+
     }
 }
 
