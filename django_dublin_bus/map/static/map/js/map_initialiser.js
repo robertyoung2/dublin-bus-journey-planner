@@ -125,8 +125,6 @@ function GeoControl(controlDiv, map) {
     controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
     controlText.style.fontSize = '16px';
     controlText.style.lineHeight = '38px';
-    controlText.style.paddingLeft = '5px';
-    controlText.style.paddingRight = '5px';
     controlText.style.width = '35px';
     controlText.style.height = '35px';
     controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149049.svg)";
