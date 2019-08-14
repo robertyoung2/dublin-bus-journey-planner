@@ -26,20 +26,27 @@ function populate_date_data(){
     current_date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
 
     for (var day = 0; day < 7; day++) {
+
         date_value = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + (today.getDate() + day);
-        date_string = new Date(today.setDate(today.getDate() + day)).toDateString();
+        let next_day = new Date();
 
-        console.log(date_value);
-        console.log(date_string);
-        console.log();
+        date_string = new Date(next_day.setDate(next_day.getDate() + day)).toDateString();
 
-        let new_date = document.createElement('option');
-        new_date.value = date_value;
+        // console.log(day);
+        // console.log(today);
+        // console.log(date_value);
+        // console.log(date_string);
+        // console.log();
+
+        let new_date = document.createElement('li');
+        new_date.classList.add("mdl-menu__item");
+        new_date.setAttribute('data-val', date_value);
         var textnode = document.createTextNode(date_string);
         new_date.appendChild(textnode);
 
         document.getElementById("date").appendChild(new_date);
     }
+    componentHandler.upgradeAllRegistered();
 }
 
 function populate_time_data(){
