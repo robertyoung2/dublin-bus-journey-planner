@@ -1,6 +1,7 @@
 console.log("Loaded journey_date_selector.js");
 
 function set_date_options() {
+    console.log("Called Set Datetime options Function!");
     //
     $(function () {
         var today = new Date();
@@ -18,8 +19,9 @@ function set_date_options() {
 
         $("#option").change(function () {
             if ($(this).val() === 'departureTime' || $(this).val() === 'arrivalTime') {
-                $(".datetime_selector_container").show();
-
+                console.log("Show container");
+                document.getElementById("datetime_selector_container").style.display = "initial";
+                // $(".datetime_selector_container").show();
 
                 $(function () {
                     //Sets default time to now
@@ -38,7 +40,9 @@ function set_date_options() {
                 });
             }
             else {
-                $(".datetime_selector_container").hide();
+                console.log("Hide container");
+                document.getElementById("datetime_selector_container").style.display = "none";
+                // $(".datetime_selector_container").hide();
             }
         });
     });
