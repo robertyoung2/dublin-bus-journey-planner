@@ -18,6 +18,7 @@ function set_date_options() {
         console.log("Inside Show/Hide date function!");
 
         $(".datetime_option").click(function () {
+            selected_datetime_option = $(this).val();
             console.log($(this).val());
             if ($(this).val() === 'departureTime' || $(this).val() === 'arrivalTime') {
                 console.log("Show container");
