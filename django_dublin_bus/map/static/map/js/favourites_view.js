@@ -12,30 +12,31 @@ function generate_favourites_view(){
         favourites_section.innerHTML = `
             <form class="cell" action="Getinput" method="get">
          
-                <div class="grid-x align-center">
-
-                    <div class="cell small-8 medium-8">
+                <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" name="set_home" id="set_home" placeholder="Enter Key">
+                            <input class="mdl-textfield__input" type="text" name="set_home" id="set_home" placeholder="Enter key">
                             <label class="mdl-textfield__label" for="set_home"></label>
                         </div>
                     </div>
 
 
-                    <div class="cell small-2 medium-2">
+                    <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--1-col-phone mdl-cell--middle">
                         <a tabindex="-1" onclick="clearSearch('set_home')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/baseline-clear-24px.svg"></a>
                     </div>
                     
-                     <div class="cell small-8 medium-8">
+                </div>
+                    
+                     <div class="mdl-grid">
+                     <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" name="set destination" id="set_destination" placeholder="Enter Location">
+                            <input class="mdl-textfield__input" type="text" name="set destination" id="set_destination" placeholder="Enter location">
                             <label class="mdl-textfield__label" for="set_destination"></label>
                         </div>
                     </div>
                     
-                    <div class="cell small-2 medium-2">
+                    <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--1-col-phone mdl-cell--middle">
                         <a tabindex="-1" onclick="clearSearch('set_destination')"><img id="clear_search_icon" title="Clear destination search" src="/static/map/images/baseline-clear-24px.svg"></a>
-
                     </div>
                     
                     

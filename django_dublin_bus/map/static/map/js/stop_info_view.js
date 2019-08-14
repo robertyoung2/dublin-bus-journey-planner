@@ -14,6 +14,15 @@ function generate_stop_info_view(){
     if(stop_info_section.innerHTML === ""){
 
         stop_info_section.innerHTML = `
+
+
+
+
+
+
+
+
+
             <ul class="tabs " data-tabs id="example-tabs">
               <li class="tabs-title is-active"><a href="#search_stop_view" aria-selected="true">Search Stop</a></li>
               <li class="tabs-title"><a href="#nearby_stops_view" onclick="generate_nearby_stop_info(true)">Nearby Stops</a></li>

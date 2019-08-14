@@ -24,7 +24,7 @@ function generate_directions_views(){
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
             <div class="mdl-textfield mdl-js-textfield ">
-                <input class="mdl-textfield__input" type="text" name="input_route_origin" id="input_route_origin" placeholder="Enter Origin (Default Current Location)">
+                <input class="mdl-textfield__input" type="text" name="input_route_origin" id="input_route_origin" placeholder="Your current location">
                 <label class="mdl-textfield__label" for="input_route_origin"></label>
             </div>
         </div>
@@ -39,7 +39,7 @@ function generate_directions_views(){
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
             <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input" type="text" name="input_route_destination" id="input_route_destination" placeholder="Enter Destination">
+                <input class="mdl-textfield__input" type="text" name="input_route_destination" id="input_route_destination" placeholder="Enter destination">
                 <label class="mdl-textfield__label" for="input_route_destination"></label>
              </div>
          </div>
@@ -49,17 +49,17 @@ function generate_directions_views(){
         </div>
         
     </div>
+     
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-    
         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="now" >
         <input type="radio" id="now" class="mdl-radio__button datetime_option" name="options" value="now" checked >
-        <span class="mdl-radio__label">Now</span>
+        <span class="mdl-radio__label">Now &nbsp;&nbsp;&nbsp;</span>
         </label>
         
         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="departureTime" >
         <input type="radio" id="departureTime" class="mdl-radio__button datetime_option" name="options" value="departureTime" >
-        <span class="mdl-radio__label">Depart At</span>
+        <span class="mdl-radio__label">Depart At &nbsp;&nbsp;&nbsp;</span>
         </label>
         
         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="arrivalTime" >
@@ -68,25 +68,19 @@ function generate_directions_views(){
         </label>
      </div>
 
-<!--    <select id="option" onchange="set_date_options()">-->
-<!--        <option value="now">Now</option>-->
-<!--        <option value="departureTime">Departure Time</option>-->
-<!--        <option value="arrivalTime">Arrival Time</option>-->
-<!--    </select>-->
-
-
-                        <div id="datetime_selector_container" class="grid-x cell align-center" style="display: none">
-
-    <select id="date"></select>
-
-
-    <input type="time" id="journey_time" value="now" required>
+    <div id="datetime_selector_container" class="mdl-grid" style="display: none">
+        <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+            <input type="time" id="journey_time" value="now" required>
+            <select id="date"></select>
+        </div>
     </div>
 
+ 
+    <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
     <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="route_submit" onclick="geocodeAddress()" value="Search">
 
+    </div>
 </form>
-
                 `;
             generateRouteSearch();
             set_date_options();
