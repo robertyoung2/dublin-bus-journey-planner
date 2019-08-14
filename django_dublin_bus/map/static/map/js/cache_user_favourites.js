@@ -39,6 +39,7 @@ function saveFavourite(){
         alert("Favourite Stop Saved!");
         clearSearch('set_home');
         clearSearch('set_destination');
+        populate_saved_favourites();
     }
     else{
         alert("Stop not saved");

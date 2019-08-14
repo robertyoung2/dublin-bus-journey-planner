@@ -20,7 +20,6 @@ function set_date_options() {
             if ($(this).val() === 'departureTime' || $(this).val() === 'arrivalTime') {
                 $(".datetime_selector_container").show();
 
-
                 $(function () {
                     //Sets default time to now
                     var current_datetime = new Date(),
