@@ -76,3 +76,17 @@ function populate_saved_favourites(){
         counter++;
     }
 }
+
+function upperCase(str) {
+    return str.toUpperCase();
+}
+function titleCase(str) {
+    var firstLetterRx = /(^|\s)[a-z]/g;
+    return str.replace(firstLetterRx, upperCase);
+}
+
+function route_to_favourite(destination){
+//    add functionality to route to the passed destination
+    generate_directions_views();
+    document.getElementById("input_route_destination").value = destination;
+}

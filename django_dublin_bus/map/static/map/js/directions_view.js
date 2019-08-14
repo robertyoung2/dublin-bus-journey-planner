@@ -85,7 +85,15 @@ function generate_directions_views(){
                     <div id="datetime_selector_container" class="mdl-grid" style="display: none">
                         <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
                             <input type="time" id="journey_time" max="23:59" value="now" required>
-                            <select id="date"></select>
+                            <!-- Pre-selected value -->
+                            <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                                <input type="text" value="" class="mdl-textfield__input" id="sample6">
+                                <input type="hidden" value="" name="sample6">
+                                <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                <label for="sample6" class="mdl-textfield__label">Date</label>
+                                <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" id="date"></ul>
+                            </div>
+                            
                         </div>
                     </div>
                 
@@ -94,7 +102,13 @@ function generate_directions_views(){
                     <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="route_submit" onclick="validate_directions_form()" value="Search">
                 
                     </div>
+                    
+                    <div id="clear_route" class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="display: none">
+                    <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="clear_the_route()" value="Clear Route">
+                
+                    </div>
                 </form>`;
+            componentHandler.upgradeAllRegistered();
             generateRouteSearch();
             set_date_options();
         }

@@ -59,7 +59,11 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
 
             console.log(response.routes.length);
             let route_options_table = document.getElementById('route_options_container');
-            route_options_table.innerHTML = "";
+            route_options_table.innerHTML = `
+                <div class="mdl-grid">
+                    <div class="mdl-cell mdl-cell--12-col">Suggested Journeys</div>
+                </div>
+            `;
 
             var model_journeys = [];
             rendered_route_list = [];
@@ -122,15 +126,29 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                     steps_counter += 1;
                 }
                 if(include === true){
-                    route_options_table.innerHTML +=
-                        `<div id="${i}" onclick="render_route_at_index(${i})" class="grid-x grid-padding"></div>`;
-
-                    let new_route_row = document.getElementById(i);
-                    console.log(new_route_row.id);
-
-                    new_route_row.innerHTML = `
-                        <div id="journey_time_${i}" class="cell small-1 medium-1"></div>
-                        <div class="cell small-8 medium-8">${journey_icons_string}</div>`;
+                    route_options_table.innerHTML += `
+                        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                            <div class="mdl-card__title">
+                                <h2 id="journey_time_${i}" class="mdl-card__title-text"></h2>
+                            </div>
+                        
+                        
+                            <div class="mdl-card__supporting-text">
+                                ${journey_icons_string}
+                            </div>
+                            
+                            <div class="mdl-card__supporting-text">
+                                Leaves in 9 minutes
+                            </div>
+                            
+                            <div class="mdl-card__actions mdl-card--border">
+                                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="${i}" onclick="render_route_at_index(${i})">
+                                    Route Journey
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    componentHandler.upgradeAllRegistered();
 
                     model_journeys.push(journey);
                     rendered_route_list.push(response.routes[i]);

@@ -1,3 +1,26 @@
 #info_section {
     /*background-color: yellow;*/
 }
+
+
+.mdl-card {
+    min-height: 170px
+}
+
+.mdl-card__title{
+    padding-top: 5px;
+    padding-bottom: 6px;
+}
+
+.mdl-card__supporting-text{
+    padding-top: 5px;
+    padding-bottom: 0px;
+
+    /*for 9 minutes*/
+    /*padding-top: 8px;*/
+}
+
+.mdl-card__actions.mdl-card--border{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
