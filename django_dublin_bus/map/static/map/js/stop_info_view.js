@@ -29,7 +29,7 @@ function generate_stop_info_view(){
                     
               </div>
             </div>`;
-        $(document).foundation();
+        // $(document).foundation();
     }
 }
 
@@ -52,7 +52,7 @@ function search_stop_number(stop){
                 </ul>`;
             AjaxGetRoutes(marker.stop_info.stop_id, marker.stop_info.actual_stop_id, "searched_stop_content");
             map.setCenter(marker.getPosition());
-            $(document).foundation();
+            // $(document).foundation();
         }
     }
 }
@@ -89,7 +89,7 @@ function generate_nearby_stop_info(button_clicked){
                 AjaxGetRoutes(marker.stop_info.stop_id, marker.stop_info.actual_stop_id, "nearby_stop_content_"+nearby_stop_counter);
                 nearby_stop_counter++;
             }
-            $(document).foundation();
+            // $(document).foundation();
         }
         else{
             document.getElementById("stop_info_view_section").innerHTML +=

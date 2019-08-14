@@ -1,5 +1,6 @@
 var showing_journey_results = false;
 function generate_directions_views(){
+
     console.log("INSIDE DIRECTIONS VIEW");
     directions_button.classList.add("active_view");
     favourites_button.classList.remove("active_view");
@@ -20,12 +21,10 @@ function generate_directions_views(){
                         
 <!--                            Origin Input-->
                             <div class="cell small-8 medium-8">
-                                <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield">
                                         <input class="mdl-textfield__input" type="text" name="input_route_origin" id="input_route_origin" placeholder = "Enter Origin (Default Current Location)">
                                         <label class="mdl-textfield__label" for="input_route_origin"></label>
                                     </div>
-                                </form>
                             </div>
                             
  
@@ -35,12 +34,10 @@ function generate_directions_views(){
                             
                             <!--                            Destination Input-->
                             <div class="cell small-8 medium-8">
-                                <form action="#">
                                     <div class="mdl-textfield mdl-js-textfield">
                                         <input class="mdl-textfield__input" type="text" name="input_route_destination" id="input_route_destination" placeholder="Enter Destination">
                                         <label class="mdl-textfield__label" for="input_route_destination"></label>
                                     </div>
-                                </form>
                             </div>
                         
      
@@ -51,6 +48,9 @@ function generate_directions_views(){
 
                         <div class="grid-x cell align-center">
                             <div class="cell small-6 medium-6 large-4">
+                            
+                            
+                            
                                 <select id="option" onchange="set_date_options()">
                                     <option value="now">Now</option>
                                     <option value="departureTime">Departure Time</option>
