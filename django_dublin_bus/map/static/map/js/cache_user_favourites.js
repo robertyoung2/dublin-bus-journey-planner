@@ -36,7 +36,12 @@ function saveFavourite(){
     }
 
     if(Object.keys(window.localStorage).includes(sethome.value.toLowerCase()) && window.localStorage.getItem(sethome.value.toLowerCase()) === destination.value){
-        alert("Favourite Stop Saved!");
+        // alert("Favourite Stop Saved!");
+        var x = document.getElementById("snackbar");
+        x.className = "show";
+        // Add the "show" class to DIV
+        // After 3 seconds, remove the show class from DIV
+        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         clearSearch('set_home');
         clearSearch('set_destination');
         populate_saved_favourites();

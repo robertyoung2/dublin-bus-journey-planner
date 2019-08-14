@@ -1,17 +1,20 @@
 console.log("Loaded journey_date_selector.js");
 
 function set_date_options() {
+
     //Function displays the date and time
     $(function () {
         console.log("Inside Show/Hide date function!");
         populate_date_data();
         populate_time_data();
-        $("#option").change(function () {
-            if ($(this).val() === 'departureTime' || $(this).val() === 'arrivalTime') {
-                $(".datetime_selector_container").show();
+
+        $(".datetime_option").click(function () {
+            selected_datetime_option = $(this).val();
+            if (selected_datetime_option === 'departureTime' || selected_datetime_option === 'arrivalTime') {
+                document.getElementById("datetime_selector_container").style.display = "initial";
             }
             else {
-                $(".datetime_selector_container").hide();
+                document.getElementById("datetime_selector_container").style.display = "none";
             }
         });
     });

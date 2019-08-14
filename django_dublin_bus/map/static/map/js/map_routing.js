@@ -10,13 +10,13 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
     var journey_date_element = document.getElementById("date");
     var journey_time_element = document.getElementById("journey_time");
 
-    if (option.value === 'now'){
+    if (selected_datetime_option === 'now'){
         departureTime = new Date();
     }
-    else if (option.value === 'departureTime') {
+    else if (selected_datetime_option === 'departureTime') {
         departureTime = new Date(Date.parse(journey_date_element.value + " " + journey_time_element.value));
     }
-     else if (option.value === 'arrivalTime') {
+     else if (selected_datetime_option === 'arrivalTime') {
         arrivalTime = new Date(Date.parse(journey_date_element.value + " " + journey_time_element.value));
     }
 

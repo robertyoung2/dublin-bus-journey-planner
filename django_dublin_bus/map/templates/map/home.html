@@ -8,6 +8,7 @@
 
     {#        Live Geolocation API Connection#}
 
+
     <!--Jquery-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
@@ -27,13 +28,25 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <!-- Compressed CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg==" crossorigin="anonymous">
-    <!-- Compressed JavaScript -->
-    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw==" crossorigin="anonymous"></script>
+<!--{#    &lt;!&ndash; Compressed CSS &ndash;&gt;#}-->
+<!--{#    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/css/foundation.min.css" integrity="sha256-xpOKVlYXzQ3P03j397+jWFZLMBXLES3IiryeClgU5og= sha384-gP4DhqyoT9b1vaikoHi9XQ8If7UNLO73JFOOlQV1RATrA7D0O7TjJZifac6NwPps sha512-AKwIib1E+xDeXe0tCgbc9uSvPwVYl6Awj7xl0FoaPFostZHOuDQ1abnDNCYtxL/HWEnVOMrFyf91TDgLPi9pNg==" crossorigin="anonymous">#}-->
+<!--{#    &lt;!&ndash; Compressed JavaScript &ndash;&gt;#}-->
+<!--{#    <script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.5.3/dist/js/foundation.min.js" integrity="sha256-/PFxCnsMh+nTuM0k3VJCRch1gwnCfKjaP8rJNq5SoBg= sha384-9ksAFjQjZnpqt6VtpjMjlp2S0qrGbcwF/rvrLUg2vciMhwc1UJJeAAOLuJ96w+Nj sha512-UMSn6RHqqJeJcIfV1eS2tPKCjzaHkU/KqgAnQ7Nzn0mLicFxaVhm9vq7zG5+0LALt15j1ljlg8Fp9PT1VGNmDw==" crossorigin="anonymous"></script>#}-->
+
+    {#  Material Design Lite  #}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-amber.min.css" />
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+
 </head>
 
 <body>
+
+
+
     <div id="page_layout" class="grid-y grid-frame">
         <div id="map_container" class="cell">
             <div id="map"></div>
@@ -72,7 +85,7 @@
         //This will contain the lat lng of the users current position to be passed if they don't enter an origin
         // ( This duplicating variables already created so should be refactored and removed)
 
-        var back_button_image_url = "{% static 'map/images/back_button.png' %}";
+        var back_button_image_url = "{% static 'map/images/baseline-arrow_back_ios-24px.svg' %}";
         var user_marker_image_url = "{% static 'map/images/user_location_marker.png' %}"; // Not doing anything yet but to be used for customer user location marker
         var bus_marker_image_url = "{% static 'map/images/bus_stop_marker.png' %}"; // Not doing anything yet but to be used for busstop location marker
 
@@ -98,6 +111,8 @@
         var geolocationFlag = true;
         var userPosition;
         var bounds;
+
+        var selected_datetime_option;
 
         var current_time;
         var current_date;
@@ -164,7 +179,7 @@
     <script>
         populate_info("directions_view");
     </script>
-    <script>$(document).foundation();</script>
+{#    <script>$(document).foundation();</script>#}
 
 
 </body>

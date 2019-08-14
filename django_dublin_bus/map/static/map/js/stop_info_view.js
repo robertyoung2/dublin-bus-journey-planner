@@ -14,6 +14,15 @@ function generate_stop_info_view(){
     if(stop_info_section.innerHTML === ""){
 
         stop_info_section.innerHTML = `
+
+
+
+
+
+
+
+
+
             <ul class="tabs " data-tabs id="example-tabs">
               <li class="tabs-title is-active"><a href="#search_stop_view" aria-selected="true">Search Stop</a></li>
               <li class="tabs-title"><a href="#nearby_stops_view" onclick="generate_nearby_stop_info(true)">Nearby Stops</a></li>
@@ -29,7 +38,7 @@ function generate_stop_info_view(){
                     
               </div>
             </div>`;
-        $(document).foundation();
+        // $(document).foundation();
     }
 }
 
@@ -52,7 +61,7 @@ function search_stop_number(stop){
                 </ul>`;
             AjaxGetRoutes(marker.stop_info.stop_id, marker.stop_info.actual_stop_id, "searched_stop_content");
             map.setCenter(marker.getPosition());
-            $(document).foundation();
+            // $(document).foundation();
         }
     }
 }
@@ -89,7 +98,7 @@ function generate_nearby_stop_info(button_clicked){
                 AjaxGetRoutes(marker.stop_info.stop_id, marker.stop_info.actual_stop_id, "nearby_stop_content_"+nearby_stop_counter);
                 nearby_stop_counter++;
             }
-            $(document).foundation();
+            // $(document).foundation();
         }
         else{
             document.getElementById("stop_info_view_section").innerHTML +=

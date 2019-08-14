@@ -15,6 +15,7 @@ function clear_the_route(){
 
 
 function generate_directions_views(){
+
     console.log("INSIDE DIRECTIONS VIEW");
     directions_button.classList.add("active_view");
     favourites_button.classList.remove("active_view");
@@ -30,50 +31,69 @@ function generate_directions_views(){
 
         if(directions_section.innerHTML === ""){
             directions_section.innerHTML =`
-                <form id="directions_form" class="cell">
-                        <div class="grid-x cell align-center">
-                            <div class="cell small-8 medium-8">
-                                <input  type="text" name="input_route_origin" id="input_route_origin" placeholder="Enter Origin (Default Current Location)">
-                            </div>
-                            <div class="cell small-2 medium-2">
-                                <a tabindex="-1" onclick="clearSearch('input_route_origin')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/clear_search.png"></a>
-                            </div>
-                            <div class="cell small-8 medium-8">
-                                <input type="text" name="input_route_destination" id="input_route_destination" placeholder="Enter Destination">
-                            </div>
-                            <div class="cell small-2 medium-2">
-                                <a tabindex="-1" onclick="clearSearch('input_route_destination')"><img id="clear_search_icon" title="Clear destination search" src="/static/map/images/clear_search.png"></a>
+                <form class="cell" action="Getinput" method="get">
+                
+                <!--    Origin Input-->
+                
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
+                            <div class="mdl-textfield mdl-js-textfield ">
+                                <input class="mdl-textfield__input" type="text" name="input_route_origin" id="input_route_origin" placeholder="Your current location">
+                                <label class="mdl-textfield__label" for="input_route_origin"></label>
                             </div>
                         </div>
-                        <div class="grid-x cell align-center">
-                            <div class="cell small-6 medium-6 large-4">
-                                <select id="option">
-                                    <option value="now">Leave Now</option>
-                                    <option value="departureTime">Depart at</option>
-                                    <option value="arrivalTime">Arrive by</option>
-                                </select>
-                            </div>
-                            <div class="cell small-4 medium-4 large-6"></div>
-                        </div>
-                        <div class="grid-x cell align-center">
-                            <div class="small-3 medium-3 cell datetime_selector_container" hidden="hidden">
-                                <input type="time" id="journey_time" max="23:59" value="now" required>
-                            </div>
-                            <div class="small-6 medium-6 cell datetime_selector_container" hidden="hidden">
-                                <select id="date"></select>
-                            </div>
-                            <div class="small-1 medium-1 cell"></div>
+                    
+                        <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--1-col-phone mdl-cell--middle">
+                            <a tabindex="-1" onclick="clearSearch('input_route_origin')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/baseline-clear-24px.svg"></a>
                         </div>
                         
-                        <div class="grid-x cell align-center">
-                            <div class="small-3 medium-3 cell">
-                                <input type="button" id="route_submit" value="Search" onclick="validate_directions_form()">
-                            </div>
-                            <!--<div id="clear_route" class="small-3 medium-3 cell" style="display: none">-->
-                                <!--<input type="button" onclick="clear_the_route()" value="Clear Route" >-->
-                            <!--</div>-->
-                            <div class="small-4 medium-4 cell"></div>
+                    </div>
+                
+                <!--    Destination Input-->
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
+                            <div class="mdl-textfield mdl-js-textfield">
+                                <input class="mdl-textfield__input" type="text" name="input_route_destination" id="input_route_destination" placeholder="Enter destination">
+                                <label class="mdl-textfield__label" for="input_route_destination"></label>
+                             </div>
+                         </div>
+                             
+                        <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--1-col-phone mdl-cell--middle">
+                             <a tabindex="-1" onclick="clearSearch('input_route_destination')"><img id="clear_search_icon" title="Clear destination search" src="/static/map/images/baseline-clear-24px.svg"></a>
                         </div>
+                        
+                    </div>
+                     
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="now" >
+                        <input type="radio" id="now" class="mdl-radio__button datetime_option" name="options" value="now" checked >
+                        <span class="mdl-radio__label">Now &nbsp;&nbsp;&nbsp;</span>
+                        </label>
+                        
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="departureTime" >
+                        <input type="radio" id="departureTime" class="mdl-radio__button datetime_option" name="options" value="departureTime" >
+                        <span class="mdl-radio__label">Depart At &nbsp;&nbsp;&nbsp;</span>
+                        </label>
+                        
+                        <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="arrivalTime" >
+                        <input type="radio" id="arrivalTime" class="mdl-radio__button datetime_option" name="options" value="arrivalTime" >
+                        <span class="mdl-radio__label">Arrive At</span>
+                        </label>
+                     </div>
+                
+                    <div id="datetime_selector_container" class="mdl-grid" style="display: none">
+                        <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                            <input type="time" id="journey_time" max="23:59" value="now" required>
+                            <select id="date"></select>
+                        </div>
+                    </div>
+                
+                 
+                    <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                    <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="route_submit" onclick="validate_directions_form()" value="Search">
+                
+                    </div>
                 </form>`;
             generateRouteSearch();
             set_date_options();
