@@ -11,6 +11,7 @@ import time
 
 
 try:
+    # If running locally, delete path save from pd.save_to_csv statements below
     path_save = '/home/student/django_code/dublin-bus/django_dublin_bus/map/ml_models/csv/'
     response = requests.get('https://api.darksky.net/forecast/95ab53fceccb16cedea7ed90b54c167d/53.3498,-6.2603?'
                             'extend=hourly&exclude=minutely,alerts,flags&units=auto')

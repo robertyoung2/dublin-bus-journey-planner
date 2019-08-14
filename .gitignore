@@ -112,3 +112,9 @@ venv.bak/
 .idea/**/shelf
 .idea/
 django_dublin_bus/map/static/ordered_routes_scraper\.py
+
+django_dublin_bus/go_ahead_busstops_for_db\.csv
+
+django_dublin_bus/go_ahead_stops_info_for_db\.csv
+
+django_dublin_bus/stopsinfo_to_drop\.csv
