@@ -30,7 +30,7 @@ function generate_directions_views(){
 
         if(directions_section.innerHTML === ""){
             directions_section.innerHTML =`
-                <form class="cell" action="Getinput" method="get">
+                <form id="directions_form" class="cell">
                         <div class="grid-x cell align-center">
                             <div class="cell small-8 medium-8">
                                 <input  type="text" name="input_route_origin" id="input_route_origin" placeholder="Enter Origin (Default Current Location)">
@@ -57,7 +57,7 @@ function generate_directions_views(){
                         </div>
                         <div class="grid-x cell align-center">
                             <div class="small-3 medium-3 cell datetime_selector_container" hidden="hidden">
-                                <input type="time" id="journey_time" value="now" required>
+                                <input type="time" id="journey_time" max="23:59" value="now" required>
                             </div>
                             <div class="small-6 medium-6 cell datetime_selector_container" hidden="hidden">
                                 <select id="date"></select>
@@ -67,11 +67,11 @@ function generate_directions_views(){
                         
                         <div class="grid-x cell align-center">
                             <div class="small-3 medium-3 cell">
-                                <input type="button" id="route_submit" onclick="geocodeAddress()" value="Search">
+                                <input type="button" id="route_submit" value="Search" onclick="validate_directions_form()">
                             </div>
-                            <div id="clear_route" class="small-3 medium-3 cell" style="display: none">
-                                <input type="button" onclick="clear_the_route()" value="Clear Route" >
-                            </div>
+                            <!--<div id="clear_route" class="small-3 medium-3 cell" style="display: none">-->
+                                <!--<input type="button" onclick="clear_the_route()" value="Clear Route" >-->
+                            <!--</div>-->
                             <div class="small-4 medium-4 cell"></div>
                         </div>
                 </form>`;
@@ -85,3 +85,18 @@ function generate_directions_views(){
         generate_journey_results_view();
     }
 }
+
+function validate_directions_form(){
+    let submitted_time = document.getElementById("journey_time");
+    let submitted_date = document.getElementById("date");
+
+    if(submitted_date.value === current_date && submitted_time.value < current_time){
+        alert("Pleas enter a valid time");
+    }
+    else{
+        console.log("Valid Time");
+        geocodeAddress();
+    }
+
+}
+
