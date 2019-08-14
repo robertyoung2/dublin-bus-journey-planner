@@ -1,4 +1,19 @@
 var showing_journey_results = false;
+
+function clear_the_route(){
+    if(directionsRenderer != null){
+        directionsRenderer.set('directions', null);
+        directionsRenderer = null;
+        console.log("Route Cleared");
+        document.getElementById("clear_route").style.display = "none";
+    }
+    else{
+        console.log("No route to clear");
+    }
+}
+
+
+
 function generate_directions_views(){
     console.log("INSIDE DIRECTIONS VIEW");
     directions_button.classList.add("active_view");
@@ -33,27 +48,31 @@ function generate_directions_views(){
                         <div class="grid-x cell align-center">
                             <div class="cell small-6 medium-6 large-4">
                                 <select id="option">
-                                    <option value="now">Now</option>
-                                    <option value="departureTime">Departure Time</option>
-                                    <option value="arrivalTime">Arrival Time</option>
+                                    <option value="now">Leave Now</option>
+                                    <option value="departureTime">Depart at</option>
+                                    <option value="arrivalTime">Arrive by</option>
                                 </select>
                             </div>
                             <div class="cell small-4 medium-4 large-6"></div>
                         </div>
                         <div class="grid-x cell align-center">
-                            <div class="small-6 medium-6 cell datetime_selector_container" hidden="hidden">
-                                <select id="date"></select>
-                            </div>
                             <div class="small-3 medium-3 cell datetime_selector_container" hidden="hidden">
                                 <input type="time" id="journey_time" value="now" required>
                             </div>
+                            <div class="small-6 medium-6 cell datetime_selector_container" hidden="hidden">
+                                <select id="date"></select>
+                            </div>
                             <div class="small-1 medium-1 cell"></div>
                         </div>
+                        
                         <div class="grid-x cell align-center">
                             <div class="small-3 medium-3 cell">
                                 <input type="button" id="route_submit" onclick="geocodeAddress()" value="Search">
                             </div>
-                            <div class="small-7 medium-7 cell"></div>
+                            <div id="clear_route" class="small-3 medium-3 cell" style="display: none">
+                                <input type="button" onclick="clear_the_route()" value="Clear Route" >
+                            </div>
+                            <div class="small-4 medium-4 cell"></div>
                         </div>
                 </form>`;
             generateRouteSearch();

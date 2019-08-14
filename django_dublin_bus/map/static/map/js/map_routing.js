@@ -142,6 +142,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
             console.log("****************");
             console.log("Accessable GMaps Data: " + rendered_route_list);
             Ajax_Model(JSON.stringify(model_journeys), rendered_route_index_list);
+            document.getElementById("clear_route").style.display = "initial";
             return true;
         }
         else {
@@ -154,3 +155,4 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
 function render_route_at_index(index){
     directionsRenderer.setRouteIndex(parseInt(index));
 }
+
