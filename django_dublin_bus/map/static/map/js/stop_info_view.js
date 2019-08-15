@@ -73,14 +73,8 @@ function generate_nearby_stop_info(button_clicked){
         if(previous_markers.length > 0){
             // console.log("Has previous markers");
             nearby_stops_view.innerHTML = `
-                <div class="table-scroll">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <ul id="nearby_stops_list" class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true"></ul>
-                            </tr>
-                        </tbody>
-                    </table>
+                <div id="nearby_stops_list" class="mdl-grid">
+                    
                 </div>
                 `;
 

@@ -103,13 +103,3 @@ function route_to_favourite(destination){
     generate_directions_views();
     document.getElementById("input_route_destination").value = destination;
 }
-
-function delete_favourite(favourite_key){
-    if(Object.keys(window.localStorage).includes(favourite_key.toLowerCase())){
-        alert("Key Deleted");
-    //    Will need to change logic to handle button click when implemented
-    }
-    else{
-        alert("Key does not exist!");
-    }
-}

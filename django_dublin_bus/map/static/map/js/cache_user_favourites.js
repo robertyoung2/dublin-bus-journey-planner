@@ -38,6 +38,9 @@ function saveFavourite(){
         alert("Key Already Exists - Add a New One");
     //    Will need to change logic to handle button click when implemented
     }
+    else if(sethome.value === ""){
+        alert("Please give your key a name");
+    }
     else{
         window.localStorage.setItem(sethome.value.toLowerCase(),destination.value);
     }
@@ -55,5 +58,18 @@ function saveFavourite(){
     }
     else{
         alert("Stop not saved");
+    }
+}
+
+
+function delete_favourite(favourite_key){
+    if(Object.keys(window.localStorage).includes(favourite_key.toLowerCase())){
+        localStorage.removeItem(favourite_key.toLowerCase());
+        populate_saved_favourites();
+        alert("Key Deleted");
+    //    Will need to change logic to handle button click when implemented
+    }
+    else{
+        alert("Key does not exist!");
     }
 }
