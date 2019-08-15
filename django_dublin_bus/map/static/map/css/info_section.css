@@ -42,8 +42,6 @@
 }
 }
 
-
-
 @media only screen and (max-width: 829px) {
     .mdl-card {
     min-height: 120px;
@@ -53,7 +51,6 @@
     margin-right: auto;
 }
 }
-
 
 .mdl-card__title{
     padding-top: 5px;
