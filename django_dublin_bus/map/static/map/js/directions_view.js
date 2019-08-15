@@ -123,9 +123,10 @@ function generate_directions_views(){
 function validate_directions_form(){
     let submitted_time = document.getElementById("journey_time");
     let submitted_date = document.getElementById("date");
+    geolocationFlag = false;
 
     if(submitted_date.value === current_date && submitted_time.value < current_time){
-        alert("Pleas enter a valid time");
+        alert("Please enter a valid time");
     }
     else{
         console.log("Valid Time");
