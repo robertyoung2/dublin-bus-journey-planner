@@ -123,6 +123,7 @@ function generate_directions_views(){
 function validate_directions_form(){
     let submitted_time = document.getElementById("journey_time");
     let submitted_date = document.getElementById("date_input");
+    geolocationFlag = false;
 
     console.log("Current Date Value:" + current_date);
     console.log("Submitted Date Value: " + submitted_date.value);
