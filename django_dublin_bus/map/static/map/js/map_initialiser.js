@@ -76,7 +76,7 @@ var initialize = function () {
     });
     map.addListener('dragend', function() {
         if(document.getElementById("stop_info_view_section").style.display === "initial"){
-            generate_nearby_stop_info();
+            generate_nearby_stop_info(false);
         }
     });
 

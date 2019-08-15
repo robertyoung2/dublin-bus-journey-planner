@@ -71,6 +71,7 @@ function generate_nearby_stop_info(button_clicked){
         nearby_stops_view.innerHTML = "";
 
         if(previous_markers.length > 0){
+            // console.log("Has previous markers");
             nearby_stops_view.innerHTML = `
                 <div class="table-scroll">
                     <table>
@@ -88,17 +89,17 @@ function generate_nearby_stop_info(button_clicked){
                 document.getElementById("nearby_stops_list").innerHTML +=
                     `<li class="accordion-item" data-accordion-item>
                         <a href="#" class="accordion-title">${marker.stop_info.stop_name} (${marker.stop_info.actual_stop_id})</a>
-                        <div id="nearby_stop_content_${nearby_stop_counter}" class="accordion-content" data-tab-content >
-                        
-                        </div>
+                        <div id="nearby_stop_content_${nearby_stop_counter}" class="accordion-content" data-tab-content ></div>
                     </li>`;
+                // console.log("nearby_stop_content_"+nearby_stop_counter);
                 AjaxGetRoutes(marker.stop_info.stop_id, marker.stop_info.actual_stop_id, "nearby_stop_content_"+nearby_stop_counter);
                 nearby_stop_counter++;
             }
         }
         else{
-            document.getElementById("stop_info_view_section").innerHTML +=
-                `<div class="card" >No Nearby Stops</div>`;
+            // console.log("No nearby stops!");
+            nearby_stops_view.innerHTML +=
+                `<div>No Nearby Stops</div>`;
         }
 
     }
