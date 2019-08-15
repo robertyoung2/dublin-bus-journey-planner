@@ -84,7 +84,11 @@ function generate_directions_views(){
                 
                     <div id="datetime_selector_container" class="mdl-grid" style="display: none">
                         <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                            
+                            <!--Time-->
                             <input type="time" id="journey_time" max="23:59" required>
+                            
+                            <!--Date-->
                             <!-- Pre-selected value -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
                                 <input type="text" value="" class="mdl-textfield__input" id="sample6">
@@ -97,15 +101,16 @@ function generate_directions_views(){
                         </div>
                     </div>
                 
-                 
-                    <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-                    <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="route_submit" onclick="validate_directions_form()" value="Search">
-                
-                    </div>
+                    <div class="mdl-grid">
+                        <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                        <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="route_submit" onclick="validate_directions_form()" value="Search">
                     
-                    <div id="clear_route" class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="display: none">
-                    <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="clear_the_route()" value="Clear Route">
-                
+                        </div>
+                        
+                        <div id="clear_route" class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone" style="display: none">
+                        <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="clear_the_route()" value="Clear Route">
+                    
+                        </div>
                     </div>
                 </form>`;
             componentHandler.upgradeAllRegistered();
