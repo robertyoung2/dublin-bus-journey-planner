@@ -156,7 +156,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                                 </a>
                             </div>
                         </div>
-                        </div>
+                    </div>
 <!--                                        <div class="mdl-grid">-->
 <!--                    <div class="mdl-cell mdl-cell&#45;&#45;12-col">-->
 <!--                        <div style="padding: 20vh"></div>-->

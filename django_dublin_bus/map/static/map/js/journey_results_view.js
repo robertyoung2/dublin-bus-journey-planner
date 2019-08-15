@@ -15,7 +15,7 @@ function generate_journey_results_view(){
                     
 
                     <div id="route_options_container" class="mdl-grid">
-                </div>
+                    </div>
                 `;
     }
     document.getElementById("back_button").addEventListener('click', function () {

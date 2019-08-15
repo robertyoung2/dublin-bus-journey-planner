@@ -70,7 +70,6 @@ function populate_saved_favourites(){
             storage_key = titleCase(storage_key);
 
             document.getElementById("saved_favourites").innerHTML += `
-
                 <li class="mdl-list__item">
                     <span class="mdl-list__item-primary-content" onclick="route_to_favourite('${storage_value}')">
                       <i class="material-icons  mdl-list__item-icon">directions</i>
@@ -81,7 +80,7 @@ function populate_saved_favourites(){
                           <i class="material-icons">clear</i>
                         </button>
                     </span>
-                  </li>
+                </li>
             `;
             counter++;
         }
