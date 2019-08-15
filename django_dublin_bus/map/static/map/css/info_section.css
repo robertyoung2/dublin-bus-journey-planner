@@ -6,6 +6,31 @@
     margin-bottom: auto;
 }
 
+.route_destination_heading{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 10pt;
+    text-align: center;
+
+}
+
+.minutes_nearby_stops{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 9pt;
+    color: #66BB6A;
+    font-weight: bold;
+    text-align: center;
+}
+
+.marker_stop_heading_nearby{
+    color: #4350AF;
+    font-weight: bold;
+    font-size: 14pt;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .journey_time_text{
     font-size: 12pt;
     font-weight: bold;
@@ -46,7 +71,7 @@
     .mdl-card {
     min-height: 120px;
     padding: 1vh;
-    max-width: 80vw;
+    max-width: 85vw;
     margin-left: auto;
     margin-right: auto;
 }
@@ -70,3 +95,26 @@
 .mdl-card__actions {
     padding: 0px;
 }
+
+
+.flex-container {
+  display: flex;
+  align-items: stretch;
+}
+
+.flex-container > div {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.mdl-chip mdl-chip--contact{
+    mix-width: 20px;
+    text-align: left;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.no_real{
+    font-size: 14pt;
+}
+

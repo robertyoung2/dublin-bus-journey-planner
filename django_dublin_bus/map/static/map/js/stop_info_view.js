@@ -83,7 +83,7 @@ function generate_nearby_stop_info(button_clicked){
                         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                         
                             <div class="mdl-card__title">
-                                <h2 class="mdl-card__title-text">${marker.stop_info.actual_stop_id} - ${marker.stop_info.stop_name}</h2>
+                                <h2 class="mdl-card__title-text marker_stop_heading_nearby">${marker.stop_info.actual_stop_id} - ${marker.stop_info.stop_name}</h2>
                             </div>
                         
                             <div class="mdl-card__supporting-text">

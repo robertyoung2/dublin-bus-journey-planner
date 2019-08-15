@@ -26,14 +26,27 @@ function AjaxGetRoutes(stop_id, actual_stop_id, element_id) {
                         if(route.route in duetime_dict[actual_stop_id] === false){
                             duetime_dict[actual_stop_id][route.route] = [];
                             element.innerHTML += `
-                                <div>
+
+                            <div class="flex-container">
+
+                                 <div style="flex: 0 0 70px">
                                     <span class="mdl-chip mdl-chip--contact">
                                         <i class="material-icons">directions_bus</i>
                                         <span class="mdl-chip__text">${route.route}</span>
                                     </span>
-                                    <span>Towards ${route.destination}</span>
-                                    <span id="duetimes_${actual_stop_id}_${route.route}"></span>
+                                 </div>
+                         
+                                <div style="flex-basis:60%" class="route_destination_heading">
+                                    <span>${route.destination}</span>
                                 </div>
+                                    
+                                <div style="flex-basis:30%" class="minutes_nearby_stops">
+                                   <span id="duetimes_${actual_stop_id}_${route.route}"></span>
+                                </div>
+                                   
+                            </div>
+                            <div></div>
+
                             `;
                         }
                         duetime_dict[actual_stop_id][route.route].push(route.duetime);
@@ -65,7 +78,7 @@ function AjaxGetRoutes(stop_id, actual_stop_id, element_id) {
                     }
                 }
                 else{
-                    element.innerHTML += `<h3>No Realtime Information Available For This Stop</h3>`;
+                    element.innerHTML += `<br><span class="no_real">No Realtime Information Available For This Stop<span>`;
                 }
             }
 
