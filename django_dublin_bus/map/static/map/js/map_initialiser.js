@@ -89,6 +89,9 @@ var initialize = function () {
     map.addListener('zoom_changed', function () {
         bounds = map.getBounds();
         getnearby();
+        if(document.getElementById("stop_info_view_section").style.display === "initial"){
+            generate_nearby_stop_info(false);
+        }
     });
 
     var styles = [
@@ -141,7 +144,9 @@ function GeoControl(controlDiv, map) {
         map.setZoom(17);
         controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149049.svg)";
         getnearby();
-        generate_nearby_stop_info(false);
+        if(document.getElementById("stop_info_view_section").style.display === "initial"){
+            generate_nearby_stop_info(false);
+        }
     });
 
     // Setup the drag event listeners: change CSS of geolocation button
