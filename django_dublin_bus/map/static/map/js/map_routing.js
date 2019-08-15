@@ -80,7 +80,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
 
                 for (let step of response.routes[i].legs[0].steps) {
                     if(step.travel_mode === "WALKING"){
-                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:black">directions_walk</i>';
+                        journey_icons_string += '<i class="material-icons" style="font-size:20px;color:black">directions_walk</i>';
                     }
                     else if(step.travel_mode === "TRANSIT"){
                         if(step.transit.line.vehicle.type !== "BUS"){
@@ -116,29 +116,31 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                         console.log("Departure_Datetime: " + new Date(step.transit.departure_time.value));
                         console.log();
 
-                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:black">directions_bus</i>';
+                        journey_icons_string += '<i class="material-icons" style="font-size:20px;color:black">directions_bus</i>';
 
-                        journey_icons_string += `<span class="">${current_route}</span>`;
+                        journey_icons_string += `<span class="bus_icon_route_num">${current_route}</span>`;
                     }
                     if (steps_counter < steps_len - 1){
-                        journey_icons_string += '<i class="material-icons" style="font-size:30px;color:black">navigate_next</i>';
+                        journey_icons_string += '<i class="material-icons" style="font-size:20px;color:black">navigate_next</i>';
                     }
                     steps_counter += 1;
                 }
                 if(include === true){
                     route_options_table.innerHTML += `
+
+                    <div class="mdl-cell mdl-cell--12-col">
+               
                         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                             <div class="mdl-card__title">
-                                <h2 id="journey_time_${i}" class="mdl-card__title-text"></h2>
+                                <h2 id="journey_time_${i}" class="mdl-card__title-text journey_time_text"></h2>
                             </div>
-                        
                         
                             <div class="mdl-card__supporting-text">
                                 ${journey_icons_string}
                             </div>
                             
                             <div class="mdl-card__supporting-text">
-                                Leaves in 9 minutes
+                                Leaves in <font color="#66BB6A"> 9 minutes</font>
                             </div>
                             
                             <div class="mdl-card__actions mdl-card--border">
@@ -147,9 +149,14 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                                 </a>
                             </div>
                         </div>
+                        </div>
+<!--                                        <div class="mdl-grid">-->
+<!--                    <div class="mdl-cell mdl-cell&#45;&#45;12-col">-->
+<!--                        <div style="padding: 20vh"></div>-->
+<!--                        </div>-->
+<!--                        </div>-->
                     `;
                     componentHandler.upgradeAllRegistered();
-
                     model_journeys.push(journey);
                     rendered_route_list.push(response.routes[i]);
                     rendered_route_index_list.push(i);

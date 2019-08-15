@@ -1,11 +1,22 @@
-#info_section {
-    /*background-color: yellow;*/
+.journey_time_text{
+    font-size: 12pt;
+    font-weight: bold;
 }
 
+.bus_time_arrival{
+    color: #66BB6A;
+}
+
+.bus_icon_route_num{
+    font-size: .8rem;
+}
 
 .mdl-card {
     min-height: 120px;
     padding: 1vh;
+    max-width: 85vw;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .mdl-card__title{
@@ -16,12 +27,13 @@
 .mdl-card__supporting-text{
     padding-top: 5px;
     padding-bottom: 0px;
-
-    /*for 9 minutes*/
-    /*padding-top: 8px;*/
 }
 
 .mdl-card__actions.mdl-card--border{
     padding-top: 0px;
     padding-bottom: 0px;
+}
+
+.mdl-card__actions {
+    padding: 0px;
 }
