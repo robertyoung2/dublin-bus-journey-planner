@@ -140,6 +140,8 @@ function GeoControl(controlDiv, map) {
         });
         map.setZoom(17);
         controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149049.svg)";
+        getnearby();
+        generate_nearby_stop_info(false);
     });
 
     // Setup the drag event listeners: change CSS of geolocation button

@@ -24,7 +24,7 @@ function generate_stop_info_view(){
                 <div class="mdl-tabs__panel is-active" id="search_stop_view">
                     <form action="#">
                         <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input"  type="text" list="stationsList" placeholder="Search Stations" id="stationSelector" oninput=" search_stop_number(this.value)" onblur="clearSearch('stationSelector')">
+                            <input class="mdl-textfield__input search_stops_input"  type="text" list="stationsList" placeholder="Search Stations" id="stationSelector" oninput=" search_stop_number(this.value)" onblur="clearSearch('stationSelector')">
                             <label class="mdl-textfield__label" for="stationSelector"></label>
                         </div>
                     </form>

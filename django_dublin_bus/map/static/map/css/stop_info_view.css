@@ -29,14 +29,9 @@
     overflow-y: scroll;
 }
 
-
 #search_stop_view{
-    padding: 0;
+    width: 90vw;
+    padding-left: 5vw;
 }
 
-#stationSelector{
-    width: 95vw;
-    margin: 1vh;
-    padding: 1vh;
-    border-radius: 10px;
-}
+
