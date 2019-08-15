@@ -62,8 +62,6 @@ function populate_time_data(){
     }
     current_time = current_hour + ':' + current_minute;
     document.getElementById("journey_time").min = current_time;
+    document.getElementById("journey_time").value = current_time;
 
-    $('input[type="time"][value="now"]').each(function () {
-        $(this).attr({'value': current_time});
-    });
 }

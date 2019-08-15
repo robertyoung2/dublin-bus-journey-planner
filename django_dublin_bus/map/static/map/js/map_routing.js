@@ -118,7 +118,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
 
                         journey_icons_string += '<i class="material-icons" style="font-size:30px;color:black">directions_bus</i>';
 
-                        journey_icons_string += `<span class="">${current_route}</span>`;
+                        journey_icons_string += `<span>${current_route}</span>`;
                     }
                     if (steps_counter < steps_len - 1){
                         journey_icons_string += '<i class="material-icons" style="font-size:30px;color:black">navigate_next</i>';

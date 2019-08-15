@@ -10,56 +10,62 @@ function generate_favourites_view(){
 
     if(favourites_section.innerHTML === ""){
         favourites_section.innerHTML = `
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+
+            <table class="mdl-data-table mdl-js-data-table mdl-shadow--2dp" id="favourites_table">
               <thead>
                 <tr>
                   <th class="mdl-data-table__cell--non-numeric">Name</th>
-                  <th>Address</th>
+                  <th class="mdl-data-table__cell--non-numeric">Address</th>
                 </tr>
               </thead>
               <tbody id="saved_favourites">
               </tbody>
             </table>
-            
-            <form action="Getinput" method="get">
-         
-                <div class="mdl-grid">
-                        <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" name="set_home" id="set_home" placeholder="Enter key">
-                            <label class="mdl-textfield__label" for="set_home"></label>
+
+            <div class="mdl-grid">
+                <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+                    <form action="Getinput" method="get">
+                 
+                        <div class="mdl-grid">
+                                <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" type="text" name="set_home" id="set_home" placeholder="Enter key">
+                                    <label class="mdl-textfield__label" for="set_home"></label>
+                                </div>
+                            </div>
+        
+        
+                            <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--1-col-phone mdl-cell--middle">
+                                <a tabindex="-1" onclick="clearSearch('set_home')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/baseline-clear-24px.svg"></a>
+                            </div>
+                            
                         </div>
-                    </div>
-
-
-                    <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--1-col-phone mdl-cell--middle">
-                        <a tabindex="-1" onclick="clearSearch('set_home')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/baseline-clear-24px.svg"></a>
-                    </div>
-                    
-                </div>
-                    
-                     <div class="mdl-grid">
-                     <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
-                        <div class="mdl-textfield mdl-js-textfield">
-                            <input class="mdl-textfield__input" type="text" name="set destination" id="set_destination" placeholder="Enter location">
-                            <label class="mdl-textfield__label" for="set_destination"></label>
+                            
+                             <div class="mdl-grid">
+                             <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
+                                <div class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input" type="text" name="set destination" id="set_destination" placeholder="Enter location">
+                                    <label class="mdl-textfield__label" for="set_destination"></label>
+                                </div>
+                            </div>
+                            
+                            <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--1-col-phone mdl-cell--middle">
+                                <a tabindex="-1" onclick="clearSearch('set_destination')">
+                                    <img id="clear_search_icon" title="Clear destination search" src="/static/map/images/baseline-clear-24px.svg">
+                                </a>
+                            </div>
+                            
+                            
+                            <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="set_favourites" value="Save Favourite">
+        
                         </div>
-                    </div>
-                    
-                    <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--1-col-phone mdl-cell--middle">
-                        <a tabindex="-1" onclick="clearSearch('set_destination')">
-                            <img id="clear_search_icon" title="Clear destination search" src="/static/map/images/baseline-clear-24px.svg">
-                        </a>
-                    </div>
-                    
-                    
-                    <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="set_favourites" value="Save Favourite">
-
+                        
+                        <div id="snackbar">Favourite saved</div>
+                        
+                    </form>
                 </div>
-                
-                <div id="snackbar">Favourite saved</div>
-                
-            </form>`;
+            </div>
+        `;
 
         capture_favourites();
         populate_saved_favourites();
@@ -67,20 +73,23 @@ function generate_favourites_view(){
 }
 
 function populate_saved_favourites(){
-    document.getElementById("saved_favourites").innerHTML = "";
-    counter = 0;
-    for(storage_key of Object.keys(window.localStorage)){
-        storage_value = window.localStorage.getItem(storage_key);
-        storage_key = titleCase(storage_key);
+    if(document.getElementById("saved_favourites")){
+        document.getElementById("saved_favourites").innerHTML = "";
+        counter = 0;
+        for(storage_key of Object.keys(window.localStorage)){
+            storage_value = window.localStorage.getItem(storage_key);
+            storage_key = titleCase(storage_key);
 
-        document.getElementById("saved_favourites").innerHTML += `
-            <tr onclick="route_to_favourite('${storage_value}')">
-              <td class="mdl-data-table__cell--non-numeric">${storage_key}</td>
-              <td>${storage_value}</td>
-            </tr>
-        `;
-        counter++;
+            document.getElementById("saved_favourites").innerHTML += `
+                <tr onclick="route_to_favourite('${storage_value}')">
+                  <td class="mdl-data-table__cell--non-numeric">${storage_key}</td>
+                  <td class="mdl-data-table__cell--non-numeric storage_value_column">${storage_value}</td>
+                </tr>
+            `;
+            counter++;
+        }
     }
+
     componentHandler.upgradeAllRegistered();
 }
 
