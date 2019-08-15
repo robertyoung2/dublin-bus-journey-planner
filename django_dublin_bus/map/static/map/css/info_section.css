@@ -26,7 +26,7 @@
 .marker_stop_heading_nearby{
     color: #4350AF;
     font-weight: bold;
-    font-size: 14pt;
+    font-size: 12pt;
     margin-top: auto;
     margin-bottom: auto;
 }
@@ -115,6 +115,6 @@
 }
 
 .no_real{
-    font-size: 14pt;
+    font-size: 12pt;
 }
 
