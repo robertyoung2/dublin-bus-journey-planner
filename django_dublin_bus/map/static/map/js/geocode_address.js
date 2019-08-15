@@ -33,15 +33,18 @@ function geocodeAddress() {
         dest_new = destination_searchbox.value
     }
 
+    // console.log();
+    // console.log("****** BUG CHECK START ******");
 
     if(origin_found === false){
         geocoder.geocode({'address': origin_new},
             function (res_origin, status) {
-                /* If place is legitimate and able to get GPS co-ordinates. */
                 if (status === 'OK') {
-
+                    // console.log("Assigning Origin!");
                     origin_lat = res_origin[0].geometry.location.lat();
                     origin_lng = res_origin[0].geometry.location.lng();
+                    // console.log("Origin Assigned");
+                    geocode_destination(origin_lat, origin_lng, dest_new);
                 }
                 else {
                     alert('Geocode was not successful for the following reason: ' + status);
@@ -50,9 +53,24 @@ function geocodeAddress() {
             }
         );
     }
+    else{
+        // console.log("Assigning Origin!");
+        geocode_destination(origin_lat, origin_lng, dest_new);
+        // console.log("Origin Assigned");
+    }
+    //
+    // console.log("origin_lat:" + origin_lat);
+    // console.log("origin_lng:" + origin_lng);
+    // console.log("origin_new:" + origin_new);
+    // console.log("dest_new:" + dest_new);
+    // console.log("origin_found:" + origin_found);
 
+}
+
+function geocode_destination(origin_lat, origin_lng, dest_new){
     geocoder.geocode({'address': dest_new}, function (res_dest, status) {
         if (status === 'OK') {
+            // console.log("Using Origin!");
             mapLocation(
                 origin_lat,
                 origin_lng,

@@ -9,6 +9,13 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
     var arrivalTime;
     var journey_date_element = document.getElementById("date_input");
     var journey_time_element = document.getElementById("journey_time");
+    //
+    // console.log("origin:" + origin);
+    // console.log("destination:" + destination);
+    // console.log("journey_date_element:" + journey_date_element);
+    // console.log("journey_time_element:" + journey_time_element);
+    // console.log("****** BUG CHECK END ******");
+    // console.log();
 
     if (selected_datetime_option === 'now'){
         departureTime = new Date();
