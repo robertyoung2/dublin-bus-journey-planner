@@ -1,3 +1,11 @@
+.journey_heading{
+    color: #4350AF;
+    font-weight: bold;
+    font-size: 14pt;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 .journey_time_text{
     font-size: 12pt;
     font-weight: bold;
@@ -11,13 +19,41 @@
     font-size: .8rem;
 }
 
+.back_journey{
+    text-align: left;
+    padding-bottom: 0px;
+}
+
 .mdl-card {
     min-height: 120px;
     padding: 1vh;
-    max-width: 85vw;
+    max-width: 40vw;
     margin-left: auto;
     margin-right: auto;
 }
+
+@media only screen and (max-width: 830px) {
+    .mdl-card {
+    min-height: 120px;
+    padding: 1vh;
+    max-width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+}
+
+
+
+@media only screen and (max-width: 829px) {
+    .mdl-card {
+    min-height: 120px;
+    padding: 1vh;
+    max-width: 80vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+}
+
 
 .mdl-card__title{
     padding-top: 5px;

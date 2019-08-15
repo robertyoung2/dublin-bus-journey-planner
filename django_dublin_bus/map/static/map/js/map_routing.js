@@ -60,9 +60,9 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
             console.log(response.routes.length);
             let route_options_table = document.getElementById('route_options_container');
             route_options_table.innerHTML = `
-                <div class="mdl-grid">
-                    <div class="mdl-cell mdl-cell--12-col">Suggested Journeys</div>
-                </div>
+<!--                <div class="mdl-grid">-->
+<!--                    <div class="mdl-cell mdl-cell&#45;&#45;12-col">Suggested Journeys</div>-->
+<!--                </div>-->
             `;
 
             var model_journeys = [];
@@ -128,7 +128,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                 if(include === true){
                     route_options_table.innerHTML += `
 
-                    <div class="mdl-cell mdl-cell--12-col">
+                    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
                
                         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                             <div class="mdl-card__title">
@@ -145,7 +145,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                             
                             <div class="mdl-card__actions mdl-card--border">
                                 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" id="${i}" onclick="render_route_at_index(${i})">
-                                    Route Journey
+                                    Show Journey
                                 </a>
                             </div>
                         </div>
