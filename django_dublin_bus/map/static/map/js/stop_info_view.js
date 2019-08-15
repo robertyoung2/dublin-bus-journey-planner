@@ -15,7 +15,7 @@ function generate_stop_info_view(){
 
         stop_info_section.innerHTML = `
 
-            <div class="mdl-tabs mdl-js-tabs
+            <div class="mdl-tabs mdl-js-tabs">
                 <div class="mdl-tabs__tab-bar">
                     <a href="#search_stop_view" class="mdl-tabs__tab">Search Stop</a>
                     <a href="#nearby_stops_view" class="mdl-tabs__tab" onclick="generate_nearby_stop_info(true)">Nearby Stops</a>
