@@ -10,9 +10,9 @@ function generate_favourites_view(){
 
     if(favourites_section.innerHTML === ""){
         favourites_section.innerHTML = `
-            <div id="saved_favourites" class="grid-x align-center"></div>
+            <div id="saved_favourites"></div>
             
-            <form class="cell" action="Getinput" method="get">
+            <form action="Getinput" method="get">
          
                 <div class="mdl-grid">
                         <div class="mdl-cell mdl-cell--7-col mdl-cell--5-col-tablet mdl-cell--3-col-phone">
@@ -38,16 +38,16 @@ function generate_favourites_view(){
                     </div>
                     
                     <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--1-col-phone mdl-cell--middle">
-                        <a tabindex="-1" onclick="clearSearch('set_destination')"><img id="clear_search_icon" title="Clear destination search" src="/static/map/images/baseline-clear-24px.svg"></a>
+                        <a tabindex="-1" onclick="clearSearch('set_destination')">
+                            <img id="clear_search_icon" title="Clear destination search" src="/static/map/images/baseline-clear-24px.svg">
+                        </a>
                     </div>
                     
                     
-                    <div class="cell small-3 medium-3">
                     <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="set_favourites" value="Save Favourite">
-                    </div>
 
-                    <div class="small-7 medium-7"></div>
                 </div>
+                
                 <div id="snackbar">Favourite saved</div>
                 
             </form>`;
@@ -66,11 +66,9 @@ function populate_saved_favourites(){
         storage_key = titleCase(storage_key);
 
         document.getElementById("saved_favourites").innerHTML += `
-            <div class="cell grid-x" onclick="route_to_favourite('${storage_value}')">
-                <div class="cell small-2 medium-2"></div>
-                <div class="cell small-4 medium-4">${storage_key}</div>
-                <div class="cell small-4 medium-4">${storage_value}</div>
-                <div class="cell small-2 medium-2"></div>
+            <div onclick="route_to_favourite('${storage_value}')">
+                <div>${storage_key}</div>
+                <div>${storage_value}</div>
             </div>
         `;
         counter++;

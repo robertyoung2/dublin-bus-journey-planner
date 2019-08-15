@@ -52,19 +52,19 @@
 </head>
 
 <body>
-<div id="page_layout" class="grid-y grid-frame">
-        <div id="map_container" class="cell">
+<div id="page_layout">
+        <div id="map_container">
             <div id="map"></div>
         </div>
 
-        <div id="info_section" class="cell grid-x">
-            <div id="directions_view_section" class="cell align-self-middle" style="display:none"></div>
+        <div id="info_section">
+            <div id="directions_view_section" style="display:none"></div>
             <div id="journey_results_view_section" style="display:none"></div>
-            <div id="favourites_view_section" class="cell grid-x align-self-middle" style="display:none"></div>
-            <div id="stop_info_view_section" class="cell grid-y grid-frame" style="display:none"></div>
+            <div id="favourites_view_section" style="display:none"></div>
+            <div id="stop_info_view_section" style="display:none"></div>
         </div>
 
-        <div id="bottom_navbar" class="cell">
+        <div id="bottom_navbar">
             <div class="mobile-app-icon-bar">
                 {% load staticfiles %}
                 <a id='directions_view_button' class="footer-link" onclick="populate_info('directions_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}"></a>

@@ -15,27 +15,27 @@ function generate_stop_info_view(){
 
         stop_info_section.innerHTML = `
 
-<div class="mdl-tabs mdl-js-tabs">
-    <div class="mdl-tabs__tab-bar">
-        <a href="#search_stop_view" class="mdl-tabs__tab">Search Stop</a>
-        <a href="#nearby_stops_view" class="mdl-tabs__tab" onclick="generate_nearby_stop_info(true)">Nearby Stops</a>
-    </div>  
-
-    <div class="mdl-tabs__panel is-active" id="search_stop_view">
-        <form action="#">
-            <div class="mdl-textfield mdl-js-textfield">
-                <input class="mdl-textfield__input"  type="text" list="stationsList" placeholder="Search Stations" id="stationSelector" oninput=" search_stop_number(this.value)" onblur="clearSearch('stationSelector')">
-                <label class="mdl-textfield__label" for="stationSelector"></label>
+            <div class="mdl-tabs mdl-js-tabs">
+                <div class="mdl-tabs__tab-bar">
+                    <a href="#search_stop_view" class="mdl-tabs__tab">Search Stop</a>
+                    <a href="#nearby_stops_view" class="mdl-tabs__tab" onclick="generate_nearby_stop_info(true)">Nearby Stops</a>
+                </div>  
+            
+                <div class="mdl-tabs__panel is-active" id="search_stop_view">
+                    <form action="#">
+                        <div class="mdl-textfield mdl-js-textfield">
+                            <input class="mdl-textfield__input"  type="text" list="stationsList" placeholder="Search Stations" id="stationSelector" oninput=" search_stop_number(this.value)" onblur="clearSearch('stationSelector')">
+                            <label class="mdl-textfield__label" for="stationSelector"></label>
+                        </div>
+                    </form>
+                    
+                <datalist id="stationsList">${stop_data_list_string}</datalist>
+                <div id="search_stop_view_content"></div>
+                </div>
+                <div class="mdl-tabs__panel" id="nearby_stops_view">
+                </div>
             </div>
-        </form>
-        
-    <datalist id="stationsList">${stop_data_list_string}</datalist>
-    <div id="search_stop_view_content"></div>
-    </div>
-    <div class="mdl-tabs__panel" id="nearby_stops_view">
-    </div>
-</div>
-`;
+            `;
         componentHandler.upgradeAllRegistered();
     }
 }

@@ -31,7 +31,7 @@ function generate_directions_views(){
 
         if(directions_section.innerHTML === ""){
             directions_section.innerHTML =`
-                <form class="cell" action="Getinput" method="get">
+                <form action="Getinput" method="get">
                 
                 <!--    Origin Input-->
                 
