@@ -7,7 +7,7 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
     var destination = new google.maps.LatLng(dest_lat, dest_lng);
     var departureTime;
     var arrivalTime;
-    var journey_date_element = document.getElementById("date");
+    var journey_date_element = document.getElementById("date_input");
     var journey_time_element = document.getElementById("journey_time");
 
     if (selected_datetime_option === 'now'){
@@ -155,6 +155,8 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                     rendered_route_index_list.push(i);
                     console.log("****************");
                 }
+                console.log("Render route at index: " + parseInt(rendered_route_list[0]));
+                directionsRenderer.setRouteIndex(parseInt(rendered_route_list[0]));
             }
             console.log("Data for Backend:" + model_journeys);
             console.log("****************");

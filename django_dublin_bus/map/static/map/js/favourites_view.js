@@ -10,7 +10,16 @@ function generate_favourites_view(){
 
     if(favourites_section.innerHTML === ""){
         favourites_section.innerHTML = `
-            <div id="saved_favourites"></div>
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+              <thead>
+                <tr>
+                  <th class="mdl-data-table__cell--non-numeric">Name</th>
+                  <th>Address</th>
+                </tr>
+              </thead>
+              <tbody id="saved_favourites">
+              </tbody>
+            </table>
             
             <form action="Getinput" method="get">
          
@@ -52,7 +61,6 @@ function generate_favourites_view(){
                 
             </form>`;
 
-        componentHandler.upgradeAllRegistered();
         capture_favourites();
         populate_saved_favourites();
     }
@@ -66,13 +74,14 @@ function populate_saved_favourites(){
         storage_key = titleCase(storage_key);
 
         document.getElementById("saved_favourites").innerHTML += `
-            <div onclick="route_to_favourite('${storage_value}')">
-                <div>${storage_key}</div>
-                <div>${storage_value}</div>
-            </div>
+            <tr onclick="route_to_favourite('${storage_value}')">
+              <td class="mdl-data-table__cell--non-numeric">${storage_key}</td>
+              <td>${storage_value}</td>
+            </tr>
         `;
         counter++;
     }
+    componentHandler.upgradeAllRegistered();
 }
 
 function upperCase(str) {
