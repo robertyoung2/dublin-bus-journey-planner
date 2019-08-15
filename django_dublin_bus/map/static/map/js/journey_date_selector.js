@@ -24,7 +24,6 @@ function populate_date_data(){
 
     var today = new Date();
     current_date = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + today.getDate();
-
     for (var day = 0; day < 7; day++) {
 
         date_value = today.getFullYear() + "-" + (today.getMonth() + 1) + "-" + (today.getDate() + day);

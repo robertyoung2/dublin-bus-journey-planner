@@ -68,12 +68,12 @@ function generate_directions_views(){
                         <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
                         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="now" >
                         <input type="radio" id="now" class="mdl-radio__button datetime_option" name="options" value="now" checked >
-                        <span class="mdl-radio__label">Now &nbsp;&nbsp;&nbsp;</span>
+                        <span class="mdl-radio__label">Now</span>
                         </label>
                         
                         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="departureTime" >
                         <input type="radio" id="departureTime" class="mdl-radio__button datetime_option" name="options" value="departureTime" >
-                        <span class="mdl-radio__label">Depart At &nbsp;&nbsp;&nbsp;</span>
+                        <span class="mdl-radio__label">Depart At</span>
                         </label>
                         
                         <label class="mdl-radio mdl-js-radio mdl-js-ripple-effect" for="arrivalTime" >
@@ -88,7 +88,7 @@ function generate_directions_views(){
                             <!-- Pre-selected value -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
                                 <input type="text" value="" class="mdl-textfield__input" id="sample6">
-                                <input type="hidden" value="" name="sample6">
+                                <input id="date_input" type="hidden" value="" name="sample6">
                                 <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
                                 <label for="sample6" class="mdl-textfield__label">Date</label>
                                 <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" id="date"></ul>
@@ -122,10 +122,13 @@ function generate_directions_views(){
 
 function validate_directions_form(){
     let submitted_time = document.getElementById("journey_time");
-    let submitted_date = document.getElementById("date");
+    let submitted_date = document.getElementById("date_input");
+
+    console.log("Current Date Value:" + current_date);
+    console.log("Submitted Date Value: " + submitted_date.value);
 
     if(submitted_date.value === current_date && submitted_time.value < current_time){
-        alert("Pleas enter a valid time");
+        alert("Please enter a valid time");
     }
     else{
         console.log("Valid Time");
