@@ -72,19 +72,26 @@ function generate_nearby_stop_info(button_clicked){
 
         if(previous_markers.length > 0){
             // console.log("Has previous markers");
-            nearby_stops_view.innerHTML = `
-                <div id="nearby_stops_list" class="mdl-grid">
-                    
-                </div>
-                `;
+            nearby_stops_view.innerHTML = `<div id="nearby_stops_list" class="mdl-grid"></div>`;
+            duetime_dict = {};
 
             let nearby_stop_counter = 0;
             for(marker of previous_markers){
-                document.getElementById("nearby_stops_list").innerHTML +=
-                    `<li class="accordion-item" data-accordion-item>
-                        <a href="#" class="accordion-title">${marker.stop_info.stop_name} (${marker.stop_info.actual_stop_id})</a>
-                        <div id="nearby_stop_content_${nearby_stop_counter}" class="accordion-content" data-tab-content ></div>
-                    </li>`;
+                document.getElementById("nearby_stops_list").innerHTML +=`
+                    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+               
+                        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+                        
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">${marker.stop_info.actual_stop_id} - ${marker.stop_info.stop_name}</h2>
+                            </div>
+                        
+                            <div class="mdl-card__supporting-text">
+                                <div id="nearby_stop_content_${nearby_stop_counter}"></div>
+                            </div>
+                            
+                        </div>
+                    </div>`;
                 // console.log("nearby_stop_content_"+nearby_stop_counter);
                 AjaxGetRoutes(marker.stop_info.stop_id, marker.stop_info.actual_stop_id, "nearby_stop_content_"+nearby_stop_counter);
                 nearby_stop_counter++;
