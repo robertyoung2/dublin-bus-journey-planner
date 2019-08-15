@@ -6,24 +6,31 @@ function capture_favourites(){
     console.log("called capture_favourites function!");
     sethome = document.getElementById('set_home');
     destination = document.getElementById('set_destination');
+    let set_favourites_button = document.getElementById('set_favourites');
 
-    autocomplete = new google.maps.places.Autocomplete(destination, autocomplete_options);
+    if(destination){
+        autocomplete = new google.maps.places.Autocomplete(destination, autocomplete_options);
+    }
 
-    document.getElementById('set_favourites').addEventListener('click', function () {
 
-        geocoder.geocode({'address': destination.value},
-            function (res_origin, status) {
-                /* If place is legitimate and able to get GPS co-ordinates. */
-                if (status === 'OK') {
-                    console.log("sucessful geocode");
-                    saveFavourite();
+    if(set_favourites_button){
+        set_favourites_button.addEventListener('click', function () {
+
+            geocoder.geocode({'address': destination.value},
+                function (res_origin, status) {
+                    /* If place is legitimate and able to get GPS co-ordinates. */
+                    if (status === 'OK') {
+                        console.log("sucessful geocode");
+                        saveFavourite();
+                    }
+                    else {
+                        alert('Please enter a valid address from google maps');
+                    }
                 }
-                else {
-                    alert('Please enter a valid address from google maps');
-                }
-            }
-        );
-    });
+            );
+        });
+    }
+
 }
 
 function saveFavourite(){

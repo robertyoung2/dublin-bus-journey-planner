@@ -84,7 +84,7 @@ function generate_directions_views(){
                 
                     <div id="datetime_selector_container" class="mdl-grid" style="display: none">
                         <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-                            <input type="time" id="journey_time" max="23:59" value="now" required>
+                            <input type="time" id="journey_time" max="23:59" required>
                             <!-- Pre-selected value -->
                             <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
                                 <input type="text" value="" class="mdl-textfield__input" id="sample6">
