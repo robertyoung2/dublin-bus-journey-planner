@@ -21,7 +21,7 @@ function generate_favourites_view(){
                 </div>
                         
                  <!--Remove Key Entry Button-->
-                <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--hide-phone">
+                <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--middle mdl-cell--hide-phone">
                     <a tabindex="-1" onclick="clearSearch('set_home')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/baseline-clear-24px.svg"></a>
                 </div>
                         
@@ -34,7 +34,7 @@ function generate_favourites_view(){
                 </div>
                         
                  <!--Remove Address Button -->
-                <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--hide-phone">
+                <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--middle mdl-cell--hide-phone">
                     <a tabindex="-1" onclick="clearSearch('set_destination')">
                         <img id="clear_search_icon" title="Clear destination search" src="/static/map/images/baseline-clear-24px.svg">
                     </a>

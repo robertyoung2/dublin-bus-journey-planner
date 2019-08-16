@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django_dublin_bus.settings import BASE_DIR, GOOGLE_KEY
+from django_dublin_bus.settings import BASE_DIR
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse
 
@@ -13,8 +13,7 @@ from math import cos, asin, sqrt
 # Create your views here
 def home(request):
     stops_info = StopsInfo.objects.all()
-    hidden_key = GOOGLE_KEY
-    context = {'bus_stops': stops_info,'google_key': hidden_key}
+    context = {'bus_stops': stops_info}
     return render(request,'map/home.html', context)
 
 

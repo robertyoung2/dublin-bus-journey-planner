@@ -31,7 +31,7 @@ var initialize = function () {
 
     var user_marker_icon = {
         url: user_marker_image_url, //the image itself
-        scaledSize: new google.maps.Size(75, 75) // resizing image to 50% smaller
+        scaledSize: new google.maps.Size(60, 60) // resizing image to 50% smaller
     };
 
     const marker = new google.maps.Marker({
