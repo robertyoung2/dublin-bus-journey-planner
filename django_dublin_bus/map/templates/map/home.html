@@ -74,14 +74,37 @@
             <div id="stop_info_view_section" style="display:none"></div>
         </div>
 
-        <div id="bottom_navbar">
-            <div class="mobile-app-icon-bar">
-                {% load staticfiles %}
-                <a id='directions_view_button' class="footer-link" onclick="populate_info('directions_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}"></a>
-                <a id="favourites_view_button" class="footer-link" onclick="populate_info('favourites_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/favourites.png" %}"></a>
-                <a id='stop_info_view_button' class="footer-link" onclick="populate_info('stop_info_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/journey.png" %}"></a>
-            </div>
-        </div>
+
+
+<nav class="mobile-bottom-nav">
+        {% load staticfiles %}
+	<div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+		<div class="mobile-bottom-nav__item-content">
+			<a id='directions_view_button' onclick="populate_info('directions_view')">Tab 1</a>
+		</div>
+	</div>
+
+	<div class="mobile-bottom-nav__item">
+		<div class="mobile-bottom-nav__item-content">
+			<a id="favourites_view_button" onclick="populate_info('favourites_view')">Tab 2</a>
+		</div>
+	</div>
+
+	<div class="mobile-bottom-nav__item">
+		<div class="mobile-bottom-nav__item-content">
+			<a id='stop_info_view_button' onclick="populate_info('stop_info_view')">Tab 3</a>
+		</div>
+	</div>
+
+</nav>
+{#        <div id="bottom_navbar">#}
+{#            <div class="mobile-app-icon-bar">#}
+{#                {% load staticfiles %}#}
+{#                <a id='directions_view_button' class="footer-link" onclick="populate_info('directions_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}"></a>#}
+{#                <a id="favourites_view_button" class="footer-link" onclick="populate_info('favourites_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/favourites.png" %}"></a>#}
+{#                <a id='stop_info_view_button' class="footer-link" onclick="populate_info('stop_info_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/journey.png" %}"></a>#}
+{#            </div>#}
+{#        </div>#}
     </div>
 
     <!--Imporing This script gives us access to the csrf token returned by django-->
