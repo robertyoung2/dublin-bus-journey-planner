@@ -1,6 +1,4 @@
-
 .mobile-bottom-nav__item a {
-  padding: 1.25rem;
   cursor: pointer;
 }
 
@@ -14,11 +12,9 @@
 
 a:hover img{
     opacity: 1;
-    /*filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg) brightness(95%) contrast(80%);*/
 }
 
 
 .active_view img{
     opacity: 1;
-    /*filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg) brightness(95%) contrast(80%);*/
 }

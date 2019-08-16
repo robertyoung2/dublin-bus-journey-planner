@@ -4,7 +4,6 @@ QUnit.test("Determine whether datetime options are show/hiding correctly", funct
 
     //Test the value is correct passing
     let option = document.getElementById("option");
-    let datetime_selector_container = document.getElementById("datetime_selector_container");
 
     option.options[0].selected = true;
     assert.equal(option.value, "now", "value is now");

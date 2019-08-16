@@ -1,8 +1,4 @@
 function set_night_mode(sunrise, sunset, timetoday){
-    // Get todays date and time
-    // Check to see if the date and time is between sunrise and sunset
-    // If not, add night mode styles to map
-
     if(timetoday >= (sunset) || timetoday <= ((sunrise))){
         styles = [
                 {

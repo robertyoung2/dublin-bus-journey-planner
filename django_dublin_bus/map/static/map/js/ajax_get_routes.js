@@ -6,20 +6,12 @@ function AjaxGetRoutes(stop_id, actual_stop_id, element_id) {
         url: get_routes_url,
 
         success: function (route_data, status) {
-            // Do unit test to make sure the right format is being returned and the data is correct
-            // let stop_routes = new Set();
             let element = document.getElementById(element_id);
             duetime_dict[actual_stop_id] = {};
 
             if(element){
                 element.innerHTML = "";
                 if(route_data[1].length > 0){
-                    // console.log();
-                    // console.log("****** BUG TEST START ********");
-                    // console.log();
-                    // console.log("Stop: " + actual_stop_id);
-                    // console.log("Route Date Below");
-                    // console.log(route_data[1]);
 
                     for(route of route_data[1]){
 
@@ -51,11 +43,6 @@ function AjaxGetRoutes(stop_id, actual_stop_id, element_id) {
                         }
                         duetime_dict[actual_stop_id][route.route].push(route.duetime);
                     }
-                    // console.log("Duetime Dict Data Below");
-                    // console.log(duetime_dict[actual_stop_id]);
-                    // console.log();
-                    // console.log("****** BUG TEST END ********");
-                    // console.log();
 
                     for(let key in duetime_dict[actual_stop_id]){
                         let duetime_result = duetime_dict[actual_stop_id][key];
@@ -81,13 +68,9 @@ function AjaxGetRoutes(stop_id, actual_stop_id, element_id) {
                     element.innerHTML += `<br><span class="no_real">No Realtime Information Available For This Stop<span>`;
                 }
             }
-
-
-
         },
         error: function (jqXHR) {
             console.log(jqXHR);
-            // Might be worth displaying this to the user in meaningful way
         }
     });
 }

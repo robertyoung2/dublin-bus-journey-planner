@@ -1,13 +1,11 @@
 from django.shortcuts import render
 from django_dublin_bus.settings import BASE_DIR, GOOGLE_KEY
 from django.views.decorators.csrf import ensure_csrf_cookie
-from django.core import serializers
 from django.http import HttpResponse
-
 
 from .models import StopsInfo, BusStops, Holidays
 
-import difflib, datetime, os, time, pickle, json, csv, requests
+import difflib, datetime, os, time, pickle, json, requests
 import pandas as pd
 from math import cos, asin, sqrt
 
@@ -23,10 +21,7 @@ def home(request):
 def get_routes(request):
     if request.method == "POST":
         data_dict = json.loads(request.POST["json_data"])
-        print(data_dict['stop_id'])
-        print(data_dict['actual_stop_id'])
         routes = list(BusStops.objects.filter(stop_id=data_dict['stop_id']).values())
-        print(routes)
 
         rts_info = requests.get('http://data.smartdublin.ie/cgi-bin/rtpi//realtimebusinformation?stopid='+data_dict['actual_stop_id']+'&format=json')
         rts_info_results = rts_info.json()['results']
@@ -37,13 +32,10 @@ def get_routes(request):
                             "destination": result['destination']}
             rts_info_list.append(bus_due_info)
 
-        # rts_info_list = json.dumps(rts_info_list)
-        # routes_json = serializers.serialize("json", routes, fields=("bus_numbers","stop_headsign"))
-        # routes_json = json.dumps(routes)
-
         routes_served_RTS = json.dumps([routes, rts_info_list])
 
         return HttpResponse(routes_served_RTS, content_type="application/json")
+
 
 def run_model(request):
     if request.method == "POST":
@@ -53,15 +45,14 @@ def run_model(request):
         path_csv = os.path.join(BASE_DIR, 'map/ml_models/csv/')
         path_xgbr_models = os.path.join(BASE_DIR, 'map/ml_models/xgbr_models/')
 
-        Start_Model_Time = time.time()
         df = pd.read_csv(path_csv+'ordered_stops_segment_goahead_fixed.csv')
         weather_df = pd.read_csv(path_csv+'168_hours_weather.csv', parse_dates=['ts_weather'])
 
-
         predictions = []
+
         for journey in data:
-            print()
             journey_results = {}
+
             for route in journey:
                 headsign_options = list(df.loc[df['route'] == route]['destination'].unique())
                 journey_results[route] = []
@@ -71,13 +62,11 @@ def run_model(request):
                 arr_time = arr_time.replace("Z", "")
                 arr_time = datetime.datetime.strptime(arr_time, '%Y-%m-%d %H:%M:%S.%f')
                 firststoparrival = int(time.mktime(arr_time.timetuple()))
-                print("Departing At:", arr_time, "or", firststoparrival, "in Unix!")
 
                 weekdays = [0, 0, 0, 0, 0, 0, 0]
                 weekdays[arr_time.weekday()] = 1
 
                 hour = arr_time.hour
-                print("Hour of Departure:", hour)
 
                 try:
                     holiday = Holidays.objects.get(date=arr_time.date())
@@ -85,18 +74,15 @@ def run_model(request):
                     holiday = {"public_holiday": False, "primary_holiday": False, "secondary_holiday": False}
 
                 headsign = journey[route]['Destination']
-                print(route, ": Towards", headsign)
                 headsign = difflib.get_close_matches(headsign, headsign_options, n=1)
-                print(route, ": Towards", headsign)
                 segments = []
                 missing_segments = []
+
                 if len(headsign) != 0:
-                    print("Headsign Matched!")
                     headsign = headsign[0]
                     route_stop_list = df.loc[(df['route'] == route) & (df['destination'] == headsign)].to_dict('records')
-                    print("Total Stops in Route:", len(route_stop_list))
+
                     if len(route_stop_list) != 0:
-                        print("Route Found")
                         journey_org_dest = closest(route_stop_list, journey[route])
 
                         first_row = True
@@ -105,6 +91,7 @@ def run_model(request):
                         for stop in route_stop_list:
                             if stop['stopid'] == journey_org_dest['Origin_Stop']['stopid']:
                                 origin_reached = True
+
                             if origin_reached == True:
                                 if first_row == True:
                                     first_row = False
@@ -113,16 +100,11 @@ def run_model(request):
 
                                 if stop['stopid'] == journey_org_dest['Destination_Stop']['stopid']:
                                     break
-                        print("Amount of stops in this Route Trip:", len(segments))
-                        print("Route Segments:", segments)
 
                         rounded_arr_time = round_to_hour(arr_time)
                         nearest_weather = weather_df.loc[weather_df['ts_weather'] == rounded_arr_time]
                         temp = float(nearest_weather['temp_c'])
-                        print("Temp:", temp)
                         rain = float(nearest_weather['rain_mm'])
-                        print("Rain:", rain)
-
 
                         for segment in segments:
                             if os.path.isfile(path_xgbr_models + segment + "_pickle.sav"):
@@ -132,6 +114,7 @@ def run_model(request):
                                                int(holiday.secondary_holiday),
                                                int(holiday.public_holiday), weekdays[0], weekdays[1], weekdays[2],
                                                weekdays[3], weekdays[4], weekdays[5], weekdays[6]]]
+
                                 model_df = pd.DataFrame(model_data, columns=['FIRSTSTOPARRIVAL', 'HOUR', 'rain', 'temp',
                                                                              'PRIMARYHOLIDAY',
                                                                              'SECONDARYHOLIDAY', 'PUBLICHOLIDAY',
@@ -140,37 +123,20 @@ def run_model(request):
                                                                              'DAY_OF_WEEK_Thursday',
                                                                              'DAY_OF_WEEK_Friday', 'DAY_OF_WEEK_Saturday',
                                                                              'DAY_OF_WEEK_Sunday'])
+
                                 journey_time = int(loaded_model.predict(model_df))
-                                #                     print(journey_time)
                                 journey_results[route].append(journey_time)
                                 firststoparrival += journey_time
+
                             else:
                                 missing_segments.append(segment)
                                 journey_results[route] = []
                                 break
-                else:
-                    print("No Matching Headsign!")
-                if len(segments) == 0:
-                    print("Could not find segments!")
-                else:
-                    if len(segments) == len(journey_results[route]):
-                        print("Success! All segments predicted!", len(segments))
-                    else:
-                        print("There are", len(missing_segments), "missing Segments:", missing_segments)
 
-                print()
-            print("There are", len(journey_results[route]), "Prediction Results:", journey_results[route])
-
-            print()
-            print("**************************")
             predictions.append(journey_results)
-        print("Predictions Results:", predictions)
-        End_Model_Time = time.time()
-        print()
-        print("Total Prediction Time:", round(End_Model_Time - Start_Model_Time, 2), "seconds")
-
 
         predictions = json.dumps(predictions)
+
         return HttpResponse(predictions, content_type='application/json')
 
 
