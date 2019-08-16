@@ -5,7 +5,7 @@ function set_date_options() {
     //Function displays the date and time
     $(function () {
         console.log("Inside Show/Hide date function!");
-        populate_date_data();
+
         populate_time_data();
 
         $(".datetime_option").click(function () {
@@ -39,18 +39,28 @@ function populate_date_data(){
         // console.log(date_string);
         // console.log();
 
-        let new_date = document.createElement('li');
-        new_date.classList.add("mdl-menu__item");
-        new_date.setAttribute('data-val', date_value);
-        if(day === 0){
-            new_date.setAttribute('data-selected', "true");
-        }
-        var textnode = document.createTextNode(date_string);
-        new_date.appendChild(textnode);
+        // <option value="${'{{bus_stop.actual_stop_id}}'}">${'{{bus_stop.stop_name}}'} (${'{{bus_stop.actual_stop_id}}'})</option>
 
-        if(document.getElementById("date")){
-            document.getElementById("date").appendChild(new_date);
-        }
+        // let new_date = document.createElement('option');
+        date_data_list_string += `<option value="${date_value}">${date_string}</option>`;
+        // new_date.value = date_value;
+        // if(day === 0){
+        //     new_date.setAttribute('data-selected', "true");
+        // }
+
+
+        // let new_date = document.createElement('li');
+        // new_date.classList.add("mdl-menu__item");
+        // new_date.setAttribute('data-val', date_value);
+        // if(day === 0){
+        //     new_date.setAttribute('data-selected', "true");
+        // }
+        // var textnode = document.createTextNode(date_string);
+        // new_date.appendChild(textnode);
+        //
+        // if(document.getElementById("date")){
+        //     document.getElementById("date").appendChild(new_date);
+        // }
 
     }
     componentHandler.upgradeAllRegistered();
