@@ -107,7 +107,7 @@ function generate_directions_views(){
                                 <div id="time_selector" class="mdl-textfield mdl-js-textfield">
                                     <input id="journey_time" max="23:59" required class="mdl-textfield__input" type="time"">
                                     <label class="mdl-textfield__label" for="sample2"></label>
-                                    <span class="mdl-textfield__error">Please enter a valid time!</span>
+                                    <!--<span id="time_selector_error" class="mdl-textfield__error">Please enter a valid time!</span>-->
                                 </div>
                             </div>
                             
@@ -130,6 +130,8 @@ function generate_directions_views(){
                 <div id="valid_address" class>Please enter a valid address</div>
                                 `;
             componentHandler.upgradeAllRegistered();
+            document.getElementById("time_selector").classList.remove("is-invalid");
+            document.getElementById("time_selector").classList.add("is-valid");
             generateRouteSearch();
             set_date_options();
         }
