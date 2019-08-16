@@ -1,11 +1,10 @@
-function set_night_mode(){
+function set_night_mode(sunrise, sunset, timetoday){
     // Get todays date and time
     // Check to see if the date and time is between sunrise and sunset
     // If not, add night mode styles to map
-    var timetoday = Math.round(new Date() / 1000);
 
     if(timetoday >= (sunset) || timetoday <= ((sunrise))){
-        let styles = [
+        styles = [
                 {
                     elementType: 'geometry',
                     stylers: [{color: '#242f3e'}]
@@ -98,6 +97,12 @@ function set_night_mode(){
                     stylers: [{ visibility: "off" }]
                 }
             ];
-        map.set('styles', styles);
+        return [styles, "Night"];
+    }
+    else{
+        styles = [
+            {"featureType": "transit.station.bus","stylers": [{"visibility": "off"}]}
+        ];
+        return [styles, "Day"];
     }
 }

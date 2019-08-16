@@ -99,12 +99,8 @@ function generate_directions_views(){
                     <div id="datetime_selector_container" style="display: none">
                         <div class="mdl-grid">
                             <!--Time-->
-                            <!--<div class="mdl-cell mdl-cell&#45;&#45;2-col mdl-cell&#45;&#45;1-col-tablet mdl-cell&#45;&#45;1-col-phone mdl-cell&#45;&#45;top">-->
-                                <!--<input type="time" id="journey_time" max="23:59" required>-->
-                            <!--</div>-->
-                            
                             <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone mdl-cell--top">
-                                <div id="time_selector" class="mdl-textfield mdl-js-textfield">
+                                <div id="time_selector" class="mdl-textfield mdl-js-textfield" readonly="true">
                                     <input id="journey_time" max="23:59" required class="mdl-textfield__input" type="time">
                                     <label class="mdl-textfield__label" for="sample2"></label>
                                     <!--<span id="time_selector_error" class="mdl-textfield__error">Please enter a valid time!</span>-->
@@ -115,7 +111,7 @@ function generate_directions_views(){
                             <!-- Pre-selected value -->
                             <div class="mdl-cell mdl-cell--5-col mdl-cell--6-col-tablet mdl-cell--2-col-phone mdl-cell--top">
                                 
-                                <div id="date_selector" class="mdl-textfield mdl-js-textfield">
+                                <div id="date_selector" class="mdl-textfield mdl-js-textfield" readonly="true">
                                     <input class="mdl-textfield__input search_stops_input"  type="text" list="date" placeholder="Select Date" id="date_input">
                                     <label class="mdl-textfield__label" for="date_input"></label>
                                 </div>
@@ -159,6 +155,5 @@ function validate_directions_form(){
         console.log("Valid Time");
         geocodeAddress();
     }
-
 }
 

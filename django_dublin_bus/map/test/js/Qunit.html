@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>QUnit Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.9.2.css">
+</head>
+<body>
+<div id="qunit"></div>
+<div id="qunit-fixture">
+    //HTML for testing
+    <input type="text" placeholder="Enter Email" id="set_location" name="email">
+   <script>document.getElementById("set_location").style.display="none";</script>
+    <div id="datetime_selector_container" hidden="hidden">
+        <select id="date"></select>
+        <input type="time" id="journey_time" required>
+    </div>
+    <select id="option">
+        <option value="now">Now</option>
+        <option value="departureTime">Departure Time</option>
+        <option value="arrivalTime">Arrival Time</option>
+    </select>
+    <input type="text" name="input_route_origin" id="input_route_origin" placeholder="Enter Origin (Default Current Location)">
+    <input type="text" name="input_route_destination" id="input_route_destination" placeholder="Enter Destination">
+    <form class="cell" action="Getinput" method="get">
+        <div class="grid-x align-center">
+            <div class="cell small-8 medium-8">
+                <input type="text" name="set_home" id="set_home" value="home" placeholder="Enter Key">
+            </div>
+            <div class="cell small-2 medium-2">
+                <a tabindex="-1" onclick="clearSearch('set_home')"></a>
+            </div>
+            <div class="cell small-8 medium-8">
+                <input type="text" name="set destination" id="set_destination" value="destination" placeholder="Enter Location">
+            </div>
+            <div class="cell small-2 medium-2">
+                <a tabindex="-1" onclick="clearSearch('set_destination')"></a>
+            </div>
+            <div class="cell small-3 medium-3">
+                <input type="button" id="set_favourites" value="Save Favourite">
+            </div>
+            <div class="small-7 medium-7"></div>
+        </div>
+    </form>
+</div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDCdOS87zrKfHICHXYGsrcQA8WX9gG3o1I&libraries=places,geometry"></script>
+<script src="https://code.jquery.com/qunit/qunit-2.9.2.js"></script>
+<script src="../../static/map/js/haversine.js"></script>
+<script src="../../static/map/js/journey_date_selector.js"></script>
+<script src="../../static/map/js/cache_user_favourites.js"></script>
+<script src="../../static/map/js/clearSearch.js"></script>
+<script src="../../static/map/js/set_map_night_mode.js"></script>
+<script src="journey_date_selector_test.js"></script>
+<script src="cache_user_favourites_test.js"></script>
+<script src="haversine_test.js"></script>
+<script src="set_map_night_mode_test.js"></script>
+<script src="clearSearch_test.js"></script>
+
+
+</body>
+</html>

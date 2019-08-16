@@ -22,9 +22,11 @@ function getnearby() {
         //
         // console.log("Width Height Proportion");
         // console.log(real_map_size);
-        // let prop = (real_map_size.width / real_map_size.height)
-
-        nearby_radius = haversine(location.lat(), location.lng(), northeastBound.lat(), northeastBound.lng());
+        // let corner_hypothenuse = Math.sqrt((Math.pow((real_map_size.width / 2), 2)) + (Math.pow((real_map_size.height / 2), 2)));
+        // let proportion = corner_hypothenuse / (real_map_size.height / 2);
+        //
+        // nearby_radius = (haversine(location.lat(), location.lng(), northeastBound.lat(), northeastBound.lng()) / proportion);
+        // nearby_radius = haversine(location.lat(), location.lng(), northeastBound.lat(), northeastBound.lng())
     }
 
     // List of current nearby markers as marker objects

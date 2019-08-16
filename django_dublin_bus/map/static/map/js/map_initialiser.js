@@ -100,14 +100,13 @@ var initialize = function () {
         }
     });
 
-    var styles = [
-        {"featureType": "transit.station.bus","stylers": [{"visibility": "off"}]}
-    ];
-    map.setOptions({
-        styles: styles
-    });
 
-    set_night_mode();
+
+    var timetoday = Math.round(new Date() / 1000);
+
+    var styles = set_night_mode(sunrise, sunset, timetoday)[0];
+
+    map.set('styles', styles);
     loopBusStops();
     geocoder = new google.maps.Geocoder();
 };
