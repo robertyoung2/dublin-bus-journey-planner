@@ -12,8 +12,6 @@ function clear_the_route(){
     }
 }
 
-
-
 function generate_directions_views(){
 
     console.log("INSIDE DIRECTIONS VIEW");
@@ -112,7 +110,8 @@ function generate_directions_views(){
                     
                         </div>
                     </div>
-                </form>`;
+                </form>
+                <div id="valid_time" class>Please enter a valid time</div>`;
             componentHandler.upgradeAllRegistered();
             generateRouteSearch();
             set_date_options();
@@ -134,7 +133,8 @@ function validate_directions_form(){
     console.log("Submitted Date Value: " + submitted_date.value);
 
     if(submitted_date.value === current_date && submitted_time.value < current_time){
-        alert("Please enter a valid time");
+        callsnackBar("valid_time");
+
     }
     else{
         console.log("Valid Time");
