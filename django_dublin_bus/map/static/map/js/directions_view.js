@@ -105,7 +105,7 @@ function generate_directions_views(){
                             
                             <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone mdl-cell--top">
                                 <div id="time_selector" class="mdl-textfield mdl-js-textfield">
-                                    <input id="journey_time" max="23:59" required class="mdl-textfield__input" type="time"">
+                                    <input id="journey_time" max="23:59" required class="mdl-textfield__input" type="time">
                                     <label class="mdl-textfield__label" for="sample2"></label>
                                     <!--<span id="time_selector_error" class="mdl-textfield__error">Please enter a valid time!</span>-->
                                 </div>

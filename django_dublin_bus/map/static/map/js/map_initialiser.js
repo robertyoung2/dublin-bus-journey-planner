@@ -29,7 +29,8 @@ var initialize = function () {
         },
         zoom: 12,
         mapTypeControl: false,
-        fullscreenControl: false
+        fullscreenControl: false,
+        gestureHandling: 'greedy'
     });
 
     var user_marker_icon = {
