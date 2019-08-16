@@ -42,6 +42,9 @@ function populate_date_data(){
         let new_date = document.createElement('li');
         new_date.classList.add("mdl-menu__item");
         new_date.setAttribute('data-val', date_value);
+        if(day === 0){
+            new_date.setAttribute('data-selected', "true");
+        }
         var textnode = document.createTextNode(date_string);
         new_date.appendChild(textnode);
 

@@ -3,6 +3,13 @@ div.mdl-textfield {
 }
 
 div.mdl-grid {
-    max-height: 40px;
+    max-height: 50px;
 }
 
+#date_selector{
+    padding: 0;
+}
+
+/*#date_selector > label{*/
+    /*padding: 20px;*/
+/*}*/

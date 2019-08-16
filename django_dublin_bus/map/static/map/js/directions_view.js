@@ -107,12 +107,12 @@ function generate_directions_views(){
                             <!--Date-->
                             <!-- Pre-selected value -->
                             <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--3-col-phone mdl-cell--top">
-                                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height">
+                                <div id="date_selector" class="mdl-textfield mdl-js-textfield getmdl-select getmdl-select__fix-height">
                                     <input type="text" value="" class="mdl-textfield__input" id="sample6">
                                     <input id="date_input" type="hidden" value="" name="sample6">
-                                    <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-                                    <label for="sample6" class="mdl-textfield__label">Date</label>
-                                    <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" id="date"></ul>
+                                        <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
+                                        <label for="sample6" class="mdl-textfield__label">Date</label>
+                                        <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" id="date"></ul>
                                 </div>
                             </div>
                         </div>
