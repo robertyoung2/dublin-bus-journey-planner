@@ -12,9 +12,11 @@ function set_date_options() {
             selected_datetime_option = $(this).val();
             if (selected_datetime_option === 'departureTime' || selected_datetime_option === 'arrivalTime') {
                 document.getElementById("datetime_selector_container").style.display = "initial";
+                componentHandler.upgradeAllRegistered();
             }
             else {
                 document.getElementById("datetime_selector_container").style.display = "none";
+                componentHandler.upgradeAllRegistered();
             }
         });
     });
@@ -40,10 +42,16 @@ function populate_date_data(){
         let new_date = document.createElement('li');
         new_date.classList.add("mdl-menu__item");
         new_date.setAttribute('data-val', date_value);
+        if(day === 0){
+            new_date.setAttribute('data-selected', "true");
+        }
         var textnode = document.createTextNode(date_string);
         new_date.appendChild(textnode);
 
-        document.getElementById("date").appendChild(new_date);
+        if(document.getElementById("date")){
+            document.getElementById("date").appendChild(new_date);
+        }
+
     }
     componentHandler.upgradeAllRegistered();
 }
@@ -61,7 +69,10 @@ function populate_time_data(){
         current_minute = '0' + current_minute;
     }
     current_time = current_hour + ':' + current_minute;
-    document.getElementById("journey_time").min = current_time;
-    document.getElementById("journey_time").value = current_time;
+
+    if(document.getElementById("journey_time")){
+        document.getElementById("journey_time").min = current_time;
+        document.getElementById("journey_time").value = current_time;
+    }
 
 }

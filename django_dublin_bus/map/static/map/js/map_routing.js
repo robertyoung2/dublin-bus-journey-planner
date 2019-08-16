@@ -64,13 +64,9 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
             console.log(response);
             directionsRenderer.setDirections(response);
 
-            console.log(response.routes.length);
+            // console.log(response.routes.length);
             let route_options_table = document.getElementById('route_options_container');
-            route_options_table.innerHTML = `
-<!--                <div class="mdl-grid">-->
-<!--                    <div class="mdl-cell mdl-cell&#45;&#45;12-col">Suggested Journeys</div>-->
-<!--                </div>-->
-            `;
+            route_options_table.innerHTML = "";
 
             var model_journeys = [];
             rendered_route_list = [];
@@ -79,11 +75,12 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
             for (i = 0; i < response.routes.length; i++) {
                 console.log("Journey Number: " + i);
                 let journey = {};
-                let include = true;
+                let include = false;
                 let steps_counter = 0;
                 let steps_len = response.routes[i].legs[0].steps.length;
 
                 let journey_icons_string = "";
+                let first_bus_step_duetime = "";
 
                 for (let step of response.routes[i].legs[0].steps) {
                     if(step.travel_mode === "WALKING"){
@@ -94,6 +91,11 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                             include = false;
                             break;
                         }
+                        include = true;
+                        if(first_bus_step_duetime === ""){
+                            first_bus_step_duetime = step.transit.departure_time.value;
+                        }
+
                         let current_route;
                         if(step.transit.line.short_name){
                              current_route = step.transit.line.short_name;
@@ -113,15 +115,15 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                         };
                         journey[current_route] = route_dict;
 
-                        console.log("Origin_Lat: " + step.transit.departure_stop.location.lat());
-                        console.log("Origin_Lon: " + step.transit.departure_stop.location.lng());
-                        console.log("Dest_Lat: " + step.transit.arrival_stop.location.lat());
-                        console.log("Dest_Lon: " + step.transit.arrival_stop.location.lng());
-                        console.log("Bus_Headsign: " + step.transit.headsign);
-                        console.log("Arrival Location: " + step.transit.arrival_stop.name);
-                        console.log("Bus_Route: " + current_route);
-                        console.log("Departure_Datetime: " + new Date(step.transit.departure_time.value));
-                        console.log();
+                        // console.log("Origin_Lat: " + step.transit.departure_stop.location.lat());
+                        // console.log("Origin_Lon: " + step.transit.departure_stop.location.lng());
+                        // console.log("Dest_Lat: " + step.transit.arrival_stop.location.lat());
+                        // console.log("Dest_Lon: " + step.transit.arrival_stop.location.lng());
+                        // console.log("Bus_Headsign: " + step.transit.headsign);
+                        // console.log("Arrival Location: " + step.transit.arrival_stop.name);
+                        // console.log("Bus_Route: " + current_route);
+                        // console.log("Departure_Datetime: " + new Date(step.transit.departure_time.value));
+                        // console.log();
 
                         journey_icons_string += '<i class="material-icons" style="font-size:20px;color:black">directions_bus</i>';
 
@@ -133,6 +135,31 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                     steps_counter += 1;
                 }
                 if(include === true){
+                    let bus_duetime_text;
+                    console.log(first_bus_step_duetime);
+                    bus_duetime = Math.ceil((Date.parse(first_bus_step_duetime) - Date.parse(new Date())) / 60000);
+
+                    if(selected_datetime_option === 'now' && bus_duetime <= 60){
+                        console.log(bus_duetime);
+                        console.log(selected_datetime_option);
+                        if(bus_duetime < 1){
+                            bus_duetime_text = "now";
+                        }
+                        else{
+                            bus_duetime_text = "in " + bus_duetime + " minutes";
+                        }
+                    }
+                    else{
+                        console.log(bus_duetime);
+                        console.log(selected_datetime_option);
+                        let minutes = first_bus_step_duetime.getMinutes();
+                        if(minutes < 10){
+                            minutes = "0" + minutes;
+                        }
+
+                        bus_duetime_text = "at ~" + first_bus_step_duetime.getHours() + ":" + minutes + " on " + first_bus_step_duetime.toDateString();
+                    }
+
                     route_options_table.innerHTML += `
 
                     <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
@@ -147,7 +174,8 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                             </div>
                             
                             <div class="mdl-card__supporting-text">
-                                Leaves in <font color="#66BB6A"> 9 minutes</font>
+                                <span>Leaves </span>
+                                <span style="color: #66BB6A">${bus_duetime_text}</span>
                             </div>
                             
                             <div class="mdl-card__actions mdl-card--border">
@@ -156,26 +184,26 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                                 </a>
                             </div>
                         </div>
-                    </div>
-<!--                                        <div class="mdl-grid">-->
-<!--                    <div class="mdl-cell mdl-cell&#45;&#45;12-col">-->
-<!--                        <div style="padding: 20vh"></div>-->
-<!--                        </div>-->
-<!--                        </div>-->
-                    `;
+                    </div>`;
                     componentHandler.upgradeAllRegistered();
                     model_journeys.push(journey);
                     rendered_route_list.push(response.routes[i]);
                     rendered_route_index_list.push(i);
-                    console.log("****************");
+                    // console.log("****************");
                 }
-                console.log("Render route at index: " + parseInt(rendered_route_list[0]));
+                // console.log("Render route at index: " + parseInt(rendered_route_list[0]));
                 directionsRenderer.setRouteIndex(parseInt(rendered_route_list[0]));
             }
-            console.log("Data for Backend:" + model_journeys);
-            console.log("****************");
-            console.log("Accessable GMaps Data: " + rendered_route_list);
-            Ajax_Model(JSON.stringify(model_journeys), rendered_route_index_list);
+            // console.log("Data for Backend:" + model_journeys);
+            // console.log("****************");
+            // console.log("Accessable GMaps Data: " + rendered_route_list);
+            if(rendered_route_index_list.length > 0){
+                Ajax_Model(JSON.stringify(model_journeys), rendered_route_index_list);
+            }
+            else{
+                alert("No bus journeys to display");
+            }
+
             document.getElementById("clear_route").style.display = "initial";
             return true;
         }
