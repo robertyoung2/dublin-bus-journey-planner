@@ -14,12 +14,12 @@ function AjaxGetRoutes(stop_id, actual_stop_id, element_id) {
             if(element){
                 element.innerHTML = "";
                 if(route_data[1].length > 0){
-                    console.log();
-                    console.log("****** BUG TEST START ********");
-                    console.log();
-                    console.log("Stop: " + actual_stop_id);
-                    console.log("Route Date Below");
-                    console.log(route_data[1]);
+                    // console.log();
+                    // console.log("****** BUG TEST START ********");
+                    // console.log();
+                    // console.log("Stop: " + actual_stop_id);
+                    // console.log("Route Date Below");
+                    // console.log(route_data[1]);
 
                     for(route of route_data[1]){
 
@@ -38,11 +38,11 @@ function AjaxGetRoutes(stop_id, actual_stop_id, element_id) {
                         }
                         duetime_dict[actual_stop_id][route.route].push(route.duetime);
                     }
-                    console.log("Duetime Dict Data Below");
-                    console.log(duetime_dict[actual_stop_id]);
-                    console.log();
-                    console.log("****** BUG TEST END ********");
-                    console.log();
+                    // console.log("Duetime Dict Data Below");
+                    // console.log(duetime_dict[actual_stop_id]);
+                    // console.log();
+                    // console.log("****** BUG TEST END ********");
+                    // console.log();
 
                     for(let key in duetime_dict[actual_stop_id]){
                         let duetime_result = duetime_dict[actual_stop_id][key];

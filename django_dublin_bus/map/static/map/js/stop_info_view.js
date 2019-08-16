@@ -44,20 +44,16 @@ function search_stop_number(stop){
     let search_stop_view = document.getElementById("search_stop_view_content");
 
     search_stop_view.innerHTML = "";
+    duetime_dict = {};
 
     for(marker of markers){
         if(marker.stop_info.actual_stop_id === stop){
-
-            search_stop_view.innerHTML += `
-                <ul id="searched_stop_list" class="accordion" data-accordion>
-                    <li id="stop_${marker.stop_info.actual_stop_id}" class="accordion-item is-active" data-accordion-item>
-                        <a href="#stop_${marker.stop_info.actual_stop_id}" class="accordion-title">${marker.stop_info.stop_name} (${marker.stop_info.actual_stop_id})</a>
-                        <div id="searched_stop_content" class="accordion-content" data-tab-content >
-                            <p>Routes Served:</p>
-                        </div>
-                    </li>  
-                </ul>`;
-            AjaxGetRoutes(marker.stop_info.stop_id, marker.stop_info.actual_stop_id, "searched_stop_content");
+            create_stop_info_card(
+                marker.stop_info.stop_id,
+                marker.stop_info.actual_stop_id,
+                document.getElementById("search_stop_view_content"),
+                "searched_stop_content"
+            );
             map.setCenter(marker.getPosition());
         }
     }
@@ -77,23 +73,12 @@ function generate_nearby_stop_info(button_clicked){
 
             let nearby_stop_counter = 0;
             for(marker of previous_markers){
-                document.getElementById("nearby_stops_list").innerHTML +=`
-                    <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-               
-                        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-                        
-                            <div class="mdl-card__title">
-                                <h2 class="mdl-card__title-text">${marker.stop_info.actual_stop_id} - ${marker.stop_info.stop_name}</h2>
-                            </div>
-                        
-                            <div class="mdl-card__supporting-text">
-                                <div id="nearby_stop_content_${nearby_stop_counter}"></div>
-                            </div>
-                            
-                        </div>
-                    </div>`;
-                // console.log("nearby_stop_content_"+nearby_stop_counter);
-                AjaxGetRoutes(marker.stop_info.stop_id, marker.stop_info.actual_stop_id, "nearby_stop_content_"+nearby_stop_counter);
+                create_stop_info_card(
+                    marker.stop_info.stop_id,
+                    marker.stop_info.actual_stop_id,
+                    document.getElementById("nearby_stops_list"),
+                    "nearby_stop_content_"+nearby_stop_counter
+                );
                 nearby_stop_counter++;
             }
         }
@@ -104,4 +89,23 @@ function generate_nearby_stop_info(button_clicked){
         }
 
     }
+}
+
+function create_stop_info_card(stop_id, actual_stop_id, injection_element, stop_input_id){
+    injection_element.innerHTML +=`
+        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
+   
+            <div class="demo-card-wide mdl-card mdl-shadow--2dp">
+            
+                <div class="mdl-card__title">
+                    <h2 class="mdl-card__title-text">${marker.stop_info.actual_stop_id} - ${marker.stop_info.stop_name}</h2>
+                </div>
+            
+                <div class="mdl-card__supporting-text">
+                    <div id="${stop_input_id}"></div>
+                </div>
+                
+            </div>
+        </div>`;
+    AjaxGetRoutes(marker.stop_info.stop_id, marker.stop_info.actual_stop_id, stop_input_id);
 }
