@@ -1,23 +1,23 @@
-.mobile-app-icon-bar {
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-    -webkit-justify-content: space-around;
-      -ms-flex-pack: distribute;
-          justify-content: space-around;
-    background: #fefefe;
-}
+/*.mobile-app-icon-bar {*/
+    /*display: -webkit-flex;*/
+    /*display: -ms-flexbox;*/
+    /*display: flex;*/
+    /*-webkit-align-items: center;*/
+      /*-ms-flex-align: center;*/
+          /*align-items: center;*/
+    /*-webkit-justify-content: space-around;*/
+      /*-ms-flex-pack: distribute;*/
+          /*justify-content: space-around;*/
+    /*background: #fefefe;*/
+/*}*/
 
-.mobile-app-icon-bar a {
+.mobile-bottom-nav__item a {
   padding: 1.25rem;
   cursor: pointer;
 }
 
 
-.mobile-app-icon-bar img {
+.mobile-bottom-nav__item img {
     opacity: 0.3;
     font-size: 5rem;
     min-height: 5vh;
