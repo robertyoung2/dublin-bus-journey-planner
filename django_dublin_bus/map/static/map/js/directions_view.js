@@ -12,8 +12,6 @@ function clear_the_route(){
     }
 }
 
-
-
 function generate_directions_views(){
 
     console.log("INSIDE DIRECTIONS VIEW");
@@ -115,9 +113,17 @@ function generate_directions_views(){
                                         <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" id="date"></ul>
                                 </div>
                             </div>
+                            <!--<div class="mdl-textfield mdl-js-textfield">-->
+                                <!--<input class="mdl-textfield__input search_stops_input"  type="text" list="stationsList" placeholder="Search Stations" id="stationSelector" oninput=" search_stop_number(this.value)" onblur="clearSearch('stationSelector')">-->
+                                <!--<label class="mdl-textfield__label" for="stationSelector"></label>-->
+                            <!--</div>-->
                         </div>
                     </div>
-                </form>`;
+                </form>
+                <div id="valid_time" class>Please enter a valid time</div>
+                <div id="enter_destination" class>Please provide a destination</div>
+                <div id="valid_address" class>Please enter a valid address</div>
+                                `;
             componentHandler.upgradeAllRegistered();
             generateRouteSearch();
             set_date_options();
@@ -139,7 +145,8 @@ function validate_directions_form(){
     console.log("Submitted Date Value: " + submitted_date.value);
 
     if(submitted_date.value === current_date && submitted_time.value < current_time){
-        alert("Please enter a valid time");
+        callsnackBar("valid_time");
+
     }
     else{
         console.log("Valid Time");

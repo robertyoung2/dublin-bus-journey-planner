@@ -168,7 +168,10 @@
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {
-                    populate_info('stop_info_view')
+                    populate_info('stop_info_view');
+
+                    document.getElementById("search_stop_tab").click();
+
                     search_stop_number(this.stop_info.actual_stop_id);
                 });
 

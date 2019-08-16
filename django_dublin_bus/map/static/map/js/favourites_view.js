@@ -52,8 +52,13 @@ function generate_favourites_view(){
                 </div>
             </div>
             
-            <div id="snackbar">Favourite saved</div>
-            
+            <div id="save_favourites" class>Favourite saved</div>
+            <div id="not_save_favourites" class>Stop not saved</div>
+            <div id="key_delete" class>Key deleted</div>
+            <div id="key_not_exist" class>Key does not exist!</div>
+            <div id="valid_address" class>Please enter a valid address</div>
+            <div id="key_exists" class>Key Already Exists</div>
+            <div id="provide_key" class>Please give your key a name</div>
         `;
 
         capture_favourites();

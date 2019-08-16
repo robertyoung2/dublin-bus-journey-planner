@@ -17,7 +17,7 @@ function generate_stop_info_view(){
 
             <div class="mdl-tabs mdl-js-tabs">
                 <div class="mdl-tabs__tab-bar">
-                    <a href="#search_stop_view" class="mdl-tabs__tab">Search Stop</a>
+                    <a id="search_stop_tab" href="#search_stop_view" class="mdl-tabs__tab">Search Stop</a>
                     <a href="#nearby_stops_view" class="mdl-tabs__tab" onclick="generate_nearby_stop_info(true)">Nearby Stops</a>
                 </div>  
             
@@ -98,7 +98,7 @@ function create_stop_info_card(stop_id, actual_stop_id, injection_element, stop_
             <div class="demo-card-wide mdl-card mdl-shadow--2dp">
             
                 <div class="mdl-card__title">
-                    <h2 class="mdl-card__title-text">${marker.stop_info.actual_stop_id} - ${marker.stop_info.stop_name}</h2>
+                    <span class="mdl-card__title-text marker_stop_heading_nearby">${marker.stop_info.actual_stop_id} - ${marker.stop_info.stop_name}</span>
                 </div>
             
                 <div class="mdl-card__supporting-text">

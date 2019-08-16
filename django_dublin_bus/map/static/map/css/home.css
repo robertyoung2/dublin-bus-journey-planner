@@ -32,11 +32,12 @@ html, body {
     padding: 0;
 }
 
-
 /* The snackbar - position it at the bottom and in the middle of the screen */
-#snackbar {
+#save_favourites, #not_save_favourites, #key_delete, #key_not_exist, #valid_address, #key_exists, #provide_key,
+#valid_time, #enter_destination{
   visibility: hidden; /* Hidden by default. Visible on click */
   min-width: 250px; /* Set a default minimum width */
+  max-width: 250px; /* Set a default minimum width */
   margin-left: -125px; /* Divide value of min-width by 2 */
   background-color: #333; /* Black background color */
   color: #fff; /* White text color */
@@ -45,12 +46,13 @@ html, body {
   padding: 16px; /* Padding */
   position: fixed; /* Sit on top of the screen */
   z-index: 1; /* Add a z-index if needed */
-  left: 50%; /* Center the snackbar */
+  left: 45%; /* Center the snackbar */
   top: 20px; /* 30px from the bottom */
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
-#snackbar.show {
+#save_favourites.show, #not_save_favourites.show, #key_delete.show, #key_not_exist.show, #valid_address.show,
+#provide_key.show, #valid_time.show, #enter_destination.show{
   visibility: visible; /* Show the snackbar */
   /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
   However, delay the fade out process for 2.5 seconds */
