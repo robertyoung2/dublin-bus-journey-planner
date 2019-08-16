@@ -82,10 +82,15 @@ function generate_nearby_stop_info(button_clicked){
                 nearby_stop_counter++;
             }
         }
-        else{
+        else if (map.getZoom() <= 16){
             // console.log("No nearby stops!");
             nearby_stops_view.innerHTML +=
-                `<div>No Nearby Stops</div>`;
+                `<div class="nearby_markers_message">Zoom in to see markers </div>`;
+
+            // <i class="material-icons nearby_markers_message">zoom_in</i>
+        } else {
+                        nearby_stops_view.innerHTML +=
+                `<div class="nearby_markers_message"> No nearby markers</div>`;
         }
 
     }
