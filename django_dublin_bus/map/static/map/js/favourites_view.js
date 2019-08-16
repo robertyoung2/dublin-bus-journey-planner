@@ -53,9 +53,10 @@ function generate_favourites_view(){
             <div id="not_save_favourites" class>Failed to save favourite</div>
             <div id="key_delete" class>Favourite deleted</div>
             <div id="key_not_exist" class>Favourite does not exist!</div>
-            <div id="valid_address" class>Please enter a valid address</div>
+            <div id="invalid_address" class>Invalid Google Maps Address</div>
             <div id="key_exists" class>Favourite already exists</div>
             <div id="provide_key" class>Please give your favourite a name</div>
+            <div id="key_too_long" class>Name too long (max. 20 characters)</div>
         `;
 
         capture_favourites();
@@ -71,19 +72,23 @@ function populate_saved_favourites(){
             storage_value = window.localStorage.getItem(storage_key);
             storage_key = titleCase(storage_key);
 
-            document.getElementById("saved_favourites").innerHTML += `
-                <li class="mdl-list__item">
-                    <span class="mdl-list__item-primary-content" onclick="route_to_favourite('${storage_value}')">
-                      <i class="material-icons  mdl-list__item-icon">directions</i>
-                      ${storage_key}
-                    </span>
-                    <span class="mdl-list__item-secondary-action">
-                        <button class="mdl-button mdl-js-button mdl-button--icon" onclick="delete_favourite('${storage_key}')">
-                          <i class="material-icons">clear</i>
-                        </button>
-                    </span>
-                </li>
-            `;
+            if(!storage_key.startsWith("Sub-") && storage_key.length <= 20){
+                document.getElementById("saved_favourites").innerHTML += `
+                    <li class="mdl-list__item">
+                        <span class="mdl-list__item-primary-content" onclick="route_to_favourite('${storage_value}')">
+                          <i class="material-icons  mdl-list__item-icon">directions</i>
+                          ${storage_key}
+                        </span>
+                        <span class="mdl-list__item-secondary-action">
+                            <button class="mdl-button mdl-js-button mdl-button--icon" onclick="delete_favourite('${storage_key}')">
+                              <i class="material-icons">clear</i>
+                            </button>
+                        </span>
+                    </li>
+                `;
+            }
+
+
             counter++;
         }
     }

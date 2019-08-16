@@ -70,7 +70,8 @@ function populate_time_data(){
     //Sets default time to now
     var current_datetime = new Date(),
         current_hour = current_datetime.getHours(),
-        current_minute = current_datetime.getMinutes();
+        current_minute = current_datetime.getMinutes(),
+        current_minute_for_min = current_minute - 1;
 
     if(current_hour < 10){
         current_hour = '0' + current_hour;
@@ -81,7 +82,7 @@ function populate_time_data(){
     current_time = current_hour + ':' + current_minute;
 
     if(document.getElementById("journey_time")){
-        document.getElementById("journey_time").min = current_time;
+        document.getElementById("journey_time").min = current_hour + ":" + current_minute_for_min;
         document.getElementById("journey_time").value = current_time;
     }
 

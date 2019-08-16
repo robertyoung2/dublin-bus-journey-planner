@@ -24,7 +24,8 @@ function capture_favourites(){
                         saveFavourite();
                     }
                     else {
-                        callsnackBar("valid_address");
+                        console.log("Invalid Geocode");
+                        callsnackBar("invalid_address");
                     }
                 }
             );
@@ -41,19 +42,22 @@ function saveFavourite(){
     else if(sethome.value === ""){
         callsnackBar("provide_key");
     }
+    else if(sethome.value.length > 20){
+        callsnackBar("key_too_long");
+    }
     else{
         window.localStorage.setItem(sethome.value.toLowerCase(),destination.value);
-    }
 
-    if(Object.keys(window.localStorage).includes(sethome.value.toLowerCase()) && window.localStorage.getItem(sethome.value.toLowerCase()) === destination.value){
+        if(Object.keys(window.localStorage).includes(sethome.value.toLowerCase()) && window.localStorage.getItem(sethome.value.toLowerCase()) === destination.value){
 
-        clearSearch('set_home');
-        clearSearch('set_destination');
-        populate_saved_favourites();
-        callsnackBar("save_favourites");
-    }
-    else{
-        callsnackBar("not_save_favourites");
+            clearSearch('set_home');
+            clearSearch('set_destination');
+            populate_saved_favourites();
+            callsnackBar("save_favourites");
+        }
+        else{
+            callsnackBar("not_save_favourites");
+        }
     }
 }
 
@@ -63,8 +67,6 @@ function delete_favourite(favourite_key){
         localStorage.removeItem(favourite_key.toLowerCase());
         populate_saved_favourites();
         callsnackBar("key_delete");
-
-    //    Will need to change logic to handle button click when implemented
     }
     else{
         callsnackBar("key_not_exist");
@@ -72,6 +74,7 @@ function delete_favourite(favourite_key){
 }
 
 function callsnackBar(elementid){
+    console.log("Snack Bar Called!");
     var x = document.getElementById(elementid);
     x.className = "show";
     setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);

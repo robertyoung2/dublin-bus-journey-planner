@@ -29,7 +29,8 @@ var initialize = function () {
         },
         zoom: 12,
         mapTypeControl: false,
-        fullscreenControl: false
+        fullscreenControl: false,
+        gestureHandling: 'greedy'
     });
 
     var user_marker_icon = {
@@ -71,10 +72,13 @@ var initialize = function () {
 
     // Listener to update markers as viewpoint centre changes
     map.addListener('center_changed', function () {
+        //CLEAR
         bounds = map.getBounds();
         getnearby();
+
     });
     map.addListener('dragend', function() {
+        //CLEAR
         if(document.getElementById("stop_info_view_section").style.display === "initial"){
             generate_nearby_stop_info(false);
         }
@@ -82,11 +86,13 @@ var initialize = function () {
 
     // Listener to deactivate view tracking of user location on drag of map
     map.addListener('drag', function () {
+        //CLEAR
         geolocationFlag = false;
     });
 
     // Checks zoom level and if markers should be displayed
     map.addListener('zoom_changed', function () {
+        //CLEAR
         bounds = map.getBounds();
         getnearby();
         if(document.getElementById("stop_info_view_section").style.display === "initial"){
@@ -136,6 +142,7 @@ function GeoControl(controlDiv, map) {
 
     // Setup the click event listeners:  set the map to user location.
     controlUI.addEventListener('click', function () {
+        //CLEAR
         geolocationFlag = true;
         map.panTo({
             lat: userPosition.lat,
@@ -153,4 +160,5 @@ function GeoControl(controlDiv, map) {
     map.addListener('drag', function(){
         controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149430.svg)";
     });
+
 }

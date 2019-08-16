@@ -6,6 +6,7 @@ previous_markers = [];
 
 function getnearby() {
 
+    console.log("Inside get nearby");
     var currentZoom = map.getZoom();
     var location = map.getCenter();
     var nearby_markers = [];
@@ -16,6 +17,13 @@ function getnearby() {
         nearby_radius = 100;
     } else {
         var northeastBound = bounds.getNorthEast();
+
+        // let real_map_size = document.getElementById("map_container").getBoundingClientRect();
+        //
+        // console.log("Width Height Proportion");
+        // console.log(real_map_size);
+        // let prop = (real_map_size.width / real_map_size.height)
+
         nearby_radius = haversine(location.lat(), location.lng(), northeastBound.lat(), northeastBound.lng());
     }
 

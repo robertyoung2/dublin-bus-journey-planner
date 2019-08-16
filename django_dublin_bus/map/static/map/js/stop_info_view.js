@@ -41,6 +41,7 @@ function generate_stop_info_view(){
 }
 
 function search_stop_number(stop){
+
     let search_stop_view = document.getElementById("search_stop_view_content");
 
     search_stop_view.innerHTML = "";
@@ -60,6 +61,7 @@ function search_stop_number(stop){
 }
 
 function generate_nearby_stop_info(button_clicked){
+
     console.log("Called generate stops function");
     let nearby_stops_view = document.getElementById("nearby_stops_view");
 
@@ -72,6 +74,7 @@ function generate_nearby_stop_info(button_clicked){
             duetime_dict = {};
 
             let nearby_stop_counter = 0;
+            console.log("Before Create Stop info card");
             for(marker of previous_markers){
                 create_stop_info_card(
                     marker.stop_info.stop_id,
@@ -82,10 +85,15 @@ function generate_nearby_stop_info(button_clicked){
                 nearby_stop_counter++;
             }
         }
-        else{
+        else if (map.getZoom() <= 16){
             // console.log("No nearby stops!");
             nearby_stops_view.innerHTML +=
-                `<div>No Nearby Stops</div>`;
+                `<div class="nearby_markers_message">Zoom in to see markers </div>`;
+
+            // <i class="material-icons nearby_markers_message">zoom_in</i>
+        } else {
+                        nearby_stops_view.innerHTML +=
+                `<div class="nearby_markers_message"> No nearby markers</div>`;
         }
 
     }
