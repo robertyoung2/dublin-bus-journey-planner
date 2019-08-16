@@ -106,7 +106,7 @@
 
     <script>
         // Global Variables
-        var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        var iOS = /iPad/.test(navigator.userAgent) && !window.MSStream;
 
         // These urls are used in the ajax queries to link to the django urls
         // We do this as we can't use django code within external js files

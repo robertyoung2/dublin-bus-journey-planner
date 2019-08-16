@@ -24,7 +24,7 @@ Login to the server using ssh. To start Jupyter notebook on the server use this 
 ### Step 2
 With Jupyter now running (without a web browser interface on the VM, as it does not have one) you now need to connect one of the ports on your local machine to the port on the VM where Jupyter is. On your local machine, run the following command: 
 
-``ssh -NfL 9999:localhost:8888 Witheld``
+``ssh -NfL 9999:localhost:8888 ***REMOVED***``
 
 and enter the server password.
 

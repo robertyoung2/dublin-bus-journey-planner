@@ -30,7 +30,7 @@ When developing locally, the above code should be commented out, and you should 
 # This database setting should only be used for local test and development
 # Ensure this is not used on the server
 # To set up an ssh tunnel to work with database locally do the following:
-# ssh -L 3333:127.0.0.1:3306 Witheld
+# ssh -L 3333:127.0.0.1:3306 ***REMOVED***
 
 DATABASES = {
     'default': {
