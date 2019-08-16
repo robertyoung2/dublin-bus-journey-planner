@@ -12,11 +12,10 @@ function generate_favourites_view(){
         favourites_section.innerHTML = `
 
             <div id="favourites_grid" class="mdl-grid">
-                <!--<form action="Getinput" method="get">-->
                     <!--Key Enter Field-->
                 <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--2-col-phone">
                     <div class="mdl-textfield mdl-js-textfield">
-                        <input class="mdl-textfield__input" type="text" name="set_home" id="set_home" placeholder="Enter key">
+                        <input class="mdl-textfield__input" type="text" name="set_home" id="set_home" placeholder="Enter name">
                         <label class="mdl-textfield__label" for="set_home"></label>
                     </div>
                 </div>
@@ -26,7 +25,6 @@ function generate_favourites_view(){
                     <a tabindex="-1" onclick="clearSearch('set_home')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/baseline-clear-24px.svg"></a>
                 </div>
                         
-                    <!--<div class="mdl-grid">-->
                 <!-- Favourite Address Entry Field -->
                  <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--2-col-phone">
                     <div class="mdl-textfield mdl-js-textfield">
@@ -45,15 +43,19 @@ function generate_favourites_view(){
                  <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
                     <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="set_favourites" value="Save Favourite">
                 </div>
-                <!--</form>-->
             
                 <div id="favourites_table_cell" class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
                     <ul class="demo-list-control mdl-list" id="saved_favourites"></ul>
                 </div>
             </div>
             
-            <div id="snackbar">Favourite saved</div>
-            
+            <div id="save_favourites" class>Favourite saved</div>
+            <div id="not_save_favourites" class>Failed to save favourite</div>
+            <div id="key_delete" class>Favourite deleted</div>
+            <div id="key_not_exist" class>Favourite does not exist!</div>
+            <div id="valid_address" class>Please enter a valid address</div>
+            <div id="key_exists" class>Favourite already exists</div>
+            <div id="provide_key" class>Please give your favourite a name</div>
         `;
 
         capture_favourites();

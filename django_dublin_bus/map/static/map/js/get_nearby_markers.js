@@ -13,7 +13,7 @@ function getnearby() {
     var previous_check = [];
 
     if (bounds === undefined || bounds === null){
-        nearby_radius = 2500;
+        nearby_radius = 100;
     } else {
         var northeastBound = bounds.getNorthEast();
         nearby_radius = haversine(location.lat(), location.lng(), northeastBound.lat(), northeastBound.lng());

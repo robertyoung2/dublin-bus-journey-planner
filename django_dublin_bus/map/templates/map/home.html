@@ -122,6 +122,7 @@
         var sunset;
 
         var stop_data_list_string = "";
+        var date_data_list_string = "";
 
         var geolocationFlag = true;
         var userPosition;
@@ -133,6 +134,7 @@
         var current_date;
 
         var duetime_dict;
+
         var date_string;
 
     </script>
@@ -168,7 +170,10 @@
                 });
 
                 google.maps.event.addListener(marker, 'click', function () {
-                    populate_info('stop_info_view')
+                    populate_info('stop_info_view');
+
+                    document.getElementById("search_stop_tab").click();
+
                     search_stop_number(this.stop_info.actual_stop_id);
                 });
 

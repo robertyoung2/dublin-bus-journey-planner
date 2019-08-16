@@ -24,7 +24,7 @@ function capture_favourites(){
                         saveFavourite();
                     }
                     else {
-                        alert('Please enter a valid address from google maps');
+                        callsnackBar("valid_address");
                     }
                 }
             );
@@ -35,29 +35,25 @@ function capture_favourites(){
 
 function saveFavourite(){
     if(Object.keys(window.localStorage).includes(sethome.value.toLowerCase())){
-        alert("Key Already Exists - Add a New One");
+        callsnackBar("key_exists");
     //    Will need to change logic to handle button click when implemented
     }
     else if(sethome.value === ""){
-        alert("Please give your key a name");
+        callsnackBar("provide_key");
     }
     else{
         window.localStorage.setItem(sethome.value.toLowerCase(),destination.value);
     }
 
     if(Object.keys(window.localStorage).includes(sethome.value.toLowerCase()) && window.localStorage.getItem(sethome.value.toLowerCase()) === destination.value){
-        // alert("Favourite Stop Saved!");
-        var x = document.getElementById("snackbar");
-        x.className = "show";
-        // Add the "show" class to DIV
-        // After 3 seconds, remove the show class from DIV
-        setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+
         clearSearch('set_home');
         clearSearch('set_destination');
         populate_saved_favourites();
+        callsnackBar("save_favourites");
     }
     else{
-        alert("Stop not saved");
+        callsnackBar("not_save_favourites");
     }
 }
 
@@ -66,10 +62,17 @@ function delete_favourite(favourite_key){
     if(Object.keys(window.localStorage).includes(favourite_key.toLowerCase())){
         localStorage.removeItem(favourite_key.toLowerCase());
         populate_saved_favourites();
-        alert("Key Deleted");
+        callsnackBar("key_delete");
+
     //    Will need to change logic to handle button click when implemented
     }
     else{
-        alert("Key does not exist!");
+        callsnackBar("key_not_exist");
     }
+}
+
+function callsnackBar(elementid){
+    var x = document.getElementById(elementid);
+    x.className = "show";
+    setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }

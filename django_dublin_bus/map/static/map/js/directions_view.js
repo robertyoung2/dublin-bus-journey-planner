@@ -12,8 +12,6 @@ function clear_the_route(){
     }
 }
 
-
-
 function generate_directions_views(){
 
     console.log("INSIDE DIRECTIONS VIEW");
@@ -30,6 +28,7 @@ function generate_directions_views(){
         directions_section.style.display = "initial";
 
         if(directions_section.innerHTML === ""){
+            populate_date_data();
             directions_section.innerHTML =`
                 <form action="Getinput" method="get">
                 
@@ -63,13 +62,13 @@ function generate_directions_views(){
                      
                     <!--Submit & Clear Buttons-->
                     <div class="mdl-grid">
-                        <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">
+                        <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
                         <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="route_submit" onclick="validate_directions_form()" value="Search">
                     
                         </div>
                         
                         <div id="clear_route" style="display: none" >
-                            <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--1-col-phone">
+                            <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--2-col-phone">
                                 <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" onclick="clear_the_route()" value="Clear Route">
                             </div>
                         </div>
@@ -100,24 +99,36 @@ function generate_directions_views(){
                     <div id="datetime_selector_container" style="display: none">
                         <div class="mdl-grid">
                             <!--Time-->
-                            <div class="mdl-cell mdl-cell--2-col mdl-cell--2-col-tablet mdl-cell--1-col-phone mdl-cell--top">
-                                <input type="time" id="journey_time" max="23:59" required>
+                            <!--<div class="mdl-cell mdl-cell&#45;&#45;2-col mdl-cell&#45;&#45;1-col-tablet mdl-cell&#45;&#45;1-col-phone mdl-cell&#45;&#45;top">-->
+                                <!--<input type="time" id="journey_time" max="23:59" required>-->
+                            <!--</div>-->
+                            
+                            <div class="mdl-cell mdl-cell--2-col mdl-cell--1-col-tablet mdl-cell--1-col-phone mdl-cell--top">
+                                <div id="time_selector" class="mdl-textfield mdl-js-textfield">
+                                    <input id="journey_time" max="23:59" required class="mdl-textfield__input" type="time"">
+                                    <label class="mdl-textfield__label" for="sample2"></label>
+                                    <span class="mdl-textfield__error">Please enter a valid time!</span>
+                                </div>
                             </div>
                             
                             <!--Date-->
                             <!-- Pre-selected value -->
-                            <div class="mdl-cell mdl-cell--6-col mdl-cell--6-col-tablet mdl-cell--3-col-phone mdl-cell--top">
-                                <div id="date_selector" class="mdl-textfield mdl-js-textfield getmdl-select getmdl-select__fix-height">
-                                    <input type="text" value="" class="mdl-textfield__input" id="sample6">
-                                    <input id="date_input" type="hidden" value="" name="sample6">
-                                        <i class="mdl-icon-toggle__label material-icons">keyboard_arrow_down</i>
-                                        <label for="sample6" class="mdl-textfield__label">Date</label>
-                                        <ul for="sample6" class="mdl-menu mdl-menu--bottom-left mdl-js-menu" id="date"></ul>
+                            <div class="mdl-cell mdl-cell--5-col mdl-cell--6-col-tablet mdl-cell--2-col-phone mdl-cell--top">
+                                
+                                <div id="date_selector" class="mdl-textfield mdl-js-textfield">
+                                    <input class="mdl-textfield__input search_stops_input"  type="text" list="date" placeholder="Select Date" id="date_input">
+                                    <label class="mdl-textfield__label" for="date_input"></label>
                                 </div>
+                                <datalist id="date">${date_data_list_string}</datalist>
                             </div>
+                            
                         </div>
                     </div>
-                </form>`;
+                </form>
+                <div id="valid_time" class>Please enter a valid time</div>
+                <div id="enter_destination" class>Please provide a destination</div>
+                <div id="valid_address" class>Please enter a valid address</div>
+                                `;
             componentHandler.upgradeAllRegistered();
             generateRouteSearch();
             set_date_options();
@@ -139,7 +150,8 @@ function validate_directions_form(){
     console.log("Submitted Date Value: " + submitted_date.value);
 
     if(submitted_date.value === current_date && submitted_time.value < current_time){
-        alert("Please enter a valid time");
+        callsnackBar("valid_time");
+
     }
     else{
         console.log("Valid Time");
