@@ -3,8 +3,6 @@ from django.test import Client
 from django.urls import reverse
 from map.views import round_to_hour, distance, closest
 import datetime
-import json
-import ast
 
 
 class MapUnitTesting(unittest.TestCase):
@@ -23,14 +21,6 @@ class MapUnitTesting(unittest.TestCase):
 
         # Check that the rendered context returns all stops from database.
         self.assertEqual(len(response.context['bus_stops']), 4732)
-
-    # def test_get_routes(self):
-    #
-    #     data = {'stop_id': "8220B007612"}
-    #     response = self.client.post(reverse('get_routes'), data)
-    #     json_content = json.loads(response.content)
-    #     self.assertEqual((json_content[0]['fields']['bus_numbers']), "757")
-    #     self.assertEqual((json_content[0]['fields']['stop_headsign']), "Charlotte Way")
 
 
     def test_round_to_hour(self):
@@ -59,5 +49,6 @@ class MapUnitTesting(unittest.TestCase):
                                         cork_coords[1]), distance_km, 2)
 
 
-    # def test_closest(self):
-    #
+
+
+
