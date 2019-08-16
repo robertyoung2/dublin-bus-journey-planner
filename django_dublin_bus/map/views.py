@@ -13,7 +13,8 @@ from math import cos, asin, sqrt
 # Create your views here
 def home(request):
     stops_info = StopsInfo.objects.all()
-    context = {'bus_stops': stops_info}
+    hidden_key = GOOGLE_KEY
+    context = {'bus_stops': stops_info,'google_key': hidden_key}
     return render(request,'map/home.html', context)
 
 
