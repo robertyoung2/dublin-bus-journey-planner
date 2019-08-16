@@ -31,8 +31,20 @@ class MapUnitTesting(unittest.TestCase):
         self.assertEqual((json_content[0]['fields']['stop_headsign']), "Charlotte Way")
 
 
-    def test_run_model(self):
-        pass
+    def test_round_hour(self):
+        round_down = "2019-08-16 16:29:19"
+        round_up = "2019-08-16 16:31:19"
+
+        
+        answer_up = "2019-08-16 17:00:00"
+
+
+
+
+
+
+
+
 
 
 
