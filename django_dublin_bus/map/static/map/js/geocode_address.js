@@ -48,7 +48,7 @@ function geocodeAddress() {
                     geocode_destination(origin_lat, origin_lng, dest_new);
                 }
                 else {
-                    callsnackBar(valid_address);
+                    callsnackBar("valid_address");
                 }
             }
         );
@@ -79,7 +79,7 @@ function geocode_destination(origin_lat, origin_lng, dest_new){
             );
         }
         else {
-            callsnackBar(valid_address);
+            callsnackBar("valid_address");
         }
     });
 }
