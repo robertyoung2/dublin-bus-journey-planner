@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django_dublin_bus.settings import BASE_DIR
+from django_dublin_bus.settings import BASE_DIR, GOOGLE_KEY
 from django.views.decorators.csrf import ensure_csrf_cookie
 from django.http import HttpResponse
 
