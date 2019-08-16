@@ -41,6 +41,9 @@ function saveFavourite(){
     else if(sethome.value === ""){
         callsnackBar("provide_key");
     }
+    else if(sethome.value.length > 20){
+        callsnackBar("key_too_long");
+    }
     else{
         window.localStorage.setItem(sethome.value.toLowerCase(),destination.value);
     }
@@ -63,8 +66,6 @@ function delete_favourite(favourite_key){
         localStorage.removeItem(favourite_key.toLowerCase());
         populate_saved_favourites();
         callsnackBar("key_delete");
-
-    //    Will need to change logic to handle button click when implemented
     }
     else{
         callsnackBar("key_not_exist");
