@@ -1,6 +1,10 @@
 function set_night_mode(){
-    var timetoday = new Date().getTime();
-    if(timetoday >= parseInt(sunset+'000') || timetoday <= (parseInt(sunrise+'000'))){
+    // Get todays date and time
+    // Check to see if the date and time is between sunrise and sunset
+    // If not, add night mode styles to map
+    var timetoday = Math.round(new Date() / 1000);
+
+    if(timetoday >= (sunset) || timetoday <= ((sunrise))){
         let styles = [
                 {
                     elementType: 'geometry',
@@ -88,6 +92,10 @@ function set_night_mode(){
                     featureType: 'water',
                     elementType: 'labels.text.stroke',
                     stylers: [{color: '#17263c'}]
+                },
+                {
+                    featureType: "transit.station.bus",
+                    stylers: [{ visibility: "off" }]
                 }
             ];
         map.set('styles', styles);

@@ -1,0 +1,25 @@
+#favourites_table{
+    margin-left:auto;
+    margin-right:auto;
+    max-width: 90vw;
+    max-height: 100%;
+    display: block;
+    overflow-x: hidden;
+    /*overflow-y: scroll;*/
+
+}
+
+.storage_value_column{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+#favourites_table_cell{
+}
+
+#favourites_form{
+}
+
+#favourites_grid{
+}

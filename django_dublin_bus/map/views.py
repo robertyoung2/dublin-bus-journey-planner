@@ -1,47 +1,49 @@
 from django.shortcuts import render
-from .models import StopsInfo, BusStops, Holidays
-import requests
+from django_dublin_bus.settings import BASE_DIR
+from django.views.decorators.csrf import ensure_csrf_cookie
 from django.core import serializers
 from django.http import HttpResponse
-import csv
-import json
-from math import cos, asin, sqrt
-import difflib
-import datetime
+
+
+from .models import StopsInfo, BusStops, Holidays
+
+import difflib, datetime, os, time, pickle, json, csv, requests
 import pandas as pd
-import pickle
-import os
-from django_dublin_bus.settings import BASE_DIR, GOOGLE_KEY
-import time
-from xgboost import XGBRegressor
-from datetime import date, timedelta
+from math import cos, asin, sqrt
 
-# Create your views here.
 
+# Create your views here
 def home(request):
     stops_info = StopsInfo.objects.all()
-
-    response = requests.get(url='http://api.openweathermap.org/data/2.5/weather?q=Dublin&APPID=0a4fb876c0f4024eff4c1beb5c4d7761')
-    weather_data = response.json()
-    temp = weather_data['main']['temp_max']
-    description = weather_data['weather'][0]['description']
-    icon = weather_data['weather'][0]['icon']
-    hidden_key = GOOGLE_KEY
-
-    # Change stops_info to bus_stops
-    context = {'bus_stops': stops_info, 'temp': temp, 'description':description, 'icon':icon, 'google_key': hidden_key}
+    context = {'bus_stops': stops_info}
     return render(request,'map/home.html', context)
 
 
 def get_routes(request):
     if request.method == "POST":
-        stop_id = request.POST["stop_id"]
-
+        data_dict = json.loads(request.POST["json_data"])
+        print(data_dict['stop_id'])
+        print(data_dict['actual_stop_id'])
         # In our django query see is it more efficient to return only bus_numbers field
-        routes = BusStops.objects.filter(stop_id=stop_id)
-        routes_json = serializers.serialize("json", routes, fields=("bus_numbers","stop_headsign"))
-        return HttpResponse(routes_json, content_type="application/json")
+        routes = list(BusStops.objects.filter(stop_id=data_dict['stop_id']).values())
+        print(routes)
 
+        rts_info = requests.get('http://data.smartdublin.ie/cgi-bin/rtpi//realtimebusinformation?stopid='+data_dict['actual_stop_id']+'&format=json')
+        rts_info_results = rts_info.json()['results']
+        rts_info_list = []
+
+        for result in rts_info_results:
+            bus_due_info = {"route": result['route'], "duetime": result['duetime'],
+                            "destination": result['destination']}
+            rts_info_list.append(bus_due_info)
+
+        # rts_info_list = json.dumps(rts_info_list)
+        # routes_json = serializers.serialize("json", routes, fields=("bus_numbers","stop_headsign"))
+        # routes_json = json.dumps(routes)
+
+        routes_served_RTS = json.dumps([routes, rts_info_list])
+
+        return HttpResponse(routes_served_RTS, content_type="application/json")
 
 def run_model(request):
     if request.method == "POST":
@@ -197,23 +199,16 @@ def round_to_hour(dt):
     return dt
 
 
+@ensure_csrf_cookie
 def get_sun(request):
+
+    path_csv = os.path.join(BASE_DIR, 'map/ml_models/csv/')
+
     if request.method == "POST":
+        df = pd.read_csv(path_csv + 'sunrise_sunset.csv')
+        sunrise = int(df.iloc[0]['ts_sunrise'])
+        sunset = int(df.iloc[0]['ts_sunset'])
+        sunrise_sunset_times = {"sunrise": sunrise, "sunset": sunset}
+        sunrise_sunset_times = json.dumps(sunrise_sunset_times)
 
-        path_csv = os.path.join(BASE_DIR, 'map/ml_models/csv/')
-        with open(path_csv+'sunrise_sunset.csv', 'r') as csvfile:
-            reader = csv.reader(csvfile)
-
-            first_row = True
-            for row in reader:
-                if first_row:
-                    first_row = False
-                else:
-                    sunrise = row[2]
-                    sunset = row[3]
-                    break
-
-        sun = {"sunrise": sunrise, "sunset": sunset}
-        sun = json.dumps(sun)
-
-        return HttpResponse(sun, content_type='application/json')
+        return HttpResponse(sunrise_sunset_times, content_type='application/json')

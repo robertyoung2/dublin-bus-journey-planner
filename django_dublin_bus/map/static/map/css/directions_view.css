@@ -1,0 +1,23 @@
+div.mdl-textfield {
+      width: 100%;
+}
+
+div.mdl-grid {
+    max-height: 50px;
+}
+
+#date_selector{
+    padding: 0;
+}
+
+#time_selector{
+    padding: 0;
+}
+
+/*#date_selector > label{*/
+    /*padding: 20px;*/
+/*}*/
+
+.mdl-radio{
+    padding-right: 20px;
+}

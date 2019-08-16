@@ -1,3 +1,120 @@
-#info_section {
-    /*background-color: yellow;*/
+.journey_heading{
+    color: #4350AF;
+    font-weight: bold;
+    font-size: 14pt;
+    margin-top: auto;
+    margin-bottom: auto;
 }
+
+.route_destination_heading{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 10pt;
+    text-align: center;
+
+}
+
+.minutes_nearby_stops{
+    margin-top: auto;
+    margin-bottom: auto;
+    font-size: 9pt;
+    color: #66BB6A;
+    font-weight: bold;
+    text-align: center;
+}
+
+.marker_stop_heading_nearby{
+    color: #4350AF;
+    font-weight: bold;
+    font-size: 12pt;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.journey_time_text{
+    font-size: 12pt;
+    font-weight: bold;
+}
+
+.bus_time_arrival{
+    color: #66BB6A;
+}
+
+.bus_icon_route_num{
+    font-size: .8rem;
+}
+
+.back_journey{
+    text-align: left;
+    padding-bottom: 0px;
+}
+
+.mdl-card {
+    min-height: 120px;
+    padding: 1vh;
+    max-width: 40vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@media only screen and (max-width: 830px) {
+    .mdl-card {
+    min-height: 120px;
+    padding: 1vh;
+    max-width: 50vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+}
+
+@media only screen and (max-width: 829px) {
+    .mdl-card {
+    min-height: 120px;
+    padding: 1vh;
+    max-width: 85vw;
+    margin-left: auto;
+    margin-right: auto;
+}
+}
+
+.mdl-card__title{
+    padding-top: 5px;
+    padding-bottom: 6px;
+}
+
+.mdl-card__supporting-text{
+    padding-top: 5px;
+    padding-bottom: 0px;
+}
+
+.mdl-card__actions.mdl-card--border{
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+
+.mdl-card__actions {
+    padding: 0px;
+}
+
+
+.flex-container {
+  display: flex;
+  align-items: stretch;
+}
+
+.flex-container > div {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.mdl-chip mdl-chip--contact{
+    mix-width: 20px;
+    text-align: left;
+    margin-bottom: auto;
+    margin-top: auto;
+}
+
+.no_real{
+    font-size: 12pt;
+}
+

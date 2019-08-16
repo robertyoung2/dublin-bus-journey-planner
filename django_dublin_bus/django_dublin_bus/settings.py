@@ -27,7 +27,7 @@ GOOGLE_KEY = config('GOOGLE_KEY')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DEBUG')
+DEBUG = False
 
 ALLOWED_HOSTS = ['137.43.49.51', '.dublinbus.city']
 
