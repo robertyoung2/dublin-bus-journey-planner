@@ -6,6 +6,7 @@ previous_markers = [];
 
 function getnearby() {
 
+    console.log("Inside get nearby");
     var currentZoom = map.getZoom();
     var location = map.getCenter();
     var nearby_markers = [];
