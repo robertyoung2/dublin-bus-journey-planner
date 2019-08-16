@@ -25,7 +25,6 @@ def get_routes(request):
         data_dict = json.loads(request.POST["json_data"])
         print(data_dict['stop_id'])
         print(data_dict['actual_stop_id'])
-        # In our django query see is it more efficient to return only bus_numbers field
         routes = list(BusStops.objects.filter(stop_id=data_dict['stop_id']).values())
         print(routes)
 
