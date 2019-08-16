@@ -85,13 +85,7 @@ html, body {
 
 /* Test work nav bar*/
 /*Taken from https://codepen.io/john-sexton/pen/oeGGag*/
-body {
-  padding: 10px;
-  padding-bottom: 50px;
-}
-h1 {
-  margin-bottom: 2000px;
-}
+
 .mobile-bottom-nav {
   position: fixed;
   bottom: 0;
