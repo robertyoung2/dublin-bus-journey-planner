@@ -114,3 +114,22 @@ html, body {
   display: flex;
   flex-direction: column;
 }
+
+
+/*#page_layout.ios_version{*/
+    /*height:calc(100vh - 44px);*/
+/*}*/
+
+#map_container.ios_version{
+    height:calc(50vh - 44px);
+}
+
+#info_section.ios_version{
+    height:calc(40vh + 44px);
+}
+
+#mobile-bottom-nav.ios_version{
+    /*height:calc(10vh - 4.4px);*/
+    padding-bottom: 44px;
+}
+

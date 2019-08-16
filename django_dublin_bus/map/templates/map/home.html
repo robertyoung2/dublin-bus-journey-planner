@@ -63,55 +63,46 @@
 
 <body>
 <div id="page_layout">
-        <div id="map_container">
-            <div id="map"></div>
-        </div>
+    <div id="map_container">
+        <div id="map"></div>
+    </div>
 
-        <div id="info_section">
-            <div id="directions_view_section" style="display:none"></div>
-            <div id="journey_results_view_section" style="display:none"></div>
-            <div id="favourites_view_section" style="display:none"></div>
-            <div id="stop_info_view_section" style="display:none"></div>
-        </div>
+    <div id="info_section">
+        <div id="directions_view_section" style="display:none"></div>
+        <div id="journey_results_view_section" style="display:none"></div>
+        <div id="favourites_view_section" style="display:none"></div>
+        <div id="stop_info_view_section" style="display:none"></div>
+    </div>
 
 
 
-<nav class="mobile-bottom-nav">
+    <nav id="mobile-bottom-nav" class="mobile-bottom-nav">
         {% load staticfiles %}
-	<div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
-		<div class="mobile-bottom-nav__item-content">
-			<a id='directions_view_button' onclick="populate_info('directions_view')">
-                <img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}">
-            </a>
-		</div>
-	</div>
-
-	<div class="mobile-bottom-nav__item">
-		<div class="mobile-bottom-nav__item-content">
-			<a id="favourites_view_button" onclick="populate_info('favourites_view')">
-                <img class="fa" aria-hidden="true" src="{% static "map/images/favourites.png" %}">
-            </a>
-		</div>
-	</div>
-
-	<div class="mobile-bottom-nav__item">
-		<div class="mobile-bottom-nav__item-content">
-			<a id='stop_info_view_button' onclick="populate_info('stop_info_view')">
-                <img class="fa" aria-hidden="true" src="{% static "map/images/journey.png" %}">
-            </a>
-		</div>
-	</div>
-
-</nav>
-    <!--<div id="bottom_navbar">
-        <div class="mobile-app-icon-bar">
-                {% load staticfiles %}
-               <a id='directions_view_button' class="footer-link" onclick="populate_info('directions_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}"></a>
-               <a id="favourites_view_button" class="footer-link" onclick="populate_info('favourites_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/favourites.png" %}"></a>
-               <a id='stop_info_view_button' class="footer-link" onclick="populate_info('stop_info_view')"><img class="fa" aria-hidden="true" src="{% static "map/images/journey.png" %}"></a>
+        <div class="mobile-bottom-nav__item mobile-bottom-nav__item--active">
+            <div class="mobile-bottom-nav__item-content">
+                <a id='directions_view_button' onclick="populate_info('directions_view')">
+                    <img class="fa" aria-hidden="true" src="{% static "map/images/directions.png" %}">
+                </a>
             </div>
         </div>
-    </div>-->
+
+        <div class="mobile-bottom-nav__item">
+            <div class="mobile-bottom-nav__item-content">
+                <a id="favourites_view_button" onclick="populate_info('favourites_view')">
+                    <img class="fa" aria-hidden="true" src="{% static "map/images/favourites.png" %}">
+                </a>
+            </div>
+        </div>
+
+        <div class="mobile-bottom-nav__item">
+            <div class="mobile-bottom-nav__item-content">
+                <a id='stop_info_view_button' onclick="populate_info('stop_info_view')">
+                    <img class="fa" aria-hidden="true" src="{% static "map/images/journey.png" %}">
+                </a>
+            </div>
+        </div>
+
+    </nav>
 
     <!--Imporing This script gives us access to the csrf token returned by django-->
     {% csrf_token %}
@@ -119,6 +110,8 @@
 
     <script>
         <!--Global Variables-->
+
+        var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
 
         //These urls are used in the ajax queries to link to the django urls
         // (We do this as we can't use django code within external js files)
@@ -209,6 +202,13 @@
                 markers.push(marker);
                 stop_data_list_string += `<option value="${'{{bus_stop.actual_stop_id}}'}">${'{{bus_stop.stop_name}}'} (${'{{bus_stop.actual_stop_id}}'})</option>`;
             {% endfor %}
+            if(iOS){
+                alert("You are using ios!");
+                document.getElementById("page_layout").classList.add("ios_version");
+                document.getElementById("map_container").classList.add("ios_version");
+                document.getElementById("info_section").classList.add("ios_version");
+                document.getElementById("mobile-bottom-nav").classList.add("ios_version");
+            }
         }
     </script>
 
