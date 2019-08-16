@@ -71,6 +71,12 @@ server you will need to make several changes to the settings.py file.
 * If desired, line 35, DEBUG can be set to True.
 * ALLOWED_HOSTS on line 37 will need to be updated to include your local server IP 'http://127.0.0.1'.
 
+Further, as part of security during deployment, passwords and API keys have been removed from the settings.py 
+file and place in a *.env* file. This will be provided with the submitted code, but will most likely be a 
+hidden file in the directory. This .env is crucial for deployment and running of the code.
+
 Again, this can be quite an involved task, and the best advice for testing of the code and it's deployment would 
 be to visit our hosted webpage at: https://dublinbus.city
+
+If you have any questions or concerns, please get in touch with Robert Young. 
 
