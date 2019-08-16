@@ -11,7 +11,6 @@
     margin-bottom: auto;
     font-size: 10pt;
     text-align: center;
-
 }
 
 .minutes_nearby_stops{
@@ -46,7 +45,7 @@
 
 .back_journey{
     text-align: left;
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 .mdl-card {
@@ -84,16 +83,16 @@
 
 .mdl-card__supporting-text{
     padding-top: 5px;
-    padding-bottom: 0px;
+    padding-bottom: 0;
 }
 
 .mdl-card__actions.mdl-card--border{
-    padding-top: 0px;
-    padding-bottom: 0px;
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .mdl-card__actions {
-    padding: 0px;
+    padding: 0;
 }
 
 
@@ -108,7 +107,6 @@
 }
 
 .mdl-chip mdl-chip--contact{
-    mix-width: 20px;
     text-align: left;
     margin-bottom: auto;
     margin-top: auto;
@@ -117,4 +115,3 @@
 .no_real{
     font-size: 12pt;
 }
-

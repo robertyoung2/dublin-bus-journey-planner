@@ -1,9 +1,4 @@
-// For inside initialise map function
-console.log("Loaded Cache_User_Favourites.js");
-
 function capture_favourites(){
-    //This can all be refactored and modularised better
-    console.log("called capture_favourites function!");
     sethome = document.getElementById('set_home');
     destination = document.getElementById('set_destination');
     let set_favourites_button = document.getElementById('set_favourites');
@@ -12,7 +7,6 @@ function capture_favourites(){
         autocomplete = new google.maps.places.Autocomplete(destination, autocomplete_options);
     }
 
-
     if(set_favourites_button){
         set_favourites_button.addEventListener('click', function () {
 
@@ -20,24 +14,21 @@ function capture_favourites(){
                 function (res_origin, status) {
                     /* If place is legitimate and able to get GPS co-ordinates. */
                     if (status === 'OK') {
-                        console.log("sucessful geocode");
                         saveFavourite();
                     }
                     else {
-                        console.log("Invalid Geocode");
                         callsnackBar("invalid_address");
                     }
                 }
             );
         });
     }
-
 }
+
 
 function saveFavourite(){
     if(Object.keys(window.localStorage).includes(sethome.value.toLowerCase())){
         callsnackBar("key_exists");
-    //    Will need to change logic to handle button click when implemented
     }
     else if(sethome.value === ""){
         callsnackBar("provide_key");
@@ -49,7 +40,6 @@ function saveFavourite(){
         window.localStorage.setItem(sethome.value.toLowerCase(),destination.value);
 
         if(Object.keys(window.localStorage).includes(sethome.value.toLowerCase()) && window.localStorage.getItem(sethome.value.toLowerCase()) === destination.value){
-
             clearSearch('set_home');
             clearSearch('set_destination');
             populate_saved_favourites();
@@ -72,6 +62,7 @@ function delete_favourite(favourite_key){
         callsnackBar("key_not_exist");
     }
 }
+
 
 function callsnackBar(elementid){
     console.log("Snack Bar Called!");

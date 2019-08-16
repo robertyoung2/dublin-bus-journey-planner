@@ -1,21 +1,10 @@
-console.log("map_routing.js Loaded!");
-
-/* Displaying the actual route on map */
 function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
-    console.log("Called mapLocation function!");
     var origin = new google.maps.LatLng(origin_lat, origin_lng);
     var destination = new google.maps.LatLng(dest_lat, dest_lng);
     var departureTime;
     var arrivalTime;
     var journey_date_element = document.getElementById("date_input");
     var journey_time_element = document.getElementById("journey_time");
-    //
-    // console.log("origin:" + origin);
-    // console.log("destination:" + destination);
-    // console.log("journey_date_element:" + journey_date_element);
-    // console.log("journey_time_element:" + journey_time_element);
-    // console.log("****** BUG CHECK END ******");
-    // console.log();
 
     if (selected_datetime_option === 'now'){
         departureTime = new Date();
@@ -23,26 +12,24 @@ function mapLocation(origin_lat, origin_lng, dest_lat, dest_lng) {
     else if (selected_datetime_option === 'departureTime') {
         departureTime = new Date(Date.parse(journey_date_element.value + " " + journey_time_element.value));
     }
-     else if (selected_datetime_option === 'arrivalTime') {
+    else if (selected_datetime_option === 'arrivalTime') {
         arrivalTime = new Date(Date.parse(journey_date_element.value + " " + journey_time_element.value));
     }
 
     if(directionsRenderer){
         directionsRenderer.setMap(null);
     }
-    var directionsService = new google.maps.DirectionsService();
 
+    var directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
 
     directionsRenderer.setMap(map);
 
     calculateAndDisplayRoute(directionsService, directionsRenderer,origin, destination, arrivalTime, departureTime);
-
 }
 
 
 function calculateAndDisplayRoute(directionsService, directionsRenderer, origin, destination, arrivalTime, departureTime) {
-    console.log("Called calculateAndDisplayRoute function!");
     directionsService.route({
         origin: origin,
         destination: destination,
@@ -57,14 +44,11 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
         unitSystem: google.maps.UnitSystem.IMPERIAL
     }, function (response, status) {
         if (status === 'OK') {
-
             showing_journey_results = true;
             generate_directions_views();
 
-            console.log(response);
             directionsRenderer.setDirections(response);
 
-            // console.log(response.routes.length);
             let route_options_table = document.getElementById('route_options_container');
             route_options_table.innerHTML = "";
 
@@ -73,7 +57,6 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
             let rendered_route_index_list = [];
 
             for (i = 0; i < response.routes.length; i++) {
-                console.log("Journey Number: " + i);
                 let journey = {};
                 let include = false;
                 let steps_counter = 0;
@@ -91,12 +74,15 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                             include = false;
                             break;
                         }
+
                         include = true;
+
                         if(first_bus_step_duetime === ""){
                             first_bus_step_duetime = step.transit.departure_time.value;
                         }
 
                         let current_route;
+
                         if(step.transit.line.short_name){
                              current_route = step.transit.line.short_name;
                         }
@@ -113,35 +99,25 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                             "Destination": step.transit.headsign,
                             "Departure_Datetime": new Date(step.transit.departure_time.value)
                         };
+
                         journey[current_route] = route_dict;
-
-                        // console.log("Origin_Lat: " + step.transit.departure_stop.location.lat());
-                        // console.log("Origin_Lon: " + step.transit.departure_stop.location.lng());
-                        // console.log("Dest_Lat: " + step.transit.arrival_stop.location.lat());
-                        // console.log("Dest_Lon: " + step.transit.arrival_stop.location.lng());
-                        // console.log("Bus_Headsign: " + step.transit.headsign);
-                        // console.log("Arrival Location: " + step.transit.arrival_stop.name);
-                        // console.log("Bus_Route: " + current_route);
-                        // console.log("Departure_Datetime: " + new Date(step.transit.departure_time.value));
-                        // console.log();
-
                         journey_icons_string += '<i class="material-icons" style="font-size:20px;color:black">directions_bus</i>';
-
                         journey_icons_string += `<span class="bus_icon_route_num">${current_route}</span>`;
                     }
+
                     if (steps_counter < steps_len - 1){
                         journey_icons_string += '<i class="material-icons" style="font-size:20px;color:black">navigate_next</i>';
                     }
+
                     steps_counter += 1;
                 }
+
                 if(include === true){
                     let bus_duetime_text;
-                    console.log(first_bus_step_duetime);
                     bus_duetime = Math.ceil((Date.parse(first_bus_step_duetime) - Date.parse(new Date())) / 60000);
 
                     if(selected_datetime_option === 'now' && bus_duetime <= 60){
-                        console.log(bus_duetime);
-                        console.log(selected_datetime_option);
+
                         if(bus_duetime < 1){
                             bus_duetime_text = "now";
                         }
@@ -150,9 +126,8 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                         }
                     }
                     else{
-                        console.log(bus_duetime);
-                        console.log(selected_datetime_option);
                         let minutes = first_bus_step_duetime.getMinutes();
+
                         if(minutes < 10){
                             minutes = "0" + minutes;
                         }
@@ -161,9 +136,7 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                     }
 
                     route_options_table.innerHTML += `
-
                     <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
-               
                         <div class="demo-card-wide mdl-card mdl-shadow--2dp">
                             <div class="mdl-card__title">
                                 <h2 id="journey_time_${i}" class="mdl-card__title-text journey_time_text"></h2>
@@ -185,36 +158,33 @@ function calculateAndDisplayRoute(directionsService, directionsRenderer, origin,
                             </div>
                         </div>
                     </div>`;
+
                     componentHandler.upgradeAllRegistered();
                     model_journeys.push(journey);
                     rendered_route_list.push(response.routes[i]);
                     rendered_route_index_list.push(i);
-                    // console.log("****************");
                 }
-                // console.log("Render route at index: " + parseInt(rendered_route_list[0]));
                 directionsRenderer.setRouteIndex(parseInt(rendered_route_list[0]));
             }
-            // console.log("Data for Backend:" + model_journeys);
-            // console.log("****************");
-            // console.log("Accessable GMaps Data: " + rendered_route_list);
+
             if(rendered_route_index_list.length > 0){
                 Ajax_Model(JSON.stringify(model_journeys), rendered_route_index_list);
             }
             else{
-                alert("No bus journeys to display");
+                // No bus journey to display
             }
 
             document.getElementById("clear_route").style.display = "initial";
             return true;
         }
         else {
-            window.alert('Directions request failed due to ' + status);
+            window.alert('Could not get directions for this journey');
             return false;
         }
     });
 }
 
+
 function render_route_at_index(index){
     directionsRenderer.setRouteIndex(parseInt(index));
 }
-

@@ -1,21 +1,17 @@
-console.log("map_initialiser.js Loaded!");
-
 setup_ajax();
+//Ajax query to return the current sunrise and sunset information
 $.ajax({
     url: get_sun_url,
     type: 'POST',
     success: function (data) {
         sunrise = data.sunrise;
         sunset = data.sunset;
-        console.log("Sunrise: " + sunrise);
-        console.log("Sunset: " + sunset);
     }
 });
 
-// Function to initialise map
-var initialize = function () {
-    console.log("Called initialise map function!");
 
+// Function to initialise google map
+var initialize = function () {
     // Centre on Dublin at the start
     const initialPosition = {
         lat: 53.3498,
@@ -35,7 +31,7 @@ var initialize = function () {
 
     var user_marker_icon = {
         url: user_marker_image_url, //the image itself
-        scaledSize: new google.maps.Size(75, 75) // resizing image to 50% smaller
+        scaledSize: new google.maps.Size(60, 60) // resizing image to 50% smaller
     };
 
     const marker = new google.maps.Marker({
@@ -72,13 +68,12 @@ var initialize = function () {
 
     // Listener to update markers as viewpoint centre changes
     map.addListener('center_changed', function () {
-        //CLEAR
         bounds = map.getBounds();
         getnearby();
 
     });
+
     map.addListener('dragend', function() {
-        //CLEAR
         if(document.getElementById("stop_info_view_section").style.display === "initial"){
             generate_nearby_stop_info(false);
         }
@@ -86,13 +81,11 @@ var initialize = function () {
 
     // Listener to deactivate view tracking of user location on drag of map
     map.addListener('drag', function () {
-        //CLEAR
         geolocationFlag = false;
     });
 
     // Checks zoom level and if markers should be displayed
     map.addListener('zoom_changed', function () {
-        //CLEAR
         bounds = map.getBounds();
         getnearby();
         if(document.getElementById("stop_info_view_section").style.display === "initial"){
@@ -100,14 +93,12 @@ var initialize = function () {
         }
     });
 
-
-
     var timetoday = Math.round(new Date() / 1000);
-
     var styles = set_night_mode(sunrise, sunset, timetoday)[0];
-
     map.set('styles', styles);
+
     loopBusStops();
+
     geocoder = new google.maps.Geocoder();
 };
 
@@ -141,15 +132,16 @@ function GeoControl(controlDiv, map) {
 
     // Setup the click event listeners:  set the map to user location.
     controlUI.addEventListener('click', function () {
-        //CLEAR
         geolocationFlag = true;
         map.panTo({
             lat: userPosition.lat,
             lng: userPosition.lng
         });
+
         map.setZoom(17);
         controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149049.svg)";
         getnearby();
+
         if(document.getElementById("stop_info_view_section").style.display === "initial"){
             generate_nearby_stop_info(false);
         }
@@ -159,5 +151,4 @@ function GeoControl(controlDiv, map) {
     map.addListener('drag', function(){
         controlText.style.backgroundImage = "url(https://image.flaticon.com/icons/svg/149/149430.svg)";
     });
-
 }

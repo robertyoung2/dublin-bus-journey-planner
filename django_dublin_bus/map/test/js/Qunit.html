@@ -12,35 +12,45 @@
 <div id="qunit-fixture">
     //HTML for testing
     <input type="text" placeholder="Enter Email" id="set_location" name="email">
-   <script>document.getElementById("set_location").style.display="none";</script>
+
+    <script>document.getElementById("set_location").style.display="none";</script>
+
     <div id="datetime_selector_container" hidden="hidden">
         <select id="date"></select>
         <input type="time" id="journey_time" required>
     </div>
+
     <select id="option">
         <option value="now">Now</option>
         <option value="departureTime">Departure Time</option>
         <option value="arrivalTime">Arrival Time</option>
     </select>
+
     <input type="text" name="input_route_origin" id="input_route_origin" placeholder="Enter Origin (Default Current Location)">
     <input type="text" name="input_route_destination" id="input_route_destination" placeholder="Enter Destination">
+
     <form class="cell" action="Getinput" method="get">
         <div class="grid-x align-center">
             <div class="cell small-8 medium-8">
                 <input type="text" name="set_home" id="set_home" value="home" placeholder="Enter Key">
             </div>
+
             <div class="cell small-2 medium-2">
                 <a tabindex="-1" onclick="clearSearch('set_home')"></a>
             </div>
+
             <div class="cell small-8 medium-8">
                 <input type="text" name="set destination" id="set_destination" value="destination" placeholder="Enter Location">
             </div>
+
             <div class="cell small-2 medium-2">
                 <a tabindex="-1" onclick="clearSearch('set_destination')"></a>
             </div>
+
             <div class="cell small-3 medium-3">
                 <input type="button" id="set_favourites" value="Save Favourite">
             </div>
+
             <div class="small-7 medium-7"></div>
         </div>
     </form>
@@ -58,7 +68,6 @@
 <script src="haversine_test.js"></script>
 <script src="set_map_night_mode_test.js"></script>
 <script src="clearSearch_test.js"></script>
-
 
 </body>
 </html>

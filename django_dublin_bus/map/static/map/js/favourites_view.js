@@ -10,9 +10,9 @@ function generate_favourites_view(){
 
     if(favourites_section.innerHTML === ""){
         favourites_section.innerHTML = `
-
             <div id="favourites_grid" class="mdl-grid">
-                    <!--Key Enter Field-->
+                
+                <!--Key Enter Field-->
                 <div class="mdl-cell mdl-cell--5-col mdl-cell--3-col-tablet mdl-cell--2-col-phone">
                     <div class="mdl-textfield mdl-js-textfield">
                         <input class="mdl-textfield__input" type="text" name="set_home" id="set_home" placeholder="Enter name">
@@ -21,7 +21,7 @@ function generate_favourites_view(){
                 </div>
                         
                  <!--Remove Key Entry Button-->
-                <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--hide-phone">
+                <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--middle mdl-cell--hide-phone">
                     <a tabindex="-1" onclick="clearSearch('set_home')"><img id="clear_search_icon" title="Clear origin search" src="/static/map/images/baseline-clear-24px.svg"></a>
                 </div>
                         
@@ -34,16 +34,18 @@ function generate_favourites_view(){
                 </div>
                         
                  <!--Remove Address Button -->
-                <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--hide-phone">
+                <div class="mdl-cell mdl-cell--1-col mdl-cell--1-col-tablet mdl-cell--middle mdl-cell--hide-phone">
                     <a tabindex="-1" onclick="clearSearch('set_destination')">
                         <img id="clear_search_icon" title="Clear destination search" src="/static/map/images/baseline-clear-24px.svg">
                     </a>
                 </div>
-                     
+                
+                <!--Set Favourites Button -->
                  <div class="mdl-cell mdl-cell--12-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
                     <input type="button" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect" id="set_favourites" value="Save Favourite">
                 </div>
-            
+                
+                <!-- Saved Favourites Table -->
                 <div id="favourites_table_cell" class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-cell--4-col-phone">
                     <ul class="demo-list-control mdl-list" id="saved_favourites"></ul>
                 </div>
@@ -79,6 +81,7 @@ function populate_saved_favourites(){
                           <i class="material-icons  mdl-list__item-icon">directions</i>
                           ${storage_key}
                         </span>
+                        
                         <span class="mdl-list__item-secondary-action">
                             <button class="mdl-button mdl-js-button mdl-button--icon" onclick="delete_favourite('${storage_key}')">
                               <i class="material-icons">clear</i>
@@ -87,25 +90,25 @@ function populate_saved_favourites(){
                     </li>
                 `;
             }
-
-
             counter++;
         }
     }
-
     componentHandler.upgradeAllRegistered();
 }
+
 
 function upperCase(str) {
     return str.toUpperCase();
 }
+
+
 function titleCase(str) {
     var firstLetterRx = /(^|\s)[a-z]/g;
     return str.replace(firstLetterRx, upperCase);
 }
 
+
 function route_to_favourite(destination){
-//    add functionality to route to the passed destination
     generate_directions_views();
     document.getElementById("input_route_destination").value = destination;
 }

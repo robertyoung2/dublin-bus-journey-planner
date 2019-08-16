@@ -16,13 +16,11 @@
 .tabs{
     text-align:center;
     align-content: center;
-    /*border: 0;*/
 }
 
 #example-tabs{
     border: 0;
 }
-
 
 .tabs-content{
     height: 100%;
@@ -37,7 +35,6 @@
 .nearby_markers_message{
     text-align: center;
     margin-bottom: auto;
-    margin-top: auto;
     margin-top: 14vh;
     font-size: 14pt;
 }
