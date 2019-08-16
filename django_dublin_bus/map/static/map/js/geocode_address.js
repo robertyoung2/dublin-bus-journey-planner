@@ -8,7 +8,8 @@ function geocodeAddress() {
     var origin_found = false;
 
     if(destination_searchbox.value === ""){
-        alert("Please provide a destination in order to plan your journey!");
+        // alert("Please provide a destination in order to plan your journey!");
+        callsnackBar("enter_destination");
         return;
     }
 
@@ -47,8 +48,7 @@ function geocodeAddress() {
                     geocode_destination(origin_lat, origin_lng, dest_new);
                 }
                 else {
-                    alert('Geocode was not successful for the following reason: ' + status);
-
+                    callsnackBar(valid_address);
                 }
             }
         );
@@ -79,7 +79,7 @@ function geocode_destination(origin_lat, origin_lng, dest_new){
             );
         }
         else {
-            alert('Geocode was not successful for the following reason: ' + status);
+            callsnackBar(valid_address);
         }
     });
 }

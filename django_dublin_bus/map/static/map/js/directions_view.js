@@ -111,7 +111,10 @@ function generate_directions_views(){
                         </div>
                     </div>
                 </form>
-                <div id="valid_time" class>Please enter a valid time</div>`;
+                <div id="valid_time" class>Please enter a valid time</div>
+                <div id="enter_destination" class>Please provide a destination</div>
+                <div id="valid_address" class>Please enter a valid address</div>
+                                `;
             componentHandler.upgradeAllRegistered();
             generateRouteSearch();
             set_date_options();
