@@ -33,7 +33,7 @@ html, body {
 }
 
 /* The snackbar - position it at the bottom and in the middle of the screen */
-#save_favourites, #not_save_favourites, #key_delete, #key_not_exist, #valid_address, #key_exists, #provide_key,
+#save_favourites, #not_save_favourites, #key_delete, #key_not_exist, #invalid_address, #valid_address, #key_exists, #provide_key,
 #valid_time, #enter_destination, #key_too_long{
   visibility: hidden; /* Hidden by default. Visible on click */
   min-width: 250px; /* Set a default minimum width */
@@ -51,8 +51,8 @@ html, body {
 }
 
 /* Show the snackbar when clicking on a button (class added with JavaScript) */
-#save_favourites.show, #not_save_favourites.show, #key_delete.show, #key_not_exist.show, #valid_address.show,
-#provide_key.show, #valid_time.show, #key_too_long.show, #enter_destination.show{
+#save_favourites.show, #not_save_favourites.show, #key_delete.show, #key_not_exist.show, #valid_address.show, #invalid_address.show,
+#provide_key.show,#key_exists.show, #valid_time.show, #key_too_long.show, #enter_destination.show{
   visibility: visible; /* Show the snackbar */
   /* Add animation: Take 0.5 seconds to fade in and out the snackbar.
   However, delay the fade out process for 2.5 seconds */

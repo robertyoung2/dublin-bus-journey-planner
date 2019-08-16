@@ -53,7 +53,7 @@ function generate_favourites_view(){
             <div id="not_save_favourites" class>Failed to save favourite</div>
             <div id="key_delete" class>Favourite deleted</div>
             <div id="key_not_exist" class>Favourite does not exist!</div>
-            <div id="valid_address" class>Please enter a valid address</div>
+            <div id="invalid_address" class>Invalid Google Maps Address</div>
             <div id="key_exists" class>Favourite already exists</div>
             <div id="provide_key" class>Please give your favourite a name</div>
             <div id="key_too_long" class>Name too long (max. 20 characters)</div>
