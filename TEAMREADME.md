@@ -2,8 +2,8 @@
 
 #### Authored by - Robert Young
 #### Note - Please see .md (Markdown) files on the repo for tips and info.
-- [Django Markdown](https://github.com/robertyoung2/dublin-bus/blob/master/Django.md)
-- [Data Analytics Markdown](https://github.com/robertyoung2/dublin-bus/blob/master/DataAnalyticsConnect.md)
+- [Django.md](https://github.com/robertyoung2/dublin-bus-journey-planner/blob/master/Django.md)
+- [DataAnalyticsConnect.md](https://github.com/robertyoung2/dublin-bus-journey-planner/blob/master/DataAnalyticsConnect.md)
 <br/>
 
 ## Code Release Process

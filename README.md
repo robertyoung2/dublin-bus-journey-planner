@@ -1,17 +1,18 @@
 
 # Instructions for Deployment - Team 4
+#### Authored by - Robert Young
 
 The website is fully deployed and operational at the url:
  
  https://dublinbus.city
  
- This is the final production release, and the code present on this deployment has been provided as part of the code submission. This is the preferred method for viewing the final submission. Should you wish to view our GitHup repository where the development of the project took place collaboratively, please send an email to robert.young2@ucdconnect.ie including the email linked to your GitHub account and you will be given access to the private repository.
+ This is the final production release, and the code present on this deployment has been provided as part of the code submission. This is the preferred method for viewing the final submission. 
 
 There are a number of useful documents within our repository used during the development process.
 
-* README.md - Coding practices for the team.
-* Django.md - how to run Django locally while accessing the database on the UCD server.
-* DataAnalyticsConnect.md - Connecting and using Jupyter notebook and accessing the data stored on the server, without removing it from the server.
+* [TEAMREADME.md](https://github.com/robertyoung2/dublin-bus-journey-planner/blob/master/TEAMREADME.md) - Coding practices for the team.
+* [Django.md](https://github.com/robertyoung2/dublin-bus-journey-planner/blob/master/Django.md) - how to run Django locally while accessing the database on the UCD server.
+* [DataAnalyticsConnect.md](https://github.com/robertyoung2/dublin-bus-journey-planner/blob/master/DataAnalyticsConnect.md) - Connecting and using Jupyter notebook and accessing the data stored on the server, without removing it from the server.
 
 ### Local Deployment of the Code
 Should you wish to deploy the code locally, there are several steps required to enable this. 
@@ -77,6 +78,4 @@ hidden file in the directory. This .env is crucial for deployment and running of
 
 Again, this can be quite an involved task, and the best advice for testing of the code and it's deployment would 
 be to visit our hosted webpage at: https://dublinbus.city
-
-If you have any questions or concerns, please get in touch with Robert Young. 
 
